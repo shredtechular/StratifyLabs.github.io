@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -93,134 +93,134 @@ the value of the ADC. It uses this value to calculate the speed set point. It me
 the speed of the motor by taking the number of encoder counts and dividing by the elapsed time. 
 These values are fed in to the PID algorithm which computes the PWM value to apply to the motor.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;applib/Pwm.hpp&gt;</span>
-<span class="cp">#include &lt;applib/Tmr.hpp&gt;</span>
-<span class="cp">#include &lt;applib/Adc.hpp&gt;</span>
-<span class="cp">#include &lt;time.h&gt;</span>
-<span class="cp">#include &lt;dsp.h&gt;</span>
-<span class="cp">#include &lt;pid.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;applib/Pwm.hpp&gt;
+#include &lt;applib/Tmr.hpp&gt;
+#include &lt;applib/Adc.hpp&gt;
+#include &lt;time.h&gt;
+#include &lt;dsp.h&gt;
+#include &lt;pid.h&gt;
  
-<span class="cp">#define TMR_PORT 0 </span><span class="c1">//Timer port used to capture encoder data</span>
-<span class="cp">#define TMR_PINASSIGN 0</span>
-<span class="cp">#define ADC_PORT 0 </span><span class="c1">//ADC port for getting user input</span>
-<span class="cp">#define ADC_INPUT_CHAN (7) </span><span class="c1">//ADC channel for user input</span>
-<span class="cp">#define PWM_PORT 1 </span><span class="c1">//PWM port for Si9986</span>
-<span class="cp">#define PWM_PINASSIGN 1 </span><span class="c1">//Uses P2.x</span>
-<span class="cp">#define PWM_CHAN_HIGH (PWM_CHANNEL3)</span>
-<span class="cp">#define PWM_CHAN_LOW (PWM_CHANNEL4)</span>
-<span class="cp">#define PWM_FREQ (1000000)  </span><span class="c1">//PWM clock frequency</span>
-<span class="cp">#define PWM_TOP 1000 </span><span class="c1">//Top value for PWM clock</span>
-<span class="cp">#define PWM_PERIOD (PWM_TOP*1000/PWM_FREQ) </span><span class="c1">//Period in ms</span>
+#define TMR_PORT 0 //Timer port used to capture encoder data
+#define TMR_PINASSIGN 0
+#define ADC_PORT 0 //ADC port for getting user input
+#define ADC_INPUT_CHAN (7) //ADC channel for user input
+#define PWM_PORT 1 //PWM port for Si9986
+#define PWM_PINASSIGN 1 //Uses P2.x
+#define PWM_CHAN_HIGH (PWM_CHANNEL3)
+#define PWM_CHAN_LOW (PWM_CHANNEL4)
+#define PWM_FREQ (1000000)  //PWM clock frequency
+#define PWM_TOP 1000 //Top value for PWM clock
+#define PWM_PERIOD (PWM_TOP*1000/PWM_FREQ) //Period in ms
  
-<span class="c1">//Set the output duty cycle</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">set_duty</span><span class="p">(</span><span class="kt">int</span> <span class="n">duty</span><span class="p">);</span>
+//Set the output duty cycle
+static void set_duty(int duty);
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="n">Tmr</span> <span class="n">tmr</span><span class="p">(</span><span class="n">TMR_PORT</span><span class="p">);</span>
-  <span class="n">Adc</span> <span class="n">adc</span><span class="p">(</span><span class="n">ADC_PORT</span><span class="p">);</span>
-  <span class="n">Pwm</span> <span class="n">pwm</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">);</span>
-  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+int main(int argc, char * argv[]){
+  Tmr tmr(TMR_PORT);
+  Adc adc(ADC_PORT);
+  Pwm pwm(PWM_PORT);
+  int i;
  
-  <span class="c1">//These are for sampling the ADC (user input)</span>
-  <span class="kt">adc_sample_t</span> <span class="n">samp</span><span class="p">;</span>
-  <span class="kt">int32_t</span> <span class="n">samp_avg</span><span class="p">;</span>
-  <span class="kt">int32_t</span> <span class="n">speed_avg</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">alpha</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">set_speed</span><span class="p">;</span>
+  //These are for sampling the ADC (user input)
+  adc_sample_t samp;
+  int32_t samp_avg;
+  int32_t speed_avg;
+  uint16_t alpha;
+  uint32_t set_speed;
  
-  <span class="c1">//This is for measuring the motor speed</span>
-  <span class="kt">uint32_t</span> <span class="n">delta_ms</span><span class="p">;</span> <span class="c1">//elapsed time in milliseconds</span>
-  <span class="kt">uint32_t</span> <span class="n">last_ms</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">now_ms</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">ref_ms</span><span class="p">;</span>
-  <span class="k">struct</span> <span class="n">timespec</span> <span class="n">now</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">current_pos</span><span class="p">;</span> <span class="c1">//current position</span>
-  <span class="kt">uint32_t</span> <span class="n">last_pos</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//position from last measurement</span>
-  <span class="kt">uint32_t</span> <span class="n">delta_pos</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">speed</span><span class="p">;</span>
+  //This is for measuring the motor speed
+  uint32_t delta_ms; //elapsed time in milliseconds
+  uint32_t last_ms;
+  uint32_t now_ms;
+  uint32_t ref_ms;
+  struct timespec now;
+  uint32_t current_pos; //current position
+  uint32_t last_pos  = 0; //position from last measurement
+  uint32_t delta_pos;
+  uint32_t speed;
  
-  <span class="c1">//PID variables</span>
-  <span class="kt">pid_i32_t</span> <span class="n">pid</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">duty</span><span class="p">;</span>
+  //PID variables
+  pid_i32_t pid;
+  uint32_t duty;
  
-  <span class="c1">//Initialize the hardware</span>
-  <span class="n">adc</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADC_INPUT_CHAN</span><span class="p">);</span>
-  <span class="n">tmr</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">TMR_CLKSRC_IC0</span> <span class="o">|</span> <span class="n">TMR_CLKSRC_EDGERISING</span><span class="p">,</span> <span class="n">TMR_PINASSIGN</span><span class="p">);</span>
-  <span class="n">pwm</span><span class="p">.</span><span class="n">init</span><span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">PWM_CHAN_HIGH</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">PWM_CHAN_LOW</span><span class="p">),</span> <span class="n">PWM_FREQ</span><span class="p">,</span> <span class="n">PWM_TOP</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">PWM_PINASSIGN</span><span class="p">);</span>
+  //Initialize the hardware
+  adc.init(1&lt;&lt;ADC_INPUT_CHAN);
+  tmr.init(0, TMR_CLKSRC_IC0 | TMR_CLKSRC_EDGERISING, TMR_PINASSIGN);
+  pwm.init((1&lt;&lt;PWM_CHAN_HIGH)|(1&lt;&lt;PWM_CHAN_LOW), PWM_FREQ, PWM_TOP, 0, PWM_PINASSIGN);
  
-  <span class="c1">//Turn the motor encoder timer on and set to zero</span>
-  <span class="n">tmr</span><span class="p">.</span><span class="n">on</span><span class="p">();</span>
-  <span class="n">tmr</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  //Turn the motor encoder timer on and set to zero
+  tmr.on();
+  tmr.set(0);
  
-  <span class="c1">//Initialize the ADC averaging (EMA filter)</span>
-  <span class="n">alpha</span> <span class="o">=</span> <span class="n">DSP_EMA_I32_ALPHA</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
-  <span class="n">adc</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">ADC_INPUT_CHAN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">samp</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">adc_sample_t</span><span class="p">));</span>
-  <span class="n">samp_avg</span> <span class="o">=</span> <span class="n">samp</span><span class="p">;</span>
-  <span class="n">speed_avg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  //Initialize the ADC averaging (EMA filter)
+  alpha = DSP_EMA_I32_ALPHA(0.1);
+  adc.read(ADC_INPUT_CHAN, &amp;samp, sizeof(adc_sample_t));
+  samp_avg = samp;
+  speed_avg = 0;
  
-  <span class="c1">//Since there is no initial measurement, the first speed will be bogus</span>
-  <span class="n">last_ms</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  //Since there is no initial measurement, the first speed will be bogus
+  last_ms = 0;
  
-  <span class="c1">//initialize the PID</span>
-  <span class="n">pid_init_i32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">990</span><span class="p">);</span> <span class="c1">//Bound the duty between 10% and 99%</span>
-  <span class="n">pid_setconstants_i32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">5.0</span><span class="p">),</span> <span class="c1">//P constant</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="c1">//I constant</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>  <span class="c1">//D constant</span>
-  <span class="p">);</span>
+  //initialize the PID
+  pid_init_i32(&amp;pid, 50, 990); //Bound the duty between 10% and 99%
+  pid_setconstants_i32(&amp;pid,
+      PID_I32_CONSTANT(5.0), //P constant
+      PID_I32_CONSTANT(0.2), //I constant
+      PID_I32_CONSTANT(0.0)  //D constant
+  );
  
-  <span class="n">usleep</span><span class="p">(</span><span class="mi">50</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-  <span class="n">set_duty</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  usleep(50*1000);
+  set_duty(0);
  
-  <span class="c1">//Get the initial time so that the program start time is close to zero in the output data</span>
-  <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_REALTIME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">now</span><span class="p">);</span>
-  <span class="n">ref_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">+</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">);</span> <span class="c1">//convert to milliseconds</span>
+  //Get the initial time so that the program start time is close to zero in the output data
+  clock_gettime(CLOCK_REALTIME, &amp;now);
+  ref_ms = (now.tv_sec * 1000 + (now.tv_nsec + 500000) / 1000000); //convert to milliseconds
  
-  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-    <span class="c1">//Read and averge the ADC to get the set point</span>
-    <span class="n">adc</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">ADC_INPUT_CHAN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">samp</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">adc_sample_t</span><span class="p">));</span>
-    <span class="n">samp_avg</span> <span class="o">=</span> <span class="n">dsp_ema_i32</span><span class="p">(</span><span class="n">samp</span><span class="p">,</span> <span class="n">samp_avg</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
-    <span class="n">set_speed</span> <span class="o">=</span> <span class="n">samp_avg</span> <span class="o">*</span> <span class="mi">130</span> <span class="o">/</span> <span class="n">ADC_MAX</span> <span class="o">+</span> <span class="mi">50</span><span class="p">;</span>  <span class="c1">//speed sets between 50 and 180</span>
+  i = 0;
+  while(1){
+    //Read and averge the ADC to get the set point
+    adc.read(ADC_INPUT_CHAN, &amp;samp, sizeof(adc_sample_t));
+    samp_avg = dsp_ema_i32(samp, samp_avg, alpha);
+    set_speed = samp_avg * 130 / ADC_MAX + 50;  //speed sets between 50 and 180
  
-    <span class="c1">//Now measure the position and calculate the speed (pos/time)</span>
-    <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_REALTIME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">now</span><span class="p">);</span>
-    <span class="n">now_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">+</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">);</span> <span class="c1">//convert to milliseconds</span>
-    <span class="n">delta_ms</span> <span class="o">=</span> <span class="n">now_ms</span> <span class="o">-</span> <span class="n">last_ms</span><span class="p">;</span>
-    <span class="n">last_ms</span> <span class="o">=</span> <span class="n">now_ms</span><span class="p">;</span>
- 
- 
-    <span class="n">current_pos</span> <span class="o">=</span> <span class="n">tmr</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
-    <span class="n">delta_pos</span> <span class="o">=</span> <span class="n">current_pos</span> <span class="o">-</span> <span class="n">last_pos</span><span class="p">;</span>
-    <span class="c1">//calculate in RPM (1000*60 ms in a min and 200 counts per revolution)</span>
-    <span class="n">speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">delta_pos</span><span class="o">*</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">60</span><span class="o">/</span><span class="mi">465</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">delta_ms</span><span class="p">);</span>
-    <span class="n">last_pos</span> <span class="o">=</span> <span class="n">current_pos</span><span class="p">;</span>
- 
-    <span class="c1">//Calculate the new duty cycle</span>
-    <span class="n">duty</span> <span class="o">=</span> <span class="n">pid_update_i32</span><span class="p">(</span><span class="n">set_speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
-    <span class="n">set_duty</span><span class="p">(</span><span class="n">duty</span><span class="p">);</span>
- 
-    <span class="n">speed_avg</span> <span class="o">=</span> <span class="n">dsp_ema_i32</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed_avg</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
- 
-    <span class="c1">//Display the data and wait for the next update</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span><span class="o">++</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="c1">//first sample is garbage because the delta values are invalid</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">now_ms</span> <span class="o">-</span> <span class="n">ref_ms</span><span class="p">),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">set_speed</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">speed_avg</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">duty</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">usleep</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">//update every 100 ms</span>
-  <span class="p">}</span>
- 
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    //Now measure the position and calculate the speed (pos/time)
+    clock_gettime(CLOCK_REALTIME, &amp;now);
+    now_ms = (now.tv_sec * 1000 + (now.tv_nsec + 500000) / 1000000); //convert to milliseconds
+    delta_ms = now_ms - last_ms;
+    last_ms = now_ms;
  
  
-<span class="kt">void</span> <span class="nf">set_duty</span><span class="p">(</span><span class="kt">int</span> <span class="n">duty</span><span class="p">){</span>
-  <span class="n">Pwm</span> <span class="n">pwm</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">);</span>
-  <span class="c1">//This runs in run mode -- one output is switching the other is high</span>
-  <span class="n">pwm</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">PWM_CHAN_HIGH</span><span class="p">,</span>  <span class="n">PWM_TOP</span> <span class="o">-</span> <span class="n">duty</span><span class="p">);</span>
-  <span class="n">pwm</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">PWM_CHAN_LOW</span><span class="p">,</span> <span class="n">PWM_TOP</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+    current_pos = tmr.get();
+    delta_pos = current_pos - last_pos;
+    //calculate in RPM (1000*60 ms in a min and 200 counts per revolution)
+    speed = (delta_pos*(1000*60/465))/(delta_ms);
+    last_pos = current_pos;
+ 
+    //Calculate the new duty cycle
+    duty = pid_update_i32(set_speed, speed, &amp;pid);
+    set_duty(duty);
+ 
+    speed_avg = dsp_ema_i32(speed, speed_avg, alpha);
+ 
+    //Display the data and wait for the next update
+    if ( i++ &gt; 0 ){ //first sample is garbage because the delta values are invalid
+      printf(&quot;%d %d %d %d;\n&quot;, (int)(now_ms - ref_ms), (int)set_speed, (int)speed_avg, (int)duty);
+    }
+    usleep(5*1000); //update every 100 ms
+  }
+ 
+  return 0;
+}
+ 
+ 
+void set_duty(int duty){
+  Pwm pwm(PWM_PORT);
+  //This runs in run mode -- one output is switching the other is high
+  pwm.set(PWM_CHAN_HIGH,  PWM_TOP - duty);
+  pwm.set(PWM_CHAN_LOW, PWM_TOP);
+}</code></pre></div>
 
 <div align="center" class="flex-video">
 	<iframe src="//www.youtube.com/embed/V6nnVzJFD_Q?rel=0" frameborder="0"> </iframe>

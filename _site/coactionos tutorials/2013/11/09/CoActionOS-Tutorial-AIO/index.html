@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -87,70 +87,70 @@ object to read() or write(), and the operation will perform asynchronously.</p>
 <a href="/coactionos-applib/html/class_aio.html">AIO class documenation</a> and 
 <a href="/coactionos-applib/html/class_dac.html">DAC class documentation</a> for more details.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/DbugStdout.hpp&gt; </span><span class="c1">//For the DbugStdout class (or just use printf() is you prefer)</span>
-<span class="cp">#include &lt;applib/Dac.hpp&gt; </span><span class="c1">//For the DbugStdout class</span>
-<span class="cp">#include &lt;applib/Aio.hpp&gt;</span>
-<span class="cp">#include &lt;cmath&gt;</span>
-<span class="cp">#include &lt;cstdio&gt; </span><span class="c1">//for perror</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/DbugStdout.hpp&gt; //For the DbugStdout class (or just use printf() is you prefer)
+#include &lt;applib/Dac.hpp&gt; //For the DbugStdout class
+#include &lt;applib/Aio.hpp&gt;
+#include &lt;cmath&gt;
+#include &lt;cstdio&gt; //for perror
  
-<span class="cp">#define NUM_SAMPLES 32</span>
+#define NUM_SAMPLES 32
  
-<span class="c1">//This function generates a sin wave for use with the DAC</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">sin_to_dac</span><span class="p">(</span><span class="kt">dac_sample_t</span> <span class="o">*</span> <span class="n">samples</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nsamples</span><span class="p">);</span>
+//This function generates a sin wave for use with the DAC
+static void sin_to_dac(dac_sample_t * samples, int nsamples);
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="kt">dac_sample_t</span> <span class="n">samples</span><span class="p">[</span><span class="n">NUM_SAMPLES</span><span class="p">];</span>
-  <span class="n">Dac</span> <span class="n">dac</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-  <span class="n">DbugStdout</span> <span class="n">d</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-  <span class="n">Aio</span> <span class="n">aio</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">NUM_SAMPLES</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">dac_sample_t</span><span class="p">));</span> <span class="c1">//this is the Aio object</span>
+int main(int argc, char * argv[]){
+  dac_sample_t samples[NUM_SAMPLES];
+  Dac dac(0);
+  DbugStdout d;
+  int i;
+  Aio aio(samples, NUM_SAMPLES*sizeof(dac_sample_t)); //this is the Aio object
  
-  <span class="c1">//Initialize the DAC</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">dac</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="o">*</span><span class="n">NUM_SAMPLES</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="c1">//enable channel 0 with 1KHz sine wave</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to init&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //Initialize the DAC
+  if( dac.init(1&lt;&lt;0, 1000*NUM_SAMPLES) &lt; 0 ){ //enable channel 0 with 1KHz sine wave
+    perror(&quot;failed to init&quot;);
+    return -1;
+  }
  
-  <span class="c1">//populate the samples with a sine wave</span>
-  <span class="n">sin_to_dac</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">NUM_SAMPLES</span><span class="p">);</span>
+  //populate the samples with a sine wave
+  sin_to_dac(samples, NUM_SAMPLES);
  
-  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  for(i=0; i &lt; 100; i++){
  
-    <span class="c1">//this is a synchronous write -- does not return until write is complete</span>
-    <span class="n">dac</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">NUM_SAMPLES</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">dac_sample_t</span><span class="p">));</span>
+    //this is a synchronous write -- does not return until write is complete
+    dac.write(0, samples, NUM_SAMPLES*sizeof(dac_sample_t));
  
-    <span class="c1">//do an asynchronous write of the samples -- returns immediately</span>
-    <span class="n">dac</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">aio</span><span class="p">);</span>
+    //do an asynchronous write of the samples -- returns immediately
+    dac.write(aio);
  
-    <span class="c1">//wait for the operation to complete</span>
-    <span class="k">while</span><span class="p">(</span> <span class="n">aio</span><span class="p">.</span><span class="n">inprogress</span><span class="p">()</span> <span class="o">==</span> <span class="nb">true</span> <span class="p">){</span>
-      <span class="n">usleep</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-    <span class="p">}</span>
+    //wait for the operation to complete
+    while( aio.inprogress() == true ){
+      usleep(2*1000);
+    }
  
-    <span class="c1">//check for errors</span>
-    <span class="k">if</span><span class="p">(</span> <span class="n">aio</span><span class="p">.</span><span class="n">ret</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-      <span class="n">errno</span> <span class="o">=</span> <span class="n">aio</span><span class="p">.</span><span class="n">error</span><span class="p">();</span>
-      <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to complete write&quot;</span><span class="p">);</span>
-      <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
+    //check for errors
+    if( aio.ret() &lt; 0 ){
+      errno = aio.error();
+      perror(&quot;failed to complete write&quot;);
+      exit(1);
+    }
  
-  <span class="p">}</span>
-  <span class="n">d</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  }
+  d &lt;&lt; &quot;Done\n&quot;;
+  return 0;
+}
  
  
-<span class="kt">void</span> <span class="nf">sin_to_dac</span><span class="p">(</span><span class="kt">dac_sample_t</span> <span class="o">*</span> <span class="n">samples</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nsamples</span><span class="p">){</span>
-  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-  <span class="n">DbugStdout</span> <span class="n">d</span><span class="p">;</span>
-  <span class="kt">dac_sample_t</span> <span class="n">sample</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">tmp</span><span class="p">;</span>
-  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nsamples</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">M_PI</span><span class="o">/</span><span class="p">(</span><span class="n">nsamples</span><span class="p">));</span> <span class="c1">//tmp is from -1 to 1</span>
-    <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">dac_sample_t</span><span class="p">)(</span><span class="n">tmp</span><span class="o">*</span><span class="n">DAC_MAX_VALUE</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">DAC_MAX_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-    <span class="n">d</span> <span class="o">&lt;&lt;</span> <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+void sin_to_dac(dac_sample_t * samples, int nsamples){
+  int i;
+  DbugStdout d;
+  dac_sample_t sample;
+  float tmp;
+  for(i=0; i &lt; nsamples; i++){
+    tmp = sin(i*2*M_PI/(nsamples)); //tmp is from -1 to 1
+    samples[i] = (dac_sample_t)(tmp*DAC_MAX_VALUE/2 + DAC_MAX_VALUE/2);
+    d &lt;&lt; samples[i] &lt;&lt; &quot;\n&quot;;
+  }
+}</code></pre></div>
 
 
 				</div>

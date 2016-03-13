@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -123,12 +123,12 @@ status, to allow the context switcher to selectively execute
 tasks.  The following code shows an example of a structure that can 
 be used for an entry in the task table:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-     <span class="kt">void</span> <span class="o">*</span> <span class="n">sp</span><span class="p">;</span> <span class="c1">//The task&#39;s current stack pointer</span>
-     <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span> <span class="c1">//Status flags includes activity status, parent task, etc</span>
-<span class="p">}</span> <span class="kt">task_table_t</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">current_task</span><span class="p">;</span>
-<span class="kt">task_table_t</span> <span class="n">task_table</span><span class="p">[</span><span class="n">MAX_TASKS</span><span class="p">];</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct {
+     void * sp; //The task&#39;s current stack pointer
+     int flags; //Status flags includes activity status, parent task, etc
+} task_table_t;
+int current_task;
+task_table_t task_table[MAX_TASKS];</code></pre></div>
 
 <p>The sp member stores the value of the task’s stack pointer, while 
 flags holds the task status. In this example, the task uses two 
@@ -149,88 +149,88 @@ the other to specify whether or not to execute the task.</p>
 <p>The following code is an example of a context switcher, preceded by some 
 helper functions, and the interrupt handlers.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">stack</span><span class="p">;</span> <span class="c1">//This is stored on the heap rather than the stack</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">static uint32_t * stack; //This is stored on the heap rather than the stack
  
-<span class="cp">#define MAIN_RETURN 0xFFFFFFF9  </span><span class="c1">//Tells the handler to return using the MSP</span>
-<span class="cp">#define THREAD_RETURN 0xFFFFFFFD </span><span class="c1">//Tells the handler to return using the PSP</span>
+#define MAIN_RETURN 0xFFFFFFF9  //Tells the handler to return using the MSP
+#define THREAD_RETURN 0xFFFFFFFD //Tells the handler to return using the PSP
  
-<span class="c1">//Reads the main stack pointer</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">rd_stack_ptr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">void</span> <span class="o">*</span> <span class="n">result</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
-  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, msp</span><span class="se">\n\t</span><span class="s">&quot;</span>
-      <span class="c1">//&quot;MOV r0, %0 \n\t&quot;</span>
-      <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
+//Reads the main stack pointer
+static inline void * rd_stack_ptr(void){
+  void * result=NULL;
+  asm volatile (&quot;MRS %0, msp\n\t&quot;
+      //&quot;MOV r0, %0 \n\t&quot;
+      : &quot;=r&quot; (result) );
+  return result;
+}
  
-<span class="c1">//This saves the context on the PSP, the Cortex-M3 pushes the other registers using hardware</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">save_context</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">uint32_t</span> <span class="n">scratch</span><span class="p">;</span>
-  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span>
-      <span class="s">&quot;STMDB %0!, {r4-r11}</span><span class="se">\n\t</span><span class="s">&quot;</span>
-      <span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span>  <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">scratch</span><span class="p">)</span> <span class="p">);</span>
-<span class="p">}</span>
+//This saves the context on the PSP, the Cortex-M3 pushes the other registers using hardware
+static inline void save_context(void){
+  uint32_t scratch;
+  asm volatile (&quot;MRS %0, psp\n\t&quot;
+      &quot;STMDB %0!, {r4-r11}\n\t&quot;
+      &quot;MSR psp, %0\n\t&quot;  : &quot;=r&quot; (scratch) );
+}
  
-<span class="c1">//This loads the context from the PSP, the Cortex-M3 loads the other registers using hardware</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">load_context</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">uint32_t</span> <span class="n">scratch</span><span class="p">;</span>
-  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span>
-      <span class="s">&quot;LDMFD %0!, {r4-r11}</span><span class="se">\n\t</span><span class="s">&quot;</span>
-      <span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span>  <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">scratch</span><span class="p">)</span> <span class="p">);</span>
-<span class="p">}</span>
+//This loads the context from the PSP, the Cortex-M3 loads the other registers using hardware
+static inline void load_context(void){
+  uint32_t scratch;
+  asm volatile (&quot;MRS %0, psp\n\t&quot;
+      &quot;LDMFD %0!, {r4-r11}\n\t&quot;
+      &quot;MSR psp, %0\n\t&quot;  : &quot;=r&quot; (scratch) );
+}
  
-<span class="c1">//The SysTick interrupt handler -- this grabs the main stack value then calls the context switcher</span>
-<span class="kt">void</span> <span class="nf">systick_handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">save_context</span><span class="p">();</span>  <span class="c1">//The context is immediately saved</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="n">rd_stack_ptr</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;</span><span class="mi">16</span><span class="p">)</span> <span class="p">){</span> <span class="c1">//Indicates timer counted to zero</span>
-        <span class="n">context_switcher</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">load_context</span><span class="p">();</span> <span class="c1">//Since the PSP has been updated, this loads the last state of the new task</span>
-<span class="p">}</span>
+//The SysTick interrupt handler -- this grabs the main stack value then calls the context switcher
+void systick_handler(void){
+    save_context();  //The context is immediately saved
+    stack = (uint32_t *)rd_stack_ptr();
+    if ( SysTick-&gt;CTRL &amp; (1&lt;16) ){ //Indicates timer counted to zero
+        context_switcher();
+    }
+    load_context(); //Since the PSP has been updated, this loads the last state of the new task
+}
  
-<span class="c1">//This does the same thing as the SysTick handler -- it is just triggered in a different way</span>
-<span class="kt">void</span> <span class="nf">pendsv_handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">save_context</span><span class="p">();</span>  <span class="c1">//The context is immediately saved</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="n">rd_stack_ptr</span><span class="p">();</span>
-    <span class="n">core_proc_context_switcher</span><span class="p">();</span>
-    <span class="n">load_context</span><span class="p">();</span> <span class="c1">//Since the PSP has been updated, this loads the last state of the new task</span>
-<span class="p">}</span>
+//This does the same thing as the SysTick handler -- it is just triggered in a different way
+void pendsv_handler(void){
+    save_context();  //The context is immediately saved
+    stack = (uint32_t *)rd_stack_ptr();
+    core_proc_context_switcher();
+    load_context(); //Since the PSP has been updated, this loads the last state of the new task
+}
  
-<span class="c1">//This reads the PSP so that it can be stored in the task table</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">rd_thread_stack_ptr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">void</span> <span class="o">*</span> <span class="n">result</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
-    <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">);</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
-<span class="p">}</span>
+//This reads the PSP so that it can be stored in the task table
+static inline void * rd_thread_stack_ptr(void){
+    void * result=NULL;
+    asm volatile (&quot;MRS %0, psp\n\t&quot; : &quot;=r&quot; (result) );
+    return(result);
+}
  
-<span class="c1">//This writes the PSP so that the task table stack pointer can be used again</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">wr_thread_stack_ptr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">ptr</span><span class="p">){</span>
-    <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">:</span> <span class="o">:</span> <span class="s">&quot;r&quot;</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+//This writes the PSP so that the task table stack pointer can be used again
+static inline void wr_thread_stack_ptr(void * ptr){
+    asm volatile (&quot;MSR psp, %0\n\t&quot; : : &quot;r&quot; (ptr) );
+}</code></pre></div>
 
 <p>This is the function for the actual context switcher. This context 
 switcher uses the MSP for task 0 (assumed to be the kernel) and the 
 PSP for other tasks.  It is also possible to use the PSP for the 
 kernel and just use the MSP during interrupt handling.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//This is the context switcher</span>
-<span class="kt">void</span> <span class="nf">context_switcher</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-   <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">rd_proc_stack_ptr</span><span class="p">();</span> <span class="c1">//Save the current task&#39;s stack pointer</span>
-   <span class="k">do</span> <span class="p">{</span>
-      <span class="n">current_task</span><span class="o">++</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="n">current_task</span> <span class="o">==</span> <span class="n">MAX_TASKS</span> <span class="p">){</span>
-         <span class="n">current_task</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-         <span class="o">*</span><span class="p">((</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">stack</span><span class="p">)</span> <span class="o">=</span> <span class="n">MAIN_RETURN</span><span class="p">;</span> <span class="c1">//Return to main process using main stack</span>
-         <span class="k">break</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">EXEC_FLAG</span> <span class="p">){</span> <span class="c1">//Check exec flag</span>
-         <span class="c1">//change to unprivileged mode</span>
-         <span class="o">*</span><span class="p">((</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">stack</span><span class="p">)</span> <span class="o">=</span> <span class="n">THREAD_RETURN</span><span class="p">;</span> <span class="c1">//Use the thread stack upon handler return</span>
-         <span class="k">break</span><span class="p">;</span>
-      <span class="p">}</span>
-   <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-   <span class="n">wr_proc_stack_ptr</span><span class="p">(</span> <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">sp</span> <span class="p">);</span> <span class="c1">//write the value of the PSP to the new task</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//This is the context switcher
+void context_switcher(void){
+   task_table[current_task].sp = rd_proc_stack_ptr(); //Save the current task&#39;s stack pointer
+   do {
+      current_task++;
+      if ( current_task == MAX_TASKS ){
+         current_task = 0;
+         *((uint32_t*)stack) = MAIN_RETURN; //Return to main process using main stack
+         break;
+      } else if ( task_table[current_task].flags &amp; EXEC_FLAG ){ //Check exec flag
+         //change to unprivileged mode
+         *((uint32_t*)stack) = THREAD_RETURN; //Use the thread stack upon handler return
+         break;
+      }
+   } while(1);
+   wr_proc_stack_ptr( task_table[current_task].sp ); //write the value of the PSP to the new task
+}</code></pre></div>
 
 <p>The following diagram shows the chronology of the stack pointer when a 
 switch happens between task one and task two. Note that because this 
@@ -247,39 +247,39 @@ than MAIN_RETURN above.</p>
 <p>The first thing that must be done is to initialize the main stack’s 
 task table entry.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//This defines the stack frame that is saved  by the hardware</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint32_t</span> <span class="n">r0</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r1</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r2</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r3</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r12</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">lr</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">pc</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">psr</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">hw_stack_frame_t</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//This defines the stack frame that is saved  by the hardware
+typedef struct {
+  uint32_t r0;
+  uint32_t r1;
+  uint32_t r2;
+  uint32_t r3;
+  uint32_t r12;
+  uint32_t lr;
+  uint32_t pc;
+  uint32_t psr;
+} hw_stack_frame_t;
  
-<span class="c1">//This defines the stack frame that must be saved by the software</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint32_t</span> <span class="n">r4</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r5</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r6</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r7</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r8</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r9</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r10</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">r11</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">sw_stack_frame_t</span><span class="p">;</span>
+//This defines the stack frame that must be saved by the software
+typedef struct {
+  uint32_t r4;
+  uint32_t r5;
+  uint32_t r6;
+  uint32_t r7;
+  uint32_t r8;
+  uint32_t r9;
+  uint32_t r10;
+  uint32_t r11;
+} sw_stack_frame_t;
  
-<span class="k">static</span> <span class="kt">char</span> <span class="n">m_stack</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">)];</span>
+static char m_stack[sizeof(sw_stack_frame_t)];
  
-<span class="kt">void</span> <span class="nf">task_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="p">...</span>
-     <span class="n">task_table</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">m_stack</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">);</span>
-     <span class="p">....</span>
-    <span class="c1">//The systick needs to be configured to the desired round-robin time</span>
-    <span class="c1">//..when the systick interrupt fires, context switching will begin</span>
-<span class="p">}</span></code></pre></div>
+void task_init(void){
+     ...
+     task_table[0].sp = m_stack + sizeof(sw_stack_frame_t);
+     ....
+    //The systick needs to be configured to the desired round-robin time
+    //..when the systick interrupt fires, context switching will begin
+}</code></pre></div>
 
 <h3 id="creating-a-new-task">Creating a New Task</h3>
 
@@ -287,49 +287,49 @@ task table entry.</p>
 to start new tasks. Starting a new task involves finding an available 
 entry in the task table and initializing the new task’s stack.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">new_task</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">),</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">arg</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">stackaddr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stack_size</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-    <span class="kt">void</span> <span class="o">*</span> <span class="n">mem</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">argp</span><span class="p">;</span>
-    <span class="kt">void</span> <span class="o">*</span> <span class="n">pc</span><span class="p">;</span>
-    <span class="kt">hw_stack_frame_t</span> <span class="o">*</span> <span class="n">process_frame</span><span class="p">;</span>
-    <span class="c1">//Disable context switching to support multi-threaded calls to this function</span>
-    <span class="n">systick_disable_irq</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_TASKS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span> <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">){</span>
-            <span class="n">process_frame</span> <span class="o">=</span> <span class="p">(</span><span class="kt">hw_stack_frame_t</span> <span class="o">*</span><span class="p">)(</span><span class="n">stackaddr</span> <span class="o">-</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">hw_stack_frame_t</span><span class="p">));</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r0</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r12</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">pc</span> <span class="o">=</span> <span class="p">((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">p</span><span class="p">);</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">lr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">del_process</span><span class="p">;</span>
-            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">psr</span> <span class="o">=</span> <span class="mh">0x21000000</span><span class="p">;</span> <span class="c1">//default PSR value</span>
-            <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span> <span class="o">=</span> <span class="n">IN_USE_FLAG</span> <span class="o">|</span> <span class="n">EXEC_FLAG</span><span class="p">;</span>
-            <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">mem</span> <span class="o">+</span> 
-                <span class="n">stack_size</span> <span class="o">-</span> 
-                <span class="k">sizeof</span><span class="p">(</span><span class="kt">hw_stack_frame_t</span><span class="p">)</span> <span class="o">-</span> 
-                <span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">);</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">systick_enable_irq</span><span class="p">();</span>  <span class="c1">//Enable context switching</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="n">MAX_TASKS</span> <span class="p">){</span>
-        <span class="c1">//New task could not be created</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">//New task ID is i</span>
-        <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">int new_task(void *(*p)(void*), void * arg, void * stackaddr, int stack_size){
+    int i, j;
+    void * mem;
+    uint32_t * argp;
+    void * pc;
+    hw_stack_frame_t * process_frame;
+    //Disable context switching to support multi-threaded calls to this function
+    systick_disable_irq();
+    for(i=1; i &lt; MAX_TASKS; i++){
+        if( core_proc_table[i].flags == 0 ){
+            process_frame = (hw_stack_frame_t *)(stackaddr - sizeof(hw_stack_frame_t));
+            process_frame-&gt;r0 = (uint32_t)arg;
+            process_frame-&gt;r1 = 0;
+            process_frame-&gt;r2 = 0;
+            process_frame-&gt;r3 = 0;
+            process_frame-&gt;r12 = 0;
+            process_frame-&gt;pc = ((uint32_t)p);
+            process_frame-&gt;lr = (uint32_t)del_process;
+            process_frame-&gt;psr = 0x21000000; //default PSR value
+            core_proc_table[i].flags = IN_USE_FLAG | EXEC_FLAG;
+            core_proc_table[i].sp = mem + 
+                stack_size - 
+                sizeof(hw_stack_frame_t) - 
+                sizeof(sw_stack_frame_t);
+            break;
+        }
+    }
+    systick_enable_irq();  //Enable context switching
+    if ( i == MAX_TASKS ){
+        //New task could not be created
+        return 0;
+    } else {
+        //New task ID is i
+        return i;
+    }
+}
  
-<span class="c1">//This is called when the task returns</span>
-<span class="kt">void</span> <span class="nf">del_process</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="n">task_table</span><span class="p">[</span><span class="n">current_task_index</span><span class="p">].</span><span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//clear the in use and exec flags</span>
-  <span class="n">SCB</span><span class="o">-&gt;</span><span class="n">ICSR</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">28</span><span class="p">);</span> <span class="c1">//switch the context</span>
-  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//once the context changes, the program will no longer return to this thread</span>
-<span class="p">}</span></code></pre></div>
+//This is called when the task returns
+void del_process(void){
+  task_table[current_task_index].flags = 0; //clear the in use and exec flags
+  SCB-&gt;ICSR |= (1&lt;&lt;28); //switch the context
+  while(1); //once the context changes, the program will no longer return to this thread
+}</code></pre></div>
 
 <h3 id="conclusion">Conclusion</h3>
 

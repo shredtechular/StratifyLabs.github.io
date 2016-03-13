@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -101,9 +101,9 @@ of the CoActionOS library is installed when you download and install the compile
 
 <p>Once the CoActionOS library is built and installed on your development system, you can build the kernel.  The kernel is built by downloading a “board support package”:/redmine/projects/hardware/files and importing it in to Eclipse.  With the board support package, you can modify what devices and filesystems are available on the board.  For example, the CoAction Hero board support package comes with /dev/i2c0, /dev/i2c1, /dev/i2c2.  If you comment out the following lines, these devices won’t be available to user applications.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//DEVICE_PERIPH(&quot;i2c0&quot;, hwpl_i2c, 0, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span>
-<span class="c1">//DEVICE_PERIPH(&quot;i2c1&quot;, hwpl_i2c, 1, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span>
-<span class="c1">//DEVICE_PERIPH(&quot;i2c2&quot;, hwpl_i2c, 2, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//DEVICE_PERIPH(&quot;i2c0&quot;, hwpl_i2c, 0, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),
+//DEVICE_PERIPH(&quot;i2c1&quot;, hwpl_i2c, 1, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),
+//DEVICE_PERIPH(&quot;i2c2&quot;, hwpl_i2c, 2, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</code></pre></div>
 
 <div class="alert alert-info"><span class="label label-danger">Note</span> If you remove 
 all three I2C ports, the resulting binary will exclude the I2C driver.  However, if you 
@@ -115,14 +115,14 @@ filesystem by commenting it out.  The / (root), /app, and /dev filesystems are
 required for proper operation.  The /home filesystem mount if for storing files 
 on an external flash chip and is not required for normal operation.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">sysfs_t</span> <span class="k">const</span> <span class="n">sysfs_list</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="c1">//the folder for ram/flash applications</span>
-	<span class="n">SYSFS_APP</span><span class="p">(</span><span class="s">&quot;/app&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">devices</span><span class="p">[</span><span class="n">MEM_DEV</span><span class="p">]),</span> <span class="n">SYSFS_ALL_ACCESS</span><span class="p">),</span>
-	<span class="n">SYSFS_DEV</span><span class="p">(</span><span class="s">&quot;/dev&quot;</span><span class="p">,</span> <span class="n">devices</span><span class="p">,</span> <span class="n">SYSFS_READONLY_ACCESS</span><span class="p">),</span> <span class="c1">//devices</span>
-	<span class="n">CAFS_LITE</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cafs_lite_cfg</span><span class="p">,</span> <span class="n">SYSFS_ALL_ACCESS</span><span class="p">),</span> <span class="c1">//user files</span>
-	<span class="n">SYSFS_ROOT</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">sysfs_list</span><span class="p">,</span> <span class="n">SYSFS_READONLY_ACCESS</span><span class="p">),</span> <span class="c1">//root</span>
-	<span class="n">SYSFS_TERMINATOR</span>
-<span class="p">};</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">const sysfs_t const sysfs_list[] = {
+	//the folder for ram/flash applications
+	SYSFS_APP(&quot;/app&quot;, &amp;(devices[MEM_DEV]), SYSFS_ALL_ACCESS),
+	SYSFS_DEV(&quot;/dev&quot;, devices, SYSFS_READONLY_ACCESS), //devices
+	CAFS_LITE(&quot;/home&quot;, &amp;cafs_lite_cfg, SYSFS_ALL_ACCESS), //user files
+	SYSFS_ROOT(&quot;/&quot;, sysfs_list, SYSFS_READONLY_ACCESS), //root
+	SYSFS_TERMINATOR
+};</code></pre></div>
 
 <p>Once you have the devices and filesystems you want, you just hit the hammer in Eclipse 
 to build the kernel binary.  You can then use CoActionOS Link to install the binary.</p>

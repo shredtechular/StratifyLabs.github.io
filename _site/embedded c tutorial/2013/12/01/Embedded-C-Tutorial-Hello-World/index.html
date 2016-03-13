@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -83,15 +83,15 @@
 of the language, and how to use output–essential for seeing if your program is 
 working correctly. The code below is the standard C Hello World program.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//include is a compiler directive and .h refers to a header file</span>
-<span class="cp">#include &lt;stdio.h&gt; </span><span class="c1">//contains the prototype for printf</span>
-<span class="cp">#include &lt;stdlib.h&gt; </span><span class="c1">//contains the prototype for exit</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//include is a compiler directive and .h refers to a header file
+#include &lt;stdio.h&gt; //contains the prototype for printf
+#include &lt;stdlib.h&gt; //contains the prototype for exit
 
-<span class="c1">//main is the symbol that the OS looks for to enter the program</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>  
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span> <span class="c1">//printf is part of stdio</span>
-     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+//main is the symbol that the OS looks for to enter the program
+int main(int argc, char * argv[]){  
+     printf(&quot;Hello World\n&quot;); //printf is part of stdio
+     exit(0);
+}</code></pre></div>
 
 <div class="alert alert-info"><span class="label label-danger">Note</span> The program above also exposes preprocessor directives, 
 raw data types, as well as pointers and arrays. These principles are discussed 
@@ -150,8 +150,8 @@ and argv which is the norm for desktop operating systems. For some embedded syst
 main() may be declared more simply (see below) because only one program is 
 ever installed on the system and no parameters are passed to main().</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//OS doesn&#39;t pass any arguments to main(), int is returned</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//OS doesn&#39;t pass any arguments to main(), int is returned
+int main(void);</code></pre></div>
 
 <p>Before running main(), the OS runs startup code referred to as the C-runtime (CRT) 
 code which initializes the program. The program then executes statements–separated 

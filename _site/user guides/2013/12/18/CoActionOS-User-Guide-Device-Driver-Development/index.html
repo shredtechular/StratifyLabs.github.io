@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -88,50 +88,50 @@
 
 <p>This code is an example of how to access a SPI device in user code (without a custom device driver):</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/Pin.hpp&gt;</span>
-<span class="cp">#include &lt;applib/Spi.hpp&gt;</span>
-<span class="p">...</span>
-<span class="n">Pin</span> <span class="n">cs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//The chip select pin on P1.0</span>
-<span class="n">Spi</span> <span class="nf">spi</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//Use SPI port 0</span>
-<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-<span class="c1">//Initialization</span>
-<span class="n">cs</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">PIO_MODE_OUTPUT</span><span class="p">);</span> <span class="c1">//this calls open(&quot;/dev/pio1&quot;, O_RDWR) and ioctl() with I_PIO_SETATTR</span>
-<span class="n">spi</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">4000000</span><span class="p">);</span> <span class="c1">//this calls open(&quot;/dev/spi0&quot;, O_RDWR) and ioctl() with I_SPI_SETATTR</span>
-<span class="c1">//SPI read operation</span>
-<span class="n">cs</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">//drive CS low</span>
-<span class="n">spi</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
-<span class="n">cs</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">//drive CS high</span>
-<span class="c1">//Cleanup</span>
-<span class="n">cs</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-<span class="n">spi</span><span class="p">.</span><span class="n">close</span><span class="p">();</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/Pin.hpp&gt;
+#include &lt;applib/Spi.hpp&gt;
+...
+Pin cs(1,0); //The chip select pin on P1.0
+Spi spi(0); //Use SPI port 0
+char buffer[16];
+//Initialization
+cs.init(PIO_MODE_OUTPUT); //this calls open(&quot;/dev/pio1&quot;, O_RDWR) and ioctl() with I_PIO_SETATTR
+spi.init(4000000); //this calls open(&quot;/dev/spi0&quot;, O_RDWR) and ioctl() with I_SPI_SETATTR
+//SPI read operation
+cs = false; //drive CS low
+spi.read(buffer, 16);
+cs = true; //drive CS high
+//Cleanup
+cs.close();
+spi.close();</code></pre></div>
 
 <p>In the above example, the application code uses the /dev/pio and /dev/spi devices (using Applib) to access a SPI device.  We can access the same device in a single read by writing a device driver for the SPI device.  The driver will manage both the chip select pin and the SPI bus.  The application code will then look like this:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/Periph.hpp&gt;</span>
-<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span> <span class="c1">//the fd to provide to Applib</span>
-<span class="kt">bool</span> <span class="n">initialized</span><span class="p">;</span> <span class="c1">//another variable required for custom applib peripherals</span>
-<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/Periph.hpp&gt;
+int fd; //the fd to provide to Applib
+bool initialized; //another variable required for custom applib peripherals
+char buffer[16];
 
-<span class="n">Periph</span> <span class="nf">my_periph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">initialzed</span><span class="p">);</span>
-<span class="n">my_periph</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/my_spi&quot;</span><span class="p">,</span> <span class="n">Periph</span><span class="o">::</span><span class="n">RDWR</span><span class="p">);</span>
-<span class="c1">//The driver for /dev/my_spi can be configured to drive CS low, </span>
-<span class="c1">//perform a SPI bus operation, then drive CS high all with the read() call</span>
-<span class="n">my_periph</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+Periph my_periph(0, 1, &amp;fd, &amp;initialzed);
+my_periph.open(&quot;/dev/my_spi&quot;, Periph::RDWR);
+//The driver for /dev/my_spi can be configured to drive CS low, 
+//perform a SPI bus operation, then drive CS high all with the read() call
+my_periph.read(buffer, 16);
 
-<span class="n">my_periph</span><span class="p">.</span><span class="n">close</span><span class="p">();</span></code></pre></div>
+my_periph.close();</code></pre></div>
 
 <h3 id="spi-driver-example">SPI Driver Example</h3>
 
 <p>Drivers are built with the kernel by populating a device_t.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-	<span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">NAME_MAX</span><span class="p">]</span> <span class="cm">/*! \brief The name of the device */</span><span class="p">;</span>
-	<span class="kt">uint8_t</span> <span class="n">uid</span> <span class="cm">/*! \brief The user ID of the device */</span><span class="p">;</span>
-	<span class="kt">uint8_t</span> <span class="n">gid</span> <span class="cm">/*! \brief The group ID of the device */</span><span class="p">;</span>
-	<span class="kt">uint16_t</span> <span class="n">mode</span> <span class="cm">/*! \brief The file access values */</span><span class="p">;</span>
-	<span class="kt">device_driver_t</span> <span class="n">driver</span> <span class="cm">/*! \brief The driver functions */</span><span class="p">;</span>
-	<span class="kt">device_cfg_t</span> <span class="n">cfg</span> <span class="cm">/*! \brief The configuration for the device */</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">device_t</span><span class="p">;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct {
+	char name[NAME_MAX] /*! \brief The name of the device */;
+	uint8_t uid /*! \brief The user ID of the device */;
+	uint8_t gid /*! \brief The group ID of the device */;
+	uint16_t mode /*! \brief The file access values */;
+	device_driver_t driver /*! \brief The driver functions */;
+	device_cfg_t cfg /*! \brief The configuration for the device */;
+} device_t;</code></pre></div>
 
 <ul>
   <li>The <em>name</em> shows up in the /dev folder.  For example, if the <em>name</em> is adc3, the file /dev/adc3 will exist.</li>
@@ -143,33 +143,33 @@
 
 <p>The <em>device_driver_t</em> is shown below:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-	<span class="kt">device_driver_open_t</span> <span class="n">open</span> <span class="cm">/*! \brief A pointer to the periph_open() function */</span><span class="p">;</span>
-	<span class="kt">device_driver_ioctl_t</span> <span class="n">ioctl</span> <span class="cm">/*! \brief A pointer to the periph_ioctl() function */</span><span class="p">;</span>
-	<span class="kt">device_driver_read_t</span> <span class="n">read</span> <span class="cm">/*! \brief A pointer to the periph_read() function */</span><span class="p">;</span>
-	<span class="kt">device_driver_write_t</span> <span class="n">write</span> <span class="cm">/*! \brief A pointer to the periph_write() function */</span><span class="p">;</span>
-	<span class="kt">device_driver_close_t</span> <span class="n">close</span> <span class="cm">/*! \brief A pointer to the periph_close() function */</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">device_driver_t</span><span class="p">;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct HWPL_PACK {
+	device_driver_open_t open /*! \brief A pointer to the periph_open() function */;
+	device_driver_ioctl_t ioctl /*! \brief A pointer to the periph_ioctl() function */;
+	device_driver_read_t read /*! \brief A pointer to the periph_read() function */;
+	device_driver_write_t write /*! \brief A pointer to the periph_write() function */;
+	device_driver_close_t close /*! \brief A pointer to the periph_close() function */;
+} device_driver_t;</code></pre></div>
 
 <p>The <em>device_driver_t</em> structure defines five function pointers that will be called when the user calls open(), read(), write(), ioctl(), or close().</p>
 
 <p>Finally, the <em>device_cfg_t</em> allows the board support package to configure what hardware is used to access the device.  For example, one board might use SPI port 1 with P1.0 as the chip select to access an external SPI device.  Another board may use SPI port 0 with P2.8 as the chip select.  The <em>device_cfg_t</em> data structure allows both boards to use the exact same device driver.  It is not even necessary to recompile the driver-just to re-link with it. This approach allows device driver developers to release hardware configurable drivers with or without releasing the source code.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-	<span class="kt">device_periph_t</span> <span class="n">periph</span> <span class="cm">/*! \brief This is the configuration used for all peripherals */</span><span class="p">;</span>
-	<span class="kt">uint8_t</span> <span class="n">pin_assign</span> <span class="cm">/*! \brief The GPIO pin configuration */</span><span class="p">;</span>
-	<span class="kt">uint32_t</span> <span class="n">bitrate</span> <span class="cm">/*! \brief Specifies the max bit rate in bps */</span><span class="p">;</span>
-	<span class="k">union</span> <span class="p">{</span>
-		<span class="kt">device_spi_cfg_t</span> <span class="n">spi</span> <span class="cm">/*! \brief The configuration for devices that are connected via SPI bus */</span><span class="p">;</span>
-		<span class="kt">device_pwm_cfg_t</span> <span class="n">pwm</span> <span class="cm">/*! \brief The configuration for devices connected via PWM */</span><span class="p">;</span>
-		<span class="kt">device_adc_cfg_t</span> <span class="n">adc</span> <span class="cm">/*! \brief The configuration for devices connected to ADC pins */</span><span class="p">;</span>
-		<span class="kt">device_uart_cfg_t</span> <span class="n">uart</span> <span class="cm">/*! \brief The configuration for devices connected to UART pins */</span><span class="p">;</span>
-		<span class="kt">device_i2c_cfg_t</span> <span class="n">i2c</span> <span class="cm">/*! \brief The configuration for devices connected via I2C bus */</span><span class="p">;</span>
-		<span class="kt">pio_t</span> <span class="n">pio</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="cm">/*! \brief Used for generic GPIO devices such as LEDs */</span><span class="p">;</span>
-	<span class="p">}</span> <span class="n">pcfg</span><span class="p">;</span>
-	<span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">dcfg</span> <span class="cm">/*! \brief Pointer to device specific configuration */</span><span class="p">;</span>
-	<span class="kt">void</span> <span class="o">*</span> <span class="n">state</span> <span class="cm">/*! \brief Pointer to device specific state (RAM) */</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">device_cfg_t</span><span class="p">;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct HWPL_PACK {
+	device_periph_t periph /*! \brief This is the configuration used for all peripherals */;
+	uint8_t pin_assign /*! \brief The GPIO pin configuration */;
+	uint32_t bitrate /*! \brief Specifies the max bit rate in bps */;
+	union {
+		device_spi_cfg_t spi /*! \brief The configuration for devices that are connected via SPI bus */;
+		device_pwm_cfg_t pwm /*! \brief The configuration for devices connected via PWM */;
+		device_adc_cfg_t adc /*! \brief The configuration for devices connected to ADC pins */;
+		device_uart_cfg_t uart /*! \brief The configuration for devices connected to UART pins */;
+		device_i2c_cfg_t i2c /*! \brief The configuration for devices connected via I2C bus */;
+		pio_t pio[4] /*! \brief Used for generic GPIO devices such as LEDs */;
+	} pcfg;
+	const void * dcfg /*! \brief Pointer to device specific configuration */;
+	void * state /*! \brief Pointer to device specific state (RAM) */;
+} device_cfg_t;</code></pre></div>
 
 <ul>
   <li><em>periph</em> contains data describes the MCU peripheral; current this is a single value that specifies the port number</li>

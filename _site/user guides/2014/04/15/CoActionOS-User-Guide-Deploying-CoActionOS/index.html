@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -115,20 +115,20 @@ support packages</a>, you will find a file called devices.c.  This file referenc
 and filesystems that will be available to applications.  You just need to comment out anything you are not using to exclude those items
 from the binary.  For example, the following lines are commented out to exclude the I2C drivers.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//DEVICE_PERIPH(&quot;i2c0&quot;, hwpl_i2c, 0, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span>
-<span class="c1">//DEVICE_PERIPH(&quot;i2c1&quot;, hwpl_i2c, 1, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span>
-<span class="c1">//DEVICE_PERIPH(&quot;i2c2&quot;, hwpl_i2c, 2, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//DEVICE_PERIPH(&quot;i2c0&quot;, hwpl_i2c, 0, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),
+//DEVICE_PERIPH(&quot;i2c1&quot;, hwpl_i2c, 1, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),
+//DEVICE_PERIPH(&quot;i2c2&quot;, hwpl_i2c, 2, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</code></pre></div>
 
 <p>If you aren’t using the CoActionOS flash filesystem, that can also be excluded.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">sysfs_t</span> <span class="k">const</span> <span class="n">sysfs_list</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="c1">//the folder for ram/flash applications</span>
-	<span class="n">SYSFS_APP</span><span class="p">(</span><span class="s">&quot;/app&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">devices</span><span class="p">[</span><span class="n">MEM_DEV</span><span class="p">]),</span> <span class="n">SYSFS_ALL_ACCESS</span><span class="p">),</span>
-	<span class="n">SYSFS_DEV</span><span class="p">(</span><span class="s">&quot;/dev&quot;</span><span class="p">,</span> <span class="n">devices</span><span class="p">,</span> <span class="n">SYSFS_READONLY_ACCESS</span><span class="p">),</span> <span class="c1">//devices</span>
-	<span class="c1">//CAFS_LITE(&quot;/home&quot;, &amp;cafs_lite_cfg, SYSFS_ALL_ACCESS), //user files</span>
-	<span class="n">SYSFS_ROOT</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">sysfs_list</span><span class="p">,</span> <span class="n">SYSFS_READONLY_ACCESS</span><span class="p">),</span> <span class="c1">//root</span>
-	<span class="n">SYSFS_TERMINATOR</span>
-<span class="p">};</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">const sysfs_t const sysfs_list[] = {
+	//the folder for ram/flash applications
+	SYSFS_APP(&quot;/app&quot;, &amp;(devices[MEM_DEV]), SYSFS_ALL_ACCESS),
+	SYSFS_DEV(&quot;/dev&quot;, devices, SYSFS_READONLY_ACCESS), //devices
+	//CAFS_LITE(&quot;/home&quot;, &amp;cafs_lite_cfg, SYSFS_ALL_ACCESS), //user files
+	SYSFS_ROOT(&quot;/&quot;, sysfs_list, SYSFS_READONLY_ACCESS), //root
+	SYSFS_TERMINATOR
+};</code></pre></div>
 
 <h4 id="exclude-unused-cposix-functions">Exclude Unused C/POSIX functions</h4>
 
@@ -136,49 +136,49 @@ from the binary.  For example, the following lines are commented out to exclude 
 not used by the kernel, are still included in the build so that they are available to applications.  It ensures that if an application links
 to printf() (see src/crt/crt_symbols.S), then the printf() code will be part of the kernel.  However, if none of your deployed applications use printf(), you don’t need it in the kernel.  To exclude a function, place a zero in the table (don’t delete the line or simply comment it out!).</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">uint32_t</span> <span class="k">const</span> <span class="n">symbols_table</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="c1">//...</span>
-	<span class="mi">0</span><span class="p">,</span> <span class="c1">//(uint32_t)fprintf,</span>
-	<span class="mi">0</span><span class="p">,</span> <span class="c1">//(uint32_t)printf,</span>
-	<span class="mi">0</span><span class="p">,</span> <span class="c1">//(uint32_t)snprintf,</span>
-	<span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">vfprintf</span><span class="p">,</span>
-	<span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">sprintf</span><span class="p">,</span>
-	<span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">vprintf</span><span class="p">,</span>
-	<span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">vsnprintf</span><span class="p">,</span>
-	<span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">vsprintf</span><span class="p">,</span>
-	<span class="c1">//...</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">uint32_t const symbols_table[] = {
+	//...
+	0, //(uint32_t)fprintf,
+	0, //(uint32_t)printf,
+	0, //(uint32_t)snprintf,
+	(uint32_t)vfprintf,
+	(uint32_t)sprintf,
+	(uint32_t)vprintf,
+	(uint32_t)vsnprintf,
+	(uint32_t)vsprintf,
+	//...
 
-<span class="p">};</span></code></pre></div>
+};</code></pre></div>
 
 <h4 id="unify-kernel-and-application">Unify Kernel and Application</h4>
 
 <p>If you still need to make the binary smaller, you can compile the application with the kernel.  In this case, you will want to exclude src/sys/symbols.c from the build entirely.  In the CoActionOS kernel library, the first thread is called intial_thread() and is weakly bound.  You can
 add this function to your board support package to override the version in the kernel library.  The default initial thread function is shown below extracted from src/sys/intial_thread.c.  Instead of initializing the link functionality (link_init() and link_update()), you can call the main() function to your application and add the applicatoin source code directly to the board support package in Eclipse.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="o">*</span> <span class="nf">initial_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">arg</span><span class="p">){</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">void * initial_thread(void * arg){
 
-	<span class="n">hwpl_core_privcall</span><span class="p">(</span><span class="n">priv_check_reset_source</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+	hwpl_core_privcall(priv_check_reset_source, NULL);
 
-	<span class="c1">//Initialize the file systems</span>
-	<span class="k">if</span> <span class="p">(</span> <span class="n">init_fs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-		<span class="p">;</span>
-	<span class="p">}</span>
+	//Initialize the file systems
+	if ( init_fs() &lt; 0 ){
+		;
+	}
 
-	<span class="c1">//Initialize the CoActionOS Link interface</span>
-	<span class="k">if</span> <span class="p">(</span> <span class="n">link_init</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-		<span class="n">hwpl_core_privcall</span><span class="p">(</span><span class="n">gled_priv_error</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-	<span class="p">}</span>
+	//Initialize the CoActionOS Link interface
+	if ( link_init() &lt; 0 ){
+		hwpl_core_privcall(gled_priv_error, 0);
+	}
 
-	<span class="n">startup_fs</span><span class="p">();</span>
+	startup_fs();
 
-	<span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/rtc&quot;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+	open(&quot;/dev/rtc&quot;, O_RDWR);
 
-	<span class="n">usleep</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-	<span class="n">led_startup</span><span class="p">();</span>
-	<span class="n">link_update</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> 	<span class="c1">//Run the link update thread--never returns</span>
+	usleep(100*1000);
+	led_startup();
+	link_update(NULL); 	//Run the link update thread--never returns
 
-	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+	return NULL;
+}</code></pre></div>
 
 <h4 id="remove-the-bootloader">Remove the Bootloader</h4>
 

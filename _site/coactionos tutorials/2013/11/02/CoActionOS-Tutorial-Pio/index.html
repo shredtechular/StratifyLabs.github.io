@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -83,35 +83,35 @@ program demonstrates using a pin to turn the CoAction Hero on-board LED
 on and off (error checking has been omitted for simplicity). 
 See <a href="/coactionos-applib/html/class_pin.html">Pin Class</a> for more details.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;applib/Timer.hpp&gt;</span>
-<span class="cp">#include &lt;applib/Pin.hpp&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;cstdio&gt;
+#include &lt;applib/Timer.hpp&gt;
+#include &lt;applib/Pin.hpp&gt;
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+int main(int argc, char * argv[]){
  
-  <span class="c1">//Use PIO port 2 (2.10 has the LED connection)</span>
-  <span class="n">Pin</span> <span class="n">pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+  //Use PIO port 2 (2.10 has the LED connection)
+  Pin pin(2,10);
  
-  <span class="c1">//open the port</span>
-  <span class="n">pin</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">PIO_MODE_OUTPUT</span><span class="p">);</span>
+  //open the port
+  pin.init(PIO_MODE_OUTPUT);
  
-  <span class="c1">//Turn the LED on</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;LED is on</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">pin</span><span class="p">.</span><span class="n">clr</span><span class="p">();</span>
-  <span class="c1">//you can also assign boolean values to the object to do the same thing</span>
-  <span class="n">pin</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  //Turn the LED on
+  printf(&quot;LED is on\n&quot;);
+  pin.clr();
+  //you can also assign boolean values to the object to do the same thing
+  pin = false;
  
-  <span class="c1">//Sleep for one second</span>
-  <span class="n">Timer</span><span class="o">::</span><span class="n">wait_sec</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  //Sleep for one second
+  Timer::wait_sec(1);
  
-  <span class="c1">//Turn the LED off</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;LED is off</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">pin</span><span class="p">.</span><span class="n">set</span><span class="p">();</span>
-  <span class="c1">//or use the = operator with a boolean value</span>
-  <span class="n">pin</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> 
+  //Turn the LED off
+  printf(&quot;LED is off\n&quot;);
+  pin.set();
+  //or use the = operator with a boolean value
+  pin = true; 
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+  return 0;
+}</code></pre></div>
 
 
 				</div>

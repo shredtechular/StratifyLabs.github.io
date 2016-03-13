@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -82,24 +82,24 @@
 
 <p>Programs are created to do something useful–in embedded systems, to make a device or gadget do something useful. As a means to an end, the program uses data and operations. For example, a motor’s position is represented as data in a program; the motor’s speed, also represented as data, can be calculated using various operations given the change in motor positions for a given period of time. This tutorial introduces C raw data types. The following code snippet illustrates how to use data in C and introduces the raw data type int.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdlib.h&gt; </span><span class="c1">//this declares exit()</span>
-<span class="cp">#include &lt;unistd.h&gt; </span><span class="c1">//this contains usleep()</span>
-<span class="cp">#include &quot;motor.h&quot; </span><span class="c1">//this is a fictitious header than contains get_motor_position()</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-     <span class="cm">/* This is where the data variables are declared--All </span>
-<span class="cm">     variables must be declared before use Since they are </span>
-<span class="cm">     declared inside main&#39;s {}, they are local to the </span>
-<span class="cm">     main function */</span>
-     <span class="kt">int</span> <span class="n">motor_pos0</span><span class="p">,</span> <span class="n">motor_pos1</span><span class="p">;</span>  <span class="c1">//commas can separate variables</span>
-     <span class="kt">int</span> <span class="n">motor_speed</span><span class="p">;</span> <span class="c1">//or just use a new statement</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdlib.h&gt; //this declares exit()
+#include &lt;unistd.h&gt; //this contains usleep()
+#include &quot;motor.h&quot; //this is a fictitious header than contains get_motor_position()
+int main(int argc, char * argv[]){
+     /* This is where the data variables are declared--All 
+     variables must be declared before use Since they are 
+     declared inside main&#39;s {}, they are local to the 
+     main function */
+     int motor_pos0, motor_pos1;  //commas can separate variables
+     int motor_speed; //or just use a new statement
  
-     <span class="n">motor_pos0</span> <span class="o">=</span> <span class="n">get_motor_position</span><span class="p">();</span>  <span class="c1">//assign position to motor_pos0</span>
-     <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>	<span class="c1">//wait for 1ms (1000 microseconds)</span>
-     <span class="n">motor_pos1</span> <span class="o">=</span> <span class="n">get_motor_position</span><span class="p">();</span>  <span class="c1">//assign the updated motor position</span>
-     <span class="c1">//now use the positions values and some operators to calculate the speed</span>
-     <span class="n">motor_speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">motor_pos1</span> <span class="o">-</span> <span class="n">motor_pos0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
-     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//exit the program</span>
-<span class="p">}</span></code></pre></div>
+     motor_pos0 = get_motor_position();  //assign position to motor_pos0
+     usleep(1000);	//wait for 1ms (1000 microseconds)
+     motor_pos1 = get_motor_position();  //assign the updated motor position
+     //now use the positions values and some operators to calculate the speed
+     motor_speed = (motor_pos1 - motor_pos0) / 1000;
+     exit(0); //exit the program
+}</code></pre></div>
 
 <h2 id="data-types">Data Types</h2>
 

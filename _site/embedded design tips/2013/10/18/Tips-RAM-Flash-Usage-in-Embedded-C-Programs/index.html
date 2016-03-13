@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -104,15 +104,15 @@ specifics, but the basic concepts are the same.</div>
 
 <p>Code and read-only data are stored in flash memory.  The layout of a C program’s flash memory is shown in the diagram above.  The beginning of the program (the lowest memory location at the bottom of the diagram) is the text section which includes executable code.  This section also includes numerical values that are not assigned to any specific C variable called “literal values”.  The read-only data section follows the text section and is exclusively stored in flash memory (note this is only true for some embedded architectures, not all).  There is then a copy of the “data” section which contains the initial values of global and static variables.  This section is copied to RAM when the program starts up.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">read_only_variable</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">data_variable</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
+const int read_only_variable = 2000;
+int data_variable = 500;
  
-<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
-     <span class="n">x</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;X is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+void my_function(void){
+     int x;
+     x = 200;
+     printf(&quot;X is %d\n&quot;, x);
+}</code></pre></div>
 
 <p>In the above code, read_only_variable is stored in the read-only data section because it is preceded by the <em>const</em> keyword. The compiler assigns <em>read_only_variable</em> a specific address location (in flash) and writes the value of <em>2000</em> to that memory location. When the variable <em>x</em> within <em>my_function()</em> is assigned the literal value <em>200</em>, it references the value stored in a “literal pool” within the text section–at least this is true for the ARM Cortex M architecture; other architectures may take a different approach to literal values but the basic concept is the same.  Finally, a copy of the initial value, <em>500</em>, assigned to <em>data_variable</em> is stored in flash memory and copied to RAM when the program starts. When the program references <em>data_variable</em>, it will refer to its location in RAM.</p>
 
@@ -130,17 +130,17 @@ specifics, but the basic concepts are the same.</div>
 
 <p>Statically allocated memory means that the compiler determines the memory address of the variable at compile time.  Static data is divided in two sections:  data and bss (there is a wikipedia page dedicated to why it is called bss).  The difference is that data is assigned an intial, non-zero value when the program starts while all variables in the bss section are initialized to zero.  For clarification, see the below example:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
  
-<span class="c1">//these variables are globally allocated</span>
-<span class="kt">int</span> <span class="n">data_var</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">bss_var0</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">bss_var1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+//these variables are globally allocated
+int data_var = 500;
+int bss_var0;
+int bss_var1 = 0;
  
-<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="kt">int</span> <span class="n">uninitialized_var</span><span class="p">;</span>
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;data_var:%d, bss_var0:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">data_var</span><span class="p">,</span> <span class="n">bss_var0</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+void my_function(void){
+     int uninitialized_var;
+     printf(&quot;data_var:%d, bss_var0:%d\n&quot;, data_var, bss_var0);
+}</code></pre></div>
 
 <p>When the C program starts, the C runtime (CRT) start function loads the memory location assigned to <em>data_var</em> with <em>500</em>.  This is typically accomplished by copying the value from flash to RAM; this implies that each byte of data will occupy one byte of flash and one byte of RAM.  The CRT start function then sets the memory locations for <em>bss_var0</em> and <em>bss_var1</em> to zero which does not require any space in flash memory.</p>
 
@@ -148,19 +148,19 @@ specifics, but the basic concepts are the same.</div>
 
 <p>Static memory should not be confused with the C keyword <em>static</em>.  While all C <em>static</em> variables are allocated as static memory, not all statically allocated memory is declared with <em>static</em>.  Consider the code snippet:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
  
-<span class="kt">int</span> <span class="n">global_var</span><span class="p">;</span> <span class="c1">//statically allocated as a global variable</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">static_var</span><span class="p">;</span> <span class="c1">//statically allocated but only accessible within file</span>
+int global_var; //statically allocated as a global variable
+static int static_var; //statically allocated but only accessible within file
  
-<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="k">static</span> <span class="kt">int</span> <span class="n">my_static</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//statically allocated, accessible within my_function</span>
-     <span class="kt">int</span> <span class="n">my_stack</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//allocated on the stack</span>
+void my_function(void){
+     static int my_static = 0; //statically allocated, accessible within my_function
+     int my_stack = 0; //allocated on the stack
  
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_static:%d, my_stack:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">my_static</span><span class="p">,</span> <span class="n">my_stack</span><span class="p">);</span>
-     <span class="n">my_stack</span><span class="o">++</span><span class="p">;</span>
-     <span class="n">my_static</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+     printf(&quot;my_static:%d, my_stack:%d\n&quot;, my_static, my_stack);
+     my_stack++;
+     my_static++;
+}</code></pre></div>
 
 <p>In the above code, <em>global_var</em> can be accessed by any file during the compilation process;  <em>static_var</em> can only be accessed with functions that are in the same C file as the <em>static_var</em> declaration.  The <em>my_static</em> variable, declared as <em>static</em> within a function, retains its value between successive calls to <em>my_function()</em> while <em>my_stack</em> does not.  The output of 5 successive calls to <em>my_function()</em> is:</p>
 
@@ -178,43 +178,43 @@ my_static:4, my_stack:0</pre>
 
 <p>The beginning of the heap is just above the last bss variable (see diagram above preceding subsection).  The C standard library contains two function families for managing the heap:  <em>malloc()</em> and <em>free()</em>.  The following code snippet illustrates their usages:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;string.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
  
-<span class="kt">void</span> <span class="nf">my_func</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="kt">char</span> <span class="o">*</span> <span class="n">buffer</span><span class="p">;</span>
+void my_func(void){
+     char * buffer;
  
-     <span class="n">buffer</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">512</span><span class="p">);</span> <span class="c1">//allocate 512 bytes for buffer on the heap</span>
-     <span class="k">if</span> <span class="p">(</span> <span class="n">buffer</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="p">){</span>
-          <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Failed to allocate memory&quot;</span><span class="p">);</span>
-          <span class="k">return</span><span class="p">;</span>
-     <span class="p">}</span>
+     buffer = malloc(512); //allocate 512 bytes for buffer on the heap
+     if ( buffer == NULL ){
+          perror(&quot;Failed to allocate memory&quot;);
+          return;
+     }
  
-     <span class="c1">//now buffer can be treated as if it were declared char buffer[512]</span>
-     <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">);</span> <span class="c1">//zero out the buffer</span>
-     <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;Buffer is at location 0x%lX</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span> <span class="c1">//show buffers address</span>
+     //now buffer can be treated as if it were declared char buffer[512]
+     memset(buffer, 0, 512); //zero out the buffer
+     sprintf(buffer, &quot;Buffer is at location 0x%lX\n&quot;, buffer); //show buffers address
  
-     <span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span> <span class="c1">//This frees 512 bytes to be used by another call to malloc()</span>
-<span class="p">}</span></code></pre></div>
+     free(buffer); //This frees 512 bytes to be used by another call to malloc()
+}</code></pre></div>
 
 <p>Dynamically allocated memory is a convenient tool for application developers but must be used deliberately to minimize the effects of memory fragmentation.  The following code shows how <em>malloc()</em> and <em>free()</em> can result in fragmented memory:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;string.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
  
-<span class="kt">void</span> <span class="nf">my_fragmenting_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="kt">char</span> <span class="o">*</span> <span class="n">my_buffers</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
-     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-     <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-          <span class="n">my_buffers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span> <span class="c1">//allocated 128 bytes (3 times)</span>
-     <span class="p">}</span>
+void my_fragmenting_function(void){
+     char * my_buffers[3];
+     int i;
+     for(i=0; i &lt; 3; i++){
+          my_buffers[i] = malloc(128); //allocated 128 bytes (3 times)
+     }
  
-     <span class="n">free</span><span class="p">(</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>
+     free( buffer[1] );
  
-     <span class="n">buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">256</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+     buffer[1] = malloc(256);
+}</code></pre></div>
 
 <p>The example above allocates 128 bytes three times then frees the middle 128 bytes.  Since the freed bytes are essentially sandwiched by the other buffers, <em>malloc()</em> can only use them again when allocating 128 bytes or less.  For the final call to allocate 256 bytes, the previously freed 128 bytes cannot be used.  Fragmentation problems can be largely avoided by careful use of <em>malloc()</em> and <em>free()</em>.</p>
 
@@ -222,18 +222,18 @@ my_static:4, my_stack:0</pre>
 
 <p>Variables that are declared within a function, known as local variables, are either allocated on the stack or simply assigned a register value.  Whether a variable is allocated on the stack or simply assigned to a register depends on many factors such as the compiler (including conventions associated with the architecture), the microcontroller architecture, as well as the number of variables already assigned to registers.  Consider the following code example:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
  
-<span class="kt">int</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
-     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
-     <span class="k">register</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
-     <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+int my_function(int a, int b, int c, int d){
+     int x;
+     register int y;
+     char buf[64];
  
-     <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;Test String</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-     <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
-     <span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">;</span>
-     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-<span class="p">}</span></code></pre></div>
+     sprintf(buf, &quot;Test String\n&quot;);
+     x = a + b + c + strlen(buf);
+     y = d*d;
+     return x*y
+}</code></pre></div>
 
 <p>The paramaters <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> to <em>my_function()</em> are stored in registers <em>r0</em>, <em>r1</em>, <em>r2</em>, and <em>r3</em>–this is true for the ARM Cortex-M but varies between architectures; though most use some number of registers for parameter passing and then pass additional parameters on the stack.  The <em>x</em> variable in <em>my_function()</em> is likely assigned to a register, but if no registers are available, it assigned a memory location on the stack.  The <em>y</em> variable is treated similarly, but because it uses the register keyword, the compiler gives it preference over <em>x</em> when allocating registers.  The <em>buf</em> variable is allocated on the stack because it is 1) likely too large for register allocation and 2) it is an array, and many architectures have instructions that making working with arrays in memory (rather than registers) perform well.  Unlike global and static variables, local variables are only initializes when the program assigns a value to them.  For example, before the line <em>x = a + b + c + strlen(buf);</em>, the value of <em>x</em> is whatever the value the register or memory location had before this line was executed.  Therefore, local variables should never to used before they are assigned a value within the function.</p>
 

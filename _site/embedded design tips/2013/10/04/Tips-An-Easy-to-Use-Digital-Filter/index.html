@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -176,23 +176,23 @@ filter with N points which requires N multiply and addition operations as well a
 samples to be stored in RAM.  The following code implements the EMA filter using 32-bit 
 fixed point math.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#define DSP_EMA_I32_ALPHA(x) ( (uint16_t)(x * 65535) )</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#define DSP_EMA_I32_ALPHA(x) ( (uint16_t)(x * 65535) )
  
-<span class="kt">int32_t</span> <span class="nf">dsp_ema_i32</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">in</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">average</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">alpha</span><span class="p">){</span>
-  <span class="k">if</span> <span class="p">(</span> <span class="n">alpha</span> <span class="o">==</span> <span class="mi">65535</span> <span class="p">)</span> <span class="k">return</span> <span class="n">in</span><span class="p">;</span>
-  <span class="kt">int64_t</span> <span class="n">tmp0</span><span class="p">;</span>
-  <span class="n">tmp0</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span><span class="p">)</span><span class="n">in</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">average</span> <span class="o">*</span> <span class="p">(</span><span class="mi">65536</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
-  <span class="k">return</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)((</span><span class="n">tmp0</span> <span class="o">+</span> <span class="mi">32768</span><span class="p">)</span> <span class="o">/</span> <span class="mi">65536</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+int32_t dsp_ema_i32(int32_t in, int32_t average, uint16_t alpha){
+  if ( alpha == 65535 ) return in;
+  int64_t tmp0;
+  tmp0 = (int64_t)in * (alpha+1) + average * (65536 - alpha);
+  return (int32_t)((tmp0 + 32768) / 65536);
+}</code></pre></div>
 
 <p>The code below is an example of how to use the above function.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int32_t</span> <span class="nf">my_avg_func</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-     <span class="k">static</span> <span class="kt">int32_t</span> <span class="n">average</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-     <span class="kt">int32_t</span> <span class="n">adc_value</span><span class="p">;</span>    
-     <span class="n">adc_value</span> <span class="o">=</span> <span class="n">read_the_adc_value</span><span class="p">();</span>
-     <span class="n">average</span> <span class="o">=</span> <span class="n">dsp_ema_i32</span><span class="p">(</span><span class="n">adc_value</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">DSP_EMA_I32_ALPHA</span><span class="p">(</span><span class="mf">0.1</span><span class="p">));</span>
-     <span class="k">return</span> <span class="n">average</span><span class="p">;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">int32_t my_avg_func(void){
+     static int32_t average = 0;
+     int32_t adc_value;    
+     adc_value = read_the_adc_value();
+     average = dsp_ema_i32(adc_value, average, DSP_EMA_I32_ALPHA(0.1));
+     return average;</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 

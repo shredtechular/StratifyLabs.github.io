@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -82,40 +82,40 @@
 and running threads. For more details on using this class, please 
 see the <a href="/coactionos-applib/html/class_thread.html">Thread Applib documentation</a>.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/Thread.hpp&gt; </span><span class="c1">//for Thread class</span>
-<span class="cp">#include &lt;applib/Timer.hpp&gt;</span>
-<span class="cp">#include &lt;cstdio&gt; </span><span class="c1">//for printf</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/Thread.hpp&gt; //for Thread class
+#include &lt;applib/Timer.hpp&gt;
+#include &lt;cstdio&gt; //for printf
  
-<span class="c1">//function to execute with thread</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">thread_func</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">args</span><span class="p">);</span>
+//function to execute with thread
+static void * thread_func(void * args);
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="n">Thread</span> <span class="n">t0</span><span class="p">;</span> <span class="c1">//construct the first thread class</span>
-  <span class="n">Thread</span> <span class="n">t1</span><span class="p">;</span> <span class="c1">//construct the second thread class</span>
-  <span class="kt">int</span> <span class="n">t0_args</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//argument for t0</span>
-  <span class="kt">int</span> <span class="n">t1_args</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//argument for t1</span>
+int main(int argc, char * argv[]){
+  Thread t0; //construct the first thread class
+  Thread t1; //construct the second thread class
+  int t0_args = 0; //argument for t0
+  int t1_args = 1; //argument for t1
  
-  <span class="c1">//create and run t0</span>
-  <span class="n">t0</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">thread_func</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">t0_args</span><span class="p">);</span>
+  //create and run t0
+  t0.create(thread_func, &amp;t0_args);
  
-  <span class="c1">//create and run t1</span>
-  <span class="n">t1</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">thread_func</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">t1_args</span><span class="p">);</span>
+  //create and run t1
+  t1.create(thread_func, &amp;t1_args);
  
-  <span class="c1">//wait for the threads to complete</span>
-  <span class="n">Timer</span><span class="o">::</span><span class="n">wait_sec</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  //wait for the threads to complete
+  Timer::wait_sec(10);
  
-  <span class="c1">//all done</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  //all done
+  printf(&quot;done\n&quot;);
+  return 0;
+}
  
-<span class="kt">void</span> <span class="o">*</span> <span class="nf">thread_func</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">args</span><span class="p">){</span>
-  <span class="kt">int</span> <span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">args</span><span class="p">;</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;This thread was passed %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">x</span><span class="p">);</span>
-  <span class="n">Timer</span><span class="o">::</span><span class="n">wait_sec</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thread %d is completing</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">x</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+void * thread_func(void * args){
+  int * x = (int*)args;
+  printf(&quot;This thread was passed %d\n&quot;, *x);
+  Timer::wait_sec(8);
+  printf(&quot;Thread %d is completing\n&quot;, *x);
+  return x;
+}</code></pre></div>
 
 <p>The threads can be analyzed while they are running by using the Monitor view 
 in CoActionOS Link. The following screen shot shows the running tasks while 

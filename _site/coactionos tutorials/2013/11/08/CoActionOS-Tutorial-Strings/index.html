@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -86,50 +86,50 @@ with very little memory.  It is based on standard C
 string manipulation (such as strcpy(), strcmp()) but gives the ease 
 of use of the STL string class.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;cstdio&gt;</span>
-<span class="cp">#include &lt;applib/String.hpp&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;cstdio&gt;
+#include &lt;applib/String.hpp&gt;
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-	<span class="c1">//String Types allows us to allocate various string sizes</span>
-	<span class="n">StringMedium</span> <span class="n">mstring</span><span class="p">;</span> <span class="c1">//This is the same as String&lt;64&gt; mstring;</span>
-	<span class="n">StringLarge</span> <span class="n">lstring</span><span class="p">;</span> <span class="c1">//This is the same as String&lt;128&gt; lstring;</span>
+int main(int argc, char * argv[]){
+	//String Types allows us to allocate various string sizes
+	StringMedium mstring; //This is the same as String&lt;64&gt; mstring;
+	StringLarge lstring; //This is the same as String&lt;128&gt; lstring;
 
-	<span class="n">mstring</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span> <span class="c1">//assignment</span>
-	<span class="n">lstring</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span> <span class="c1">//concatenation</span>
+	mstring = &quot;Hello&quot;; //assignment
+	lstring &lt;&lt; &quot;Hello&quot;; //concatenation
 
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Medium using %d of %d bytes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mstring</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">mstring</span><span class="p">.</span><span class="n">capacity</span><span class="p">());</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Large using %d of %d bytes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lstring</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">lstring</span><span class="p">.</span><span class="n">capacity</span><span class="p">());</span>
+	printf(&quot;Medium using %d of %d bytes\n&quot;, mstring.size(), mstring.capacity());
+	printf(&quot;Large using %d of %d bytes\n&quot;, lstring.size(), lstring.capacity());
 
 
-	<span class="c1">//Strings can be compared C++ style (to const char*)</span>
-	<span class="k">if</span><span class="p">(</span> <span class="n">mstring</span> <span class="o">==</span> <span class="s">&quot;Hello&quot;</span> <span class="p">){</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-	<span class="p">}</span>
+	//Strings can be compared C++ style (to const char*)
+	if( mstring == &quot;Hello&quot; ){
+		printf(&quot;Hello\n&quot;);
+	}
 
-	<span class="c1">//Two strings can also be compared</span>
-	<span class="k">if</span><span class="p">(</span> <span class="n">mstring</span> <span class="o">==</span> <span class="n">lstring</span> <span class="p">){</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;They are the same</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-	<span class="p">}</span>
+	//Two strings can also be compared
+	if( mstring == lstring ){
+		printf(&quot;They are the same\n&quot;);
+	}
 
-	<span class="c1">//We can allows write numbers to the string and concatenate strings</span>
-	<span class="n">mstring</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Number #&quot;</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">mstring</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span> <span class="c1">//it is converted to a c string just like STL string</span>
+	//We can allows write numbers to the string and concatenate strings
+	mstring &lt;&lt; &quot; Number #&quot; &lt;&lt; 5 &lt;&lt; &quot;\n&quot;;
+	printf(&quot;%s&quot;, mstring.c_str()); //it is converted to a c string just like STL string
 
-	<span class="c1">//We can also concatenation strings</span>
-	<span class="n">mstring</span> <span class="o">=</span> <span class="s">&quot;I am mstring</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-	<span class="n">lstring</span> <span class="o">=</span> <span class="s">&quot;I am lstring</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-	<span class="n">mstring</span> <span class="o">&lt;&lt;</span> <span class="n">lstring</span><span class="p">;</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">mstring</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+	//We can also concatenation strings
+	mstring = &quot;I am mstring\n&quot;;
+	lstring = &quot;I am lstring\n&quot;;
+	mstring &lt;&lt; lstring;
+	printf(&quot;%s&quot;, mstring.c_str());
 
-	<span class="c1">//copy the first five bytes of lstring to mstring</span>
-	<span class="c1">//This is as close as we can get to implementing substr() with dynamic memory allocation</span>
-	<span class="n">lstring</span> <span class="o">=</span> <span class="s">&quot;Hello mstring&quot;</span><span class="p">;</span>
-	<span class="n">mstring</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="c1">//since copy doesn&#39;t add a 0 terminator - we clear mstirng now</span>
-	<span class="n">lstring</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mstring</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+	//copy the first five bytes of lstring to mstring
+	//This is as close as we can get to implementing substr() with dynamic memory allocation
+	lstring = &quot;Hello mstring&quot;;
+	mstring.clear(); //since copy doesn&#39;t add a 0 terminator - we clear mstirng now
+	lstring.copy(mstring, 5, 0);
 
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Now mstring is %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mstring</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+	printf(&quot;Now mstring is %s\n&quot;, mstring.c_str());
+	return 0;
+}</code></pre></div>
 
 <p>That about covers the basics.  You can read the 
 <a href="/coactionos-applib/html/class_string.html">String class API</a> 

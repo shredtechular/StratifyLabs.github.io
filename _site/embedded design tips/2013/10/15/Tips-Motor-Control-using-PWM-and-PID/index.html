@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -133,52 +133,52 @@ and capacitor in series across the terminals of the motor as shown below.</p>
 
 <p>The following code is a PID loop implementation using floating point variables.  The structure (pid_f_t) is first initialized using pid_init_f() with the minimum and maximum values for the manipulated variable accepted as parameters.  The minimum is useful if the motor requires some minimum PWM duty cycle to make it turn while the maximum ensures the PID algorithm does not try to exceed 100% duty cycle.  The pid_update_f() function uses the current set point and the process variable as well as the constants stored in the pid_f_t structure to compute the manipulated variable.  The application loop includes a function to measure the motor current or speed, call pid_update_f(), and set the PWM value according to the manipulated variable.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
-  <span class="kt">float</span> <span class="n">max</span> <span class="cm">/*! Max manipulated value */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">min</span> <span class="cm">/*! Miniumum manipulated value */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">e</span> <span class="cm">/*! Error value */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">i</span> <span class="cm">/*! Integrator value */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">kp</span> <span class="cm">/*! Proportional constant */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">ki</span> <span class="cm">/*! Integrator constant */</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">kd</span> <span class="cm">/*! Differential constant */</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">pid_f_t</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct{
+  float max /*! Max manipulated value */;
+  float min /*! Miniumum manipulated value */;
+  float e /*! Error value */;
+  float i /*! Integrator value */;
+  float kp /*! Proportional constant */;
+  float ki /*! Integrator constant */;
+  float kd /*! Differential constant */;
+} pid_f_t;
  
-<span class="cm">/*! \details This function initializes the data in a PID structure.</span>
-<span class="cm"> *</span>
-<span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">pid_init_f</span><span class="p">(</span><span class="kt">pid_f_t</span> <span class="o">*</span> <span class="n">ptr</span> <span class="cm">/*! A pointer to the PID data structure */</span><span class="p">,</span>
-    <span class="kt">float</span> <span class="n">min</span> <span class="cm">/*! The manipulated variable&#39;s minimum value */</span><span class="p">,</span>
-    <span class="kt">float</span> <span class="n">max</span> <span class="cm">/*! The manipulated variable&#39;s maximum value */</span><span class="p">){</span>
-  <span class="n">memset</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">pid_f_t</span><span class="p">));</span>
-  <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">min</span> <span class="o">=</span> <span class="n">min</span><span class="p">;</span>
-  <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">max</span> <span class="o">=</span> <span class="n">max</span><span class="p">;</span>
-<span class="p">}</span>
+/*! \details This function initializes the data in a PID structure.
+ *
+ */
+void pid_init_f(pid_f_t * ptr /*! A pointer to the PID data structure */,
+    float min /*! The manipulated variable&#39;s minimum value */,
+    float max /*! The manipulated variable&#39;s maximum value */){
+  memset(ptr, 0, sizeof(pid_f_t));
+  ptr-&gt;min = min;
+  ptr-&gt;max = max;
+}
  
-<span class="cm">/*! \details This function updates the value of the manipulated variable (MV)</span>
-<span class="cm"> * based on the current state of the PID loop.</span>
-<span class="cm"> */</span>
-<span class="kt">float</span> <span class="nf">pid_update_f</span><span class="p">(</span><span class="kt">float</span> <span class="n">sp</span> <span class="cm">/*! The set point */</span><span class="p">,</span>
-    <span class="kt">float</span> <span class="n">pv</span> <span class="cm">/*! The process variable */</span><span class="p">,</span>
-    <span class="kt">pid_f_t</span> <span class="o">*</span> <span class="n">ptr</span> <span class="cm">/*! A pointer to the PID constants */</span><span class="p">){</span>
-  <span class="kt">float</span> <span class="n">temp</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">e</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">p</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">manp</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">tmpi</span><span class="p">;</span>
-  <span class="n">e</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">;</span>
-  <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">e</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">-</span> <span class="n">pv</span><span class="p">;</span>
-  <span class="n">tmpi</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">i</span> <span class="o">+</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">;</span>
-  <span class="c1">//bound the integral</span>
-  <span class="n">manp</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">kp</span> <span class="o">*</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">e</span> <span class="o">+</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">ki</span> <span class="o">*</span> <span class="n">tmpi</span> <span class="o">+</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">kd</span> <span class="o">*</span> <span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">manp</span> <span class="o">&lt;</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">max</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">manp</span> <span class="o">&gt;</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">min</span><span class="p">)</span> <span class="p">){</span>
-    <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">i</span> <span class="o">=</span> <span class="n">tmpi</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">manp</span> <span class="o">&gt;</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">max</span> <span class="p">){</span>
-    <span class="n">manp</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">max</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">manp</span> <span class="o">&lt;</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">min</span> <span class="p">){</span>
-    <span class="n">manp</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">min</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">manp</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+/*! \details This function updates the value of the manipulated variable (MV)
+ * based on the current state of the PID loop.
+ */
+float pid_update_f(float sp /*! The set point */,
+    float pv /*! The process variable */,
+    pid_f_t * ptr /*! A pointer to the PID constants */){
+  float temp;
+  float e;
+  float p;
+  float manp;
+  float tmpi;
+  e = ptr-&gt;e;
+  ptr-&gt;e = sp - pv;
+  tmpi = ptr-&gt;i + ptr-&gt;e;
+  //bound the integral
+  manp = ptr-&gt;kp * ptr-&gt;e + ptr-&gt;ki * tmpi + ptr-&gt;kd * (e - ptr-&gt;e);
+  if ( (manp &lt; ptr-&gt;max) &amp;amp;&amp;amp; (manp &gt; ptr-&gt;min) ){
+    ptr-&gt;i = tmpi;
+  } else if ( manp &gt; ptr-&gt;max ){
+    manp = ptr-&gt;max;
+  } else if ( manp &lt; ptr-&gt;min ){
+    manp = ptr-&gt;min;
+  }
+  return manp;
+}</code></pre></div>
 
 <p>It is important to properly apply the manipulated variable to the process.  In the H-bridge shown above, Q5 inverts the PWM signal which means the software needs to invert the PWM value before applying it.  Also while switching Q2 and Q4, the states of Q1 and Q3 determine the motor direction; this affects how the sign of the manipulated variable is interpreted.  These nuances in the circuit can make debugging a PID loop tricky but can be overcome with sound analysis as well as trial and error.</p>
 
@@ -208,232 +208,232 @@ and capacitor in series across the terminals of the motor as shown below.</p>
 
 <p>The source code uses a PID loop to control the motor speed. First, it reads the ADC to calculate a speed setting from 1500RPM to 10,000RPM which is set by the user using the potentiometer. After the ADC is sampled, it is filtered using an exponential moving average, low-pass filter. This prevents noise on the ADC from causing changes to the speed setting. The code then calculates the motor speed in revolutions per minute. It measures the rising edges of the rotary encoder (200 counts per revolution) using the timer clock input. It then uses the POSIX function (provided by CoActionOS) clock_gettime() to calculate the change in time since the last measurement. The current speed is then the change in number of revolutions divided by the change in time. The current speed and the set point speed are then passed to the PID calculation which returns the duty cycle which is applied to the PWM output.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;applib/pwm.h&gt;</span>
-<span class="cp">#include &lt;applib/tmr.h&gt;</span>
-<span class="cp">#include &lt;applib/adc.h&gt;</span>
-<span class="cp">#include &lt;time.h&gt;</span>
-<span class="cp">#include &lt;dsp.h&gt;</span>
-<span class="cp">#include &lt;pid.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
+#include &lt;applib/pwm.h&gt;
+#include &lt;applib/tmr.h&gt;
+#include &lt;applib/adc.h&gt;
+#include &lt;time.h&gt;
+#include &lt;dsp.h&gt;
+#include &lt;pid.h&gt;
  
-<span class="cp">#define TMR_PORT 0 </span><span class="c1">//Timer port used to capture encoder data</span>
-<span class="cp">#define ADC_PORT 0 </span><span class="c1">//ADC port for getting user input</span>
-<span class="cp">#define ADC_INPUT_CHAN (7) </span><span class="c1">//ADC channel for user input</span>
-<span class="cp">#define PWM_PORT 1 </span><span class="c1">//PWM port for Si9986</span>
-<span class="cp">#define PWM_CHAN_HIGH (PWM_CHANNEL5)</span>
-<span class="cp">#define PWM_CHAN_LOW (PWM_CHANNEL4)</span>
-<span class="cp">#define PWM_FREQ (1000000)  </span><span class="c1">//PWM clock frequency</span>
-<span class="cp">#define PWM_TOP 1000 </span><span class="c1">//Top value for PWM clock</span>
-<span class="cp">#define PWM_PERIOD (PWM_TOP*1000/PWM_FREQ) </span><span class="c1">//Period in ms</span>
+#define TMR_PORT 0 //Timer port used to capture encoder data
+#define ADC_PORT 0 //ADC port for getting user input
+#define ADC_INPUT_CHAN (7) //ADC channel for user input
+#define PWM_PORT 1 //PWM port for Si9986
+#define PWM_CHAN_HIGH (PWM_CHANNEL5)
+#define PWM_CHAN_LOW (PWM_CHANNEL4)
+#define PWM_FREQ (1000000)  //PWM clock frequency
+#define PWM_TOP 1000 //Top value for PWM clock
+#define PWM_PERIOD (PWM_TOP*1000/PWM_FREQ) //Period in ms
  
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">init</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//initilize timer, PWM and ADC</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">init_tmr</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">init_pwm</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">init_adc</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+static int init(void); //initilize timer, PWM and ADC
+static int init_tmr(void);
+static int init_pwm(void);
+static int init_adc(void);
  
-<span class="c1">//Set the output duty cycle</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">set_duty</span><span class="p">(</span><span class="kt">int</span> <span class="n">duty</span><span class="p">);</span>
+//Set the output duty cycle
+static void set_duty(int duty);
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="kt">pwm_reqattr_t</span> <span class="n">req</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+int main(int argc, char * argv[]){
+  pwm_reqattr_t req;
+  int i;
  
-  <span class="c1">//These are for sampling the ADC (user input)</span>
-  <span class="kt">adc_sample_t</span> <span class="n">samp</span><span class="p">;</span>
-  <span class="kt">int32_t</span> <span class="n">samp_avg</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">alpha</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">set_speed</span><span class="p">;</span>
+  //These are for sampling the ADC (user input)
+  adc_sample_t samp;
+  int32_t samp_avg;
+  uint16_t alpha;
+  uint32_t set_speed;
  
-  <span class="c1">//This is for measuring the motor speed</span>
-  <span class="kt">uint32_t</span> <span class="n">delta_ms</span><span class="p">;</span> <span class="c1">//elapsed time in milliseconds</span>
-  <span class="kt">uint32_t</span> <span class="n">last_ms</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">now_ms</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">ref_ms</span><span class="p">;</span>
-  <span class="k">struct</span> <span class="n">timespec</span> <span class="n">now</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">current_pos</span><span class="p">;</span> <span class="c1">//current position</span>
-  <span class="kt">uint32_t</span> <span class="n">last_pos</span><span class="p">;</span> <span class="c1">//position from last measurement</span>
-  <span class="kt">uint32_t</span> <span class="n">delta_pos</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">speed</span><span class="p">;</span>
+  //This is for measuring the motor speed
+  uint32_t delta_ms; //elapsed time in milliseconds
+  uint32_t last_ms;
+  uint32_t now_ms;
+  uint32_t ref_ms;
+  struct timespec now;
+  uint32_t current_pos; //current position
+  uint32_t last_pos; //position from last measurement
+  uint32_t delta_pos;
+  uint32_t speed;
  
-  <span class="c1">//PID variables</span>
-  <span class="kt">pid_i32_t</span> <span class="n">pid</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">duty</span><span class="p">;</span>
+  //PID variables
+  pid_i32_t pid;
+  uint32_t duty;
  
-  <span class="k">if</span><span class="p">(</span> <span class="n">init</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-                <span class="c1">//exit unsuccessfully if any hardware failed to initialize</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="p">}</span>
+  if( init() &lt; 0 ){
+                //exit unsuccessfully if any hardware failed to initialize
+    exit(1);
+  }
  
-  <span class="c1">//Initialize the ADC averaging (EMA filter)</span>
-  <span class="n">alpha</span> <span class="o">=</span> <span class="n">DSP_EMA_I32_ALPHA</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
-  <span class="n">adc_read</span><span class="p">(</span><span class="n">ADC_PORT</span><span class="p">,</span> <span class="n">ADC_INPUT_CHAN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">samp</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">adc_sample_t</span><span class="p">));</span>
-  <span class="n">samp_avg</span> <span class="o">=</span> <span class="n">samp</span><span class="p">;</span>
+  //Initialize the ADC averaging (EMA filter)
+  alpha = DSP_EMA_I32_ALPHA(0.1);
+  adc_read(ADC_PORT, ADC_INPUT_CHAN, &amp;samp, sizeof(adc_sample_t));
+  samp_avg = samp;
  
-  <span class="c1">//Since there is no initial measurement, the first speed will be bogus</span>
-  <span class="n">last_ms</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  //Since there is no initial measurement, the first speed will be bogus
+  last_ms = 0;
  
-  <span class="c1">//initialize the PID</span>
-  <span class="n">pid_init_i32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">900</span><span class="p">);</span> <span class="c1">//Bound the duty between 20% and 90%</span>
-  <span class="n">pid_setconstants_i32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">,</span>
-                        <span class="c1">//These constants take some tweaking to get everything to work smoothly</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">0.05</span><span class="p">),</span> <span class="c1">//P constant</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">0.01</span><span class="p">),</span> <span class="c1">//I constant</span>
-      <span class="n">PID_I32_CONSTANT</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>  <span class="c1">//D constant</span>
-      <span class="p">);</span>
+  //initialize the PID
+  pid_init_i32(&amp;pid, 200, 900); //Bound the duty between 20% and 90%
+  pid_setconstants_i32(&amp;pid,
+                        //These constants take some tweaking to get everything to work smoothly
+      PID_I32_CONSTANT(0.05), //P constant
+      PID_I32_CONSTANT(0.01), //I constant
+      PID_I32_CONSTANT(0.0001)  //D constant
+      );
  
-  <span class="n">usleep</span><span class="p">(</span><span class="mi">50</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
-  <span class="n">set_duty</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  usleep(50*1000);
+  set_duty(0);
  
-  <span class="c1">//Get the initial time so that the program start time is close to zero in the output data</span>
-  <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_REALTIME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">now</span><span class="p">);</span>
-  <span class="n">ref_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">+</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">);</span> <span class="c1">//convert to milliseconds</span>
+  //Get the initial time so that the program start time is close to zero in the output data
+  clock_gettime(CLOCK_REALTIME, &amp;now);
+  ref_ms = (now.tv_sec * 1000 + (now.tv_nsec + 500000) / 1000000); //convert to milliseconds
  
-  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-    <span class="c1">//Read and averge the ADC to get the set point</span>
-    <span class="n">adc_read</span><span class="p">(</span><span class="n">ADC_PORT</span><span class="p">,</span> <span class="n">ADC_INPUT_CHAN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">samp</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">adc_sample_t</span><span class="p">));</span>
-    <span class="n">samp_avg</span> <span class="o">=</span> <span class="n">dsp_ema_i32</span><span class="p">(</span><span class="n">samp</span><span class="p">,</span> <span class="n">samp_avg</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
-    <span class="n">set_speed</span> <span class="o">=</span> <span class="n">samp_avg</span> <span class="o">*</span> <span class="mi">8500</span> <span class="o">/</span> <span class="n">ADC_MAX</span> <span class="o">+</span> <span class="mi">1500</span><span class="p">;</span>
+  i = 0;
+  while(1){
+    //Read and averge the ADC to get the set point
+    adc_read(ADC_PORT, ADC_INPUT_CHAN, &amp;samp, sizeof(adc_sample_t));
+    samp_avg = dsp_ema_i32(samp, samp_avg, alpha);
+    set_speed = samp_avg * 8500 / ADC_MAX + 1500;
  
-    <span class="c1">//Now measure the position and calculate the speed (pos/time)</span>
-    <span class="n">clock_gettime</span><span class="p">(</span><span class="n">CLOCK_REALTIME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">now</span><span class="p">);</span>
-    <span class="n">now_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">+</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">);</span> <span class="c1">//convert to milliseconds</span>
-    <span class="n">delta_ms</span> <span class="o">=</span> <span class="n">now_ms</span> <span class="o">-</span> <span class="n">last_ms</span><span class="p">;</span>
-    <span class="n">last_ms</span> <span class="o">=</span> <span class="n">now_ms</span><span class="p">;</span>
+    //Now measure the position and calculate the speed (pos/time)
+    clock_gettime(CLOCK_REALTIME, &amp;now);
+    now_ms = (now.tv_sec * 1000 + (now.tv_nsec + 500000) / 1000000); //convert to milliseconds
+    delta_ms = now_ms - last_ms;
+    last_ms = now_ms;
  
  
-    <span class="n">current_pos</span> <span class="o">=</span> <span class="n">tmr_get</span><span class="p">(</span><span class="n">TMR_PORT</span><span class="p">);</span>
-    <span class="n">delta_pos</span> <span class="o">=</span> <span class="n">current_pos</span> <span class="o">-</span> <span class="n">last_pos</span><span class="p">;</span>
-    <span class="c1">//calculate in RPM (1000*60 ms in a min and 200 counts per revolution)</span>
-    <span class="n">speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">delta_pos</span><span class="o">*</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">60</span><span class="o">/</span><span class="mi">200</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">delta_ms</span><span class="p">);</span>
-    <span class="n">last_pos</span> <span class="o">=</span> <span class="n">current_pos</span><span class="p">;</span>
+    current_pos = tmr_get(TMR_PORT);
+    delta_pos = current_pos - last_pos;
+    //calculate in RPM (1000*60 ms in a min and 200 counts per revolution)
+    speed = (delta_pos*(1000*60/200))/(delta_ms);
+    last_pos = current_pos;
  
-    <span class="c1">//Calculate the new duty cycle</span>
-    <span class="n">duty</span> <span class="o">=</span> <span class="n">pid_update_i32</span><span class="p">(</span><span class="n">set_speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
-    <span class="n">set_duty</span><span class="p">(</span><span class="n">duty</span><span class="p">);</span>
+    //Calculate the new duty cycle
+    duty = pid_update_i32(set_speed, speed, &amp;pid);
+    set_duty(duty);
  
-    <span class="c1">//Display the data and wait for the next update</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span><span class="o">++</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="c1">//first sample is garbage because the delta values are invalid</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">now_ms</span> <span class="o">-</span> <span class="n">ref_ms</span><span class="p">,</span> <span class="n">set_speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">duty</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">usleep</span><span class="p">(</span><span class="mi">25</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">//update every 25 ms</span>
-  <span class="p">}</span>
+    //Display the data and wait for the next update
+    if ( i++ &gt; 0 ){ //first sample is garbage because the delta values are invalid
+      printf(&quot;%d %d %d %d;\n&quot;, now_ms - ref_ms, set_speed, speed, duty);
+    }
+    usleep(25*1000); //update every 25 ms
+  }
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  return 0;
+}
  
-<span class="kt">int</span> <span class="nf">init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span> <span class="n">init_tmr</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">init_adc</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">init_pwm</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+int init(void){
+        if( init_tmr() &lt; 0 ){ return -1; }
+  if( init_adc() &lt; 0 ){ return -1; }
+  if( init_pwm() &lt; 0 ){ return -1; }
+  return 0;
+}
  
-<span class="kt">int</span> <span class="nf">init_tmr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">tmr_attr_t</span> <span class="n">attr</span><span class="p">;</span>
+int init_tmr(void){
+  tmr_attr_t attr;
  
-  <span class="c1">//Open the timer port</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">tmr_open</span><span class="p">(</span><span class="n">TMR_PORT</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to open tmr&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //Open the timer port
+  if( tmr_open(TMR_PORT) &lt; 0 ){
+    perror(&quot;failed to open tmr&quot;);
+    return -1;
+  }
  
-  <span class="c1">//We are using Capture 0 on timer 0 (CAP0. -- count rising edges</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">clksrc</span> <span class="o">=</span> <span class="n">TMR_CLKSRC_IC0</span> <span class="o">|</span> <span class="n">TMR_CLKSRC_EDGERISING</span><span class="p">;</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">freq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//this is not used with input capture counting</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">enabled_ic_chans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//not used</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">enabled_oc_chans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//not used</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">pin_assign</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//From the datasheet, this pin is using TMR1(0) where 0 is the pin assignment</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">tmr_setattr</span><span class="p">(</span><span class="n">TMR_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to setattr tmr&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //We are using Capture 0 on timer 0 (CAP0. -- count rising edges
+  attr.clksrc = TMR_CLKSRC_IC0 | TMR_CLKSRC_EDGERISING;
+  attr.freq = 0; //this is not used with input capture counting
+  attr.enabled_ic_chans = 0; //not used
+  attr.enabled_oc_chans = 0; //not used
+  attr.pin_assign = 0; //From the datasheet, this pin is using TMR1(0) where 0 is the pin assignment
+  if( tmr_setattr(TMR_PORT, &amp;attr) &lt; 0 ){
+    perror(&quot;failed to setattr tmr&quot;);
+    return -1;
+  }
  
-  <span class="c1">//Turn the timer on (start counting edges)</span>
-  <span class="k">if</span> <span class="p">(</span> <span class="n">tmr_on</span><span class="p">(</span><span class="n">TMR_PORT</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to turn tmr on&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+  //Turn the timer on (start counting edges)
+  if ( tmr_on(TMR_PORT) &lt; 0 ){
+    perror(&quot;failed to turn tmr on&quot;);
+  }
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  return 0;
+}
  
-<span class="kt">int</span> <span class="nf">init_pwm</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">pwm_attr_t</span> <span class="n">attr</span><span class="p">;</span>
-  <span class="kt">pwm_reqattr_t</span> <span class="n">req</span><span class="p">;</span>
+int init_pwm(void){
+  pwm_attr_t attr;
+  pwm_reqattr_t req;
  
-  <span class="c1">//Open the PWM port</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">pwm_open</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to open pwm&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //Open the PWM port
+  if( pwm_open(PWM_PORT) &lt; 0 ){
+    perror(&quot;failed to open pwm&quot;);
+    return -1;
+  }
  
-  <span class="c1">//Set the PWM attributes</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">enabled_channels</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">PWM_CHAN_HIGH</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">PWM_CHAN_LOW</span><span class="p">);</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">PWM_FREQ</span><span class="p">;</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">PWM_TOP</span><span class="p">;</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">pin_assign</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//Using PWM1(1) from the datasheet the (1) means pin assignment 1</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">pwm_setattr</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to setattr pwm&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+  //Set the PWM attributes
+  attr.enabled_channels = (1&lt;&lt;PWM_CHAN_HIGH)|(1&lt;&lt;PWM_CHAN_LOW);
+  attr.freq = PWM_FREQ;
+  attr.top = PWM_TOP;
+  attr.pin_assign = 1; //Using PWM1(1) from the datasheet the (1) means pin assignment 1
+  if( pwm_setattr(PWM_PORT, &amp;attr) &lt; 0 ){
+    perror(&quot;failed to setattr pwm&quot;);
+  }
  
-  <span class="c1">//Allow the PWM clock time to initialize</span>
-  <span class="n">usleep</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
+  //Allow the PWM clock time to initialize
+  usleep(100*1000);
  
-  <span class="c1">//Set both PWM outputs to Zero</span>
-  <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_HIGH</span><span class="p">;</span>
-  <span class="n">req</span><span class="p">.</span><span class="n">duty</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to set high duty&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+  //Set both PWM outputs to Zero
+  req.channel = PWM_CHAN_HIGH;
+  req.duty = 0;
+  if( pwm_set(PWM_PORT, &amp;req) &lt; 0 ){
+    perror(&quot;failed to set high duty&quot;);
+  }
  
-  <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_LOW</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to set low duty&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+  req.channel = PWM_CHAN_LOW;
+  if( pwm_set(PWM_PORT, &amp;req) &lt; 0 ){
+    perror(&quot;failed to set low duty&quot;);
+  }
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  return 0;
+}
  
-<span class="kt">int</span> <span class="nf">init_adc</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="kt">adc_attr_t</span> <span class="n">attr</span><span class="p">;</span>
+int init_adc(void){
+  adc_attr_t attr;
  
-  <span class="c1">//Open the ADC port</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">adc_open</span><span class="p">(</span><span class="n">ADC_PORT</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to open adc&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //Open the ADC port
+  if( adc_open(ADC_PORT) &lt; 0){
+    perror(&quot;failed to open adc&quot;);
+    return -1;
+  }
  
-  <span class="c1">//Set the ADC attributes</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">enabled_channels</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADC_INPUT_CHAN</span><span class="p">);</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">ADC_MAX_FREQ</span><span class="p">;</span>
-  <span class="n">attr</span><span class="p">.</span><span class="n">pin_assign</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">adc_setattr</span><span class="p">(</span><span class="n">ADC_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to setattr for adc&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
+  //Set the ADC attributes
+  attr.enabled_channels = (1&lt;&lt;ADC_INPUT_CHAN);
+  attr.freq = ADC_MAX_FREQ;
+  attr.pin_assign = 0;
+  if( adc_setattr(ADC_PORT, &amp;attr) &lt; 0 ){
+    perror(&quot;failed to setattr for adc&quot;);
+    return -1;
+  }
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+  return 0;
+}
  
-<span class="kt">void</span> <span class="nf">set_duty</span><span class="p">(</span><span class="kt">int</span> <span class="n">duty</span><span class="p">){</span>
-  <span class="kt">pwm_reqattr_t</span> <span class="n">req</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">duty</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="c1">//This turns on the brake -- both outputs low</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">duty</span> <span class="o">=</span> <span class="n">duty</span><span class="p">;</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_HIGH</span><span class="p">;</span>
-    <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_LOW</span><span class="p">;</span>
-    <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">//This runs in run mode -- one output is switching the other is high</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">duty</span> <span class="o">=</span> <span class="n">PWM_TOP</span> <span class="o">-</span> <span class="n">duty</span><span class="p">;</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_HIGH</span><span class="p">;</span>
-    <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">duty</span> <span class="o">=</span> <span class="n">PWM_TOP</span><span class="p">;</span>
-    <span class="n">req</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHAN_LOW</span><span class="p">;</span>
-    <span class="n">pwm_set</span><span class="p">(</span><span class="n">PWM_PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+void set_duty(int duty){
+  pwm_reqattr_t req;
+  if( duty == 0 ){
+    //This turns on the brake -- both outputs low
+    req.duty = duty;
+    req.channel = PWM_CHAN_HIGH;
+    pwm_set(PWM_PORT, &amp;req);
+    req.channel = PWM_CHAN_LOW;
+    pwm_set(PWM_PORT, &amp;req);
+  } else {
+    //This runs in run mode -- one output is switching the other is high
+    req.duty = PWM_TOP - duty;
+    req.channel = PWM_CHAN_HIGH;
+    pwm_set(PWM_PORT, &amp;req);
+    req.duty = PWM_TOP;
+    req.channel = PWM_CHAN_LOW;
+    pwm_set(PWM_PORT, &amp;req);
+  }
+}</code></pre></div>
 
 <h3 id="results">Results</h3>
 

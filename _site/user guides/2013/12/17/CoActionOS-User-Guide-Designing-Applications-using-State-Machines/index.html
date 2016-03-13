@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -109,10 +109,10 @@ the top level state machine and <a href="/coactionos-applib/html/class_state.htm
 each individual state.  Each state is implemented as it’s own class which 
 inherits <a href="/coactionos-applib/html/class_state.html">State</a> and re-implements:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="nf">name</span><span class="p">();</span>  <span class="c1">//unique state name</span>
-<span class="kt">bool</span> <span class="nf">entry_action</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//action to execute when entering the state</span>
-<span class="kt">bool</span> <span class="nf">action</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//action to execute while state is active</span>
-<span class="n">State</span> <span class="o">*</span> <span class="nf">exit_condition</span><span class="p">(</span><span class="n">State</span> <span class="o">*</span> <span class="n">slist</span><span class="p">[]);</span> <span class="c1">//Executing to see if state should transition</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">const char * name();  //unique state name
+bool entry_action(void); //action to execute when entering the state
+bool action(void); //action to execute while state is active
+State * exit_condition(State * slist[]); //Executing to see if state should transition</code></pre></div>
 
 <p>The methods above fit in to the state diagram above as noted below.</p>
 
@@ -122,34 +122,34 @@ inherits <a href="/coactionos-applib/html/class_state.html">State</a> and re-imp
 
 <p>This means the “home” state class looks like this:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/State.hpp&gt;</span>
-<span class="cp">#include &lt;applib/Pin.hpp&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/State.hpp&gt;
+#include &lt;applib/Pin.hpp&gt;
 
-<span class="k">class</span> <span class="nc">HomeState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">State</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-	<span class="n">HomeState</span><span class="p">()</span> <span class="o">:</span> <span class="n">State</span><span class="p">()</span> <span class="p">{};</span>
+class HomeState : public State {
+public:
+	HomeState() : State() {};
 
-	<span class="c1">//The name of the state</span>
-	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="nf">name</span><span class="p">(){</span> <span class="k">return</span> <span class="s">&quot;home&quot;</span><span class="p">;</span> <span class="p">}</span>
+	//The name of the state
+	const char * name(){ return &quot;home&quot;; }
 
-	<span class="c1">//The state machine executes this function when the state is entered</span>
-	<span class="kt">bool</span> <span class="nf">entry_action</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
+	//The state machine executes this function when the state is entered
+	bool entry_action(void){ return true; }
 
-	<span class="c1">//The state executes this function while the state is active</span>
-	<span class="kt">bool</span> <span class="nf">action</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
+	//The state executes this function while the state is active
+	bool action(void){ return true; }
 
-	<span class="c1">//The state executes this function while the state is active</span>
-	<span class="c1">//If this function returns a State other than 0 -- the state machine will transition to the new state</span>
-	<span class="n">State</span> <span class="o">*</span> <span class="nf">exit_condition</span><span class="p">(</span><span class="n">State</span> <span class="o">*</span> <span class="n">slist</span><span class="p">[]){</span>
-		<span class="n">State</span> <span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="n">Pin</span> <span class="n">start</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//assume state button is on P1.0</span>
-		<span class="n">start</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">Pin</span><span class="o">::</span><span class="n">INPUT</span> <span class="o">|</span> <span class="n">Pin</span><span class="o">::</span><span class="n">PULLDOWN</span><span class="p">);</span> <span class="c1">//this only NEEDS to be called once at system startup</span>
-		<span class="k">if</span><span class="p">(</span> <span class="n">start</span><span class="p">.</span><span class="n">value</span><span class="p">()</span> <span class="o">==</span> <span class="nb">true</span> <span class="p">){</span>
-			<span class="n">next</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">slist</span><span class="p">,</span> <span class="s">&quot;timer&quot;</span><span class="p">);</span>
-		<span class="p">}</span>
-		<span class="k">return</span> <span class="n">next</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">};</span></code></pre></div>
+	//The state executes this function while the state is active
+	//If this function returns a State other than 0 -- the state machine will transition to the new state
+	State * exit_condition(State * slist[]){
+		State * next = 0;
+		Pin start(1,0); //assume state button is on P1.0
+		start.init(Pin::INPUT | Pin::PULLDOWN); //this only NEEDS to be called once at system startup
+		if( start.value() == true ){
+			next = find(slist, &quot;timer&quot;);
+		}
+		return next;
+	}
+};</code></pre></div>
 
 <p>The “timer” and “alarm” states are similarly defined.  The “timer” state’s name() method must return “timer” in order to the home state to find the state in the list.  Next we will look at how the state machine is executed using SMach.</p>
 
@@ -157,47 +157,47 @@ inherits <a href="/coactionos-applib/html/class_state.html">State</a> and re-imp
 
 <p>The state machine is a special type of state that contains a list of states that define the machine.  It is declared quite similarly to a State.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/SMach.hpp&gt;</span>
-<span class="k">class</span> <span class="nc">Machine</span> <span class="o">:</span> <span class="k">public</span> <span class="n">SMach</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-	<span class="n">Machine</span><span class="p">();</span>
-	<span class="kt">void</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-	<span class="kt">bool</span> <span class="nf">action</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">};</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/SMach.hpp&gt;
+class Machine : public SMach {
+public:
+	Machine();
+	void run(void);
+	bool action(void);
+};</code></pre></div>
 
 <p>The run() method will be used to execute the state machine.  The action() method is optional.  It allows the state machine to execute some action whenever any state within the machine is active.  For example, if you want to delay 10ms between executing state actions for all states, it can be done using the action() method as in the example below.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;applib/Timer.hpp&gt;</span>
-<span class="cp">#include &quot;Machine.hpp&quot;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;applib/Timer.hpp&gt;
+#include &quot;Machine.hpp&quot;
 
-<span class="cp">#include &quot;HomeState.hpp&quot;</span>
-<span class="cp">#include &quot;AlarmState.hpp&quot;</span>
-<span class="cp">#include &quot;TimerState.hpp&quot;</span>
+#include &quot;HomeState.hpp&quot;
+#include &quot;AlarmState.hpp&quot;
+#include &quot;TimerState.hpp&quot;
 
-<span class="k">static</span> <span class="n">HomeState</span> <span class="n">home</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">AlarmState</span> <span class="n">alarm</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">TimerState</span> <span class="n">timer</span><span class="p">;</span>
+static HomeState home;
+static AlarmState alarm;
+static TimerState timer;
 
-<span class="c1">//This is the state list -- it defines the states within the state machine</span>
-<span class="n">State</span> <span class="o">*</span> <span class="n">states</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-		<span class="o">&amp;</span><span class="n">home</span><span class="p">,</span>
-		<span class="o">&amp;</span><span class="n">timer</span><span class="p">,</span>
-		<span class="o">&amp;</span><span class="n">alarm</span><span class="p">,</span>
-		<span class="mi">0</span>
-<span class="p">};</span>
+//This is the state list -- it defines the states within the state machine
+State * states[] = {
+		&amp;home,
+		&amp;timer,
+		&amp;alarm,
+		0
+};
 
-<span class="n">Machine</span><span class="o">::</span><span class="n">Machine</span><span class="p">()</span> <span class="o">:</span> <span class="n">SMach</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">home</span><span class="p">){}</span>
+Machine::Machine() : SMach(states, &amp;home){}
 
-<span class="kt">void</span> <span class="n">Machine</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="n">SMach</span><span class="o">::</span><span class="n">exec</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-<span class="p">}</span>
+void Machine::run(void){
+	SMach::exec(states, this);
+}
 
-<span class="kt">bool</span> <span class="n">Machine</span><span class="o">::</span><span class="n">action</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="c1">//This is executed when any state within the state machine is active</span>
-	<span class="n">Timer</span><span class="o">::</span><span class="n">wait_msec</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-	<span class="c1">//Now call the parent action to execute the action within the active state</span>
-	<span class="k">return</span> <span class="n">SMach</span><span class="o">::</span><span class="n">action</span><span class="p">();</span>
-<span class="p">}</span></code></pre></div>
+bool Machine::action(void){
+	//This is executed when any state within the state machine is active
+	Timer::wait_msec(10);
+	//Now call the parent action to execute the action within the active state
+	return SMach::action();
+}</code></pre></div>
 
 <p>As you can see in the action() method, we delay for 10ms.  This will be called in the “home”, “timer”, and “alarm” states.  Call it a “global” action.  If a global state machine action is not used, you don’t need to re-implement the action() method at all.</p>
 

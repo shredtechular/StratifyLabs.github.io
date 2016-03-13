@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -156,65 +156,65 @@ in code.  The code sample below helps to bridge that gap.</p>
 <p>The code below is a snippet for performing an FFT.  ARM provides a DSP library
 as part of the Cortex Microcontroller Software Inteface Standard (CMSIS).</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">int32_t</span> <span class="n">real</span><span class="p">;</span>
-  <span class="kt">int32_t</span> <span class="n">imag</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">fft_i32_t</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef struct {
+  int32_t real;
+  int32_t imag;
+} fft_i32_t;
  
-<span class="kt">void</span> <span class="nf">core_fft_i32</span><span class="p">(</span><span class="kt">fft_context_i32_t</span> <span class="o">*</span> <span class="n">context</span><span class="p">,</span> <span class="kt">fft_i32_t</span> <span class="o">*</span> <span class="n">dest</span><span class="p">,</span> <span class="kt">fft_i32_t</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sign</span><span class="p">){</span>
-  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">half_N</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">k2</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">twiddle</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">twiddle_jump</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">twiddle_max</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">n_jump</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">n_start</span><span class="p">;</span>
-  <span class="kt">fft_i32_t</span> <span class="n">tmp_product</span><span class="p">;</span>
-  <span class="kt">fft_i32_t</span> <span class="n">twiddle_factor</span><span class="p">;</span>
-  <span class="kt">fft_i32_t</span> <span class="n">tmp</span><span class="p">;</span>
+void core_fft_i32(fft_context_i32_t * context, fft_i32_t * dest, fft_i32_t * src, int sign){
+  int n, k, m;
+  int half_N;
+  int k2;
+  int twiddle;
+  int twiddle_jump;
+  int twiddle_max;
+  int n_jump;
+  int n_start;
+  fft_i32_t tmp_product;
+  fft_i32_t twiddle_factor;
+  fft_i32_t tmp;
  
-  <span class="c1">//copy the signal input to the tmp variable</span>
-  <span class="k">for</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">){</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">bit_reversal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">);</span>
-    <span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
-  <span class="p">}</span>
+  //copy the signal input to the tmp variable
+  for(n=0; n &lt; context-&gt;N; n++){
+    m = bit_reversal(n,context-&gt;order);
+    dest[n] = src[m];
+  }
  
-        <span class="c1">//This loop performs the FFT using the Cooley-Tukey algorithm</span>
-  <span class="n">half_N</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">){</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">k</span><span class="p">);</span>
+        //This loop performs the FFT using the Cooley-Tukey algorithm
+  half_N = context-&gt;N &gt;&gt; 1;
+  for(k=0; k &lt; context-&gt;order; k++){
+    n = 0;
+    k2 = (1&lt;&lt;k);
  
-    <span class="c1">//Calculate the twiddle jump and max for the stage</span>
-    <span class="n">twiddle_max</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
-    <span class="n">twiddle_jump</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span> <span class="c1">//equals 2^(kmax - k)</span>
+    //Calculate the twiddle jump and max for the stage
+    twiddle_max = (1&lt;&lt;(context-&gt;order - 1));
+    twiddle_jump = (1&lt;&lt;(context-&gt;order - k - 1)); //equals 2^(kmax - k)
  
-    <span class="c1">//Calculate the n jump for the stage</span>
-    <span class="n">n_jump</span> <span class="o">=</span> <span class="n">k2</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">n_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    //Calculate the n jump for the stage
+    n_jump = k2&lt;&lt;1;
+    n_start = 0;
  
-    <span class="k">for</span><span class="p">(</span><span class="n">twiddle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">twiddle</span> <span class="o">&lt;</span> <span class="n">twiddle_max</span><span class="p">;</span> <span class="n">twiddle</span> <span class="o">+=</span> <span class="n">twiddle_jump</span><span class="p">){</span>
+    for(twiddle = 0; twiddle &lt; twiddle_max; twiddle += twiddle_jump){
  
-      <span class="c1">//twiddle value in the table (always &lt; N/2)</span>
-      <span class="n">twiddle_factor</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">twiddle_table</span><span class="p">[</span><span class="n">twiddle</span><span class="p">].</span><span class="n">real</span><span class="p">;</span>
-      <span class="n">twiddle_factor</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">twiddle_table</span><span class="p">[</span><span class="n">twiddle</span><span class="p">].</span><span class="n">imag</span> <span class="o">*</span> <span class="n">sign</span><span class="p">;</span>
+      //twiddle value in the table (always &lt; N/2)
+      twiddle_factor.real = context-&gt;twiddle_table[twiddle].real;
+      twiddle_factor.imag = context-&gt;twiddle_table[twiddle].imag * sign;
  
-                        <span class="c1">//This loop executes a single butterfly operation (size-2 DFT operation)</span>
-      <span class="k">for</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_start</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">+=</span> <span class="n">n_jump</span><span class="p">){</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="n">k2</span><span class="p">;</span>
-        <span class="c1">//This is the butterfly code</span>
-        <span class="n">tmp_product</span> <span class="o">=</span> <span class="n">fft_mult_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">twiddle_factor</span><span class="p">);</span>  <span class="c1">//multiply</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">scale_add_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">tmp_product</span><span class="p">,</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">scale</span><span class="p">);</span> <span class="c1">//accumlate</span>
-        <span class="n">dest</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale_subtract_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">tmp_product</span><span class="p">,</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">scale</span><span class="p">);</span>
-        <span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                        //This loop executes a single butterfly operation (size-2 DFT operation)
+      for(n=n_start; n &lt; context-&gt;N; n+= n_jump){
+        m = n+k2;
+        //This is the butterfly code
+        tmp_product = fft_mult_i32(dest[m], twiddle_factor);  //multiply
+        tmp = scale_add_i32(dest[n], tmp_product, context-&gt;scale); //accumlate
+        dest[m] = scale_subtract_i32(dest[n], tmp_product, context-&gt;scale);
+        dest[n] = tmp;
  
-      <span class="p">}</span>
-      <span class="n">n_start</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
+      }
+      n_start++;
+    }
  
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+  }
+}</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 

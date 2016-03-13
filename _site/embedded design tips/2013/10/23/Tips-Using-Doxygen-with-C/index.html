@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -97,45 +97,45 @@ layered architecture diagram is shown above.</p>
 group.  The groups are then grouped together.  For example, functions in the UART driver are 
 part of the UART group, and the UART group is part of the PERIPHERAL group as shown below:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/*! \addtogroup UART UART Driver</span>
-<span class="cm"> *</span>
-<span class="cm"> * \ingroup PERIPHERAL</span>
-<span class="cm"> * @{</span>
-<span class="cm"> * \details This is the UART perhipheral driver.</span>
-<span class="cm"> *</span>
-<span class="cm"> */</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">/*! \addtogroup UART UART Driver
+ *
+ * \ingroup PERIPHERAL
+ * @{
+ * \details This is the UART perhipheral driver.
+ *
+ */
  
-<span class="cm">/*! \file</span>
-<span class="cm"> * \details This file is the UART peripheral driver header file.</span>
-<span class="cm"> */</span>
+/*! \file
+ * \details This file is the UART peripheral driver header file.
+ */
  
-<span class="cp">#ifndef UART_H_</span>
-<span class="cp">#define UART_H_</span>
+#ifndef UART_H_
+#define UART_H_
  
-<span class="cm">/*! \details This function opens the specified UART port.</span>
-<span class="cm"> * \return Zero if the port opened successfully.</span>
-<span class="cm"> */</span>
-<span class="kt">int</span> <span class="nf">uart_open</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span> <span class="cm">/*! The port to open */</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mode</span> <span class="cm">/*! The mode for the UART */</span><span class="p">);</span>
+/*! \details This function opens the specified UART port.
+ * \return Zero if the port opened successfully.
+ */
+int uart_open(int port /*! The port to open */, int mode /*! The mode for the UART */);
  
-<span class="cm">/*! \details This function opens the specified UART port.</span>
-<span class="cm"> * \return The number of bytes read</span>
-<span class="cm"> */</span>
-<span class="kt">int</span> <span class="nf">uart_rd</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span> <span class="cm">/*! The port to read */</span><span class="p">,</span> 
-     <span class="kt">void</span> <span class="o">*</span> <span class="n">dest</span> <span class="cm">/*! A pointer to the destination memory */</span><span class="p">,</span> 
-     <span class="kt">int</span> <span class="n">size</span> <span class="cm">/*! The number of bytes to read */</span><span class="p">);</span>
+/*! \details This function opens the specified UART port.
+ * \return The number of bytes read
+ */
+int uart_rd(int port /*! The port to read */, 
+     void * dest /*! A pointer to the destination memory */, 
+     int size /*! The number of bytes to read */);
  
-<span class="cm">/*! \details This function opens the specified UART port.</span>
-<span class="cm"> * \return The number of bytes written</span>
-<span class="cm"> */</span>
-<span class="kt">int</span> <span class="nf">uart_wr</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span> <span class="cm">/*! The port to write */</span><span class="p">,</span> 
-     <span class="kt">void</span> <span class="o">*</span> <span class="n">src</span> <span class="cm">/*! A pointer to the source memory */</span><span class="p">,</span> 
-     <span class="kt">int</span> <span class="n">size</span> <span class="cm">/*! The number of bytes to write */</span><span class="p">);</span>
+/*! \details This function opens the specified UART port.
+ * \return The number of bytes written
+ */
+int uart_wr(int port /*! The port to write */, 
+     void * src /*! A pointer to the source memory */, 
+     int size /*! The number of bytes to write */);
  
-<span class="cm">/*! \details This function opens the specified UART port.</span>
-<span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">uart_close</span><span class="p">(</span><span class="kt">int</span> <span class="n">port</span> <span class="cm">/*! The port to close */</span><span class="p">);</span>
+/*! \details This function opens the specified UART port.
+ */
+void uart_close(int port /*! The port to close */);
  
-<span class="cp">#endif</span></code></pre></div>
+#endif</code></pre></div>
 
 <p>To complete the design hierarchy, the PERIPHERAL group is part of a top group 
 called SYSTEM.  To document all of the modules shown in the architecture diagram 

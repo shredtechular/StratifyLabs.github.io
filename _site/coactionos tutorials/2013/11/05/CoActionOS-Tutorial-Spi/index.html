@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -106,52 +106,52 @@ For more details on using the SPI, please see the
 The <a href="/coactionos-applib/html/class_pin.html">Pin class documentation</a> 
 may also be helpful.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;cstdio&gt; </span><span class="c1">//For printf and perror</span>
-<span class="cp">#include &lt;cstdlib&gt; </span><span class="c1">//for NULL</span>
-<span class="cp">#include &lt;cstring&gt; </span><span class="c1">//for memset</span>
-<span class="cp">#include &lt;applib/Spi.hpp&gt; </span><span class="c1">//For the SPI class</span>
-<span class="cp">#include &lt;applib/Pin.hpp&gt; </span><span class="c1">//For the PIN class</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;cstdio&gt; //For printf and perror
+#include &lt;cstdlib&gt; //for NULL
+#include &lt;cstring&gt; //for memset
+#include &lt;applib/Spi.hpp&gt; //For the SPI class
+#include &lt;applib/Pin.hpp&gt; //For the PIN class
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-  <span class="kt">char</span> <span class="n">buffer_duplex</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-  <span class="n">Spi</span> <span class="n">spi</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//use SPI port 0</span>
-  <span class="n">Pin</span> <span class="n">cs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span> <span class="c1">//use PIO port 2 for the CS</span>
+int main(int argc, char * argv[]){
+  char buffer[16];
+  char buffer_duplex[16];
+  Spi spi(0); //use SPI port 0
+  Pin cs(2,10); //use PIO port 2 for the CS
  
-  <span class="c1">//Initialize the CS line</span>
-  <span class="n">cs</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">PIO_MODE_OUTPUT</span><span class="p">);</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// or use cs.set() or cs.on()</span>
+  //Initialize the CS line
+  cs.init(PIO_MODE_OUTPUT);
+  cs = true;  // or use cs.set() or cs.on()
  
-  <span class="c1">//Initialize at 2MHz bitrate</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">2000000</span><span class="p">);</span>
+  //Initialize at 2MHz bitrate
+  spi.init(2000000);
  
-  <span class="c1">//For full duplex, set the buffer</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">setduplex</span><span class="p">(</span><span class="n">buffer_duplex</span><span class="p">);</span> <span class="c1">//read buffer when using write(), write buffer when using read()</span>
+  //For full duplex, set the buffer
+  spi.setduplex(buffer_duplex); //read buffer when using write(), write buffer when using read()
  
-  <span class="c1">//Here is a SPI read</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>  <span class="c1">// or use cs.clr() or cs.off() to drive the pin low</span>
-  <span class="n">memset</span><span class="p">(</span><span class="n">buffer_duplex</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">//this is written when using read</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">//read 16 bytes to buffer and write 16 bytes from buffer_duplex</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  //Here is a SPI read
+  cs = false;  // or use cs.clr() or cs.off() to drive the pin low
+  memset(buffer_duplex, 0xFF, 16); //this is written when using read
+  spi.read(buffer, 16); //read 16 bytes to buffer and write 16 bytes from buffer_duplex
+  cs = true;
  
-  <span class="c1">//Here is a SPI write</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">//this is written when using read</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">//write 16 bytes from buffer and read 16 bytes to buffer_duplex</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  //Here is a SPI write
+  cs = false;
+  memset(buffer, 0xFF, 16); //this is written when using read
+  spi.write(buffer, 16); //write 16 bytes from buffer and read 16 bytes to buffer_duplex
+  cs = true;
  
-  <span class="c1">//Put the SPI in half-duplex mode</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">setduplex</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">//buffer is written, incoming data is discarded</span>
-  <span class="n">cs</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  //Put the SPI in half-duplex mode
+  spi.setduplex(NULL);
+  cs = false;
+  spi.write(buffer, 16); //buffer is written, incoming data is discarded
+  cs = true;
  
-  <span class="c1">//Close the peripherals</span>
-  <span class="n">spi</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-  <span class="n">cs</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+  //Close the peripherals
+  spi.close();
+  cs.close();
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+  return 0;
+}</code></pre></div>
 
 				</div>
 			</div>

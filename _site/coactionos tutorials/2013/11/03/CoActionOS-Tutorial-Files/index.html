@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -85,49 +85,49 @@
 
 <p>The program below demonstrates how to use the <a href="/coactionos-applib/html/class_file.html">Applib File Class</a>.  It uses POSIX calls to access files but is easier to code than using POSIX.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;cstdio&gt; </span><span class="c1">//For printf and perror</span>
-<span class="cp">#include &lt;cstdlib&gt; </span><span class="c1">//for exit()</span>
-<span class="cp">#include &lt;cstring&gt; </span><span class="c1">//for strcpy and memset</span>
-<span class="cp">#include &lt;applib/File.hpp&gt; </span><span class="c1">//For the File class</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;cstdio&gt; //For printf and perror
+#include &lt;cstdlib&gt; //for exit()
+#include &lt;cstring&gt; //for strcpy and memset
+#include &lt;applib/File.hpp&gt; //For the File class
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="kt">char</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
-  <span class="n">File</span> <span class="n">f</span><span class="p">;</span> <span class="c1">//Declare f as a File class</span>
+int main(int argc, char * argv[]){
+  char tmp[64];
+  File f; //Declare f as a File class
  
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Create a new file</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  printf(&quot;Create a new file\n&quot;);
  
-  <span class="c1">//Create a new file</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">f</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;/home/myfile.txt&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to create file&quot;</span><span class="p">);</span>
-    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="p">}</span>
+  //Create a new file
+  if( f.create(&quot;/home/myfile.txt&quot;) &lt; 0 ){
+    perror(&quot;failed to create file&quot;);
+    exit(1);
+  }
  
-  <span class="c1">//Construct a string in a temporary variable</span>
-  <span class="n">strcpy</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="s">&quot;This is a string to write to the file</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  //Construct a string in a temporary variable
+  strcpy(tmp, &quot;This is a string to write to the file\n&quot;);
  
-  <span class="c1">//Write data to the file</span>
-  <span class="k">if</span><span class="p">(</span> <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;failed to write&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+  //Write data to the file
+  if( f.write(tmp, strlen(tmp)) &lt; 0 ){
+    perror(&quot;failed to write&quot;);
+  }
  
-  <span class="c1">//Close the file</span>
-  <span class="n">f</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+  //Close the file
+  f.close();
  
-  <span class="c1">//Clear the contents of tmp</span>
-  <span class="n">memset</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
+  //Clear the contents of tmp
+  memset(tmp, 0, 64);
  
-  <span class="c1">//Open the file for reading</span>
-  <span class="n">f</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/myfile.txt&quot;</span><span class="p">);</span>
+  //Open the file for reading
+  f.open(&quot;/home/myfile.txt&quot;);
  
-  <span class="c1">//Read and show contents</span>
-  <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Read:%s&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+  //Read and show contents
+  f.read(tmp, 64);
+  printf(&quot;Read:%s&quot;, tmp);
  
-  <span class="c1">//Close the file</span>
-  <span class="n">f</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+  //Close the file
+  f.close();
  
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+  return 0;
+}</code></pre></div>
 
 				</div>
 			</div>

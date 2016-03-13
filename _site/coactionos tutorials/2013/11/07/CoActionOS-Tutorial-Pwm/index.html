@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -93,32 +93,32 @@ apply a variable voltage to a motor.</p>
 <p>The following program demonstrates using a PWM output. For more details on 
 using PWM, please see the <a href="/coactionos-applib/html/class_pwm.html">PWM Applib documentation</a>.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;cstdio&gt; </span><span class="c1">//for printf</span>
-<span class="cp">#include &lt;applib/Pwm.hpp&gt;</span><span class="c1">//for PWM class</span>
-<span class="cp">#include &lt;applib/Timer.hpp&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;cstdio&gt; //for printf
+#include &lt;applib/Pwm.hpp&gt;//for PWM class
+#include &lt;applib/Timer.hpp&gt;
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-  <span class="n">Pwm</span> <span class="n">pwm</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//instantiate PMW Port 1</span>
-  <span class="kt">uint8_t</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">PWM_CHANNEL3</span><span class="p">;</span> <span class="c1">//use channel 3</span>
-  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+int main(int argc, char * argv[]){
+  Pwm pwm(1); //instantiate PMW Port 1
+  uint8_t channel = PWM_CHANNEL3; //use channel 3
+  int i;
  
-  <span class="n">pwm</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">channel</span><span class="p">,</span>
-      <span class="mi">10000000</span><span class="p">,</span> <span class="c1">//10MHz frequency</span>
-      <span class="mi">1000</span><span class="p">,</span> <span class="c1">//1000 top value</span>
-      <span class="mi">0</span><span class="p">,</span> <span class="c1">//PWM Flags (not used on lpc17xx)</span>
-      <span class="n">__PWM1_PINASSIGN_PORT2_0_1_2_3_4_5</span> <span class="c1">//pin assignment</span>
-  <span class="p">);</span>  <span class="c1">//initialize with channel 3 enabled</span>
+  pwm.init(1&lt;&lt;channel,
+      10000000, //10MHz frequency
+      1000, //1000 top value
+      0, //PWM Flags (not used on lpc17xx)
+      __PWM1_PINASSIGN_PORT2_0_1_2_3_4_5 //pin assignment
+  );  //initialize with channel 3 enabled
  
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Start Updating Duty Cycle</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-    <span class="n">pwm</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">//set channel 3 to duty cycle i / 1000</span>
-    <span class="n">Timer</span><span class="o">::</span><span class="n">wait_msec</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">//wait 5ms between updates</span>
-  <span class="p">}</span>
+  printf(&quot;Start Updating Duty Cycle\n&quot;);
+  for(i=0; i &lt; 1000; i++){
+    pwm.set(channel, i); //set channel 3 to duty cycle i / 1000
+    Timer::wait_msec(5); //wait 5ms between updates
+  }
  
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Duty Cycle Update Complete</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">pwm</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+  printf(&quot;Duty Cycle Update Complete\n&quot;);
+  pwm.close();
+  return 0;
+}</code></pre></div>
 
 
 				</div>

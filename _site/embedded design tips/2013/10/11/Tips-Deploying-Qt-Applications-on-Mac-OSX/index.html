@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -86,83 +86,83 @@ platforms deploying a Qt application to different platforms can be challenging.<
 also does code signing which is becoming more important on Mac OS X starting with Mountain Lion. The 
 script is used to deploy CoActionOS Link but can adapted to any Qt application.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
-<span class="nv">VERSION</span><span class="o">=</span><span class="nv">$1</span>
-<span class="nv">QTSDKPATH</span><span class="o">=</span>/Users/tgil/QtSDK
-<span class="nv">APP</span><span class="o">=</span>CoActionOS-Link
-<span class="nv">TEMPDIR</span><span class="o">=</span><span class="nv">$APP</span>-tmp
-<span class="nv">SIGNATURE</span><span class="o">=</span>CoActionOS,<span class="se">\ </span>Inc
-<span class="nv">NAME</span><span class="o">=</span><span class="sb">`</span>uname<span class="sb">`</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$NAME&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Darwin&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;This is not a Mac&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$VERSION&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Usage:  ../deploy &quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">#!/bin/bash
+VERSION=$1
+QTSDKPATH=/Users/tgil/QtSDK
+APP=CoActionOS-Link
+TEMPDIR=$APP-tmp
+SIGNATURE=CoActionOS,\ Inc
+NAME=`uname`
+if [ &quot;$NAME&quot; != &quot;Darwin&quot; ]; then
+    echo &quot;This is not a Mac&quot;
+    exit 1
+fi
+if [ &quot;$VERSION&quot; = &quot;&quot; ]; then
+    echo &quot;Usage:  ../deploy &quot;
+    exit 1
+fi
 make
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to Build&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="c">#use macdeployqt to deploy the application</span>
-<span class="nv">$QTSDKPATH</span>/Desktop/Qt/4.8.0/gcc/bin/macdeployqt ./<span class="nv">$APP</span>.app
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to run macdeployqt&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Create $TEMPDIR&quot;</span>
-<span class="c">#Create a temporary directory if one doesn&#39;t exist</span>
-mkdir -p <span class="nv">$TEMPDIR</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to create temporary folder&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Clean $TEMPDIR&quot;</span>
-<span class="c">#Delete the contents of any previous builds</span>
-rm -Rf ./<span class="nv">$TEMPDIR</span>/*
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to clean temporary folder&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Move application bundle&quot;</span>
-<span class="c">#Move the application to the temporary directory</span>
-mv ./<span class="nv">$APP</span>.app ./<span class="nv">$TEMPDIR</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to move application bundle&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Sign the code&quot;</span>
-<span class="c">#This signs the code</span>
-<span class="nb">echo</span> <span class="s2">&quot;Sign Code with $SIGNATURE&quot;</span>
-codesign -s <span class="s2">&quot;$SIGNATURE&quot;</span> -f ./<span class="nv">$TEMPDIR</span>/<span class="nv">$APP</span>.app
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to sign app bundle&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Create symbolic link&quot;</span>
-<span class="c">#Create a symbolic link to the applications folder</span>
-ln -s /Applications ./<span class="nv">$TEMPDIR</span>/Applications
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to create link to /Applications&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">echo</span> <span class="s2">&quot;Create new disk image&quot;</span>
-<span class="c">#Create the disk image</span>
-rm -f ./<span class="nv">$APP</span>-<span class="nv">$VERSION</span>.dmg
-hdiutil create -srcfolder ./<span class="nv">$TEMPDIR</span> -format UDBZ ./<span class="nv">$APP</span>-<span class="nv">$VERSION</span>.dmg
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to create disk image&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="c">#delete the temporary directory</span>
-rm -Rf ./<span class="nv">$TEMPDIR</span>/*
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> -ne <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Failed to clean temporary folder&quot;</span>
-    <span class="nb">exit </span>1
-<span class="k">fi</span>
-<span class="nb">exit </span>0</code></pre></div>
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to Build&quot;
+    exit 1
+fi
+#use macdeployqt to deploy the application
+$QTSDKPATH/Desktop/Qt/4.8.0/gcc/bin/macdeployqt ./$APP.app
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to run macdeployqt&quot;
+    exit 1
+fi
+echo &quot;Create $TEMPDIR&quot;
+#Create a temporary directory if one doesn&#39;t exist
+mkdir -p $TEMPDIR
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to create temporary folder&quot;
+    exit 1
+fi
+echo &quot;Clean $TEMPDIR&quot;
+#Delete the contents of any previous builds
+rm -Rf ./$TEMPDIR/*
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to clean temporary folder&quot;
+    exit 1
+fi
+echo &quot;Move application bundle&quot;
+#Move the application to the temporary directory
+mv ./$APP.app ./$TEMPDIR
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to move application bundle&quot;
+    exit 1
+fi
+echo &quot;Sign the code&quot;
+#This signs the code
+echo &quot;Sign Code with $SIGNATURE&quot;
+codesign -s &quot;$SIGNATURE&quot; -f ./$TEMPDIR/$APP.app
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to sign app bundle&quot;
+    exit 1
+fi
+echo &quot;Create symbolic link&quot;
+#Create a symbolic link to the applications folder
+ln -s /Applications ./$TEMPDIR/Applications
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to create link to /Applications&quot;
+    exit 1
+fi
+echo &quot;Create new disk image&quot;
+#Create the disk image
+rm -f ./$APP-$VERSION.dmg
+hdiutil create -srcfolder ./$TEMPDIR -format UDBZ ./$APP-$VERSION.dmg
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to create disk image&quot;
+    exit 1
+fi
+#delete the temporary directory
+rm -Rf ./$TEMPDIR/*
+if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to clean temporary folder&quot;
+    exit 1
+fi
+exit 0</code></pre></div>
 
 <p>Hopefully, this script is helpful in your endeavours to deploy Qt applications on Mac OS X.</p>
 

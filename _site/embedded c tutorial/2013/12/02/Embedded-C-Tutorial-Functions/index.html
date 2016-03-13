@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -80,25 +80,25 @@
 				<div class="panel-body">
 					<p>A function is a collection of C statements that can be utilized many times throughout a program or packaged into a module and re-used throughout many programs. The anatomy of a C function includes the prototype, the return type, the parameters, the name, and the body. Here is an example:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="kt">int</span> <span class="nf">my_first_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span> <span class="c1">//this is the prototype</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
-     <span class="kt">int</span> <span class="n">w</span><span class="p">;</span>
-     <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
-     <span class="n">w</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-     <span class="n">z</span> <span class="o">=</span> <span class="n">my_first_function</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;z is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
-     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">//this is the type (int), name, and parameters (x and y) of the function</span>
-<span class="kt">int</span> <span class="nf">my_first_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-     <span class="c1">//Inside the curly brackets is the function body</span>
-     <span class="kt">int</span> <span class="n">sum</span><span class="p">;</span>
-     <span class="n">sum</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
-     <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-     <span class="k">return</span> <span class="n">sum</span><span class="p">;</span> <span class="c1">//tells the compiler to return the int x+y to the caller</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int my_first_function(int x, int y); //this is the prototype
+int main(int argc, char * argv[]){
+     int w;
+     int z;
+     w = 5;
+     z = my_first_function(w, 3);
+     printf(&quot;z is %d\n&quot;, z);
+     exit(0);
+}
+//this is the type (int), name, and parameters (x and y) of the function
+int my_first_function(int x, int y){
+     //Inside the curly brackets is the function body
+     int sum;
+     sum = x + y;
+     x = 0;
+     return sum; //tells the compiler to return the int x+y to the caller
+}</code></pre></div>
 
 <p>The code above demonstrates my_first_function(). The prototype is always the return type, name, and parameters followed by a semi-colon. In most cases, the prototype is part of a header file so that the function can be used in many different source files. This is the case for printf() whose prototype is part of the stdio.h header file. The compiler gives a warning if a function is used, but a prototype is not found. It is important for the compiler to know function prototypes so that it can verify the number and types of the parameters passed to a function are compatible. It also checks that the return type is used correctly.</p>
 
@@ -118,16 +118,16 @@ well as not be a <a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutoria
 
 <p>The body of a function includes any number of C statements (separted by semicolons) within curly brackets. The return keyword is used to exit the function. If the return type is void, using return is optional. Also, return does not have to come at the end of the function. A function may conditionally return before it reaches the end. Here are a few examples to illustrate using return.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">print_output</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">){</span>
-     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Output is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-     <span class="c1">//because the return type is void, return is optional here</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">sum_abc</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">){</span>
-     <span class="k">if</span> <span class="p">(</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-          <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">//conditionally return early if a is less than 0</span>
-     <span class="p">}</span>
-     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span> <span class="c1">//return the sum (as an int)</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">void print_output(int value){
+     printf(&quot;Output is %d\n&quot;, value);
+     //because the return type is void, return is optional here
+}
+int sum_abc(int a, int b, int c){
+     if ( a &lt; 0 ){
+          return -1; //conditionally return early if a is less than 0
+     }
+     return a + b + c; //return the sum (as an int)
+}</code></pre></div>
 
 <h2 id="take-away">Take Away</h2>
 

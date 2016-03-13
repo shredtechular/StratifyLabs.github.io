@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -95,48 +95,48 @@
 
 <p>To effectively use the service call interrupt, we pass two arguments to a function which immediately invokes the SVC instruction. The arguments are a pointer to a function to execute in privileged mode and a pointer to a data structure that the function can use to read/write data in the caller’s context. The following code shows the prototype and body of the function.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//we need to decrease the optimization so the the compiler</span>
-<span class="c1">//does not ignore func and args</span>
-<span class="kt">void</span> <span class="nf">service_call</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">),</span> <span class="kt">void</span><span class="o">*</span> <span class="n">args</span><span class="p">)</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">optimize</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">));</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">//we need to decrease the optimization so the the compiler
+//does not ignore func and args
+void service_call(void (*func)(void*), void* args) __attribute__((optimize(&quot;1&quot;));
  
-<span class="kt">void</span> <span class="nf">service_call</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">),</span> <span class="kt">void</span><span class="o">*</span> <span class="n">args</span><span class="p">){</span>
-     <span class="c1">//by convention func is in r0 and args is in r1</span>
-     <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;svc 0&quot;</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+void service_call(void (*func)(void*), void* args){
+     //by convention func is in r0 and args is in r1
+     asm volatile(&quot;svc 0&quot;);
+}</code></pre></div>
 
 <p>When SVC is executed, the NVIC immediately stacks various registers including r0 and r1 and then executes the interrupt handler. The interrupt handler then needs to grab the values of r0 and r1 from the stack. The value in r0 is the function pointer while r1 is a pointer to some data in the caller’s context. The r0 value is type casted as a function and executed with a single argument, the value of r1.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="kt">svcall_t</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">typedef void (*svcall_t)(void*);
  
-<span class="kt">void</span> <span class="nf">svcall_handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-  <span class="k">register</span> <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">frame</span><span class="p">;</span>
-  <span class="k">register</span> <span class="kt">svcall_t</span> <span class="n">call</span><span class="p">;</span>
-  <span class="k">register</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">args</span><span class="p">;</span>
-  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="p">);</span> <span class="c1">//assumes PSP in use when service_call() invoked</span>
-  <span class="n">call</span> <span class="o">=</span> <span class="p">(</span><span class="kt">svcall_t</span><span class="p">)</span><span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)(</span><span class="n">frame</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-  <span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+void svcall_handler(void){
+  register uint32_t * frame;
+  register svcall_t call;
+  register void * args;
+  asm volatile (&quot;MRS %0, psp\n\t&quot; : &quot;=r&quot; (frame) ); //assumes PSP in use when service_call() invoked
+  call = (svcall_t)frame[0];
+  args = (void*)(frame[1]);
+  call(args);
+}</code></pre></div>
 
 <p>Finally, to make a privileged call:</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">my_priv_func</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">data</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="o">*</span> <span class="n">my_int</span><span class="p">;</span>
-    <span class="n">my_int</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">my_int</span> <span class="o">==</span> <span class="mi">10</span> <span class="p">){</span>
-        <span class="o">*</span><span class="n">my_int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">void my_priv_func(void * data){
+    int * my_int;
+    my_int = data;
+    if (*my_int == 10 ){
+        *my_int = 0;
+    }
+}
  
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">var</span><span class="p">;</span>
-    <span class="n">var</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="n">service_call</span><span class="p">(</span><span class="n">my_priv_func</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">var</span><span class="p">);</span> <span class="c1">//executes my_priv_func() in interrupt mode</span>
-    <span class="k">if</span><span class="p">(</span> <span class="n">var</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">){</span>
-        <span class="c1">//if this is true, that means everything worked</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+int main(void){
+    int var;
+    var = 10;
+    service_call(my_priv_func, &amp;var); //executes my_priv_func() in interrupt mode
+    if( var == 0 ){
+        //if this is true, that means everything worked
+    }
+    return 0;
+}</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 

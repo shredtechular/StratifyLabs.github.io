@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -104,11 +104,11 @@ to different objects.  We just need to augment those classes with the Bootstrap 
 do this, we use javascript and jquery.  The code below will add Bootstrap formatting
 to various Doxygen tables.</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.params&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.directory&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table table-striped&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.fieldtable&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>	
-<span class="p">});</span></code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">$( document ).ready(function() {
+	$(&quot;table.params&quot;).addClass(&quot;table&quot;);
+	$(&quot;table.directory&quot;).addClass(&quot;table table-striped&quot;);
+	$(&quot;table.fieldtable&quot;).addClass(&quot;table&quot;);	
+});</code></pre></div>
 
 <p>For this to work well, we need to modify doxygen’s default stylesheet and remove almost all
 formatting.  We leave the code highlighting formatting in place since this doesn’t affect
@@ -116,69 +116,69 @@ any of the Bootstrap formatting, but pretty much all other Doxygen formatting is
 We also modify the HTML header or footer to load the Bootstrap css/javascript and 
 our custom javascript (doxy-boot.js).</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;bootstrap3/css/bootstrap.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bootstrap3/js/jquery-2.0.3.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bootstrap3/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;doxy-boot.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;link href=&quot;bootstrap3/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;bootstrap3/js/jquery-2.0.3.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bootstrap3/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;doxy-boot.js&quot;&gt;&lt;/script&gt;</code></pre></div>
 
 <p>The following code shows the full contents of doxy-boot.js used on the 
 <a href="/coactionos/html/">CoActionOS documentation</a>.</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">$( document ).ready(function() {
 
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.headertitle&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;page-header&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.title&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">);</span>
+	$(&quot;div.headertitle&quot;).addClass(&quot;page-header&quot;);
+	$(&quot;div.title&quot;).addClass(&quot;h1&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-cog&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;CoActionOS&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;modules.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-square&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;namespaces.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-bars&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;annotated.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list-ul&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;classes.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-book&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;inherits.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-sitemap&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_func.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_vars.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_enum.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_eval.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;img[src=&quot;ftv2ns.png&quot;]&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s1">&#39;&lt;span class=&quot;label label-danger&quot;&gt;N&lt;/span&gt; &#39;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;img[src=&quot;ftv2cl.png&quot;]&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s1">&#39;&lt;span class=&quot;label label-danger&quot;&gt;C&lt;/span&gt; &#39;</span><span class="p">);</span>
+	$(&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-cog&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;).text(&quot;CoActionOS&quot;);
+	$(&#39;li &gt; a[href=&quot;modules.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-square&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;namespaces.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-bars&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;annotated.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list-ul&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;classes.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-book&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;inherits.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-sitemap&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;functions.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;functions_func.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;functions_vars.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;functions_enum.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;li &gt; a[href=&quot;functions_eval.html&quot;] &gt; span&#39;).before(&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;);
+	$(&#39;img[src=&quot;ftv2ns.png&quot;]&#39;).replaceWith(&#39;&lt;span class=&quot;label label-danger&quot;&gt;N&lt;/span&gt; &#39;);
+	$(&#39;img[src=&quot;ftv2cl.png&quot;]&#39;).replaceWith(&#39;&lt;span class=&quot;label label-danger&quot;&gt;C&lt;/span&gt; &#39;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;nav nav-pills nav-justified&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-top&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;li.current&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;iframe&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;scrolling&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">);</span>
+	$(&quot;ul.tablist&quot;).addClass(&quot;nav nav-pills nav-justified&quot;);
+	$(&quot;ul.tablist&quot;).css(&quot;margin-top&quot;, &quot;0.5em&quot;);
+	$(&quot;ul.tablist&quot;).css(&quot;margin-bottom&quot;, &quot;0.5em&quot;);
+	$(&quot;li.current&quot;).addClass(&quot;active&quot;);
+	$(&quot;iframe&quot;).attr(&quot;scrolling&quot;, &quot;yes&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#nav-path &gt; ul&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">);</span>
+	$(&quot;#nav-path &gt; ul&quot;).addClass(&quot;breadcrumb&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.params&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ingroups&quot;</span><span class="p">).</span><span class="nx">wrapInner</span><span class="p">(</span><span class="s2">&quot;&lt;small&gt;&lt;/small&gt;&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels &gt; span&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default btn-xs&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels &gt; span&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-right&quot;</span><span class="p">,</span> <span class="s2">&quot;0.25em&quot;</span><span class="p">);</span>
+	$(&quot;table.params&quot;).addClass(&quot;table&quot;);
+	$(&quot;div.ingroups&quot;).wrapInner(&quot;&lt;small&gt;&lt;/small&gt;&quot;);
+	$(&quot;div.levels&quot;).css(&quot;margin&quot;, &quot;0.5em&quot;);
+	$(&quot;div.levels &gt; span&quot;).addClass(&quot;btn btn-default btn-xs&quot;);
+	$(&quot;div.levels &gt; span&quot;).css(&quot;margin-right&quot;, &quot;0.25em&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.directory&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table table-striped&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.summary &gt; a&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default btn-xs&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.fieldtable&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.fragment&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;well&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memitem&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel panel-default&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memproto&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-heading&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memdoc&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-body&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;span.mlabel&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;label label-info&quot;</span><span class="p">);</span>
+	$(&quot;table.directory&quot;).addClass(&quot;table table-striped&quot;);
+	$(&quot;div.summary &gt; a&quot;).addClass(&quot;btn btn-default btn-xs&quot;);
+	$(&quot;table.fieldtable&quot;).addClass(&quot;table&quot;);
+	$(&quot;.fragment&quot;).addClass(&quot;well&quot;);
+	$(&quot;.memitem&quot;).addClass(&quot;panel panel-default&quot;);
+	$(&quot;.memproto&quot;).addClass(&quot;panel-heading&quot;);
+	$(&quot;.memdoc&quot;).addClass(&quot;panel-body&quot;);
+	$(&quot;span.mlabel&quot;).addClass(&quot;label label-info&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.memberdecls&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;[class^=memitem]&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+	$(&quot;table.memberdecls&quot;).addClass(&quot;table&quot;);
+	$(&quot;[class^=memitem]&quot;).addClass(&quot;active&quot;);
 	
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ah&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;span.mlabels&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;pull-right&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.mlabels&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="s2">&quot;100%&quot;</span><span class="p">)</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;td.mlabels-right&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;pull-right&quot;</span><span class="p">);</span>
+	$(&quot;div.ah&quot;).addClass(&quot;btn btn-default&quot;);
+	$(&quot;span.mlabels&quot;).addClass(&quot;pull-right&quot;);
+	$(&quot;table.mlabels&quot;).css(&quot;width&quot;, &quot;100%&quot;)
+	$(&quot;td.mlabels-right&quot;).addClass(&quot;pull-right&quot;);
 
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttc&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel panel-info&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttname&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-heading&quot;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttdef,div.ttdoc,div.ttdeci&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-body&quot;</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+	$(&quot;div.ttc&quot;).addClass(&quot;panel panel-info&quot;);
+	$(&quot;div.ttname&quot;).addClass(&quot;panel-heading&quot;);
+	$(&quot;div.ttdef,div.ttdoc,div.ttdeci&quot;).addClass(&quot;panel-body&quot;);
+});</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 

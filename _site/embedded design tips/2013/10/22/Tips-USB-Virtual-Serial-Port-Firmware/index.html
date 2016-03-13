@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -175,265 +175,265 @@ host while the bulk out endpoint transfer data from the host to the device.</p>
 <p>The following code is used to set up the endpoint descriptors for the 
 virtual serial port.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdint.h&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">#include &lt;stdint.h&gt;
  
-<span class="c1">//This is the standard device descriptor </span>
-<span class="c1">//(HWPL_PACK ensure the structures are packed using a pragma)</span>
-<span class="c1">//on GCC HWPL PACK is #define HWPL_PACK __attribute__((packed))</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">bcdUSB</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDeviceClass</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDeviceSubClass</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDeviceProtocol</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bMaxPacketSize</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">idVendor</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">idProduct</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">bcdDevice</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">iManufacturer</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">iProduct</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">iSerialNumber</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bNumConfigurations</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">usb_dev_desc_t</span><span class="p">;</span>
+//This is the standard device descriptor 
+//(HWPL_PACK ensure the structures are packed using a pragma)
+//on GCC HWPL PACK is #define HWPL_PACK __attribute__((packed))
+typedef struct HWPL_PACK {
+  uint8_t bLength;
+  uint8_t bDescriptorType;
+  uint16_t bcdUSB;
+  uint8_t bDeviceClass;
+  uint8_t bDeviceSubClass;
+  uint8_t bDeviceProtocol;
+  uint8_t bMaxPacketSize;
+  uint16_t idVendor;
+  uint16_t idProduct;
+  uint16_t bcdDevice;
+  uint8_t iManufacturer;
+  uint8_t iProduct;
+  uint8_t iSerialNumber;
+  uint8_t bNumConfigurations;
+} usb_dev_desc_t;
  
-<span class="c1">//definition to aid with declaring USB strings</span>
-<span class="cp">#define usb_declare_string(len) struct \</span>
-<span class="cp">    HWPL_PACK { \</span>
-<span class="cp">  uint8_t bLength; \</span>
-<span class="cp">  uint8_t bDescriptorType; \</span>
-<span class="cp">  uint16_t string[len]; \</span>
-<span class="cp">}</span>
+//definition to aid with declaring USB strings
+#define usb_declare_string(len) struct \
+    HWPL_PACK { \
+  uint8_t bLength; \
+  uint8_t bDescriptorType; \
+  uint16_t string[len]; \
+}
  
-<span class="c1">//definition to aid with assigning values to a USB string</span>
-<span class="cp">#define usb_assign_string(len, ...) { \</span>
-<span class="cp">    .bLength = len*2+2, \</span>
-<span class="cp">    .bDescriptorType = USB_STRING_DESCRIPTOR_TYPE, \</span>
-<span class="cp">    .string = { __VA_ARGS__ } }</span>
+//definition to aid with assigning values to a USB string
+#define usb_assign_string(len, ...) { \
+    .bLength = len*2+2, \
+    .bDescriptorType = USB_STRING_DESCRIPTOR_TYPE, \
+    .string = { __VA_ARGS__ } }
  
-<span class="c1">//The standard configuration descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">wTotalLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bNumInterfaces</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bConfigurationValue</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">iConfiguration</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bmAttributes</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bMaxPower</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">usb_cfg_desc_t</span><span class="p">;</span>
+//The standard configuration descriptor
+typedef struct HWPL_PACK {
+  uint8_t bLength;
+  uint8_t bDescriptorType;
+  uint16_t wTotalLength;
+  uint8_t bNumInterfaces;
+  uint8_t bConfigurationValue;
+  uint8_t iConfiguration;
+  uint8_t bmAttributes;
+  uint8_t bMaxPower;
+} usb_cfg_desc_t;
  
-<span class="c1">//The standard interface descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bInterfaceNumber</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bAlternateSetting</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bNumEndpoints</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bInterfaceClass</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bInterfaceSubClass</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bInterfaceProtocol</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">iInterface</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">usb_interface_desc_t</span><span class="p">;</span>
+//The standard interface descriptor
+typedef struct HWPL_PACK {
+  uint8_t bLength;
+  uint8_t bDescriptorType;
+  uint8_t bInterfaceNumber;
+  uint8_t bAlternateSetting;
+  uint8_t bNumEndpoints;
+  uint8_t bInterfaceClass;
+  uint8_t bInterfaceSubClass;
+  uint8_t bInterfaceProtocol;
+  uint8_t iInterface;
+} usb_interface_desc_t;
  
-<span class="c1">//The standard endpoint descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bEndpointAddress</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bmAttributes</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">wMaxPacketSize</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bInterval</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">usb_ep_desc_t</span><span class="p">;</span>
+//The standard endpoint descriptor
+typedef struct HWPL_PACK {
+  uint8_t bLength;
+  uint8_t bDescriptorType;
+  uint8_t bEndpointAddress;
+  uint8_t bmAttributes;
+  uint16_t wMaxPacketSize;
+  uint8_t bInterval;
+} usb_ep_desc_t;
  
-<span class="c1">//The CDC functional header</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">bcdCDC</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">cdc_header_func_desc_t</span><span class="p">;</span>
+//The CDC functional header
+typedef struct {
+  uint8_t bFunctionLength;
+  uint8_t bDescriptorType;
+  uint8_t bDescriptorSubType;
+  uint16_t bcdCDC;
+} cdc_header_func_desc_t;
  
-<span class="c1">//The CDC call management descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bmCapabilities</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDataInterface</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">cdc_call_mgt_func_desc_t</span><span class="p">;</span>
+//The CDC call management descriptor
+typedef struct {
+  uint8_t bFunctionLength;
+  uint8_t bDescriptorType;
+  uint8_t bDescriptorSubType;
+  uint8_t bmCapabilities;
+  uint8_t bDataInterface;
+} cdc_call_mgt_func_desc_t;
  
-<span class="c1">//The CDC ACM descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bmCapabilities</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">cdc_abstract_contorl_model_func_desc_t</span><span class="p">;</span>
+//The CDC ACM descriptor
+typedef struct {
+  uint8_t bFunctionLength;
+  uint8_t bDescriptorType;
+  uint8_t bDescriptorSubType;
+  uint8_t bmCapabilities;
+} cdc_abstract_contorl_model_func_desc_t;
  
-<span class="c1">//The CDC union descriptor</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bMasterInterface</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bSlaveInterface</span><span class="p">[];</span>
-<span class="p">}</span> <span class="kt">cdc_union_func_desc_t</span><span class="p">;</span>
+//The CDC union descriptor
+typedef struct {
+  uint8_t bFunctionLength;
+  uint8_t bDescriptorType;
+  uint8_t bDescriptorSubType;
+  uint8_t bMasterInterface;
+  uint8_t bSlaveInterface[];
+} cdc_union_func_desc_t;
  
-<span class="c1">//CDC interface descriptor with CDC header, ACM, union, and call management</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">usb_dev_cdc_header_t</span> <span class="n">header</span><span class="p">;</span>
-  <span class="kt">usb_dev_cdc_acm_t</span> <span class="n">acm</span><span class="p">;</span>
-  <span class="kt">usb_dev_cdc_uniondescriptor_t</span> <span class="n">union_descriptor</span><span class="p">;</span>
-  <span class="kt">usb_dev_cdc_callmanagement_t</span> <span class="n">call_management</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">cdc_acm_interface_t</span><span class="p">;</span>
+//CDC interface descriptor with CDC header, ACM, union, and call management
+typedef struct HWPL_PACK {
+  usb_dev_cdc_header_t header;
+  usb_dev_cdc_acm_t acm;
+  usb_dev_cdc_uniondescriptor_t union_descriptor;
+  usb_dev_cdc_callmanagement_t call_management;
+} cdc_acm_interface_t;
  
-<span class="c1">//Application level configuration descriptor with interfaces and endpoints</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
-  <span class="kt">usb_cfg_desc_t</span> <span class="n">cfg</span> <span class="cm">/* The configuration descriptor */</span><span class="p">;</span>
-  <span class="kt">usb_interface_desc_t</span> <span class="n">ifcontrol</span> <span class="cm">/* The interface descriptor */</span><span class="p">;</span>
-  <span class="kt">link_cdc_acm_interface_t</span> <span class="n">acm</span> <span class="cm">/*! The CDC ACM Class descriptor */</span><span class="p">;</span>
-  <span class="kt">usb_ep_desc_t</span> <span class="n">control</span> <span class="cm">/* Endpoint:  Interrupt out for control packets */</span><span class="p">;</span>
-  <span class="kt">usb_interface_desc_t</span> <span class="n">ifdata</span> <span class="cm">/* The interface descriptor */</span><span class="p">;</span>
-  <span class="kt">usb_ep_desc_t</span> <span class="n">data_out</span> <span class="cm">/* Endpoint:  Bulk out */</span><span class="p">;</span>
-  <span class="kt">usb_ep_desc_t</span> <span class="n">data_in</span> <span class="cm">/* Endpoint:  Bulk in */</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">terminator</span>  <span class="cm">/* A null terminator used by the driver (required) */</span><span class="p">;</span>
-<span class="p">}</span> <span class="kt">app_cfg_desc_t</span><span class="p">;</span>
+//Application level configuration descriptor with interfaces and endpoints
+typedef struct HWPL_PACK {
+  usb_cfg_desc_t cfg /* The configuration descriptor */;
+  usb_interface_desc_t ifcontrol /* The interface descriptor */;
+  link_cdc_acm_interface_t acm /*! The CDC ACM Class descriptor */;
+  usb_ep_desc_t control /* Endpoint:  Interrupt out for control packets */;
+  usb_interface_desc_t ifdata /* The interface descriptor */;
+  usb_ep_desc_t data_out /* Endpoint:  Bulk out */;
+  usb_ep_desc_t data_in /* Endpoint:  Bulk in */;
+  uint8_t terminator  /* A null terminator used by the driver (required) */;
+} app_cfg_desc_t;
  
-<span class="cp">#define USB_DESC_MANUFACTURER_SIZE 15</span>
-<span class="cp">#define USB_DESC_PRODUCT_SIZE 10</span>
-<span class="cp">#define USB_DESC_SERIAL_SIZE 16</span>
-<span class="cp">#define USB_DESC_MANUFACTURER_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;,&#39;,&#39;,&#39; &#39;,&#39;I&#39;,&#39;n&#39;,&#39;c&#39;</span>
-<span class="cp">#define USB_DESC_PRODUCT_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;</span>
-<span class="cp">#define USB_DESC_SERIAL_STRING &#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;</span>
- 
- 
-<span class="c1">//The application structure used for storing the strings</span>
-<span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="kt">app_usb_string_t</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
-  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
-  <span class="kt">uint16_t</span> <span class="n">wLANGID</span><span class="p">;</span>
-  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_MANUFACTURER_SIZE</span><span class="p">)</span> <span class="n">manufacturer</span><span class="p">;</span>
-  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_PRODUCT_SIZE</span><span class="p">)</span> <span class="n">product</span><span class="p">;</span>
-  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_SERIAL_SIZE</span><span class="p">)</span> <span class="n">serial</span><span class="p">;</span>
-<span class="p">};</span>
- 
-<span class="k">const</span> <span class="k">struct</span> <span class="kt">link_usb_string_t</span> <span class="n">app_string_desc</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_STRING_DESCRIPTOR_TYPE</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">wLANGID</span> <span class="o">=</span> <span class="mh">0x0409</span><span class="p">,</span> <span class="c1">//English</span>
-    <span class="p">.</span><span class="n">manufacturer</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_MANUFACTURER_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_MANUFACTURER_STRING</span><span class="p">),</span>
-    <span class="p">.</span><span class="n">product</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_PRODUCT_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_PRODUCT_STRING</span><span class="p">),</span>
-    <span class="p">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_SERIAL_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_SERIAL_STRING</span><span class="p">)</span>
-<span class="p">};</span>
- 
-<span class="c1">//The application device descriptor assignment</span>
-<span class="k">const</span> <span class="kt">usb_dev_desc_t</span> <span class="n">app_dev_desc</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_desc_t</span><span class="p">),</span>
-    <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_DEVICE_DESCRIPTOR_TYPE</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bcdUSB</span> <span class="o">=</span> <span class="mh">0x0200</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bDeviceClass</span> <span class="o">=</span> <span class="n">USB_DEVICE_CLASS_COMMUNICATIONS</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bDeviceSubClass</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bDeviceProtocol</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bMaxPacketSize</span> <span class="o">=</span> <span class="n">USB_MAX_PACKET0</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">idVendor</span> <span class="o">=</span> <span class="n">LINK_USB_VID</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">idProduct</span> <span class="o">=</span> <span class="n">LINK_USB_PID</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bcdDevice</span> <span class="o">=</span> <span class="mh">0x0010</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">iManufacturer</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">iProduct</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">iSerialNumber</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">bNumConfigurations</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">};</span>
- 
-<span class="c1">//The assignment of the application&#39;s USB configuration descriptor</span>
-<span class="k">const</span> <span class="kt">link_cfg_desc_t</span> <span class="n">app_cfg_desc</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_cfg_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_CONFIGURATION_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">wTotalLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">app_cfg_desc_t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="c1">//exclude the zero terminator</span>
-        <span class="p">.</span><span class="n">bNumInterfaces</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bConfigurationValue</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">iConfiguration</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bmAttributes</span> <span class="o">=</span> <span class="n">USB_CONFIG_BUS_POWERED</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bMaxPower</span> <span class="o">=</span> <span class="n">USB_CONFIG_POWER_MA</span><span class="p">(</span> <span class="n">LINK_REQD_CURRENT</span> <span class="p">)</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">ifcontrol</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_interface_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_INTERFACE_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceNumber</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bAlternateSetting</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bNumEndpoints</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_CLASS_COMMUNICATIONS</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceSubClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_SUBCLASS_ACM</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceProtocol</span> <span class="o">=</span> <span class="n">USB_INTERFACE_PROTOCOL_V25TER</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">iInterface</span> <span class="o">=</span> <span class="mh">0x00</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">acm</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_header_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bcdCDC</span> <span class="o">=</span> <span class="mh">0x0110</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_acm_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bmCapabilities</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_uniondescriptor_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x06</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bMasterInterface</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bSlaveInterface</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_callmanagement_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bmCapabilities</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDataInterface</span> <span class="o">=</span> <span class="mh">0x01</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">control</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_INTIN</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_INTERRUPT</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_INTERRUPT_ENDPOINT_SIZE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">ifdata</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_interface_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_INTERFACE_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceNumber</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bAlternateSetting</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bNumEndpoints</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_CLASS_COMMUNICATIONS_DATA</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceSubClass</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterfaceProtocol</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">iInterface</span> <span class="o">=</span> <span class="mh">0x00</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">data_out</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_BULKOUT</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_BULK</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_BULK_ENDPOINT_SIZE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
-    <span class="p">},</span>
- 
-    <span class="p">.</span><span class="n">data_in</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_BULKIN</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_BULK</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_BULK_ENDPOINT_SIZE</span><span class="p">,</span>
-        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
-    <span class="p">},</span>
+#define USB_DESC_MANUFACTURER_SIZE 15
+#define USB_DESC_PRODUCT_SIZE 10
+#define USB_DESC_SERIAL_SIZE 16
+#define USB_DESC_MANUFACTURER_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;,&#39;,&#39;,&#39; &#39;,&#39;I&#39;,&#39;n&#39;,&#39;c&#39;
+#define USB_DESC_PRODUCT_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;
+#define USB_DESC_SERIAL_STRING &#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;
  
  
+//The application structure used for storing the strings
+struct HWPL_PACK app_usb_string_t {
+  uint8_t bLength;
+  uint8_t bDescriptorType;
+  uint16_t wLANGID;
+  usb_declare_string(USB_DESC_MANUFACTURER_SIZE) manufacturer;
+  usb_declare_string(USB_DESC_PRODUCT_SIZE) product;
+  usb_declare_string(USB_DESC_SERIAL_SIZE) serial;
+};
  
-    <span class="p">.</span><span class="n">terminator</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="p">};</span></code></pre></div>
+const struct link_usb_string_t app_string_desc = {
+    .bLength = 4,
+    .bDescriptorType = USB_STRING_DESCRIPTOR_TYPE,
+    .wLANGID = 0x0409, //English
+    .manufacturer = usb_assign_string(USB_DESC_MANUFACTURER_SIZE, USB_DESC_MANUFACTURER_STRING),
+    .product = usb_assign_string(USB_DESC_PRODUCT_SIZE, USB_DESC_PRODUCT_STRING),
+    .serial = usb_assign_string(USB_DESC_SERIAL_SIZE, USB_DESC_SERIAL_STRING)
+};
+ 
+//The application device descriptor assignment
+const usb_dev_desc_t app_dev_desc = {
+    .bLength = sizeof(usb_dev_desc_t),
+    .bDescriptorType = USB_DEVICE_DESCRIPTOR_TYPE,
+    .bcdUSB = 0x0200,
+    .bDeviceClass = USB_DEVICE_CLASS_COMMUNICATIONS,
+    .bDeviceSubClass = 0,
+    .bDeviceProtocol = 0,
+    .bMaxPacketSize = USB_MAX_PACKET0,
+    .idVendor = LINK_USB_VID,
+    .idProduct = LINK_USB_PID+10,
+    .bcdDevice = 0x0010,
+    .iManufacturer = 1,
+    .iProduct = 2,
+    .iSerialNumber = 3,
+    .bNumConfigurations = 1
+};
+ 
+//The assignment of the application&#39;s USB configuration descriptor
+const link_cfg_desc_t app_cfg_desc = {
+    .cfg = {
+        .bLength = sizeof(usb_cfg_desc_t),
+        .bDescriptorType = USB_CONFIGURATION_DESCRIPTOR_TYPE,
+        .wTotalLength = sizeof(app_cfg_desc_t)-1, //exclude the zero terminator
+        .bNumInterfaces = 0x02,
+        .bConfigurationValue = 0x01,
+        .iConfiguration = 0x03,
+        .bmAttributes = USB_CONFIG_BUS_POWERED,
+        .bMaxPower = USB_CONFIG_POWER_MA( LINK_REQD_CURRENT )
+    },
+ 
+    .ifcontrol = {
+        .bLength = sizeof(usb_interface_desc_t),
+        .bDescriptorType = USB_INTERFACE_DESCRIPTOR_TYPE,
+        .bInterfaceNumber = 0x00,
+        .bAlternateSetting = 0x00,
+        .bNumEndpoints = 0x01,
+        .bInterfaceClass = USB_INTERFACE_CLASS_COMMUNICATIONS,
+        .bInterfaceSubClass = USB_INTERFACE_SUBCLASS_ACM,
+        .bInterfaceProtocol = USB_INTERFACE_PROTOCOL_V25TER,
+        .iInterface = 0x00
+    },
+ 
+    .acm = {
+        .header.bLength = sizeof(usb_dev_cdc_header_t),
+        .header.bDescriptorType = 0x24,
+        .header.bDescriptorSubType = 0x00,
+        .header.bcdCDC = 0x0110,
+        .acm.bFunctionLength = sizeof(usb_dev_cdc_acm_t),
+        .acm.bDescriptorType = 0x24,
+        .acm.bDescriptorSubType = 0x02,
+        .acm.bmCapabilities = 0x02,
+        .union_descriptor.bFunctionLength = sizeof(usb_dev_cdc_uniondescriptor_t),
+        .union_descriptor.bDescriptorType = 0x24,
+        .union_descriptor.bDescriptorSubType = 0x06,
+        .union_descriptor.bMasterInterface = 0x00,
+        .union_descriptor.bSlaveInterface = 0x01,
+        .call_management.bFunctionLength = sizeof(usb_dev_cdc_callmanagement_t),
+        .call_management.bDescriptorType = 0x24,
+        .call_management.bDescriptorSubType = 0x01,
+        .call_management.bmCapabilities = 0x00,
+        .call_management.bDataInterface = 0x01
+    },
+ 
+    .control = {
+        .bLength= sizeof(usb_ep_desc_t),
+        .bDescriptorType=USB_ENDPOINT_DESCRIPTOR_TYPE,
+        .bEndpointAddress=USB_INTIN,
+        .bmAttributes=USB_ENDPOINT_TYPE_INTERRUPT,
+        .wMaxPacketSize=LINK_INTERRUPT_ENDPOINT_SIZE,
+        .bInterval=1
+    },
+ 
+    .ifdata = {
+        .bLength = sizeof(usb_interface_desc_t),
+        .bDescriptorType = USB_INTERFACE_DESCRIPTOR_TYPE,
+        .bInterfaceNumber = 0x01,
+        .bAlternateSetting = 0x00,
+        .bNumEndpoints = 0x02,
+        .bInterfaceClass = USB_INTERFACE_CLASS_COMMUNICATIONS_DATA,
+        .bInterfaceSubClass = 0x00,
+        .bInterfaceProtocol = 0x00,
+        .iInterface = 0x00
+    },
+ 
+    .data_out = {
+        .bLength= sizeof(usb_ep_desc_t),
+        .bDescriptorType=USB_ENDPOINT_DESCRIPTOR_TYPE,
+        .bEndpointAddress=USB_BULKOUT,
+        .bmAttributes=USB_ENDPOINT_TYPE_BULK,
+        .wMaxPacketSize=LINK_BULK_ENDPOINT_SIZE,
+        .bInterval=1
+    },
+ 
+    .data_in = {
+        .bLength= sizeof(usb_ep_desc_t),
+        .bDescriptorType=USB_ENDPOINT_DESCRIPTOR_TYPE,
+        .bEndpointAddress=USB_BULKIN,
+        .bmAttributes=USB_ENDPOINT_TYPE_BULK,
+        .wMaxPacketSize=LINK_BULK_ENDPOINT_SIZE,
+        .bInterval=1
+    },
+ 
+ 
+ 
+    .terminator = 0
+};</code></pre></div>
 
 <h3 id="required-interface-requests">Required Interface Requests</h3>
 

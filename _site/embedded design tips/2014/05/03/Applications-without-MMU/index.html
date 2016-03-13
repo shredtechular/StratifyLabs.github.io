@@ -46,7 +46,7 @@
 							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="/index.html">
-							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+							<img style="height: 22px;" src="/images/Stratify-Labs-Logo.svg" />
 						</a>
 					</div>
 
@@ -132,7 +132,7 @@ de00005c:	deff826d 	.word	0xdeff826d
 
 <p>This approach has two limitations.  First, the program (flash and RAM) must be less than 16MB (not a problem for most microcontroller applications).  Second, if the program uses data between 0xDE000000 and 0xDEFFFFFF (integers between 3.72 billion and 3.74 billion), the embedded installer will modify the data even if it does not refer to a memory location.  For example, the embedded installer will mistake the following variable for a memory address and translate it to a new location.</p>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">uint32_t</span> <span class="n">world_population_1970</span> <span class="o">=</span> <span class="mi">3733996830</span><span class="p">;</span> <span class="c1">//0xDE90451E</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp">uint32_t world_population_1970 = 3733996830; //0xDE90451E</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 
