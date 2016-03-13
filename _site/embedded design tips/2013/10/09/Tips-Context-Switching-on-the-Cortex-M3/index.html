@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Context Switching on the Cortex-M3</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						Context Switching on the Cortex-M3 <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p>The ARM Cortex-M3 architecture is designed with special features to 
+facilitate implementing a pre-emptive RTOS. The system code takes 
+advantage of these features when implementing context switching code.</p>
+
+<h3 id="arm-cortex-m3-context-switching-hardware">ARM Cortex-M3 Context Switching Hardware</h3>
+
+<h4 id="interrupts">Interrupts</h4>
+
+<p>The SysTick and PendSV interrupts can both be used for context 
+switching. The SysTick peripheral is a 24-bit timer that interrupts 
+the processor each time it counts down to zero. This makes it 
+well-suited to round-robin style context switching. The PendSV 
+interrupt allows a task to cede control of the CPU when it is 
+inactive (such as when sleeping or waiting for a hardware resource) which 
+is helpful for FIFO style context switching. In addition to these 
+interrupts, the ARM Cortex-M3 also includes two stack pointers.</p>
+
+<h4 id="stacks">Stacks</h4>
+
+<p>The stack pointers for the ARM Cortex-M3 include the main stack 
+pointer (MSP) and the process stack pointer (PSP). The MSP is always 
+used when handling interrupts and optionally used during regular 
+program execution. The PSP is only used during regular program 
+execution.  ARM recommends using the MSP for the kernel as well 
+as interrupts and recommends the PSP for executing other 
+tasks.  While the architecture provides the interrupts and the 
+stack pointers, the implementation must provide the context 
+switching code.</p>
+
+<h3 id="context-switching-software-implementation">Context Switching Software Implementation</h3>
+
+<p>The RTOS manages the interrupts and stacks in order to achieve 
+context switching.  When switching contexts, the RTOS needs a way 
+to keep track of which tasks are doing what using a task or scheduler 
+table.  Three routines are then required to: perform the context 
+switch, initialize the system, and create new tasks.</p>
+
+<h4 id="task-table">Task Table</h4>
+
+<p>The task table, at a minimum, saves each task’s stack pointer; it is 
+also helpful to save other information, such as the task parent and 
+status, to allow the context switcher to selectively execute 
+tasks.  The following code shows an example of a structure that can 
+be used for an entry in the task table:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+     <span class="kt">void</span> <span class="o">*</span> <span class="n">sp</span><span class="p">;</span> <span class="c1">//The task&#39;s current stack pointer</span>
+     <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span> <span class="c1">//Status flags includes activity status, parent task, etc</span>
+<span class="p">}</span> <span class="kt">task_table_t</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">current_task</span><span class="p">;</span>
+<span class="kt">task_table_t</span> <span class="n">task_table</span><span class="p">[</span><span class="n">MAX_TASKS</span><span class="p">];</span></code></pre></div>
+
+<p>The sp member stores the value of the task’s stack pointer, while 
+flags holds the task status. In this example, the task uses two 
+status bits: one to indicate that the table entry is in use and 
+the other to specify whether or not to execute the task.</p>
+
+<h3 id="context-switching-routine">Context Switching Routine</h3>
+
+<p>The context switcher needs to:</p>
+
+<ul>
+  <li>save the state of the current task,</li>
+  <li>update the current task index to the next task to be executed,</li>
+  <li>set up the CPU to either use the MSP (if it’s time to run the kernel) or the PSP,</li>
+  <li>and finally load the context of the task which is about to execute.</li>
+</ul>
+
+<p>The following code is an example of a context switcher, preceded by some 
+helper functions, and the interrupt handlers.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">stack</span><span class="p">;</span> <span class="c1">//This is stored on the heap rather than the stack</span>
+ 
+<span class="cp">#define MAIN_RETURN 0xFFFFFFF9  </span><span class="c1">//Tells the handler to return using the MSP</span>
+<span class="cp">#define THREAD_RETURN 0xFFFFFFFD </span><span class="c1">//Tells the handler to return using the PSP</span>
+ 
+<span class="c1">//Reads the main stack pointer</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">rd_stack_ptr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="kt">void</span> <span class="o">*</span> <span class="n">result</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, msp</span><span class="se">\n\t</span><span class="s">&quot;</span>
+      <span class="c1">//&quot;MOV r0, %0 \n\t&quot;</span>
+      <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This saves the context on the PSP, the Cortex-M3 pushes the other registers using hardware</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">save_context</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="kt">uint32_t</span> <span class="n">scratch</span><span class="p">;</span>
+  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span>
+      <span class="s">&quot;STMDB %0!, {r4-r11}</span><span class="se">\n\t</span><span class="s">&quot;</span>
+      <span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span>  <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">scratch</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This loads the context from the PSP, the Cortex-M3 loads the other registers using hardware</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">load_context</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="kt">uint32_t</span> <span class="n">scratch</span><span class="p">;</span>
+  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span>
+      <span class="s">&quot;LDMFD %0!, {r4-r11}</span><span class="se">\n\t</span><span class="s">&quot;</span>
+      <span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span>  <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">scratch</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+ 
+<span class="c1">//The SysTick interrupt handler -- this grabs the main stack value then calls the context switcher</span>
+<span class="kt">void</span> <span class="nf">systick_handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">save_context</span><span class="p">();</span>  <span class="c1">//The context is immediately saved</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="n">rd_stack_ptr</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;</span><span class="mi">16</span><span class="p">)</span> <span class="p">){</span> <span class="c1">//Indicates timer counted to zero</span>
+        <span class="n">context_switcher</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">load_context</span><span class="p">();</span> <span class="c1">//Since the PSP has been updated, this loads the last state of the new task</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This does the same thing as the SysTick handler -- it is just triggered in a different way</span>
+<span class="kt">void</span> <span class="nf">pendsv_handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">save_context</span><span class="p">();</span>  <span class="c1">//The context is immediately saved</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="n">rd_stack_ptr</span><span class="p">();</span>
+    <span class="n">core_proc_context_switcher</span><span class="p">();</span>
+    <span class="n">load_context</span><span class="p">();</span> <span class="c1">//Since the PSP has been updated, this loads the last state of the new task</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This reads the PSP so that it can be stored in the task table</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">rd_thread_stack_ptr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">void</span> <span class="o">*</span> <span class="n">result</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MRS %0, psp</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This writes the PSP so that the task table stack pointer can be used again</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">wr_thread_stack_ptr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">ptr</span><span class="p">){</span>
+    <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&quot;MSR psp, %0</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">:</span> <span class="o">:</span> <span class="s">&quot;r&quot;</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>This is the function for the actual context switcher. This context 
+switcher uses the MSP for task 0 (assumed to be the kernel) and the 
+PSP for other tasks.  It is also possible to use the PSP for the 
+kernel and just use the MSP during interrupt handling.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//This is the context switcher</span>
+<span class="kt">void</span> <span class="nf">context_switcher</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+   <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">rd_proc_stack_ptr</span><span class="p">();</span> <span class="c1">//Save the current task&#39;s stack pointer</span>
+   <span class="k">do</span> <span class="p">{</span>
+      <span class="n">current_task</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">current_task</span> <span class="o">==</span> <span class="n">MAX_TASKS</span> <span class="p">){</span>
+         <span class="n">current_task</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+         <span class="o">*</span><span class="p">((</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">stack</span><span class="p">)</span> <span class="o">=</span> <span class="n">MAIN_RETURN</span><span class="p">;</span> <span class="c1">//Return to main process using main stack</span>
+         <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">EXEC_FLAG</span> <span class="p">){</span> <span class="c1">//Check exec flag</span>
+         <span class="c1">//change to unprivileged mode</span>
+         <span class="o">*</span><span class="p">((</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">stack</span><span class="p">)</span> <span class="o">=</span> <span class="n">THREAD_RETURN</span><span class="p">;</span> <span class="c1">//Use the thread stack upon handler return</span>
+         <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+   <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+   <span class="n">wr_proc_stack_ptr</span><span class="p">(</span> <span class="n">task_table</span><span class="p">[</span><span class="n">current_task</span><span class="p">].</span><span class="n">sp</span> <span class="p">);</span> <span class="c1">//write the value of the PSP to the new task</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The following diagram shows the chronology of the stack pointer when a 
+switch happens between task one and task two. Note that because this 
+implementation uses the MSP for task zero, the mechanics of a context 
+switch are slightly different when switching to and from task zero. A 
+context switching implementation can just as easily use the PSP for 
+all tasks and the MSP for interrupts by using THREAD_RETURN rather 
+than MAIN_RETURN above.</p>
+
+<p><img class="post_image" src="/images/psp-chronology.svg" /></p>
+
+<h3 id="initialization">Initialization</h3>
+
+<p>The first thing that must be done is to initialize the main stack’s 
+task table entry.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//This defines the stack frame that is saved  by the hardware</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint32_t</span> <span class="n">r0</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r1</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r2</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r3</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r12</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">lr</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">pc</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">psr</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">hw_stack_frame_t</span><span class="p">;</span>
+ 
+<span class="c1">//This defines the stack frame that must be saved by the software</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint32_t</span> <span class="n">r4</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r5</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r6</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r7</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r8</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r9</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r10</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">r11</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">sw_stack_frame_t</span><span class="p">;</span>
+ 
+<span class="k">static</span> <span class="kt">char</span> <span class="n">m_stack</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">)];</span>
+ 
+<span class="kt">void</span> <span class="nf">task_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="p">...</span>
+     <span class="n">task_table</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">m_stack</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">);</span>
+     <span class="p">....</span>
+    <span class="c1">//The systick needs to be configured to the desired round-robin time</span>
+    <span class="c1">//..when the systick interrupt fires, context switching will begin</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="creating-a-new-task">Creating a New Task</h3>
+
+<p>Once the context switcher is initialized, there needs to be a mechanism 
+to start new tasks. Starting a new task involves finding an available 
+entry in the task table and initializing the new task’s stack.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">new_task</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">),</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">arg</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">stackaddr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stack_size</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span> <span class="n">mem</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">argp</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span> <span class="n">pc</span><span class="p">;</span>
+    <span class="kt">hw_stack_frame_t</span> <span class="o">*</span> <span class="n">process_frame</span><span class="p">;</span>
+    <span class="c1">//Disable context switching to support multi-threaded calls to this function</span>
+    <span class="n">systick_disable_irq</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_TASKS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">){</span>
+            <span class="n">process_frame</span> <span class="o">=</span> <span class="p">(</span><span class="kt">hw_stack_frame_t</span> <span class="o">*</span><span class="p">)(</span><span class="n">stackaddr</span> <span class="o">-</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">hw_stack_frame_t</span><span class="p">));</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r0</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">r12</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">pc</span> <span class="o">=</span> <span class="p">((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">lr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">del_process</span><span class="p">;</span>
+            <span class="n">process_frame</span><span class="o">-&gt;</span><span class="n">psr</span> <span class="o">=</span> <span class="mh">0x21000000</span><span class="p">;</span> <span class="c1">//default PSR value</span>
+            <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span> <span class="o">=</span> <span class="n">IN_USE_FLAG</span> <span class="o">|</span> <span class="n">EXEC_FLAG</span><span class="p">;</span>
+            <span class="n">core_proc_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sp</span> <span class="o">=</span> <span class="n">mem</span> <span class="o">+</span> 
+                <span class="n">stack_size</span> <span class="o">-</span> 
+                <span class="k">sizeof</span><span class="p">(</span><span class="kt">hw_stack_frame_t</span><span class="p">)</span> <span class="o">-</span> 
+                <span class="k">sizeof</span><span class="p">(</span><span class="kt">sw_stack_frame_t</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">systick_enable_irq</span><span class="p">();</span>  <span class="c1">//Enable context switching</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="n">MAX_TASKS</span> <span class="p">){</span>
+        <span class="c1">//New task could not be created</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//New task ID is i</span>
+        <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This is called when the task returns</span>
+<span class="kt">void</span> <span class="nf">del_process</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="n">task_table</span><span class="p">[</span><span class="n">current_task_index</span><span class="p">].</span><span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//clear the in use and exec flags</span>
+  <span class="n">SCB</span><span class="o">-&gt;</span><span class="n">ICSR</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">28</span><span class="p">);</span> <span class="c1">//switch the context</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//once the context changes, the program will no longer return to this thread</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>ARM, with the Cortex M architecture, delivers valuable hardware 
+resources to enable context switching.  The interrupts support both 
+round robing and FIFO style scheduling while the dual stacks allow 
+the kernel process and interrupts to execute on a dedicated stack.  With 
+just a few software routines to perform the context switching, initialize 
+the system, and create new stacks, system developers can create a 
+functioning pre-emptive kernel.</p>
+
+<p>For more information on context switching on the Cortex-M3, see the 
+Cortex-M3 technical reference manual from ARM.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#cortex-m3-ref">cortex-m3 <span class="badge">4</span></a></li>
+     
+    	<li><a href="/tags.html#threads-ref">threads <span class="badge">2</span></a></li>
+     
+    	<li><a href="/tags.html#popular-ref">popular <span class="badge">11</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3" class="active">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

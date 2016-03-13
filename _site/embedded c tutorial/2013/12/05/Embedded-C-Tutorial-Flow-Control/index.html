@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flow Control</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						Flow Control <small>Embedded C Tutorial</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p>The typical C program executes one statement after the next. Various mechanisms exist to vary the flow of the program in order to conditionally execute some statements while executing others over and over within a looThe C flow control keywords include:</p>
+
+<ul>
+  <li>if, else</li>
+  <li>switch, case</li>
+  <li>default</li>
+  <li>goto, label</li>
+  <li>do, while, or for</li>
+  <li>break, continue</li>
+</ul>
+
+<p>The first three groups are associated with conditional execution while the last group is used to execute the same group of statements within a loop.</p>
+
+<h2 id="if-else">If, Else</h2>
+
+<p>The if and else keywords allow you to conditionally execute a group of statements based on certain conditions. The syntax includes the if keyword followed by an expression in parentheses and a statement to execute. If the statement includes multiple statements, curly brackets are used. Here is an example:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">{</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is equal to 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//OR</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">5</span> <span class="p">){</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is equal to 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is NOT equal to 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The first if clause will print “x is equal to 5” if the variable x is equal to five. Otherwise, it will not output anything. The second if clause appends a statement to execute if x is not equal to five. The else portion of an if clause is always optional. If you are only executing one statement within an if clause, the curly brackets ({}) are also optional. Though, many programmers always include them to make the code more readable and to avoid ambiguous situations. Here are a few more examples.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is greater than 5</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="c1">//there is a pitfall to omitting {}, it can create ambiguity with compound if statements</span>
+<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">)</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">x10</span><span class="p">)</span>
+          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x is greater than 5 and x less than 10</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="k">else</span>
+          <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;x is not less than 10 but it might be greater than 5</span><span class="se">\n</span><span class="s">)</span><span class="p">;</span></code></pre></div>
+
+<p>In the snippet above, it is not clear whether the else statement is attached to the first or second if statement. Using the curly brackets fixes the ambiguity.</p>
+
+<p>The above examples are simple, but if statements can be rather complex. Any combination of symbols and operators can be used.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">((</span><span class="n">x</span>  <span class="mi">100</span><span class="p">)</span> <span class="p">){</span>
+     <span class="c1">//statement</span>
+<span class="p">}</span>
+<span class="c1">//sometimes logical and/or are separated on a newline for clarity</span>
+<span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
+     <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
+     <span class="p">((</span><span class="n">y</span>  <span class="mi">200</span><span class="p">))</span> <span class="p">){</span>
+     <span class="c1">//statement</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="switch-case">Switch, Case</h2>
+
+<p>The switch/case flow control structure is designed to allow the user to execute a statement based on the value of an integer type variable. It is a shorthand version of a series of if, else statements which might look something like the following example.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">){</span>
+     <span class="c1">//case 0</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">){</span>
+     <span class="c1">//case 1</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">){</span>
+     <span class="c1">//case 2</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">10</span> <span class="p">){</span> 
+     <span class="c1">//case 10</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="c1">//default</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The equivalent code using switch and case is:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">switch</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">default</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The break keyword is used to exit the switch context. Many times it is present at the end of each case. However, break can be omitted if the same statement is to be executed for multiple cases.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">switch</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+     <span class="c1">//statement for 0</span>
+<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+     <span class="c1">//statement for 0 and 1</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+<span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+<span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+<span class="k">case</span> <span class="mi">5</span><span class="o">:</span>
+     <span class="c1">//statement for 2, 3, 4, and 5</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="k">default</span><span class="o">:</span>
+     <span class="c1">//statement</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="goto-label">Goto, Label</h2>
+
+<p>The goto keyword is used to jump to another location in a program. The concept of the goto keyword has its root in assembly language which uses branches and jumps to move around the order of execution.  However, the use of goto in C is somewhat taboo because it makes a program difficult to maintain and understand.  Nonetheless, here is an example of using it.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&amp;amp;gt.h</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;start here</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="k">goto</span> <span class="n">the_end</span><span class="p">;</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;skip over this part</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+ 
+     <span class="nl">the_end</span><span class="p">:</span> <span class="c1">//this is the label, it is following by a colon like case labels</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;the end</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="for-loop">For Loop</h2>
+
+<p>While if/else and switch/case allow conditional execution of codes, loops allows the same code to be executed many times. C has two types of loops: for loops and while loops. The for loop includes an initial statement, a test statement, and an increment statement. The following is an example of using a for loop in a program.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&amp;amp;gt.h</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+     <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span> <span class="c1">//intial; test; incremental</span>
+          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The initial statement is execute before the loop is entered. The increment statement executes when the loop completes. The condition statement executes before the loop restarts. If the condition statement is a non-zero value, the loop continues executing. The following example should clear up any conclusion:</p>
+
+<p>The output of the above program is shown below</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">i</span> <span class="n">is</span> <span class="mi">0</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">2</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">3</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">4</span></code></pre></div>
+
+<p>The loop in the above example executes five times. Once i is equal to five, the condition statement evaluates to zero, and the loop terminates.</p>
+
+<h2 id="while-loops">While Loops</h2>
+
+<p>While loops execute as long as a condition is true. They can take on two formats known as the while loop and the do/while looEach loop type is shown in the following program.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&amp;amp;gt.h</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;while loop:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="k">while</span><span class="p">(</span><span class="n">i</span>  <span class="mi">5</span> <span class="p">){</span>
+          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+          <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+     <span class="p">}</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;do/while loop</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="k">do</span> <span class="p">{</span>
+          <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+          <span class="n">i</span><span class="o">+</span><span class="p">;</span>
+     <span class="p">}</span> <span class="k">while</span><span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">);</span>
+     <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The main difference between while and do/while is that the do/while loop will always execute at least once because the condition statement is not checked until the body statements have already been executed. Conversely, the while loop executes the condition statement before the body statements and can execute zero times if the condition statement is initially false.</p>
+
+<p>Here is the output of the above program.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">while</span> <span class="nl">loop</span><span class="p">:</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">0</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">2</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">3</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">4</span>
+<span class="k">do</span><span class="o">/</span><span class="k">while</span> <span class="n">loop</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">0</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">2</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">3</span>
+<span class="n">i</span> <span class="n">is</span> <span class="mi">4</span></code></pre></div>
+
+<p>Note the output of the while and do/while loops is identical to the output of the for loop in the previous example.</p>
+
+<h2 id="take-away">Take Away</h2>
+
+<p>Flow control in C programs is broken down to conditions and loops. C’s if/else clauses and switch/case clauses are the main tools for conditionally executing statements in C. Two mechanisms are available for loops: the for loop and the while loop.</p>
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#tutorial-ref">tutorial <span class="badge">22</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded C Tutorial</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control" class="active">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Using Op Amps in Embedded Design</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						Using Op Amps in Embedded Design <small>Embedded Design Tips</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image" src="/images/inverting-opamp.svg" />
+Op-amps are very useful devices in electronics and can be very helpful when 
+interfacing analog and digital technologies in embedded systems.</p>
+
+<h2 id="introduction-to-op-amps">Introduction to Op-Amps</h2>
+
+<p>An op-amp (or operational amplifier) is a very common electrical circuit widely used in the electronics industry. It has two inputs (plus and minus) as well as one output. Traditional op-amps require a positive and negative voltage supply (e.g. plus and minus 15V) and the output voltage is limited to within about a volt of each rail–meaning the maximum output for an op-amp with a 15V supply is around 14V. This presents a problem in single supply systems with traditional digital voltage levels. Traditional op-amps are not able to take advantage of the full range of ADCs nor definitively drive digital inputs. The rail problem is overcome by using rail-to-rail op-amps which are designed for single supply operation and can drive its output within a few millivolts of the power rails. Rail-to-rail op-amps are particularly well suited for embedded systems integration. Before looking at some typical applications, it is important to understand how to analyze an op-amp circuits.</p>
+
+<h2 id="analyzing-op-amp-circuits">Analyzing Op-amp Circuits</h2>
+
+<p>Ideal op-amps are a good first order approximation of op-amp behavior and are used to analyze as well as design op-amp circuits. The ideal op-amp has two basic rules:</p>
+
+<ul>
+  <li>Infinite Input Impedance (no current flows in or out of the input terminals)</li>
+  <li>Output forces voltage difference on inputs to zero in closed-loop designs (meaning the voltage at both input terminals is the same)</li>
+</ul>
+
+<p>To apply these two rules to op-amp circuit analysis, it is important to be familiar with two electrical laws: Ohm’s Law and Kirchhoff’s Current Law. Ohm’s law is defined by the equation:</p>
+
+<p><img class="post_equation" src="/images/ohms-law.svg" /></p>
+
+<p>That is, voltage is equal to current times resistance. Ohm’s law can be used to calculate the current through the resistor in the diagram below.</p>
+
+<p><img class="post_image" src="/images/ohms-law-circuit.svg" /></p>
+
+<p>Kirchhoff’s current law states that the sum of all currents entering a node is zero. The law implies that all currents entering the node are equal to the currents leaving the node. This law can be applied to the op-amp circuit above (first in the article).</p>
+
+<p><img class="post_equation" src="/images/opamp-kirchhoff-0.svg" /></p>
+
+<p>If Ohm’s law is combined with Kirchhoff’s current law, the equation then becomes the following.</p>
+
+<p><img class="post_equation" src="/images/opamp-kirchhoff-1.svg" /></p>
+
+<p>The equation is simplified further by applying the rules of an ideal op-am.  First, 
+infinite input impedance means that current i3 is zero. Second, the 
+voltage difference on the inputs is zero means V<sub>n</sub> = V<sub>p</sub> = 0V. 
+The resulting equation is as follows.</p>
+
+<p><img class="post_equation" src="/images/opamp-kirchhoff-2.svg" /></p>
+
+<p>To calculate the gain of the circuit, the above equation is solved for the output divided by the input.</p>
+
+<p><img class="post_equation" src="/images/opamp-kirchhoff-3.svg" /></p>
+
+<p>The op-amp circuit shown above is called an inverting amplifier (the output is the input times a negative number). As drawn, the inverting amplifier is not well adapted to single supply embedded systems because the output is centered at 0V. However, there are plenty of great ways to use op-amps in single supply, embedded designs.</p>
+
+<h2 id="using-op-amps-in-embedded-systems">Using Op-amps in Embedded Systems</h2>
+
+<p>Op-amps are great in embedded systems when mixing analog and digital circuitry. One common use is signal conditioning before sampling with an analog-to-digital converter (ADC). The op-amp can also be used as a comparator for comparing thresholds or as a frequency counter.</p>
+
+<h2 id="signal-conditioning-example">Signal Conditioning Example</h2>
+
+<p>A pressure sensor typically has an output in the millivolt range. To measure this voltage with an ADC on a microcontroller, an op-amp is used to scale the output of the pressure sensor to span the range of the ADC input. For example, if the pressure sensor output is zero volts to 250mV and the ADC input range is zero to 2.5V, the amplifier needs to magnify the sensor output with a gain of 10. Because all the voltages are positive, the desired op-amp configuration is a non-inverting op-amp.</p>
+
+<p><img class="post_image" src="/images/non-inverting-opamp.svg" /></p>
+
+<p>The analysis technique described above shows that the output of the op-amp is:</p>
+
+<p><img class="post_equation" src="/images/opamp-kirchhoff-4.svg" /></p>
+
+<p>If the feedback resistor is 9KOhms and the input resistor is 1KOhms, the gain will be 10 such that the output of the pressure sensor will be scaled to take advantage of the full range of the ADC.</p>
+
+<h2 id="frequency-counter-example">Frequency Counter Example</h2>
+
+<p>Another useful application of the op-amp is a sine-wave to square-wave converter which can be input to a timer clock input to measure frequency. For example, if you have a sine wave in your embedded application and want to measure the frequency, you can pass the wave through an op-amp and use a timer on the microcontroller to count rising edges. Converting the rising edges to frequency can be done in one of two ways. The fast way is to count the number of MCU clock cycles between rising edges; this method works well if the MCU clock speed is much higher have the input frequency. The slow way is to count the number of rising edges in a given period of time. Either method uses the circuit below to convert the sine wave to a square wave that can act as the timer input.</p>
+
+<p><img class="post_image" src="/images/freq-counter-circuit.png" /></p>
+
+<p>The first stage of the circuit adjusts the sine wave to be centered around Vcc/2. Rf and Ri can be adjusted so that the output swing of the first amplifier is between 0V and Vcc. The second op-amp acts as a voltage comparator. If the input (on the inverting terminal) is greater than Vcc/2 (the non-inverting terminal), the output is zero volts. If the inverting input is less than Vcc/2, the output is Vcc assuming the op-amp is of the rail-to-rail variety.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Op-amps are great for analog signals in digital designs (especially rail-to-rail op-amps). The ideal op-amp as well as knowledge of basic electrical principles greatly simplify designing and integrating op-amps in your embedded designs.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#circuit-ref">circuit <span class="badge">7</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/coactionos%20tutorials/2013/11/01/CoActionOS-Tutorial-First-Project" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design" class="active">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

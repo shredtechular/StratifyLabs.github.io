@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FFT on the ARM Cortex M3</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						FFT on the ARM Cortex M3 <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image" src="/images/DIT-FFT-butterfly.png" />
+The ARM Cortex-M3 combined with a Fast Fourier Transform (FFT) implementation 
+is a powerful, embedded digital signal processing (DSP) solution.  The ARM 
+Cortex-M3 is a mid-range microcontroller architecture with clock speeds 
+over 100MHz and a powerful arithmetic logic unit (ALU).  The FFT, a useful 
+tool in many DSP applications, utilizes these features enabling the ARM 
+Cortex-M3 to be a suitable replacement for dedicated DSP’s in some embedded 
+applications.</p>
+
+<h2 id="arm-cortex-m3">ARM Cortex-M3</h2>
+
+<p>The ARM Cortex-M3 architecture is a 32-bit microcontroller architecture core.  The 
+core is implemented by various manufacturers, including NXP, TI, STMicro, 
+and Atmel, as microcontrollers that are competitively priced against 8/16 bit 
+cores.  It offers substantial performance improvements over 8/16 bit architectures 
+including various features that enable signal processing algorithms such as 
+single cycle 32-bit multiply and bit reversal instructions as well as separate 
+data and instruction busses.  The FFT makes frequent use of both the multiply 
+and bit-reversal instructions as well as takes advantage of the separate busses.</p>
+
+<h2 id="fft">FFT</h2>
+
+<p>The FFT is an algorithm, or more accurately a family of algorithms, that implement the Discrete Fourier Transform (DFT) in a “fast” way–hence the name.  The FFT re-uses calculations to provide faster computing times but sacrifices a small amount of accuracy in doing so.  It turns out there are many uses for a fast approximation of the DFT.</p>
+
+<h2 id="fft-applications">FFT Applications</h2>
+
+<p>The FFT is used frequently in both audio (and other one-dimensional signals) and 
+image processing applications.  The FFT allows a signal to be analyzed in the 
+frequency domain rather than the discrete time domain.  The following graph 
+shows a signal in the time domain (top) as well as the frequency domain (middle 
+and bottom).</p>
+
+<p><img class="post_image" src="/images/time-freq.png" /></p>
+
+<p>The above graphs use the following equation for the time-domain representation:</p>
+
+<p><img class="post_equation" src="/images/fft-formula1.svg" /></p>
+
+<p>This signal represents the number five using dual-tone multi-frequency 
+encoding (DTMF)–that is, the sound you hear when you are on a phone call and 
+press the number five.  When looking at this signal in the time domain as 
+compared to the frequency domain, it is much easier to decipher the tone looking 
+at the frequency plot, hence the usefulness of the FFT.</p>
+
+<p>In the frequency plot (middle above), there are four spikes.  The spikes on the 
+left represent the frequencies at 770Hz and 1366Hz (the bottom plot zooms in on 
+these spikes).  The spikes on the right are a mirror image of the aforementioned 
+frequencies.  In fact, the FFT always mirrors all frequencies below half the 
+sampling frequency (see Nyquist Rate for more information).</p>
+
+<p>Image processing also uses the FFT.  Consider the images below.  The one on the 
+left is the original while the other has had an edge detection algorithm applied.</p>
+
+<p><img class="post_image" src="/images/EdgeDetectionMathematica.png" /></p>
+
+<p>Image from Wikpedia:  <a href="http://en.wikipedia.org/wiki/Edge_detection">Edge Detection</a></p>
+
+<p>Edge detection is done by using an operation called convolution.  A filter matrix 
+is “convolved” with an image to produce the edge detected image.  Because 
+convolution is computationally intensive in the time domain, frequency domain 
+multiplication can be used instead to reduced the number of operations 
+performed.  This means, rather than convolving, the following steps are taken:</p>
+
+<ul>
+  <li>first the FFT is applied to the image and the filter,</li>
+  <li>the image and the filter are multiplied,</li>
+  <li>finally, an inverse FFT is applied to the result in order to get the edge detected image.  </li>
+</ul>
+
+<p>Despite being more steps, this approach actually uses much less computing power 
+than convolution.  However, convolution is much easier than an FFT to implement 
+in code.  The code sample below helps to bridge that gap.</p>
+
+<h2 id="fft-code">FFT Code</h2>
+
+<p>The code below is a snippet for performing an FFT.  ARM provides a DSP library
+as part of the Cortex Microcontroller Software Inteface Standard (CMSIS).</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int32_t</span> <span class="n">real</span><span class="p">;</span>
+  <span class="kt">int32_t</span> <span class="n">imag</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">fft_i32_t</span><span class="p">;</span>
+ 
+<span class="kt">void</span> <span class="nf">core_fft_i32</span><span class="p">(</span><span class="kt">fft_context_i32_t</span> <span class="o">*</span> <span class="n">context</span><span class="p">,</span> <span class="kt">fft_i32_t</span> <span class="o">*</span> <span class="n">dest</span><span class="p">,</span> <span class="kt">fft_i32_t</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sign</span><span class="p">){</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">half_N</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">k2</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">twiddle</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">twiddle_jump</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">twiddle_max</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">n_jump</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">n_start</span><span class="p">;</span>
+  <span class="kt">fft_i32_t</span> <span class="n">tmp_product</span><span class="p">;</span>
+  <span class="kt">fft_i32_t</span> <span class="n">twiddle_factor</span><span class="p">;</span>
+  <span class="kt">fft_i32_t</span> <span class="n">tmp</span><span class="p">;</span>
+ 
+  <span class="c1">//copy the signal input to the tmp variable</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">bit_reversal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">);</span>
+    <span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+  <span class="p">}</span>
+ 
+        <span class="c1">//This loop performs the FFT using the Cooley-Tukey algorithm</span>
+  <span class="n">half_N</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">k</span><span class="p">);</span>
+ 
+    <span class="c1">//Calculate the twiddle jump and max for the stage</span>
+    <span class="n">twiddle_max</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="n">twiddle_jump</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">context</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span> <span class="c1">//equals 2^(kmax - k)</span>
+ 
+    <span class="c1">//Calculate the n jump for the stage</span>
+    <span class="n">n_jump</span> <span class="o">=</span> <span class="n">k2</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">n_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ 
+    <span class="k">for</span><span class="p">(</span><span class="n">twiddle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">twiddle</span> <span class="o">&lt;</span> <span class="n">twiddle_max</span><span class="p">;</span> <span class="n">twiddle</span> <span class="o">+=</span> <span class="n">twiddle_jump</span><span class="p">){</span>
+ 
+      <span class="c1">//twiddle value in the table (always &lt; N/2)</span>
+      <span class="n">twiddle_factor</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">twiddle_table</span><span class="p">[</span><span class="n">twiddle</span><span class="p">].</span><span class="n">real</span><span class="p">;</span>
+      <span class="n">twiddle_factor</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">twiddle_table</span><span class="p">[</span><span class="n">twiddle</span><span class="p">].</span><span class="n">imag</span> <span class="o">*</span> <span class="n">sign</span><span class="p">;</span>
+ 
+                        <span class="c1">//This loop executes a single butterfly operation (size-2 DFT operation)</span>
+      <span class="k">for</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_start</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">+=</span> <span class="n">n_jump</span><span class="p">){</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="n">k2</span><span class="p">;</span>
+        <span class="c1">//This is the butterfly code</span>
+        <span class="n">tmp_product</span> <span class="o">=</span> <span class="n">fft_mult_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">twiddle_factor</span><span class="p">);</span>  <span class="c1">//multiply</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">scale_add_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">tmp_product</span><span class="p">,</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">scale</span><span class="p">);</span> <span class="c1">//accumlate</span>
+        <span class="n">dest</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale_subtract_i32</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">tmp_product</span><span class="p">,</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">scale</span><span class="p">);</span>
+        <span class="n">dest</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+ 
+      <span class="p">}</span>
+      <span class="n">n_start</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The combination of the ARM CM3 and the FFT allow developers to execute some 
+signal processing algorithms previously reserved for dedicated DSP 
+hardware.  This is possible due to the single cycle multiply as well as bit 
+reversal instructions available on the CM3 and the high speed CPU cores that 
+are available.  All of this functionality comes at power budgets and price 
+points that are competitive with 8/16 microcontroller architectures.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#cortex-m3-ref">cortex-m3 <span class="badge">4</span></a></li>
+     
+    	<li><a href="/tags.html#fft-ref">fft <span class="badge">1</span></a></li>
+     
+    	<li><a href="/tags.html#filter-ref">filter <span class="badge">3</span></a></li>
+     
+    	<li><a href="/tags.html#popular-ref">popular <span class="badge">11</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3" class="active">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

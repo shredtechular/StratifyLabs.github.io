@@ -1,0 +1,8 @@
+<map id="System" name="System">
+<area shape="rect" id="node1" href="$group___s_y_s___d_e_v_f_i_f_o.html" title="Device FIFO" alt="" coords="365,5,461,33"/>
+<area shape="rect" id="node2" href="$group___s_y_s___u_a_r_t_f_i_f_o.html" title="UART FIFO" alt="" coords="368,57,459,85"/>
+<area shape="rect" id="node3" href="$group___s_y_s___f_i_f_o.html" title="FIFO Buffer" alt="" coords="368,109,459,137"/>
+<area shape="rect" id="node4" href="$group___h_w_d_l.html" title="Hardware Device Library" alt="" coords="5,109,173,137"/>
+<area shape="rect" id="node6" href="$group___t_t_y.html" title="TTY (terminal devices)" alt="" coords="336,161,491,189"/>
+<area shape="rect" id="node7" href="$group___d_i_s_k.html" title="Disk" alt="" coords="390,213,437,241"/>
+</map>

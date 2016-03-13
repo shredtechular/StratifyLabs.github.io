@@ -1,0 +1,9 @@
+<map id="Pchar" name="Pchar">
+<area shape="rect" id="node4" href="$class_spi.html" title="SPI Class. " alt="" coords="5,742,104,951"/>
+<area shape="rect" id="node5" href="$class_tmr.html" title="Tmr (physcial timer) Class. " alt="" coords="128,718,233,975"/>
+<area shape="rect" id="node6" href="$class_uart.html" title="UART Class. " alt="" coords="259,742,348,951"/>
+<area shape="rect" id="node2" href="$class_periph.html" title="Peripheral Class. " alt="" coords="137,201,225,522"/>
+<area shape="rect" id="node3" href="$class_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="149,6,213,151"/>
+<area shape="rect" id="node7" href="$class_brsp.html" title="BRSP class (bluetooth low energy serial protocol) " alt="" coords="188,1025,295,1266"/>
+<area shape="rect" id="node8" href="$class_dbug_uart.html" title="Debug UART Class. " alt="" coords="319,1073,417,1218"/>
+</map>

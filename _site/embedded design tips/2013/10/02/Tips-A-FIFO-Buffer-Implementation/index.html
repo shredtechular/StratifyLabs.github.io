@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A FIFO Buffer Implementation</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						A FIFO Buffer Implementation <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image_tall" src="/images/fifo.png" />
+A FIFO buffer is a useful way of storing data that arrives to a microcontroller peripheral 
+asynchronously but cannot be read immediately.  One example is storing bytes incoming on a 
+UART. Buffering the bytes eases the real-time requirements for the embedded firmware.</p>
+
+<p>A FIFO buffer stores data on a first-in, first-out basis.   The storage structure is typically 
+an array of contiguous memory.  Data is written to the “head” of the buffer and read from 
+the “tail”.  When the head or tail reach the end of the memory array, it wraps around to 
+the beginning.  If the tail runs in to the head, the buffer is empty.  But if the head runs 
+in to the tail, the implementation must define if the oldest data is discarded or the write 
+does not complete.  In the example below, data is never discarded.</p>
+
+<h2 id="general-implementation">General Implementation</h2>
+
+<p>The code below shows a general implementation of a FIFO buffer.  The code assumes an 
+overflow condition is not allowed (that is when the head meets the tail, the buffer is 
+full and no more data can be written).</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+     <span class="kt">char</span> <span class="o">*</span> <span class="n">buf</span><span class="p">;</span>
+     <span class="kt">int</span> <span class="n">head</span><span class="p">;</span>
+     <span class="kt">int</span> <span class="n">tail</span><span class="p">;</span>
+     <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">fifo_t</span><span class="p">;</span>
+ 
+<span class="c1">//This initializes the FIFO structure with the given buffer and size</span>
+<span class="kt">void</span> <span class="nf">fifo_init</span><span class="p">(</span><span class="kt">fifo_t</span> <span class="o">*</span> <span class="n">f</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">){</span>
+     <span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="n">f</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+     <span class="n">f</span><span class="o">-&gt;</span><span class="n">buf</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This reads nbytes bytes from the FIFO</span>
+<span class="c1">//The number of bytes read is returned</span>
+<span class="kt">int</span> <span class="nf">fifo_read</span><span class="p">(</span><span class="kt">fifo_t</span> <span class="o">*</span> <span class="n">f</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nbytes</span><span class="p">){</span>
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+     <span class="kt">char</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+     <span class="n">p</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+     <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nbytes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+          <span class="k">if</span><span class="p">(</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">!=</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="p">){</span> <span class="c1">//see if any data is available</span>
+               <span class="o">*</span><span class="n">p</span><span class="o">++</span> <span class="o">=</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span><span class="p">];</span>  <span class="c1">//grab a byte from the buffer</span>
+               <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span><span class="o">++</span><span class="p">;</span>  <span class="c1">//increment the tail</span>
+               <span class="k">if</span><span class="p">(</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">==</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">size</span> <span class="p">){</span>  <span class="c1">//check for wrap-around</span>
+                    <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+               <span class="p">}</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//number of bytes read </span>
+          <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="n">nbytes</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="c1">//This writes up to nbytes bytes to the FIFO</span>
+<span class="c1">//If the head runs in to the tail, not all bytes are written</span>
+<span class="c1">//The number of bytes written is returned</span>
+<span class="kt">int</span> <span class="nf">fifo_write</span><span class="p">(</span><span class="kt">fifo_t</span> <span class="o">*</span> <span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nbytes</span><span class="p">){</span>
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+     <span class="n">p</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+     <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nbytes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+           <span class="c1">//first check to see if there is space in the buffer</span>
+           <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span><span class="p">)</span> <span class="o">||</span>
+                <span class="p">(</span> <span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">){</span>
+                 <span class="k">return</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//no more room</span>
+           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="n">f</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
+               <span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">++</span><span class="p">;</span>  <span class="c1">//increment the head</span>
+               <span class="k">if</span><span class="p">(</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">==</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">size</span> <span class="p">){</span>  <span class="c1">//check for wrap-around</span>
+                    <span class="n">f</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="n">nbytes</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="using-a-fifo-with-a-microcontroller-uart">Using a FIFO with a Microcontroller UART</h2>
+
+<p>Many microcontroller designs have limited buffer space for data arriving on the 
+UART.  Incorporating a FIFO in the UART ISR can make it easier to manage incoming 
+data.  The following pseudo-code uses the above FIFO as part of the UART ISR.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">fifo_t</span> <span class="o">*</span> <span class="n">uart_fifo</span><span class="p">;</span>
+ 
+<span class="kt">void</span> <span class="nf">uart_fifo_init</span><span class="p">(</span><span class="kt">fifo_t</span> <span class="o">*</span> <span class="n">fifo</span><span class="p">){</span>
+     <span class="n">uart_fifo</span> <span class="o">=</span> <span class="n">fifo</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="nf">uart_isr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">char</span> <span class="n">incoming_byte</span><span class="p">;</span>
+     <span class="c1">//execute any required ISR entrance code</span>
+ 
+     <span class="k">while</span><span class="p">(</span> <span class="n">UART_REGISTER_FLAG_DATA_READY</span> <span class="p">){</span> <span class="c1">//check the register for incoming data</span>
+          <span class="n">incoming_byte</span> <span class="o">=</span> <span class="n">UART_REGISTER_READ_DATA_BYTE</span><span class="p">;</span> <span class="c1">//read the UART data</span>
+          <span class="n">fifo_write</span><span class="p">(</span><span class="n">uart_fifo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">incoming_byte</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">//write the data to the fifo</span>
+     <span class="p">}</span>
+ 
+     <span class="c1">//execute any required ISR exit code</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Using a FIFO in the above way lessens the real-time requirements for an application as 
+well as gives the application developer more leeway in handling incoming data.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>FIFOs are a storage mechanism which operate on a first-in, first-out basis.  They are useful 
+for managing the arrival of asynchronous data.  Integrating a FIFO with an ISR, such as the 
+UART ISR, can make processing the incoming data much easier for the application developer.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#fifo-ref">fifo <span class="badge">1</span></a></li>
+     
+    	<li><a href="/tags.html#uart-ref">uart <span class="badge">2</span></a></li>
+     
+    	<li><a href="/tags.html#serial-ref">serial <span class="badge">5</span></a></li>
+     
+    	<li><a href="/tags.html#microcontroller-ref">microcontroller <span class="badge">7</span></a></li>
+     
+    	<li><a href="/tags.html#programming-ref">programming <span class="badge">9</span></a></li>
+     
+    	<li><a href="/tags.html#popular-ref">popular <span class="badge">11</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation" class="active">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Categories</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+<script type="text/javascript">
+
+function register_click(name){
+	$("#" + name).click( function(){
+		$(".tag-list-item").removeClass("active");
+		$("#" + name).addClass("active");
+		$(".tagged").addClass("hidden");
+		$("." + name).removeClass("hidden");
+	});	
+}
+
+$(document).ready( function(){
+	
+	register_click("coaction");	
+	
+	register_click("downloads");	
+	
+	register_click("embedded");	
+	
+	register_click("microcontroller");	
+	
+	register_click("popular");	
+	
+	register_click("fifo");	
+	
+	register_click("uart");	
+	
+	register_click("serial");	
+	
+	register_click("programming");	
+	
+	register_click("adc");	
+	
+	register_click("lookup-table");	
+	
+	register_click("c");	
+	
+	register_click("filter");	
+	
+	register_click("iir");	
+	
+	register_click("gcc");	
+	
+	register_click("compiler");	
+	
+	register_click("windows");	
+	
+	register_click("macosx");	
+	
+	register_click("linux");	
+	
+	register_click("cortex-m3");	
+	
+	register_click("threads");	
+	
+	register_click("circuit");	
+	
+	register_click("power");	
+	
+	register_click("qt");	
+	
+	register_click("fft");	
+	
+	register_click("control");	
+	
+	register_click("pwm");	
+	
+	register_click("pid");	
+	
+	register_click("motor");	
+	
+	register_click("sensor");	
+	
+	register_click("gpio");	
+	
+	register_click("usb");	
+	
+	register_click("doxygen");	
+	
+	register_click("led");	
+	
+	register_click("tutorial");	
+	
+	register_click("spi");	
+	
+	register_click("i2c");	
+	
+	register_click("signals");	
+	
+	register_click("user-guide");	
+	
+	register_click("javascript");	
+	
+	register_click("bootstrap");	
+	
+	register_click("arm");	
+	
+	
+	$("#all").click(function(){
+		$(".tagged").removeClass("hidden");
+		$(".tag-list-item").removeClass("active");
+	});
+});
+
+</script>
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7 panel panel-default">
+			<div class="panel-body">
+				
+
+<h1>Categories</h1>
+
+<ul class="nav nav-pills">
+  
+  
+
+
+  
+     
+    	<li><a href="/categories.html#getting started-ref">
+    		getting started <span class="badge">2</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#embedded design tips-ref">
+    		embedded design tips <span class="badge">27</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#coactionos tutorials-ref">
+    		coactionos tutorials <span class="badge">12</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#embedded c tutorial-ref">
+    		embedded c tutorial <span class="badge">10</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#user guides-ref">
+    		user guides <span class="badge">7</span>
+    	</a></li>
+    
+  
+
+
+</ul>
+
+
+ 
+  <h2 id="getting started-ref" class="anchor">getting started</h2>
+  <ul>
+      
+    
+
+
+  
+    
+      
+      	
+      	<li class='tagged coaction downloads'><a href="/getting%20started/2013/09/02/Getting-Started-Get-the-Software">Get the Software</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction'><a href="/getting%20started/2013/09/01/Getting-Started-Buy-the-Hardware">Buy the Hardware</a></li>
+      	
+      
+    
+  
+
+
+
+  </ul>
+ 
+  <h2 id="embedded design tips-ref" class="anchor">embedded design tips</h2>
+  <ul>
+      
+    
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+  </ul>
+ 
+  <h2 id="coactionos tutorials-ref" class="anchor">coactionos tutorials</h2>
+  <ul>
+      
+    
+
+
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial control threads'><a href="/coactionos%20tutorials/2013/11/11/CoActionOS-Tutorial-Motor-Control">Motor Control Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial'><a href="/coactionos%20tutorials/2013/11/10/CoActionOS-Tutorial-Thread">Thread Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial signals'><a href="/coactionos%20tutorials/2013/11/10/CoActionOS-Tutorial-Signals">Signals Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial'><a href="/coactionos%20tutorials/2013/11/09/CoActionOS-Tutorial-AIO">AIO Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial'><a href="/coactionos%20tutorials/2013/11/08/CoActionOS-Tutorial-Strings">Strings Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial control pwm'><a href="/coactionos%20tutorials/2013/11/07/CoActionOS-Tutorial-Pwm">PWM Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial serial i2c'><a href="/coactionos%20tutorials/2013/11/06/CoActionOS-Tutorial-I2C">I2C Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial serial spi'><a href="/coactionos%20tutorials/2013/11/05/CoActionOS-Tutorial-Spi">SPI Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial serial uart'><a href="/coactionos%20tutorials/2013/11/04/CoActionOS-Tutorial-Uart">UART Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial'><a href="/coactionos%20tutorials/2013/11/03/CoActionOS-Tutorial-Files">Files Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial control'><a href="/coactionos%20tutorials/2013/11/02/CoActionOS-Tutorial-Pio">PIO Tutorial</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction tutorial control popular'><a href="/coactionos%20tutorials/2013/11/01/CoActionOS-Tutorial-First-Project">First Project</a></li>
+      	
+      
+    
+  
+
+
+
+  </ul>
+ 
+  <h2 id="embedded c tutorial-ref" class="anchor">embedded c tutorial</h2>
+  <ul>
+      
+    
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+  </ul>
+ 
+  <h2 id="user guides-ref" class="anchor">user guides</h2>
+  <ul>
+      
+    
+
+
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2014/04/15/CoActionOS-User-Guide-Deploying-CoActionOS">Deploying CoActionOS</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/20/CoActionOS-User-Guide-Installing-Windows-Device-Drivers">Installing Windows Device Drivers</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/18/CoActionOS-User-Guide-Device-Driver-Development">Device Driver Development</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/17/CoActionOS-User-Guide-Designing-Applications-using-State-Machines">Designing Applications using State Machines</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/16/CoActionOS-User-Guide-CoActionOS-and-Eclipse">Developing on CoActionOS using Eclipse</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/15/CoActionOS-User-Guide-Building-and-Installing-CoActionOS">Building and Installing CoActionOS</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/14/CoActionOS-User-Guide-Getting-Started">Getting Started</a></li>
+      	
+      
+    
+  
+
+
+
+  </ul>
+
+
+
+			</div>
+		</div>
+		<div class="col-md-3">
+			<h2><i class="fa fa-filter"></i> Filter
+			<button id="all" class="btn btn-default pull-right"><i class="fa fa-refresh"></i></button>
+			</h2>
+			<ul class="list-inline">
+				
+				
+
+
+  
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="coaction"><button type="button" class="btn btn-lg btn-default">coaction</button></li>
+	   	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="downloads"><button type="button" class="btn btn-xs btn-default">downloads</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="embedded"><button type="button" class="btn btn-lg btn-default">embedded</button></li>
+	   	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="microcontroller"><button type="button" class="btn btn-sm btn-default">microcontroller</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="popular"><button type="button" class="btn btn-default">popular</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="fifo"><button type="button" class="btn btn-xs btn-default">fifo</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="uart"><button type="button" class="btn btn-xs btn-default">uart</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="serial"><button type="button" class="btn btn-xs btn-default">serial</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="programming"><button type="button" class="btn btn-sm btn-default">programming</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="adc"><button type="button" class="btn btn-xs btn-default">adc</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="lookup-table"><button type="button" class="btn btn-xs btn-default">lookup-table</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="c"><button type="button" class="btn btn-xs btn-default">c</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="filter"><button type="button" class="btn btn-xs btn-default">filter</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="iir"><button type="button" class="btn btn-xs btn-default">iir</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="gcc"><button type="button" class="btn btn-xs btn-default">gcc</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="compiler"><button type="button" class="btn btn-xs btn-default">compiler</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="windows"><button type="button" class="btn btn-xs btn-default">windows</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="macosx"><button type="button" class="btn btn-xs btn-default">macosx</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="linux"><button type="button" class="btn btn-xs btn-default">linux</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="cortex-m3"><button type="button" class="btn btn-xs btn-default">cortex-m3</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="threads"><button type="button" class="btn btn-xs btn-default">threads</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="circuit"><button type="button" class="btn btn-sm btn-default">circuit</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="power"><button type="button" class="btn btn-xs btn-default">power</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="qt"><button type="button" class="btn btn-xs btn-default">qt</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="fft"><button type="button" class="btn btn-xs btn-default">fft</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="control"><button type="button" class="btn btn-sm btn-default">control</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="pwm"><button type="button" class="btn btn-xs btn-default">pwm</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="pid"><button type="button" class="btn btn-xs btn-default">pid</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="motor"><button type="button" class="btn btn-xs btn-default">motor</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="sensor"><button type="button" class="btn btn-xs btn-default">sensor</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="gpio"><button type="button" class="btn btn-xs btn-default">gpio</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="usb"><button type="button" class="btn btn-xs btn-default">usb</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="doxygen"><button type="button" class="btn btn-xs btn-default">doxygen</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="led"><button type="button" class="btn btn-xs btn-default">led</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="tutorial"><button type="button" class="btn btn-lg btn-default">tutorial</button></li>
+	   	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="spi"><button type="button" class="btn btn-xs btn-default">spi</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="i2c"><button type="button" class="btn btn-xs btn-default">i2c</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="signals"><button type="button" class="btn btn-xs btn-default">signals</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="user-guide"><button type="button" class="btn btn-sm btn-default">user-guide</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="javascript"><button type="button" class="btn btn-xs btn-default">javascript</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="bootstrap"><button type="button" class="btn btn-xs btn-default">bootstrap</button></li>
+    	
+     
+    	
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="arm"><button type="button" class="btn btn-xs btn-default">arm</button></li>
+    	
+    
+  
+
+
+
+			</ul>
+			<div class="list-inline">
+				<a class="btn btn-primary" href="/archive.html"
+	data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+	><i class="fa fa-archive"></i></a> 
+<a class="btn btn-primary" href="/categories.html"
+	data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+	><i class="fa fa-folder-open"></i></a>
+<a class="btn btn-primary" href="/tags.html"
+	data-toggle="tooltip" data-placement="top" title="" data-original-title="Tags"
+	><i class="fa fa-tags"></i></a>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

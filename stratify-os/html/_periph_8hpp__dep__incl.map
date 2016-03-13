@@ -1,0 +1,28 @@
+<map id="/Users/tgil/git/CoActionOS/CoActionOS&#45;Applib/include/Periph.hpp" name="/Users/tgil/git/CoActionOS/CoActionOS&#45;Applib/include/Periph.hpp">
+<area shape="rect" id="node2" href="$_pblock_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Pblock.hpp" alt="" coords="692,115,896,175"/>
+<area shape="rect" id="node9" href="$_pchar_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Pchar.hpp" alt="" coords="2068,115,2272,175"/>
+<area shape="rect" id="node3" href="$_adc_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Adc.hpp" alt="" coords="921,225,1125,285"/>
+<area shape="rect" id="node4" href="$_dac_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Dac.hpp" alt="" coords="1151,225,1355,285"/>
+<area shape="rect" id="node5" href="$_eint_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Eint.hpp" alt="" coords="4,225,208,285"/>
+<area shape="rect" id="node6" href="$_i2c_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/I2c.hpp" alt="" coords="233,225,437,285"/>
+<area shape="rect" id="node7" href="$_pwm_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Pwm.hpp" alt="" coords="463,225,667,285"/>
+<area shape="rect" id="node8" href="$_usb_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Usb.hpp" alt="" coords="692,225,896,285"/>
+<area shape="rect" id="node10" href="$_uart_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Uart.hpp" alt="" coords="1839,225,2043,285"/>
+<area shape="rect" id="node15" href="$_core_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Core.hpp" alt="" coords="2068,225,2272,285"/>
+<area shape="rect" id="node16" href="$_dbug_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Dbug.hpp" alt="" coords="2297,225,2501,285"/>
+<area shape="rect" id="node19" href="$_pio_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Pio.hpp" alt="" coords="2596,225,2800,285"/>
+<area shape="rect" id="node23" href="$_spi_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Spi.hpp" alt="" coords="2825,225,3029,285"/>
+<area shape="rect" id="node24" href="$_gpio_8hpp_source.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Gpio.hpp" alt="" coords="3055,225,3259,285"/>
+<area shape="rect" id="node25" href="$_rtc_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Rtc.hpp" alt="" coords="1380,225,1584,285"/>
+<area shape="rect" id="node26" href="$_tmr_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Tmr.hpp" alt="" coords="1609,225,1813,285"/>
+<area shape="rect" id="node11" href="$_brsp_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Brsp.hpp" alt="" coords="1663,334,1867,394"/>
+<area shape="rect" id="node12" href="$_dbug_uart_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/DbugUart.hpp" alt="" coords="1943,334,2147,394"/>
+<area shape="rect" id="node13" href="$_lpc_phy_8hpp_source.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/LpcPhy.hpp" alt="" coords="2217,443,2421,503"/>
+<area shape="rect" id="node14" href="$_lpc_isp_8hpp_source.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/LpcIsp.hpp" alt="" coords="2217,553,2421,613"/>
+<area shape="rect" id="node17" href="$_dbug_null_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/DbugNull.hpp" alt="" coords="2172,334,2376,394"/>
+<area shape="rect" id="node18" href="$_dbug_stdout_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/DbugStdout.hpp" alt="" coords="2401,334,2605,394"/>
+<area shape="rect" id="node20" href="$_nhdc12832_8hpp_source.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Nhdc12832.hpp" alt="" coords="2860,334,3064,394"/>
+<area shape="rect" id="node22" href="$_pin_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Pin.hpp" alt="" coords="2631,334,2835,394"/>
+<area shape="rect" id="node21" href="$_exp_lcd_device_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/ExpLcdDevice.hpp" alt="" coords="2860,443,3064,503"/>
+<area shape="rect" id="node27" href="$_timer_8hpp.html" title="/Users/tgil/git/CoAction\lOS/CoActionOS&#45;Applib/include\l/Timer.hpp" alt="" coords="1433,334,1637,394"/>
+</map>

@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>USB Virtual Serial Port Firmware</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						USB Virtual Serial Port Firmware <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image" src="/images/usb-cdc-desc.svg" />
+Desktop communication to embedded devices is critical for programming and 
+debugging.  It is also important in production for data acquisition devices 
+and other computer peripherals.  Setting up a device as a virtual serial port 
+using USB is a great solution for transferring data between desktop computers 
+and embedded systems.  It can be connected to most desktop operating systems 
+(Windows, Mac OS X, and Linux) without installing or developing any USB drivers.</p>
+
+<h2 id="introduction-to-usb">Introduction to USB</h2>
+
+<p>USB is a serial communications protocol that is found in almost all desktop 
+computers (its name, Universal Serial Bus, is truly descriptive).  Physically 
+USB is just four wires: 5V, ground, data plus and data minus.  It uses 
+differential signaling to maximize immunity to noise.  Using differential 
+signaling means both data lines are used to send data in one direction making 
+USB a half-duplex protocol.  So at any given time, the USB is sending data in 
+at most one direction.  The data sent is packetized and error 
+checked.  The packets enable communication between logical endpoints stored in the 
+host and device.</p>
+
+<p><img class="post_image" src="/images/usb-endpoints.svg" /></p>
+
+<p>The basic logical building block of USB is an endpoint.  Unfortunately, 
+unlike USB, endpoint is not a descriptive name.  Endpoints are realized 
+as memory buffers in the host and device (see above diagram).  In USB, 
+the host is always the master, and the slave is the device.  The host 
+initiates all communcations.    When the host sends data to a device 
+endpoint, it means that the data is packetized, transmitted across the 
+data plus and data minus lines, and stored in one of various memory 
+buffers (called endpoints) in the device.</p>
+
+<p>USB uses endpoint zero as the control endpoint.  This means all USB devices 
+have at least one endpoint.  In order for the host to understand the device, 
+it uses the control endpoint to load data that describes the device. This data 
+is called a USB descriptor.  The four main types of descriptors are:  </p>
+
+<ul>
+  <li>Device Descriptor:  contains information about the device such as USB version, power consumption, manufacturer and serial number </li>
+  <li>Configuration Descriptor:  contains information about what the device does like mass storage or communications</li>
+  <li>Interface Descriptor:  describes one of possibly many ways the host can interact with the configuration</li>
+  <li>Endpoint Descriptor:  describes how the host can send data to and get data from an interface</li>
+</ul>
+
+<p>In addition to these descriptor types, different classes define additional 
+descriptors that provide additional information about how the device 
+works.  For example, a human interface device (HID) has additional descriptors that 
+describe the input type (such as mouse, keyboard, joystick, etc).  For a 
+virtual serial port, the communications device class (CDC) provides additional 
+information about how the host sends information to the device.</p>
+
+<h2 id="abstract-control-model">Abstract Control Model</h2>
+
+<p>Successfully implementing the abstract control model on the USB device 
+requires three things:</p>
+
+<h3 id="properly-implementing-the-usb-descriptors">Properly implementing the USB descriptors</h3>
+
+<ol>
+  <li>Responding to interface requests on endpoint zero</li>
+  <li>Reading and writing data on the data class interface</li>
+  <li>USB Virtual Serial Port USB Descriptors</li>
+</ol>
+
+<p>The diagram above (top) outlines the USB descriptors for a CDC device 
+using the abstract control model (ACM).  The ACM is used for a virtual 
+serial port.  Under the CDC configuration, there are two interfaces:<br />
+the communications class interface and the data class interface.  The 
+former is used for control (such as telling the host the status of the 
+CTS line has changed) while the latter transfers the serial port data.</p>
+
+<h3 id="communications-class-interface">Communications Class Interface</h3>
+
+<p>The communications class interface includes four special CDC descriptors:</p>
+
+<ul>
+  <li>CDC Header:  tells the host the size of the special CDC descriptors</li>
+  <li>ACM:  tells the host the device is, basically, a virtual serial port</li>
+  <li>Union:  tells the host which data class interface to use to transfer data</li>
+  <li>Call Management:  tells the host which, if any, commands the device handles over the control endpoint</li>
+</ul>
+
+<p>The interrupt endpoint is used when the device needs to send status 
+updates to the host.  The endpoint is an in endpoint meaning data is 
+sent in to the host from the device.</p>
+
+<h3 id="data-class-interface">Data Class Interface</h3>
+
+<p>There are two endpoints that are part of the data class interface. These 
+endpoints are effectively used to read and write data over the virtual 
+serial port. The bulk in endpoint allows the device to send data to the 
+host while the bulk out endpoint transfer data from the host to the device.</p>
+
+<h3 id="example-code">Example Code</h3>
+
+<p>The following code is used to set up the endpoint descriptors for the 
+virtual serial port.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdint.h&gt;</span>
+ 
+<span class="c1">//This is the standard device descriptor </span>
+<span class="c1">//(HWPL_PACK ensure the structures are packed using a pragma)</span>
+<span class="c1">//on GCC HWPL PACK is #define HWPL_PACK __attribute__((packed))</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">bcdUSB</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDeviceClass</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDeviceSubClass</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDeviceProtocol</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bMaxPacketSize</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">idVendor</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">idProduct</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">bcdDevice</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">iManufacturer</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">iProduct</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">iSerialNumber</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bNumConfigurations</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">usb_dev_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//definition to aid with declaring USB strings</span>
+<span class="cp">#define usb_declare_string(len) struct \</span>
+<span class="cp">    HWPL_PACK { \</span>
+<span class="cp">  uint8_t bLength; \</span>
+<span class="cp">  uint8_t bDescriptorType; \</span>
+<span class="cp">  uint16_t string[len]; \</span>
+<span class="cp">}</span>
+ 
+<span class="c1">//definition to aid with assigning values to a USB string</span>
+<span class="cp">#define usb_assign_string(len, ...) { \</span>
+<span class="cp">    .bLength = len*2+2, \</span>
+<span class="cp">    .bDescriptorType = USB_STRING_DESCRIPTOR_TYPE, \</span>
+<span class="cp">    .string = { __VA_ARGS__ } }</span>
+ 
+<span class="c1">//The standard configuration descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">wTotalLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bNumInterfaces</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bConfigurationValue</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">iConfiguration</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bmAttributes</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bMaxPower</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">usb_cfg_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The standard interface descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bInterfaceNumber</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bAlternateSetting</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bNumEndpoints</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bInterfaceClass</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bInterfaceSubClass</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bInterfaceProtocol</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">iInterface</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">usb_interface_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The standard endpoint descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bEndpointAddress</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bmAttributes</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">wMaxPacketSize</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bInterval</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">usb_ep_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The CDC functional header</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">bcdCDC</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">cdc_header_func_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The CDC call management descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bmCapabilities</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDataInterface</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">cdc_call_mgt_func_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The CDC ACM descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bmCapabilities</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">cdc_abstract_contorl_model_func_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//The CDC union descriptor</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bFunctionLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorSubType</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bMasterInterface</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bSlaveInterface</span><span class="p">[];</span>
+<span class="p">}</span> <span class="kt">cdc_union_func_desc_t</span><span class="p">;</span>
+ 
+<span class="c1">//CDC interface descriptor with CDC header, ACM, union, and call management</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">usb_dev_cdc_header_t</span> <span class="n">header</span><span class="p">;</span>
+  <span class="kt">usb_dev_cdc_acm_t</span> <span class="n">acm</span><span class="p">;</span>
+  <span class="kt">usb_dev_cdc_uniondescriptor_t</span> <span class="n">union_descriptor</span><span class="p">;</span>
+  <span class="kt">usb_dev_cdc_callmanagement_t</span> <span class="n">call_management</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">cdc_acm_interface_t</span><span class="p">;</span>
+ 
+<span class="c1">//Application level configuration descriptor with interfaces and endpoints</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="p">{</span>
+  <span class="kt">usb_cfg_desc_t</span> <span class="n">cfg</span> <span class="cm">/* The configuration descriptor */</span><span class="p">;</span>
+  <span class="kt">usb_interface_desc_t</span> <span class="n">ifcontrol</span> <span class="cm">/* The interface descriptor */</span><span class="p">;</span>
+  <span class="kt">link_cdc_acm_interface_t</span> <span class="n">acm</span> <span class="cm">/*! The CDC ACM Class descriptor */</span><span class="p">;</span>
+  <span class="kt">usb_ep_desc_t</span> <span class="n">control</span> <span class="cm">/* Endpoint:  Interrupt out for control packets */</span><span class="p">;</span>
+  <span class="kt">usb_interface_desc_t</span> <span class="n">ifdata</span> <span class="cm">/* The interface descriptor */</span><span class="p">;</span>
+  <span class="kt">usb_ep_desc_t</span> <span class="n">data_out</span> <span class="cm">/* Endpoint:  Bulk out */</span><span class="p">;</span>
+  <span class="kt">usb_ep_desc_t</span> <span class="n">data_in</span> <span class="cm">/* Endpoint:  Bulk in */</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">terminator</span>  <span class="cm">/* A null terminator used by the driver (required) */</span><span class="p">;</span>
+<span class="p">}</span> <span class="kt">app_cfg_desc_t</span><span class="p">;</span>
+ 
+<span class="cp">#define USB_DESC_MANUFACTURER_SIZE 15</span>
+<span class="cp">#define USB_DESC_PRODUCT_SIZE 10</span>
+<span class="cp">#define USB_DESC_SERIAL_SIZE 16</span>
+<span class="cp">#define USB_DESC_MANUFACTURER_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;,&#39;,&#39;,&#39; &#39;,&#39;I&#39;,&#39;n&#39;,&#39;c&#39;</span>
+<span class="cp">#define USB_DESC_PRODUCT_STRING &#39;C&#39;,&#39;o&#39;,&#39;A&#39;,&#39;c&#39;,&#39;t&#39;,&#39;i&#39;,&#39;o&#39;,&#39;n&#39;,&#39;O&#39;,&#39;S&#39;</span>
+<span class="cp">#define USB_DESC_SERIAL_STRING &#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;</span>
+ 
+ 
+<span class="c1">//The application structure used for storing the strings</span>
+<span class="k">struct</span> <span class="n">HWPL_PACK</span> <span class="kt">app_usb_string_t</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">bLength</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="n">bDescriptorType</span><span class="p">;</span>
+  <span class="kt">uint16_t</span> <span class="n">wLANGID</span><span class="p">;</span>
+  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_MANUFACTURER_SIZE</span><span class="p">)</span> <span class="n">manufacturer</span><span class="p">;</span>
+  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_PRODUCT_SIZE</span><span class="p">)</span> <span class="n">product</span><span class="p">;</span>
+  <span class="n">usb_declare_string</span><span class="p">(</span><span class="n">USB_DESC_SERIAL_SIZE</span><span class="p">)</span> <span class="n">serial</span><span class="p">;</span>
+<span class="p">};</span>
+ 
+<span class="k">const</span> <span class="k">struct</span> <span class="kt">link_usb_string_t</span> <span class="n">app_string_desc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_STRING_DESCRIPTOR_TYPE</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">wLANGID</span> <span class="o">=</span> <span class="mh">0x0409</span><span class="p">,</span> <span class="c1">//English</span>
+    <span class="p">.</span><span class="n">manufacturer</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_MANUFACTURER_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_MANUFACTURER_STRING</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">product</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_PRODUCT_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_PRODUCT_STRING</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">serial</span> <span class="o">=</span> <span class="n">usb_assign_string</span><span class="p">(</span><span class="n">USB_DESC_SERIAL_SIZE</span><span class="p">,</span> <span class="n">USB_DESC_SERIAL_STRING</span><span class="p">)</span>
+<span class="p">};</span>
+ 
+<span class="c1">//The application device descriptor assignment</span>
+<span class="k">const</span> <span class="kt">usb_dev_desc_t</span> <span class="n">app_dev_desc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_desc_t</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_DEVICE_DESCRIPTOR_TYPE</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bcdUSB</span> <span class="o">=</span> <span class="mh">0x0200</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bDeviceClass</span> <span class="o">=</span> <span class="n">USB_DEVICE_CLASS_COMMUNICATIONS</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bDeviceSubClass</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bDeviceProtocol</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bMaxPacketSize</span> <span class="o">=</span> <span class="n">USB_MAX_PACKET0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">idVendor</span> <span class="o">=</span> <span class="n">LINK_USB_VID</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">idProduct</span> <span class="o">=</span> <span class="n">LINK_USB_PID</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bcdDevice</span> <span class="o">=</span> <span class="mh">0x0010</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">iManufacturer</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">iProduct</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">iSerialNumber</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bNumConfigurations</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">};</span>
+ 
+<span class="c1">//The assignment of the application&#39;s USB configuration descriptor</span>
+<span class="k">const</span> <span class="kt">link_cfg_desc_t</span> <span class="n">app_cfg_desc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_cfg_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_CONFIGURATION_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">wTotalLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">app_cfg_desc_t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="c1">//exclude the zero terminator</span>
+        <span class="p">.</span><span class="n">bNumInterfaces</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bConfigurationValue</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">iConfiguration</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bmAttributes</span> <span class="o">=</span> <span class="n">USB_CONFIG_BUS_POWERED</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bMaxPower</span> <span class="o">=</span> <span class="n">USB_CONFIG_POWER_MA</span><span class="p">(</span> <span class="n">LINK_REQD_CURRENT</span> <span class="p">)</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">ifcontrol</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_interface_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_INTERFACE_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceNumber</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bAlternateSetting</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bNumEndpoints</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_CLASS_COMMUNICATIONS</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceSubClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_SUBCLASS_ACM</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceProtocol</span> <span class="o">=</span> <span class="n">USB_INTERFACE_PROTOCOL_V25TER</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">iInterface</span> <span class="o">=</span> <span class="mh">0x00</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">acm</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_header_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">bcdCDC</span> <span class="o">=</span> <span class="mh">0x0110</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_acm_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">acm</span><span class="p">.</span><span class="n">bmCapabilities</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_uniondescriptor_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x06</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bMasterInterface</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">union_descriptor</span><span class="p">.</span><span class="n">bSlaveInterface</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bFunctionLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_dev_cdc_callmanagement_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="mh">0x24</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDescriptorSubType</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bmCapabilities</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">call_management</span><span class="p">.</span><span class="n">bDataInterface</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">control</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_INTIN</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_INTERRUPT</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_INTERRUPT_ENDPOINT_SIZE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">ifdata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_interface_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span> <span class="o">=</span> <span class="n">USB_INTERFACE_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceNumber</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bAlternateSetting</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bNumEndpoints</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceClass</span> <span class="o">=</span> <span class="n">USB_INTERFACE_CLASS_COMMUNICATIONS_DATA</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceSubClass</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterfaceProtocol</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">iInterface</span> <span class="o">=</span> <span class="mh">0x00</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">data_out</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_BULKOUT</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_BULK</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_BULK_ENDPOINT_SIZE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">},</span>
+ 
+    <span class="p">.</span><span class="n">data_in</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">bLength</span><span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">usb_ep_desc_t</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">bDescriptorType</span><span class="o">=</span><span class="n">USB_ENDPOINT_DESCRIPTOR_TYPE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bEndpointAddress</span><span class="o">=</span><span class="n">USB_BULKIN</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bmAttributes</span><span class="o">=</span><span class="n">USB_ENDPOINT_TYPE_BULK</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">wMaxPacketSize</span><span class="o">=</span><span class="n">LINK_BULK_ENDPOINT_SIZE</span><span class="p">,</span>
+        <span class="p">.</span><span class="n">bInterval</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">},</span>
+ 
+ 
+ 
+    <span class="p">.</span><span class="n">terminator</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">};</span></code></pre></div>
+
+<h3 id="required-interface-requests">Required Interface Requests</h3>
+
+<p>The firmware must recognize two special interface requests: 
+SEND_ENCAPSULATED_COMMAND and GET_ENCAPSULATED_RESPONSE. The firmware 
+must not stall the USB endpoint when these requests arrive. However, 
+the firmware does not need to do anything special with the requests 
+other than receive them and not stall.</p>
+
+<h3 id="reading-and-writing-data-over-the-virtual-serial-port">Reading and Writing Data over the Virtual Serial Port</h3>
+
+<p>To send and receive data over the virtual serial port is 
+simple. Data is written to the BULK IN endpoint and is read from the BULK OUT 
+endpoint. These are the endpoints defined in the data interface.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The USB communications device class (CDC) abstract control model (ACM) 
+is a great way to create a cross-platform software-firmware 
+interface. The connection creates a virtual serial communications port that can be 
+read and written like a classic serial port but without the outdated cables.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#usb-ref">usb <span class="badge">1</span></a></li>
+     
+    	<li><a href="/tags.html#programming-ref">programming <span class="badge">9</span></a></li>
+     
+    	<li><a href="/tags.html#microcontroller-ref">microcontroller <span class="badge">7</span></a></li>
+     
+    	<li><a href="/tags.html#serial-ref">serial <span class="badge">5</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware" class="active">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

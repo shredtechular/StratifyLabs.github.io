@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Developing on CoActionOS using Eclipse</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						Developing on CoActionOS using Eclipse <small>CoActionOS User Guide</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p>Eclipse is an Integrated Development Environement (IDE) that works great for developing CoActionOS applications.</p>
+
+<p>To start using Eclipse with CoActionOS, you’ll first need to download and install 
+the latest version of Eclipse.  You can then import sample projects 
+downloaded from this website into Eclipse. Eclipse can then be used to build and debug programs.</p>
+
+<h3 id="download-eclipse">Download Eclipse</h3>
+
+<p>Eclipse can be downloaded for free from http://www.eclipse.org/downloads/. You want to download the Eclipse IDE for C/C++ Developers (known as C/C++ Developer Tools or CDT). The download package includes a single zip file.</p>
+
+<h3 id="installing">Installing</h3>
+
+<h4 id="windows">Windows</h4>
+
+<p>Eclipse is distributed as a zip file.  It just needs to be extracted and then you can create a shortcut to the eclipse.exe executable.</p>
+
+<h4 id="mac-os-x">Mac OS X</h4>
+
+<p>Eclipse is distributed as an application bundle.  You can copy the bundle to the /Applications folder (or anywhere else you like) to install Eclipse.</p>
+
+<h4 id="linux">Linux</h4>
+
+<p>Eclipse is also available on Linux.  You can usually just download the latest package and extract the files.  Some distributions (Ubuntu, for example) have Eclipse in their built-in software stores.</p>
+
+<h3 id="starting-eclipse">Starting Eclipse</h3>
+
+<p>When Eclipse starts, it will prompt you for a workspace. The most common place to put the workspace on Windows 7 and Mac OS X is in /Users/username/workspace. On Windows XP, it is easiest to use c:\workspace.</p>
+
+<p>Once Eclipse starts, you will want to open the C/C++ perspective by:</p>
+
+<ol>
+  <li>Click Window-&gt;Open Perspective-&gt;Other… (or C/C++ if it is shown)</li>
+  <li>Highlight C/C++ then click OK</li>
+</ol>
+
+<h3 id="adding-a-coactionos-application-to-eclipse">Adding a CoActionOS Application to Eclipse</h3>
+
+<p>To add a new project to Eclipse, first import the Hello World sample project. You then rename the project to whatever you wish (but don’t use any spaces or CoActionOS will reject the binary that is created).</p>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=6-rbEx6AV6A">This youtube video</a> walks through importing a project in Eclipse.</p>
+
+<h3 id="updating-the-include-paths-and-rebuilding-the-index">Updating the Include Paths and Rebuilding the Index</h3>
+
+<p>If you are getting code errors in the default Hello World program, you may need to re-initialize the include paths and re-build the index. To do this:</p>
+
+<ol>
+  <li>Right click on the project and click “Properties”</li>
+  <li>In the left pane, browser to “C/C++ General -&gt; Preprocessor Include Paths”</li>
+  <li>In the center of the window, click “Providers”</li>
+  <li>Highlight “CDT GCC Builtin Compilter Settings” and then click the “Clear Entries” button in the right pane</li>
+  <li>Hit “Apply” then “OK”</li>
+  <li>Right click on the project and click “Index -&gt; Rebuild”</li>
+</ol>
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#coaction-ref">coaction <span class="badge">22</span></a></li>
+     
+    	<li><a href="/tags.html#user-guide-ref">user-guide <span class="badge">7</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/user%20guides/2013/12/15/CoActionOS-User-Guide-Building-and-Installing-CoActionOS" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/user%20guides/2013/12/17/CoActionOS-User-Guide-Designing-Applications-using-State-Machines" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>User Guides</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2014/04/15/CoActionOS-User-Guide-Deploying-CoActionOS">Deploying CoActionOS</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/20/CoActionOS-User-Guide-Installing-Windows-Device-Drivers">Installing Windows Device Drivers</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/18/CoActionOS-User-Guide-Device-Driver-Development">Device Driver Development</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/17/CoActionOS-User-Guide-Designing-Applications-using-State-Machines">Designing Applications using State Machines</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged coaction user-guide'><a href="/user%20guides/2013/12/16/CoActionOS-User-Guide-CoActionOS-and-Eclipse" class="active">Developing on CoActionOS using Eclipse</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/15/CoActionOS-User-Guide-Building-and-Installing-CoActionOS">Building and Installing CoActionOS</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged coaction user-guide'><a href="/user%20guides/2013/12/14/CoActionOS-User-Guide-Getting-Started">Getting Started</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

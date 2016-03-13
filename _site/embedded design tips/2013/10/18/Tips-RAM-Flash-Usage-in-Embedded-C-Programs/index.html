@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RAM/Flash Usage in Embedded C Programs</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						RAM/Flash Usage in Embedded C Programs <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image" src="/images/flash-map.svg" />
+In embedded designs, memory, especially RAM, is a precious 
+resource.  Understanding how C allocates variables in memory 
+is crucial to getting the best use of memory in embedded systems.</p>
+
+<p>Memory in a C program includes code (executable instructions) and 
+data.  Code is typically read-only and executable–characteristics 
+enforced by the operating system (OS).  Data memory is 
+non-executable (enforced by the OS), can be either read-only or 
+read-write, and is either statically or dynamically allocated which 
+characteristics are managed by the compiler.  In desktop programs, the 
+entire memory map is managed through virtual memory using a hardware 
+construct, called a Memory Management Unit (MMU), to map the 
+program’s memory to physical RAM.  In RAM-constrained embedded systems 
+lacking an MMU, the memory map is divided in to a section for flash 
+memory (code and read-only data) and a section for RAM (read-write data).</p>
+
+<div class="alert alert-info"><span class="label label-danger">Note</span> This article 
+talks about specifics of the C language implementation using GCC with 
+the ARM Cortex-M3 architecture. Other implementations differ on 
+specifics, but the basic concepts are the same.</div>
+
+<h2 id="flash--code-and-read-only-memory">Flash:  Code and Read-Only Memory</h2>
+
+<p>Code and read-only data are stored in flash memory.  The layout of a C program’s flash memory is shown in the diagram above.  The beginning of the program (the lowest memory location at the bottom of the diagram) is the text section which includes executable code.  This section also includes numerical values that are not assigned to any specific C variable called “literal values”.  The read-only data section follows the text section and is exclusively stored in flash memory (note this is only true for some embedded architectures, not all).  There is then a copy of the “data” section which contains the initial values of global and static variables.  This section is copied to RAM when the program starts up.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">read_only_variable</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">data_variable</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+ 
+<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;X is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>In the above code, read_only_variable is stored in the read-only data section because it is preceded by the <em>const</em> keyword. The compiler assigns <em>read_only_variable</em> a specific address location (in flash) and writes the value of <em>2000</em> to that memory location. When the variable <em>x</em> within <em>my_function()</em> is assigned the literal value <em>200</em>, it references the value stored in a “literal pool” within the text section–at least this is true for the ARM Cortex M architecture; other architectures may take a different approach to literal values but the basic concept is the same.  Finally, a copy of the initial value, <em>500</em>, assigned to <em>data_variable</em> is stored in flash memory and copied to RAM when the program starts. When the program references <em>data_variable</em>, it will refer to its location in RAM.</p>
+
+<h2 id="ram--read-write-data">RAM:  Read-Write Data</h2>
+
+<p>The following diagram shows the map of the RAM in a C program.</p>
+
+<p><img class="post_image" src="/images/ram-map.svg" /></p>
+
+<p>The read-write data that is stored in RAM is further categorized as statically or dynamically allocated.</p>
+
+<h2 id="statically-allocated">Statically Allocated</h2>
+
+<h4 id="data-vs-bss">Data vs bss</h4>
+
+<p>Statically allocated memory means that the compiler determines the memory address of the variable at compile time.  Static data is divided in two sections:  data and bss (there is a wikipedia page dedicated to why it is called bss).  The difference is that data is assigned an intial, non-zero value when the program starts while all variables in the bss section are initialized to zero.  For clarification, see the below example:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+ 
+<span class="c1">//these variables are globally allocated</span>
+<span class="kt">int</span> <span class="n">data_var</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bss_var0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bss_var1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ 
+<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">int</span> <span class="n">uninitialized_var</span><span class="p">;</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;data_var:%d, bss_var0:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">data_var</span><span class="p">,</span> <span class="n">bss_var0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>When the C program starts, the C runtime (CRT) start function loads the memory location assigned to <em>data_var</em> with <em>500</em>.  This is typically accomplished by copying the value from flash to RAM; this implies that each byte of data will occupy one byte of flash and one byte of RAM.  The CRT start function then sets the memory locations for <em>bss_var0</em> and <em>bss_var1</em> to zero which does not require any space in flash memory.</p>
+
+<h2 id="the-c-static-keyword">The C static Keyword</h2>
+
+<p>Static memory should not be confused with the C keyword <em>static</em>.  While all C <em>static</em> variables are allocated as static memory, not all statically allocated memory is declared with <em>static</em>.  Consider the code snippet:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+ 
+<span class="kt">int</span> <span class="n">global_var</span><span class="p">;</span> <span class="c1">//statically allocated as a global variable</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">static_var</span><span class="p">;</span> <span class="c1">//statically allocated but only accessible within file</span>
+ 
+<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="k">static</span> <span class="kt">int</span> <span class="n">my_static</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//statically allocated, accessible within my_function</span>
+     <span class="kt">int</span> <span class="n">my_stack</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//allocated on the stack</span>
+ 
+     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_static:%d, my_stack:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">my_static</span><span class="p">,</span> <span class="n">my_stack</span><span class="p">);</span>
+     <span class="n">my_stack</span><span class="o">++</span><span class="p">;</span>
+     <span class="n">my_static</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>In the above code, <em>global_var</em> can be accessed by any file during the compilation process;  <em>static_var</em> can only be accessed with functions that are in the same C file as the <em>static_var</em> declaration.  The <em>my_static</em> variable, declared as <em>static</em> within a function, retains its value between successive calls to <em>my_function()</em> while <em>my_stack</em> does not.  The output of 5 successive calls to <em>my_function()</em> is:</p>
+
+<pre>my_static:0, my_stack:0
+my_static:1, my_stack:0
+my_static:2, my_stack:0
+my_static:3, my_stack:0
+my_static:4, my_stack:0</pre>
+
+<h2 id="dynamically-allocated">Dynamically Allocated</h2>
+
+<p>While the compiler determines the memory address of static memory at compile time, the locations of dynamically allocted variables are determined while the program is running.  The two quintessential, dynamic memory structures in C are the heap and the stack.  The stack grows down (from higher memory address to lower ones) and the heap grows u If memory usage is ignored in the design, the stack and heap can collide causing one or both to become corrupted and result in a situation that can be difficult to debug.  The heap is managed by the programmer while the compiler takes care of the stack.</p>
+
+<h2 id="the-heap">The Heap</h2>
+
+<p>The beginning of the heap is just above the last bss variable (see diagram above preceding subsection).  The C standard library contains two function families for managing the heap:  <em>malloc()</em> and <em>free()</em>.  The following code snippet illustrates their usages:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+ 
+<span class="kt">void</span> <span class="nf">my_func</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">char</span> <span class="o">*</span> <span class="n">buffer</span><span class="p">;</span>
+ 
+     <span class="n">buffer</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">512</span><span class="p">);</span> <span class="c1">//allocate 512 bytes for buffer on the heap</span>
+     <span class="k">if</span> <span class="p">(</span> <span class="n">buffer</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="p">){</span>
+          <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Failed to allocate memory&quot;</span><span class="p">);</span>
+          <span class="k">return</span><span class="p">;</span>
+     <span class="p">}</span>
+ 
+     <span class="c1">//now buffer can be treated as if it were declared char buffer[512]</span>
+     <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">);</span> <span class="c1">//zero out the buffer</span>
+     <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;Buffer is at location 0x%lX</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span> <span class="c1">//show buffers address</span>
+ 
+     <span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span> <span class="c1">//This frees 512 bytes to be used by another call to malloc()</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Dynamically allocated memory is a convenient tool for application developers but must be used deliberately to minimize the effects of memory fragmentation.  The following code shows how <em>malloc()</em> and <em>free()</em> can result in fragmented memory:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+ 
+<span class="kt">void</span> <span class="nf">my_fragmenting_function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">char</span> <span class="o">*</span> <span class="n">my_buffers</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+     <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+          <span class="n">my_buffers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span> <span class="c1">//allocated 128 bytes (3 times)</span>
+     <span class="p">}</span>
+ 
+     <span class="n">free</span><span class="p">(</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>
+ 
+     <span class="n">buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">256</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The example above allocates 128 bytes three times then frees the middle 128 bytes.  Since the freed bytes are essentially sandwiched by the other buffers, <em>malloc()</em> can only use them again when allocating 128 bytes or less.  For the final call to allocate 256 bytes, the previously freed 128 bytes cannot be used.  Fragmentation problems can be largely avoided by careful use of <em>malloc()</em> and <em>free()</em>.</p>
+
+<h2 id="the-stack">The Stack</h2>
+
+<p>Variables that are declared within a function, known as local variables, are either allocated on the stack or simply assigned a register value.  Whether a variable is allocated on the stack or simply assigned to a register depends on many factors such as the compiler (including conventions associated with the architecture), the microcontroller architecture, as well as the number of variables already assigned to registers.  Consider the following code example:</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+ 
+<span class="kt">int</span> <span class="nf">my_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
+     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+     <span class="k">register</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+     <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+ 
+     <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&quot;Test String</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+     <span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">;</span>
+     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The paramaters <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> to <em>my_function()</em> are stored in registers <em>r0</em>, <em>r1</em>, <em>r2</em>, and <em>r3</em>–this is true for the ARM Cortex-M but varies between architectures; though most use some number of registers for parameter passing and then pass additional parameters on the stack.  The <em>x</em> variable in <em>my_function()</em> is likely assigned to a register, but if no registers are available, it assigned a memory location on the stack.  The <em>y</em> variable is treated similarly, but because it uses the register keyword, the compiler gives it preference over <em>x</em> when allocating registers.  The <em>buf</em> variable is allocated on the stack because it is 1) likely too large for register allocation and 2) it is an array, and many architectures have instructions that making working with arrays in memory (rather than registers) perform well.  Unlike global and static variables, local variables are only initializes when the program assigns a value to them.  For example, before the line <em>x = a + b + c + strlen(buf);</em>, the value of <em>x</em> is whatever the value the register or memory location had before this line was executed.  Therefore, local variables should never to used before they are assigned a value within the function.</p>
+
+<h2 id="registers-vs-registers">Registers vs Registers</h2>
+
+<p>It is important to make the distinction between the registers used with local variables and those used to configure the microcontroller features and peripherals.  Microcontroller datasheets and user manuals refer to “registers” that are used, for example, to turn the UART on and off and configure its baud rate.  These configuration”registers” are not the same as the ones mentioned above used with local function variables.  Configuration registers are accessed in the same way that RAM is; they are assigned a fixed location in the memory ma Normal registers (such as r0) are memory that is tightly integrated with the central processing logic of the microcontroller and an integral part of the instruction set.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In embedded systems, it is crucial to pay close attention to memory usage.  Having a sound understanding of how C allocates variables in RAM and flash both dynamically and statically is key to getting the most out of limited memory.</p>
+
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#embedded-ref">embedded <span class="badge">36</span></a></li>
+     
+    	<li><a href="/tags.html#c-ref">c <span class="badge">3</span></a></li>
+     
+    	<li><a href="/tags.html#programming-ref">programming <span class="badge">9</span></a></li>
+     
+    	<li><a href="/tags.html#popular-ref">popular <span class="badge">11</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs" class="active">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+

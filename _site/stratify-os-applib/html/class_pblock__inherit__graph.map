@@ -1,0 +1,11 @@
+<map id="Pblock" name="Pblock">
+<area shape="rect" id="node4" href="$class_adc.html" title="ADC Peripheral Class. " alt="" coords="4,647,93,801"/>
+<area shape="rect" id="node5" href="$class_dac.html" title="DAC Class. " alt="" coords="119,634,197,814"/>
+<area shape="rect" id="node6" href="$class_i2c.html" title="I2C Peripheral Class. " alt="" coords="223,594,312,854"/>
+<area shape="rect" id="node9" href="$class_pwm.html" title="PWM Class. " alt="" coords="336,634,425,814"/>
+<area shape="rect" id="node10" href="$class_usb.html" title="USB Class. " alt="" coords="450,587,563,861"/>
+<area shape="rect" id="node2" href="$class_periph.html" title="Peripheral Class. " alt="" coords="218,182,317,415"/>
+<area shape="rect" id="node3" href="$class_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="235,6,300,133"/>
+<area shape="rect" id="node7" href="$class_i2_c.html" title="I2C Class (alternate class for I2c) " alt="" coords="195,910,257,983"/>
+<area shape="rect" id="node8" href="$class_iic.html" title="IIC Class (alternate class for I2c) " alt="" coords="282,910,336,983"/>
+</map>

@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Integrating Doxygen and Bootstrap</title> 
+<meta name="author" content="Stratify Labs, Inc">
+
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="/assets/themes/twitter/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="/assets/themes/twitter/bootstrap3/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap3/js/bootstrap.min.js"></script>
+<link href="/assets/themes/twitter/bootstrap3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/style.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/syntax.css" rel="stylesheet">
+<script src="/assets/themes/twitter/js/application.js"></script>
+
+<!-- Le fav and touch icons -->
+<!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+</head>
+<body style="min-height: 200px; padding-top: 50px;">
+	<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".menu-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/index.html">
+							<img style="height: 22px;" src="/images/StratifyOS-Logo.svg" />
+						</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
+						<ul class="nav navbar-nav">
+							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<a class="anchor" id="top"></a>
+
+
+	<div class="content" id="content">
+		
+
+
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>
+						Integrating Doxygen and Bootstrap <small>Embedded Design</small>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<p><img class="post_image" src="/images/doxygen-and-bootstrap.png" />
+Doxygen is a great tool for documenting embedded projects.  Twitter Bootstrap is
+an elegant, HTML5 framework that works great on both desktop and mobile browsers.  Using
+jquery and javascript, the two technologies can be easily integrated.</p>
+
+<h2 id="customizing-doxygen-output">Customizing Doxygen Output</h2>
+
+<p>Doxygen provides for a handful of ways to <a href="http://www.stack.nl/~dimitri/doxygen/manual/customize.html">customize the output</a>.  If
+you want full control over all of the Doxygen objects, you can have Doxygen output XML and then
+write your own output generator to do anything you want.  The drawback of doing this is that
+it requires a substantial effort.  It is much easier to simply customize the Doxygen HTML
+output.</p>
+
+<p>Doxygen allows you to customize the HTML output by modifying the master HTML header, footer, and
+stylesheet.  The following command will generate the default Doxygen HTML files.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">doxygen -w html header.html footer.html customdoxygen.css</code></pre></div>
+
+<p>Modifying these files alone is not enough to get good Twitter Bootstrap integration.  Bootstrap 
+requires that certain classes be applied within the body of the HTML.  For example, 
+a Bootstrap “table” needs to have a class called “table” in order
+to apply the Bootstrap table formatting.  Doxygen does a good job of applying classes
+to different objects.  We just need to augment those classes with the Bootstrap classes.  To
+do this, we use javascript and jquery.  The code below will add Bootstrap formatting
+to various Doxygen tables.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.params&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.directory&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table table-striped&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.fieldtable&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>	
+<span class="p">});</span></code></pre></div>
+
+<p>For this to work well, we need to modify doxygen’s default stylesheet and remove almost all
+formatting.  We leave the code highlighting formatting in place since this doesn’t affect
+any of the Bootstrap formatting, but pretty much all other Doxygen formatting is removed.<br />
+We also modify the HTML header or footer to load the Bootstrap css/javascript and 
+our custom javascript (doxy-boot.js).</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;bootstrap3/css/bootstrap.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bootstrap3/js/jquery-2.0.3.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bootstrap3/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;doxy-boot.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+
+<p>The following code shows the full contents of doxy-boot.js used on the 
+<a href="/coactionos/html/">CoActionOS documentation</a>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.headertitle&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;page-header&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.title&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-cog&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;index.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;CoActionOS&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;modules.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-square&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;namespaces.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-bars&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;annotated.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list-ul&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;classes.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-book&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;inherits.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-sitemap&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_func.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_vars.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_enum.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li &gt; a[href=&quot;functions_eval.html&quot;] &gt; span&#39;</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">&quot;&lt;i class=&#39;fa fa-list&#39;&gt;&lt;/i&gt; &quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;img[src=&quot;ftv2ns.png&quot;]&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s1">&#39;&lt;span class=&quot;label label-danger&quot;&gt;N&lt;/span&gt; &#39;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;img[src=&quot;ftv2cl.png&quot;]&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s1">&#39;&lt;span class=&quot;label label-danger&quot;&gt;C&lt;/span&gt; &#39;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;nav nav-pills nav-justified&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-top&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;ul.tablist&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;li.current&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;iframe&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;scrolling&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#nav-path &gt; ul&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;breadcrumb&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.params&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ingroups&quot;</span><span class="p">).</span><span class="nx">wrapInner</span><span class="p">(</span><span class="s2">&quot;&lt;small&gt;&lt;/small&gt;&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5em&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels &gt; span&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default btn-xs&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.levels &gt; span&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;margin-right&quot;</span><span class="p">,</span> <span class="s2">&quot;0.25em&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.directory&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table table-striped&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.summary &gt; a&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default btn-xs&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.fieldtable&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.fragment&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;well&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memitem&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel panel-default&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memproto&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-heading&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.memdoc&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-body&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;span.mlabel&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;label label-info&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.memberdecls&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;[class^=memitem]&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+	
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ah&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;btn btn-default&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;span.mlabels&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;pull-right&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;table.mlabels&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="s2">&quot;100%&quot;</span><span class="p">)</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;td.mlabels-right&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;pull-right&quot;</span><span class="p">);</span>
+
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttc&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel panel-info&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttname&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-heading&quot;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;div.ttdef,div.ttdoc,div.ttdeci&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;panel-body&quot;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There are various ways to customize the Doxygen output.  The easiest way to integrate
+Doxygen and Twitter Bootstrap is to use a few lines of javascript/jquery code to apply the desired
+Bootstrap classes to the already well documented Doxygen output.  This results in
+fully responsive, mobile-ready code documentation.</p>
+
+				</div>
+			</div>
+
+			
+			<ul class="nav nav-pills">
+				
+				
+
+
+  
+     
+    	<li><a href="/tags.html#doxygen-ref">doxygen <span class="badge">2</span></a></li>
+     
+    	<li><a href="/tags.html#javascript-ref">javascript <span class="badge">1</span></a></li>
+     
+    	<li><a href="/tags.html#bootstrap-ref">bootstrap <span class="badge">1</span></a></li>
+    
+  
+
+
+
+			</ul>
+			
+			<div class="pagination">
+				<center>
+					 
+						<a href="/user%20guides/2013/12/20/CoActionOS-User-Guide-Installing-Windows-Device-Drivers" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="left" title="" data-original-title="Previous Post"
+							>
+							<i class="fa fa-arrow-left"></i>
+						</a> 
+					 
+					<a href="/archive.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Archives"
+						>
+						<i class="fa fa-archive"></i>
+					</a> 
+					<a href="/categories.html" type="button" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="" data-original-title="Categories"
+					>
+						<i class="fa fa-folder-open"></i>
+					</a> 
+					 
+						<a href="/user%20guides/2014/04/15/CoActionOS-User-Guide-Deploying-CoActionOS" type="button" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="right" title="" data-original-title="Next Post"
+							>
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					
+				</center>
+			</div>
+				
+		</div>
+		<div class="col-md-3">
+		
+
+			<h3>Embedded Design Tips</h3>
+			<ul class="nav nav-pills nav-stacked">
+				
+				
+				
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller arm cortex-m3 coaction'><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='active tagged doxygen javascript bootstrap'><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap" class="active">Integrating Doxygen and Bootstrap</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit'><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control gpio'><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gpio circuit microcontroller popular'><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit led control'><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c doxygen programming'><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded usb programming microcontroller serial'><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller gpio programming'><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit sensor filter adc programming'><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded c programming popular'><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded control pwm pid motor programming circuit popular'><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller circuit'><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 fft filter popular'><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3'><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded macosx qt'><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded circuit power popular'><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded cortex-m3 threads popular'><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded compiler gcc'><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler linux'><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler macosx'><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded gcc compiler windows'><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded filter iir programming popular'><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded adc lookup-table c programming'><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded fifo uart serial microcontroller programming popular'><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded microcontroller popular'><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a></li>
+      	
+      
+    
+  
+
+
+
+			</ul>
+			
+			
+				<h3>Embedded C Tutorial</h3>
+				<ul class="nav nav-pills nav-stacked">
+					  
+					
+
+
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/11/Embedded-C-Tutorial-Order-of-Operations">Order of Operations Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/10/Embedded-C-Tutorial-Keyword-Reference">Keywords Reference</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/09/Embedded-C-Tutorial-Compound-Data-Types">Compound Data Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/08/Embedded-C-Tutorial-Preprocessor">Preprocessor Directives</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/07/Embedded-C-Tutorial-Pointers-and-Arrays">Pointers and Arrays</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/05/Embedded-C-Tutorial-Flow-Control">Flow Control</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/04/Embedded-C-Tutorial-Operators">Operators</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/03/Embedded-C-Tutorial-Raw-Types">Raw Types</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial'><a href="/embedded%20c%20tutorial/2013/12/02/Embedded-C-Tutorial-Functions">Functions</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li class='tagged embedded tutorial popular'><a href="/embedded%20c%20tutorial/2013/12/01/Embedded-C-Tutorial-Hello-World">Hello World</a></li>
+      	
+      
+    
+  
+
+
+
+				</ul>
+			
+			
+			
+			  
+		</div>
+	</div>
+
+</div>
+
+
+
+	</div>
+
+	<footer style="background: #344555; color: #fff;">
+		<div class="container">
+			<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+				<div class="col-md-12">
+					<p>&copy; 2016 Stratify Labs, Inc</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21543723-3', 'coactionos.com');
+  ga('send', 'pageview');
+
+</script>
+ </body>
+</html>
+
