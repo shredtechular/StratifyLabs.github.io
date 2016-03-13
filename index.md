@@ -1,6 +1,6 @@
 ---
 layout: homepage
-title: Stratify OS
+title: Stratify Labs
 tagline: Rapid Embedded Development
 sections:
  icon: Stratify-Logo-Cog.svg
