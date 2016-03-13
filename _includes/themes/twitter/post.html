@@ -2,17 +2,11 @@
 
 <div class="container">
 	<div class="row" style="margin-top: 20px;">
-		<div class="col-md-offset-1 col-md-7">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+		<div class="col-md-8">
 					<h1>
 						{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}
 					</h1>
-				</div>
-				<div class="panel-body">
 					{{ content }}
-				</div>
-			</div>
 
 			{% unless page.tags == empty %}
 			<ul class="nav nav-pills">
@@ -52,7 +46,7 @@
 			</div>
 				
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 		{% unless page.categories == empty %}
 
 			<h3>{{ page.category }}</h3>
@@ -61,7 +55,7 @@
 				{% assign pages_list = site.categories[category] %}
 				{% include JB/pages_list %}
 			</ul>
-			
+
 			{% if category == "embedded design tips" %}
 				<h3>Embedded C Tutorial</h3>
 				<ul class="nav nav-pills nav-stacked">

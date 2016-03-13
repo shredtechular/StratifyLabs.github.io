@@ -54,6 +54,7 @@
 					<div class="collapse navbar-collapse menu-navbar-collapse" role="navigation">
 						<ul class="nav navbar-nav">
 							<li><a href="https://github.com/StratifyLabs"><i class="fa fa-code-fork"></i> Code</a></li>
+							<li><a href="/tips.html"><i class="fa fa-exclamation-circle"></i> Design Tips</a></li>
 						</ul>
 					</div>
 				</div>
@@ -79,89 +80,21 @@ function register_click(name){
 
 $(document).ready( function(){
 	
-	register_click("coaction");	
-	
-	register_click("downloads");	
-	
 	register_click("embedded");	
 	
-	register_click("microcontroller");	
+	register_click("tutorial");	
 	
 	register_click("popular");	
-	
-	register_click("fifo");	
-	
-	register_click("uart");	
-	
-	register_click("serial");	
-	
-	register_click("programming");	
-	
-	register_click("adc");	
-	
-	register_click("lookup-table");	
-	
-	register_click("c");	
-	
-	register_click("filter");	
-	
-	register_click("iir");	
 	
 	register_click("gcc");	
 	
 	register_click("compiler");	
 	
-	register_click("windows");	
-	
 	register_click("macosx");	
 	
-	register_click("linux");	
+	register_click("windows");	
 	
-	register_click("cortex-m3");	
-	
-	register_click("threads");	
-	
-	register_click("circuit");	
-	
-	register_click("power");	
-	
-	register_click("qt");	
-	
-	register_click("fft");	
-	
-	register_click("control");	
-	
-	register_click("pwm");	
-	
-	register_click("pid");	
-	
-	register_click("motor");	
-	
-	register_click("sensor");	
-	
-	register_click("gpio");	
-	
-	register_click("usb");	
-	
-	register_click("doxygen");	
-	
-	register_click("led");	
-	
-	register_click("tutorial");	
-	
-	register_click("spi");	
-	
-	register_click("i2c");	
-	
-	register_click("signals");	
-	
-	register_click("user-guide");	
-	
-	register_click("javascript");	
-	
-	register_click("bootstrap");	
-	
-	register_click("arm");	
+	register_click("ubuntu");	
 	
 	
 	$("#all").click(function(){
@@ -174,374 +107,21 @@ $(document).ready( function(){
 
 <div class="container">
 	<div class="row" style="margin-top: 20px;">
-		<div class="col-md-offset-1 col-md-7 panel panel-default">
-			<div class="panel-body">
-				
+		<div class="col-md-8">
+			
 
 
-	<div class='tagged embedded gcc compiler macosx'>
-	<h2><a href="/embedded%20design%20tips/2014/10/05/Tips-Building-and-Installing-a-Cortex-M4-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M4 Compiler on Mac OS X</a> <small>2014-10-05</small></h2>
-	<p><p>Installing a compiler for the ARM Cortex M4 is similiar to the CM3.  The following environment variable needs to be changed from the Cortex-M3 settings:</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded microcontroller arm cortex-m3 coaction'>
-	<h2><a href="/embedded%20design%20tips/2014/05/03/Applications-without-MMU">Applications without an MMU</a> <small>2014-05-03</small></h2>
-	<p><p>One of CoActionOS’s biggest software challenges is providing the ability to install applications separately from the OS–without an MMU.  Overcoming this challenge contributes to both ease-of-use and portability.  By installing just the application, you save the programmer the work of integrating and compiling the OS with the application.  The programmer can also distribute the binary file to other devices running CoActionOS.  In the MMU-free world, these features are only available on uCLinux and now CoActionOS.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged doxygen javascript bootstrap'>
-	<h2><a href="/embedded%20design%20tips/2014/01/07/Tips-Integrating-Doxygen-and-Bootstrap">Integrating Doxygen and Bootstrap</a> <small>2014-01-07</small></h2>
-	<p><p><img class="post_image" src="/images/doxygen-and-bootstrap.png" />
-Doxygen is a great tool for documenting embedded projects.  Twitter Bootstrap is
-an elegant, HTML5 framework that works great on both desktop and mobile browsers.  Using
-jquery and javascript, the two technologies can be easily integrated.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded circuit'>
-	<h2><a href="/embedded%20design%20tips/2013/10/27/Tips-Using-Op-Amps-in-Embedded-Design">Using Op Amps in Embedded Design</a> <small>2013-10-27</small></h2>
-	<p><p><img class="post_image" src="/images/inverting-opamp.svg" />
-Op-amps are very useful devices in electronics and can be very helpful when 
-interfacing analog and digital technologies in embedded systems.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded control gpio'>
-	<h2><a href="/embedded%20design%20tips/2013/10/26/Tips-Controlling-a-Solenoid">Controlling a Solenoid</a> <small>2013-10-26</small></h2>
-	<p><p><img class="post_image" src="/images/solenoid-ckt.png" />
-Many products use solenoids to open and close valves. A microcontroller 
-can control solenoids programmatically using a GPIO pin and a simple circuit. </p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded gpio circuit microcontroller popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/25/Tips-Using-Pull-Up-and-Pull-Down-Resistors">Using Pull-Up and Pull-Down Resistors</a> <small>2013-10-25</small></h2>
-	<p><p><img class="post_image" src="/images/pullup.png" />
-An embedded microcontroller utilizes input/output (IO) signals to 
-communicate with the outside world.  The simplest form of IO is 
-commonly referred to as general purpose input/output (GPIO) where 
-the GPIO voltage level can be high, low, or high-impedance.  Pulling 
-resistors are used to ensure GPIO is always in a valid state.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded circuit led control'>
-	<h2><a href="/embedded%20design%20tips/2013/10/24/Tips-Using-LEDs-in-Embedded-Designs">Using LEDs in Embedded Designs</a> <small>2013-10-24</small></h2>
-	<p><p><img class="post_image_tall" src="/images/LED-circuit.png" />
-LEDs are a common element of many embedded designs.  Though the devices are 
-simple; their implementation is not always simplistic.  Optimizing LED cost 
-and performance includes ensuring the driving circuitry is providing the 
-correct voltage and current.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded c doxygen programming'>
-	<h2><a href="/embedded%20design%20tips/2013/10/23/Tips-Using-Doxygen-with-C">Using Doxygen with C</a> <small>2013-10-23</small></h2>
-	<p><p><img class="post_image" src="/images/cdoxygen-arch.png" />
-Doxygen is a free source code documentation tool.  It automatically 
-decomposes a software design when using an object-oriented programming 
-language such as C++ or Java.  When using C, however, there is no natural 
-break-down of the code so the developer must create groups (or modules) within 
-Doxygen to show a definitive decomposition of the design.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded usb programming microcontroller serial'>
-	<h2><a href="/embedded%20design%20tips/2013/10/22/Tips-USB-Virtual-Serial-Port-Firmware">USB Virtual Serial Port Firmware</a> <small>2013-10-22</small></h2>
-	<p><p><img class="post_image" src="/images/usb-cdc-desc.svg" />
-Desktop communication to embedded devices is critical for programming and 
-debugging.  It is also important in production for data acquisition devices 
-and other computer peripherals.  Setting up a device as a virtual serial port 
-using USB is a great solution for transferring data between desktop computers 
-and embedded systems.  It can be connected to most desktop operating systems 
-(Windows, Mac OS X, and Linux) without installing or developing any USB drivers.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded microcontroller gpio programming'>
-	<h2><a href="/embedded%20design%20tips/2013/10/21/Tips-Understanding-Microcontroller-Pin-Input-Output-Modes">Understanding Microcontroller Pin Input/Output Modes</a> <small>2013-10-21</small></h2>
-	<p><p><img class="post_image" src="/images/gpio-output-types.png" />
-General purpose input/output (GPIO) pins on microcontrollers have various modes 
-for both input and output. Input modes may include pull-up or pull-down resistors, 
-hysteresis, or some combination. Output modes can be push-pull, high-drive or open-drain.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded circuit sensor filter adc programming'>
-	<h2><a href="/embedded%20design%20tips/2013/10/19/Tips-Sensing-the-Source-Current-in-an-Embedded-Application">Sensing the Source Current in an Embedded Application</a> <small>2013-10-19</small></h2>
-	<p><p><img class="post_image" src="/images/currentsense.png" />
-This is a simple, low-cost way to measure the current output at the power 
-source of an embedded system using a microcontroller’s ADC input.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded c programming popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/18/Tips-RAM-Flash-Usage-in-Embedded-C-Programs">RAM/Flash Usage in Embedded C Programs</a> <small>2013-10-18</small></h2>
-	<p><p><img class="post_image" src="/images/flash-map.svg" />
-In embedded designs, memory, especially RAM, is a precious 
-resource.  Understanding how C allocates variables in memory 
-is crucial to getting the best use of memory in embedded systems.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded control pwm pid motor programming circuit popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/15/Tips-Motor-Control-using-PWM-and-PID">Motor Control using PWM and PID</a> <small>2013-10-15</small></h2>
-	<p><p><img class="post_image" src="/images/h-bridge.png" />
-Bi-directional motor control can be done using an H-bridge circuit 
-with pulse-width modulation (PWM) from a microcontroller to vary 
-the speed. Several design challenges include preventing shoot-through, implementing 
-a snubber circuit, as well as open and closed loop (such as PID) control 
-mechanisms.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded microcontroller circuit'>
-	<h2><a href="/embedded%20design%20tips/2013/10/14/Tips-How-Microcontrollers-Work">How Microcontrollers Work</a> <small>2013-10-14</small></h2>
-	<p><p><img class="post_image_tall" src="/images/sili-atom.svg" />
-Microcontrollers are small computers that contain a central processor, memory, 
-and input/output circuitry all on one integrated chiComputers in general 
-contain all these components with varying degrees of integration. Most people 
-are familiar with the CPU acronym which refers to the central processing 
-unit. The core of a microcontroller is also a central processing unit and is 
-also the focus of this article.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded cortex-m3 fft filter popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/13/Tips-FFT-on-the-ARM-Cortex-M3">FFT on the ARM Cortex M3</a> <small>2013-10-13</small></h2>
-	<p><p><img class="post_image" src="/images/DIT-FFT-butterfly.png" />
-The ARM Cortex-M3 combined with a Fast Fourier Transform (FFT) implementation 
-is a powerful, embedded digital signal processing (DSP) solution.  The ARM 
-Cortex-M3 is a mid-range microcontroller architecture with clock speeds 
-over 100MHz and a powerful arithmetic logic unit (ALU).  The FFT, a useful 
-tool in many DSP applications, utilizes these features enabling the ARM 
-Cortex-M3 to be a suitable replacement for dedicated DSP’s in some embedded 
-applications.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded cortex-m3'>
-	<h2><a href="/embedded%20design%20tips/2013/10/12/Tips-Effective-Use-of-ARM-Cortex-M3-SVCall">Effective Use of ARM Cortex-M3 SVCall</a> <small>2013-10-12</small></h2>
-	<p><p>The ARM Cortex-M3 service call (SVCall) can be a tricky feature to integrate in to your system software. It is useful for two things:</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded macosx qt'>
-	<h2><a href="/embedded%20design%20tips/2013/10/11/Tips-Deploying-Qt-Applications-on-Mac-OSX">Deploying Qt Applications on Mac OSX</a> <small>2013-10-11</small></h2>
-	<p><p>Qt is a multi-platform development framework supporting Windows, Mac, and Linux. It is great for 
-creating desktop applications that interact with embedded devices. Though the code runs on multiple 
-platforms deploying a Qt application to different platforms can be challenging.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded circuit power popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/10/Tips-Decoupling-Capacitors">Decoupling Capacitors (and Other Power Rules of Thumb)</a> <small>2013-10-10</small></h2>
-	<p><p><img class="post_image" src="/images/decouple-caps.png" />
-It is ubiquitous in the digital electronics industry to use small capacitors 
-next to power pins.  These capacitors stabilize the power delivered to 
-digital devices and reduce noise.  They are not the only good idea in 
-embedded systems power supply design.  Ferrite beads further attenuate 
-noise on the power supply line while diodes prevent reverse voltage and 
-overvoltage conditions.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded cortex-m3 threads popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/09/Tips-Context-Switching-on-the-Cortex-M3">Context Switching on the Cortex-M3</a> <small>2013-10-09</small></h2>
-	<p><p>The ARM Cortex-M3 architecture is designed with special features to 
-facilitate implementing a pre-emptive RTOS. The system code takes 
-advantage of these features when implementing context switching code.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded compiler gcc'>
-	<h2><a href="/embedded%20design%20tips/2013/10/08/Tips-Building-and-Installing-Autotools">Building and Installing Autotools</a> <small>2013-10-08</small></h2>
-	<p><p>Autotools is a set of tools used to build and manage software builds on 
-multiple platforms.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded gcc compiler linux'>
-	<h2><a href="/embedded%20design%20tips/2013/10/07/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Ubuntu">Building and Installing a Cortex-M3 Compiler on Ubuntu</a> <small>2013-10-07</small></h2>
-	<p><p>GCC is a open source C compiler which can be downloaded, compiled, and 
-installed on Ubuntu.  It is the compiler of choice for CoActionOS.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded gcc compiler macosx'>
-	<h2><a href="/embedded%20design%20tips/2013/10/06/Tips-Building-and-Installing-a-Cortex-M3-Compiler-on-Mac-OS-X">Building and Installing a Cortex-M3 Compiler on Mac OS X</a> <small>2013-10-06</small></h2>
+	<div class='tagged embedded gcc compiler macosx windows ubuntu'>
+	<h2><a href="/embedded%20design%20tips/2016/03/13/Tips-Building-and-Installing-a-Cortex-M-Compiler">Building and Installing a Cortex-M Compiler on Mac, Windows or Linux</a> <small>2016-03-13</small></h2>
 	<p><p>GCC is a open source C compiler which can be downloaded, compiled, and installed on Mac OS X.  It is 
-the compiler of choice for CoActionOS, and an excellent general purpose ARM Cortex-M3 compiler.</p>
-
-<p>To install GCC for the ARM Cortex M3 architecture on a computer running Mac OS X (10.5 or higher), you 
-must have XCode installed.  Also, ensure the following packages (or their equivalents are installed): flex, 
-bison, libgmp3, libppl, libmpfr, autoconf, automake, texinfo, libmpc, and  build-essential.  These 
-packages can be installed using Fink or Macports.  Once the pre-requisite packages are installed, the 
-binutils, GCC, and newlib source files must be downloaded and extracted.</p>
+the compiler of choice for Stratify OS, and an excellent general purpose ARM Cortex-M3 compiler.</p>
 
 </p>
 	<hr>
 	</div>
 
-	<div class='tagged embedded gcc compiler windows'>
-	<h2><a href="/embedded%20design%20tips/2013/10/05/Tips-Building-and-Installing-a-Cortex-M3-Compiler-in-Windows">Building and Installing a Cortex-M3 Compiler in Windows</a> <small>2013-10-05</small></h2>
-	<p><p>GCC is a open source C compiler which can be downloaded, compiled, and 
-installed on Windows.  It is the compiler of choice for CoActionOS.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded filter iir programming popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/04/Tips-An-Easy-to-Use-Digital-Filter">An Easy-to-Use Digital Filter</a> <small>2013-10-04</small></h2>
-	<p><p><img class="post_image_tall" src="/images/316px-Fourier_Series.png" />
-The exponential moving average (EMA) is a type of infinite impulse response (IIR) filter 
-that can be used in many embedded DSP applications.  It requires only a small amount 
-of RAM and computing power.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded adc lookup-table c programming'>
-	<h2><a href="/embedded%20design%20tips/2013/10/03/Tips-ADC-Thermistor-Circuit-and-Lookup-Table">ADC Thermistor Circuit and Lookup Table</a> <small>2013-10-03</small></h2>
-	<p><p><img class="post_image" src="/images/thermistor-circuit.png" />
-Thermistors are simple to integrate in embedded designs but their temperature 
-response can be challenging to interpret.  A lookup table is a convenient way 
-to convert a thermistor’s ADC reading to temperature.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded fifo uart serial microcontroller programming popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation">A FIFO Buffer Implementation</a> <small>2013-10-02</small></h2>
-	<p><p><img class="post_image_tall" src="/images/fifo.png" />
-A FIFO buffer is a useful way of storing data that arrives to a microcontroller peripheral 
-asynchronously but cannot be read immediately.  One example is storing bytes incoming on a 
-UART. Buffering the bytes eases the real-time requirements for the embedded firmware.</p>
-
-</p>
-	<hr>
-	</div>
-
-	<div class='tagged embedded microcontroller popular'>
-	<h2><a href="/embedded%20design%20tips/2013/10/01/Tips-8-vs-16-vs-32-Bit-Microcontrollers">8 vs 16 vs 32 Bit Microcontrollers--A Case Study</a> <small>2013-10-01</small></h2>
-	<p><table class="table table-striped table-bordered">
-<tr>
-	<td><strong>MCU</strong></td>
-	<td><strong>Arch</strong></td>
-	<td><strong>Flash (KB)</strong></td>
-	<td><strong>RAM (KB)</strong></td>
-	<td><strong>Clock (MHz)</strong></td>
-	<td><strong>Current (mA)</strong></td>
-	<td><strong>mA/MHz</strong></td>
-	<td><strong>Price (USD) at 1k</strong></td>
-</tr>
-<tr>
-	<td>LPC1765FBD100,551</td>
-	<td>ARM Cortex-M3 (32)</td>
-	<td>256</td>
-	<td>64</td>
-	<td>100</td>
-	<td>50</td>
-	<td>0.5</td>
-	<td>5.06</td>
-</tr>
-<tr>
-	<td>ATxmega128A1</td>
-	<td>AVR (8)</td>
-	<td>128</td>
-	<td>8</td>
-	<td>32</td>
-	<td>20</td>
-	<td>0.63</td>
-	<td>6.05</td>
-</tr>
-<tr>
-	<td>MSP430F5436AIPZR</td>
-	<td>MSP430 (16)</td>
-	<td>192</td>
-	<td>16</td>
-	<td>25</td>
-	<td>10</td>
-	<td>0.4</td>
-	<td>4.797</td>
-</tr>
-<tr>
-	<td>PIC32MX340F128L-80I/PT</td>
-	<td>PIC32 (32)</td>
-	<td>128</td>
-	<td>32</td>
-	<td>80</td>
-	<td>55</td>
-	<td>0.69</td>
-	<td>4.82</td>
-</tr>
-<tr>
-	<td>STM32F103VBT6</td>
-	<td>ARM Cortex-M3 (32)</td>
-	<td>128</td>
-	<td>20</td>
-	<td>72</td>
-	<td>33</td>
-	<td>0.46</td>
-	<td>4.29</td>
-</tr>
-</table>
-<p>Traditional microcontroller projects have been based on 8-bit architectures.  However, 16-bit and 32-bit architectures (such as the ARM Cortex-M3) are becoming very attractive alternatives with competitive pricing and power consumption requirements.</p>
-
-</p>
-	<hr>
-	</div>
-
-			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<h2><i class="fa fa-filter"></i> Filter
 			<button id="all" class="btn btn-default pull-right"><i class="fa fa-refresh"></i></button>
 			</h2>
@@ -553,59 +133,15 @@ UART. Buffering the bytes eases the real-time requirements for the embedded firm
   
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="coaction"><button type="button" class="btn btn-lg btn-default">coaction</button></li>
-	   	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="downloads"><button type="button" class="btn btn-xs btn-default">downloads</button></li>
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="embedded"><button type="button" class="btn btn-default">embedded</button></li>
     	
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="embedded"><button type="button" class="btn btn-lg btn-default">embedded</button></li>
-	   	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="microcontroller"><button type="button" class="btn btn-sm btn-default">microcontroller</button></li>
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="tutorial"><button type="button" class="btn btn-sm btn-default">tutorial</button></li>
     	
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="popular"><button type="button" class="btn btn-default">popular</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="fifo"><button type="button" class="btn btn-xs btn-default">fifo</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="uart"><button type="button" class="btn btn-xs btn-default">uart</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="serial"><button type="button" class="btn btn-xs btn-default">serial</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="programming"><button type="button" class="btn btn-sm btn-default">programming</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="adc"><button type="button" class="btn btn-xs btn-default">adc</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="lookup-table"><button type="button" class="btn btn-xs btn-default">lookup-table</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="c"><button type="button" class="btn btn-xs btn-default">c</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="filter"><button type="button" class="btn btn-xs btn-default">filter</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="iir"><button type="button" class="btn btn-xs btn-default">iir</button></li>
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="popular"><button type="button" class="btn btn-xs btn-default">popular</button></li>
     	
      
     	
@@ -617,107 +153,15 @@ UART. Buffering the bytes eases the real-time requirements for the embedded firm
     	
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="windows"><button type="button" class="btn btn-xs btn-default">windows</button></li>
-    	
-     
-    	
     		<li class="tag-list-item" style="margin-bottom: 0.3em" id="macosx"><button type="button" class="btn btn-xs btn-default">macosx</button></li>
     	
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="linux"><button type="button" class="btn btn-xs btn-default">linux</button></li>
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="windows"><button type="button" class="btn btn-xs btn-default">windows</button></li>
     	
      
     	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="cortex-m3"><button type="button" class="btn btn-xs btn-default">cortex-m3</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="threads"><button type="button" class="btn btn-xs btn-default">threads</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="circuit"><button type="button" class="btn btn-sm btn-default">circuit</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="power"><button type="button" class="btn btn-xs btn-default">power</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="qt"><button type="button" class="btn btn-xs btn-default">qt</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="fft"><button type="button" class="btn btn-xs btn-default">fft</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="control"><button type="button" class="btn btn-sm btn-default">control</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="pwm"><button type="button" class="btn btn-xs btn-default">pwm</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="pid"><button type="button" class="btn btn-xs btn-default">pid</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="motor"><button type="button" class="btn btn-xs btn-default">motor</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="sensor"><button type="button" class="btn btn-xs btn-default">sensor</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="gpio"><button type="button" class="btn btn-xs btn-default">gpio</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="usb"><button type="button" class="btn btn-xs btn-default">usb</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="doxygen"><button type="button" class="btn btn-xs btn-default">doxygen</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="led"><button type="button" class="btn btn-xs btn-default">led</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="tutorial"><button type="button" class="btn btn-lg btn-default">tutorial</button></li>
-	   	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="spi"><button type="button" class="btn btn-xs btn-default">spi</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="i2c"><button type="button" class="btn btn-xs btn-default">i2c</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="signals"><button type="button" class="btn btn-xs btn-default">signals</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="user-guide"><button type="button" class="btn btn-sm btn-default">user-guide</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="javascript"><button type="button" class="btn btn-xs btn-default">javascript</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="bootstrap"><button type="button" class="btn btn-xs btn-default">bootstrap</button></li>
-    	
-     
-    	
-    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="arm"><button type="button" class="btn btn-xs btn-default">arm</button></li>
+    		<li class="tag-list-item" style="margin-bottom: 0.3em" id="ubuntu"><button type="button" class="btn btn-xs btn-default">ubuntu</button></li>
     	
     
   
