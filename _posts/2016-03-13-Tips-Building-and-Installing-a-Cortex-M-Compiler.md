@@ -148,7 +148,6 @@ cd ../gcc
 ../gcc-$GCC_VERSION/configure \
      --disable-werror \
      --target=$ARCH \
-     --with-mode=thumb \
      --enable-multilib \
      --with-newlib \
      --enable-languages="c,c++" \
@@ -158,8 +157,6 @@ cd ../gcc
      --program-prefix=$PROGPREFIX \
      --prefix=$TOOLSPATH \
      --with-gmp=$TOOLSPATH \
-     --with-ppl=$TOOLSPATH \
-     --with-no-thumb-interwork \
      --enable-target-optspace \
      --disable-libssp \
      CC=clang 

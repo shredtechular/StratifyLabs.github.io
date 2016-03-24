@@ -4,7 +4,7 @@
  <title>Stratify Labs</title>
  <link href="http://stratifylabs.co/" rel="self"/>
  <link href="http://stratifylabs.co"/>
- <updated>2016-03-15T13:54:56-06:00</updated>
+ <updated>2016-03-17T00:08:48-06:00</updated>
  <id>http://stratifylabs.co</id>
  <author>
    <name>Stratify Labs, Inc</name>
@@ -161,7 +161,6 @@ cd ../gcc
 ../gcc-$GCC_VERSION/configure \
      --disable-werror \
      --target=$ARCH \
-     --with-mode=thumb \
      --enable-multilib \
      --with-newlib \
      --enable-languages=&quot;c,c++&quot; \
@@ -171,8 +170,6 @@ cd ../gcc
      --program-prefix=$PROGPREFIX \
      --prefix=$TOOLSPATH \
      --with-gmp=$TOOLSPATH \
-     --with-ppl=$TOOLSPATH \
-     --with-no-thumb-interwork \
      --enable-target-optspace \
      --disable-libssp \
      CC=clang 

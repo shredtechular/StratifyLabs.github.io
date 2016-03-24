@@ -5,8 +5,8 @@
         <description>Stratify Labs - Stratify Labs, Inc</description>
         <link>http://stratifylabs.co</link>
         <link>http://stratifylabs.co</link>
-        <lastBuildDate>2016-03-15T13:54:56-06:00</lastBuildDate>
-        <pubDate>2016-03-15T13:54:56-06:00</pubDate>
+        <lastBuildDate>2016-03-17T00:08:48-06:00</lastBuildDate>
+        <pubDate>2016-03-17T00:08:48-06:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -156,7 +156,6 @@ cd ../gcc
 ../gcc-$GCC_VERSION/configure \
      --disable-werror \
      --target=$ARCH \
-     --with-mode=thumb \
      --enable-multilib \
      --with-newlib \
      --enable-languages=&quot;c,c++&quot; \
@@ -166,8 +165,6 @@ cd ../gcc
      --program-prefix=$PROGPREFIX \
      --prefix=$TOOLSPATH \
      --with-gmp=$TOOLSPATH \
-     --with-ppl=$TOOLSPATH \
-     --with-no-thumb-interwork \
      --enable-target-optspace \
      --disable-libssp \
      CC=clang 
