@@ -1,5 +1,0 @@
-<map id="Usb" name="Usb">
-<area shape="rect" id="node2" href="$class_pblock.html" title="Peripheral Block Class. " alt="" coords="20,465,101,538"/>
-<area shape="rect" id="node3" href="$class_periph.html" title="Peripheral Class. " alt="" coords="11,182,111,415"/>
-<area shape="rect" id="node4" href="$class_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="29,6,93,133"/>
-</map>
