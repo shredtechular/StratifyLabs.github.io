@@ -1,6 +1,0 @@
-<map id="Brsp" name="Brsp">
-<area shape="rect" id="node2" href="$class_uart.html" title="UART Class. " alt="" coords="14,718,103,927"/>
-<area shape="rect" id="node3" href="$class_pchar.html" title="Peripheral Character Class. " alt="" coords="18,571,99,669"/>
-<area shape="rect" id="node4" href="$class_periph.html" title="Peripheral Class. " alt="" coords="14,201,103,522"/>
-<area shape="rect" id="node5" href="$class_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="26,6,91,151"/>
-</map>
