@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_font.html" title="Font class. " alt="" coords="5,5,53,30"/>
+<area shape="rect" id="node2" href="$class_m_font.html" title="Monochrome Font. " alt="" coords="101,5,160,30"/>
+<area shape="rect" id="node3" href="$class_m_b_font.html" title="Monochrome Bitmap Font class. " alt="" coords="209,5,277,30"/>
+<area shape="rect" id="node4" href="$class_font8.html" title="Bitmap Fonts (used with LCDs) " alt="" coords="326,5,381,30"/>
+</map>

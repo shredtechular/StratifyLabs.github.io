@@ -1,0 +1,5 @@
+<map id="Brsp" name="Brsp">
+<area shape="rect" id="node2" href="$class_uart.html" title="UART Class. " alt="" coords="14,425,103,605"/>
+<area shape="rect" id="node3" href="$class_pchar.html" title="Peripheral Character Class. " alt="" coords="18,289,99,375"/>
+<area shape="rect" id="node4" href="$class_periph.html" title="Peripheral Class. " alt="" coords="9,6,108,239"/>
+</map>

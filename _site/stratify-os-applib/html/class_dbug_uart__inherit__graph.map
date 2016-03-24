@@ -1,0 +1,6 @@
+<map id="DbugUart" name="DbugUart">
+<area shape="rect" id="node2" href="$class_dbug.html" title="Debug Class. " alt="" coords="5,425,112,618"/>
+<area shape="rect" id="node3" href="$class_uart.html" title="UART Class. " alt="" coords="136,431,225,611"/>
+<area shape="rect" id="node4" href="$class_pchar.html" title="Peripheral Character Class. " alt="" coords="141,289,221,375"/>
+<area shape="rect" id="node5" href="$class_periph.html" title="Peripheral Class. " alt="" coords="131,6,231,239"/>
+</map>
