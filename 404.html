@@ -1,19 +1,16 @@
 ---
-layout: post
-title:  Not Found
-tagline: Sorry (404 Error)
+layout: utilitypage
+title: Not Found
+tagline: Page Not Found
+sections:
+ intro: 404
+ brief: Oops.  We couldn't find the page you wanted.
+ icon: fa fa-exclamation-triangle fa-5x
 ---
 
-The page you are looking for has probably been moved.  Here is a list of the most 
-popular posts:
-<ul>
-{% assign pages_list = site.tags["popular"] %}  
-{% include JB/pages_list %}
-</ul>
 
-If what you are looking for is not in the list above, try these links:
-<ul>
-<li><a href="{{ BASE_URL }}/tips.html">Embedded Design Tips</a></li>
-<li><a href="{{ BASE_URL }}/">CoActionOS Home</a></li>
-</ul>
+<h1>Oh Well</h1>
 
+That's OK.  There is a lot of great stuff on the site still.  Feel free to have a look around.
+
+{% include themes/twitter/signup.html %}
