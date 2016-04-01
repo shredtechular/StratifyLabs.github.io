@@ -23,24 +23,23 @@ title: Stratify OS Docs
 <div class="textblock"><p><small>This is the <b>Stratify Application Library</b> documentation. If you consider yourself an expert, you can check out the <a href="../../StratifyOS/html/">Stratify OS documentation</a>.</small></p>
 <h1><a class="anchor" id="INTRO"></a>
 Introduction</h1>
-<p>If you want to explore the docs, here are some commonly used classes:</p>
+<p>Here are some useful namespaces to check out:</p>
 <ul>
-<li><a class="el" href="class_hal_1_1_uart.html">Hal::Uart</a> - access to UART hardware</li>
-<li><a class="el" href="class_hal_1_1_pin.html">Hal::Pin</a> - read and write pin values</li>
-<li><a class="el" href="class_var_1_1_string.html">Var::String</a> - string manipulation</li>
-<li><a class="el" href="class_sys_1_1_timer.html">Sys::Timer</a> - Timing and delays</li>
-</ul>
-<p>Also check out these namespaces:</p>
-<ul>
-<li><a class="el" href="namespace_hal.html">Hal</a> - Hardware Abstraction Layer</li>
-<li><a class="el" href="namespace_calc.html">Calc</a> - Useful software algorithms</li>
-<li><a class="el" href="namespace_draw.html">Draw</a> - Drawing on an LCD</li>
-<li><a class="el" href="namespace_fmt.html">Fmt</a> - Common file formats</li>
-<li><a class="el" href="namespace_sys.html">Sys</a> - Access to timers and files and such</li>
-<li><a class="el" href="namespace_var.html">Var</a> - Variable storage in data and strings</li>
+<li><a class="el" href="namespace_hal.html" title="Hardware Abstraction Layer. ">Hal</a> - Hardware Abstraction Layer</li>
+<li><a class="el" href="namespace_calc.html" title="Standard Calculation and Software Routines. ">Calc</a> - Useful software algorithms</li>
+<li><a class="el" href="namespace_draw.html" title="Drawing Routines. ">Draw</a> - Drawing on an LCD</li>
+<li><a class="el" href="namespace_fmt.html" title="Standard Data Formats. ">Fmt</a> - Common file formats</li>
+<li><a class="el" href="namespace_sys.html" title="System and Kernel Access (including POSIX abstraction) ">Sys</a> - Access to timers and files and such</li>
+<li><a class="el" href="namespace_var.html" title="Var is a collection of volatile data storage mechanisms and routines such as buffers and strings...">Var</a> - Variable storage in data and strings</li>
 </ul>
 <p>You can also use standard <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___p_o_s_i_x.html">POSIX</a> and <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___s_t_d_c.html">C Standard Library</a> functions.</p>
-<p>Here are a couple of examples to give you an idea about how things work.</p>
+<p>Here are a couple of examples to give you an idea about how things work. These are the objects used in the examples.</p>
+<ul>
+<li><a class="el" href="class_hal_1_1_uart.html" title="UART Class. ">Hal::Uart</a> - access to UART hardware</li>
+<li><a class="el" href="class_hal_1_1_pin.html" title="Pin class. ">Hal::Pin</a> - read and write pin values</li>
+<li><a class="el" href="class_var_1_1_string.html" title="String class. ">Var::String</a> - string manipulation</li>
+<li><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Sys::Timer</a> - Timing and delays</li>
+</ul>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span> <span class="comment">//this will include all namespace classes and add the namespace i.e. &quot;using namespace Hal;&quot;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line"> Pin p(2, 10);</div><div class="line"> Pin button(2,9);</div><div class="line"> p.init(Pin::OUTPUT); <span class="comment">//open the port and configure pin 10 as an output</span></div><div class="line"> button.init(Pin::INPUT | Pin::PULLUP); <span class="comment">//pin 9 is an input (pulled high)</span></div><div class="line"></div><div class="line"> <span class="comment">//toggle p until the button is pressed</span></div><div class="line"> <span class="keywordflow">while</span>( button.value() != 0 ){</div><div class="line">     p = <span class="keyword">false</span>;</div><div class="line">     Timer::wait_msec(100);</div><div class="line">     p = <span class="keyword">true</span>;</div><div class="line">     Timer::wait_msec(100);</div><div class="line"> }</div><div class="line"></div><div class="line">     <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --><p>Here is an example of a UART loop back routine.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Var.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line"> Uart uart(0);</div><div class="line">  <span class="keywordtype">int</span> ret;</div><div class="line">  String exitCommand = <span class="stringliteral">&quot;exit&quot;</span>;</div><div class="line">  <span class="keywordtype">bool</span> done = <span class="keyword">false</span>;</div><div class="line"> <span class="keywordtype">char</span> buffer[64];</div><div class="line"> uart.init(115200);</div><div class="line"></div><div class="line"> <span class="comment">//toggle p until the button is pressed</span></div><div class="line"> <span class="keywordflow">while</span>( done == <span class="keyword">false</span> ){</div><div class="line">     <span class="keywordflow">if</span>( (ret = uart.read(buffer,64)) &gt; 0 ){</div><div class="line">          <span class="keywordflow">if</span>( exitCommand == buffer ){</div><div class="line">               done = <span class="keyword">true</span>;</div><div class="line">          }</div><div class="line">          uart.write(buffer, ret);</div><div class="line">     }</div><div class="line"> }</div><div class="line"></div><div class="line">     <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --><p>The best way to learn is to get started. </p>
 </div></div><!-- contents -->

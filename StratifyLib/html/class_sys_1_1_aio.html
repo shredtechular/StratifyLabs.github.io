@@ -28,80 +28,20 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="class_sys_1_1_aio-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Sys::Aio Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Asynchronous IO Class.  
- <a href="class_sys_1_1_aio.html#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>The Asynchronous IO class is used for performing asynchronous operations on hardware devices. When calling synchronous IO, the read/write function is called and then returns when the operation is complete. With Asynchronous IO, the read/write function returns immediately and the <a class="el" href="class_sys_1_1_aio.html" title="Asynchronous IO Class. ">Aio</a> class can be used to see when the operation completes.</p>
 <p>On Stratify OS, synchronous operations will always cause the running thread to yield the processor. This can be avoided by using the <a class="el" href="class_sys_1_1_aio.html" title="Asynchronous IO Class. ">Aio</a> class. Consider the following example:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Var.hpp&gt;</span></div><div class="line"></div><div class="line">String <a class="code" href="class_sys_1_1_aio.html#a3327997737fb60c28296e646192f5c0d">buf</a> = <span class="stringliteral">&quot;Hello World!\n&quot;</span>;</div><div class="line">Uart uart(0); <span class="comment">//we will read/write data to UART port 0</span></div><div class="line"><a class="code" href="class_sys_1_1_aio.html#af5415930b1f618f08b151a0c7196a4cd">Aio</a> aio(buf.data(), buf.size()); <span class="comment">//aio uses buf as it&#39;s data</span></div><div class="line"></div><div class="line">uart.init(2400); <span class="comment">//init the UART with baudrate 2400</span></div><div class="line"></div><div class="line"> <span class="comment">//First a synchronous write</span></div><div class="line">uart.write(buf.c_str(), buf.size());  <span class="comment">//this will return when the bytes are written</span></div><div class="line"> <span class="comment">//While bytes are writing, the processor will be used on another thread</span></div><div class="line"></div><div class="line"> <span class="comment">//Now the AIO version</span></div><div class="line">uart.write(aio);</div><div class="line"> <span class="comment">//This thread keeps the processor -- so we can do something else in parallel</span></div><div class="line"></div><div class="line"><span class="keywordflow">while</span>( aio.done() == false ){</div><div class="line">  <a class="code" href="class_sys_1_1_timer.html#a89d5264da473f13dd535b15f09f22455">Timer::wait_msec</a>(5); <span class="comment">//wait for the opeation to complete</span></div><div class="line">}</div></div><!-- fragment --><p>You can read <a href="/projects/coactionos/wiki/Stratify OS_Tutorial--Async_IO">this tutorial</a>. for another example. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af5415930b1f618f08b151a0c7196a4cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5415930b1f618f08b151a0c7196a4cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#af5415930b1f618f08b151a0c7196a4cd">Aio</a> (volatile void *<a class="el" href="class_sys_1_1_aio.html#a3327997737fb60c28296e646192f5c0d">buf</a>, int <a class="el" href="class_sys_1_1_aio.html#a49d455f65077e6287aba2e08c018da0d">nbytes</a>, int <a class="el" href="class_sys_1_1_aio.html#a0adb1cb077cdb3d9bd67879958ffd231">offset</a>=0)</td></tr>
-<tr class="memdesc:af5415930b1f618f08b151a0c7196a4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare an <a class="el" href="class_sys_1_1_aio.html" title="Asynchronous IO Class. ">Aio</a> object. <br /></td></tr>
-<tr class="separator:af5415930b1f618f08b151a0c7196a4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a772cda9812e86abc7a3afe2e90252b47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a772cda9812e86abc7a3afe2e90252b47"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a772cda9812e86abc7a3afe2e90252b47">suspend</a> (int timeout_usec=0)</td></tr>
-<tr class="memdesc:a772cda9812e86abc7a3afe2e90252b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Block until the operation completes or timeout is reached. <br /></td></tr>
-<tr class="separator:a772cda9812e86abc7a3afe2e90252b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3327997737fb60c28296e646192f5c0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3327997737fb60c28296e646192f5c0d"></a>
-volatile void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a3327997737fb60c28296e646192f5c0d">buf</a> (void) const </td></tr>
-<tr class="memdesc:a3327997737fb60c28296e646192f5c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the buffer pointer. <br /></td></tr>
-<tr class="separator:a3327997737fb60c28296e646192f5c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dc2288f53119cb07beabb673c71ad69"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4dc2288f53119cb07beabb673c71ad69"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a4dc2288f53119cb07beabb673c71ad69">setbuf</a> (volatile void *<a class="el" href="class_sys_1_1_aio.html#a3327997737fb60c28296e646192f5c0d">buf</a>)</td></tr>
-<tr class="memdesc:a4dc2288f53119cb07beabb673c71ad69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the buffer pointer. <br /></td></tr>
-<tr class="separator:a4dc2288f53119cb07beabb673c71ad69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49d455f65077e6287aba2e08c018da0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49d455f65077e6287aba2e08c018da0d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a49d455f65077e6287aba2e08c018da0d">nbytes</a> (void) const </td></tr>
-<tr class="memdesc:a49d455f65077e6287aba2e08c018da0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of bytes to transfer. <br /></td></tr>
-<tr class="separator:a49d455f65077e6287aba2e08c018da0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b7002620eb37ad0eafa9f610225cdf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12b7002620eb37ad0eafa9f610225cdf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a12b7002620eb37ad0eafa9f610225cdf">setnbytes</a> (int <a class="el" href="class_sys_1_1_aio.html#a49d455f65077e6287aba2e08c018da0d">nbytes</a>)</td></tr>
-<tr class="memdesc:a12b7002620eb37ad0eafa9f610225cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of bytes to transfer. <br /></td></tr>
-<tr class="separator:a12b7002620eb37ad0eafa9f610225cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0adb1cb077cdb3d9bd67879958ffd231"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0adb1cb077cdb3d9bd67879958ffd231"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a0adb1cb077cdb3d9bd67879958ffd231">offset</a> (void) const </td></tr>
-<tr class="memdesc:a0adb1cb077cdb3d9bd67879958ffd231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the offset (or channel for Dac, Adc, Pwm, etc) <br /></td></tr>
-<tr class="separator:a0adb1cb077cdb3d9bd67879958ffd231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48feb2f48f3f708cc4a43ac4275c5838"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48feb2f48f3f708cc4a43ac4275c5838"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a48feb2f48f3f708cc4a43ac4275c5838">setoffset</a> (int <a class="el" href="class_sys_1_1_aio.html#a0adb1cb077cdb3d9bd67879958ffd231">offset</a>)</td></tr>
-<tr class="memdesc:a48feb2f48f3f708cc4a43ac4275c5838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the offset (or channcel for Dac, Adc, Pwm, etc) <br /></td></tr>
-<tr class="separator:a48feb2f48f3f708cc4a43ac4275c5838"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af58e10280a20d417338d8442e0c781f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af58e10280a20d417338d8442e0c781f7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#af58e10280a20d417338d8442e0c781f7">ret</a> (void)</td></tr>
-<tr class="memdesc:af58e10280a20d417338d8442e0c781f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the return value of the operation. <br /></td></tr>
-<tr class="separator:af58e10280a20d417338d8442e0c781f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af12baa1a294f5abb229cd1794225d9cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af12baa1a294f5abb229cd1794225d9cb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#af12baa1a294f5abb229cd1794225d9cb">error</a> (void)</td></tr>
-<tr class="memdesc:af12baa1a294f5abb229cd1794225d9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the error number of the operation. <br /></td></tr>
-<tr class="separator:af12baa1a294f5abb229cd1794225d9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5535ff28e2212cac0bb6c48561b48a60"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5535ff28e2212cac0bb6c48561b48a60"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a5535ff28e2212cac0bb6c48561b48a60">done</a> (void) const </td></tr>
-<tr class="memdesc:a5535ff28e2212cac0bb6c48561b48a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check to see if operation is complete. <br /></td></tr>
-<tr class="separator:a5535ff28e2212cac0bb6c48561b48a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a8de4fd39e3ff876b9859b039650fe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#a3a8de4fd39e3ff876b9859b039650fe8">signal</a> (int number, int value)</td></tr>
-<tr class="memdesc:a3a8de4fd39e3ff876b9859b039650fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a signal when the operation completes.  <a href="#a3a8de4fd39e3ff876b9859b039650fe8">More...</a><br /></td></tr>
 <tr class="separator:a3a8de4fd39e3ff876b9859b039650fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee187a225219dc96e1bd3cdf192e482a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee187a225219dc96e1bd3cdf192e482a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#aee187a225219dc96e1bd3cdf192e482a">inprogress</a> (void) const </td></tr>
-<tr class="memdesc:aee187a225219dc96e1bd3cdf192e482a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check to see if operation is still in progress. <br /></td></tr>
-<tr class="separator:aee187a225219dc96e1bd3cdf192e482a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1a6d9639dce516750b689d0ea728a47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1a6d9639dce516750b689d0ea728a47"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_aio.html#aa1a6d9639dce516750b689d0ea728a47">suspend</a> (struct <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structaiocb.html">aiocb</a> *const list[], int nent, int timeout_usec=0)</td></tr>
-<tr class="memdesc:aa1a6d9639dce516750b689d0ea728a47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Block until all transfers in list have completed or timeout is reached. <br /></td></tr>
-<tr class="separator:aa1a6d9639dce516750b689d0ea728a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a3a8de4fd39e3ff876b9859b039650fe8"></a>
@@ -135,6 +75,8 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send a signal when the operation completes. </p>
 <p>This method will cause the thread to receive a signal when the operation completes.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

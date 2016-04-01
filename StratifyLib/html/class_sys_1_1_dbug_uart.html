@@ -33,107 +33,30 @@ title: Stratify OS Docs
 <div class="title">Sys::DbugUart Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Debug UART Class.  
- <a href="class_sys_1_1_dbug_uart.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Sys::DbugUart:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_sys_1_1_dbug_uart__inherit__graph.svg" width="234" height="840"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class uses <a class="el" href="class_sys_1_1_dbug.html" title="Debug Class. ">Dbug</a> and Uart classes to create a concrete debugging class. The following is an example of how to use the debugger: </p><div class="fragment"><div class="line">DbugUart d(0); <span class="comment">//use UART port 0 for debugging</span></div><div class="line">d.init(); <span class="comment">//initialize the UART (only do this ONCE for all instances)</span></div><div class="line">d.setmode(<a class="code" href="class_sys_1_1_dbug.html#ac4b86fb7f79894221ccfb2abbfa66480a52f8e9cfcbc00d4a26901c798f78e18c">Dbug::DECIMAL</a>, 8); <span class="comment">//decimal mode with 8 leading zeros</span></div><div class="line">d &lt;&lt; <span class="stringliteral">&quot;My number in DECIMAL &quot;</span> &lt;&lt; 1123 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div><div class="line">d.setmode(<a class="code" href="class_sys_1_1_dbug.html#ac4b86fb7f79894221ccfb2abbfa66480a186ae87ed5bbf30c4bd79ac8561fdaae">Dbug::BINARY</a>, 8); <span class="comment">//decimal mode with 8 leading zeros</span></div><div class="line">d &lt;&lt; <span class="stringliteral">&quot;My number in BINARY &quot;</span> &lt;&lt; 1123 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3070ea79d0994edffc492e072f8ed287"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3070ea79d0994edffc492e072f8ed287"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug_uart.html#a3070ea79d0994edffc492e072f8ed287">open</a> (int <a class="el" href="class_sys_1_1_dbug.html#ac4b86fb7f79894221ccfb2abbfa66480">mode</a>=0)</td></tr>
-<tr class="memdesc:a3070ea79d0994edffc492e072f8ed287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open the UART port. <br /></td></tr>
-<tr class="separator:a3070ea79d0994edffc492e072f8ed287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0e773119ffe8d23b5d9589e8254afdf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug_uart.html#ac0e773119ffe8d23b5d9589e8254afdf">close</a> (void)</td></tr>
-<tr class="memdesc:ac0e773119ffe8d23b5d9589e8254afdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#ac0e773119ffe8d23b5d9589e8254afdf">More...</a><br /></td></tr>
 <tr class="separator:ac0e773119ffe8d23b5d9589e8254afdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af33bed2676cf5336cf6c15c81f706933"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af33bed2676cf5336cf6c15c81f706933"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug_uart.html#af33bed2676cf5336cf6c15c81f706933">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="memdesc:af33bed2676cf5336cf6c15c81f706933"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device. <br /></td></tr>
-<tr class="separator:af33bed2676cf5336cf6c15c81f706933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_sys_1_1_dbug"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_sys_1_1_dbug')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_sys_1_1_dbug.html">Sys::Dbug</a></td></tr>
 <tr class="memitem:a96b32eac1a2dbdcc63c210cded1a72c9 inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#a96b32eac1a2dbdcc63c210cded1a72c9">setmode</a> (<a class="el" href="class_sys_1_1_dbug.html#ac4b86fb7f79894221ccfb2abbfa66480">Dbug::mode</a> <a class="el" href="class_sys_1_1_dbug.html#ac4b86fb7f79894221ccfb2abbfa66480">mode</a>, int width=0)</td></tr>
-<tr class="memdesc:a96b32eac1a2dbdcc63c210cded1a72c9 inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">See detail below.  <a href="#a96b32eac1a2dbdcc63c210cded1a72c9">More...</a><br /></td></tr>
 <tr class="separator:a96b32eac1a2dbdcc63c210cded1a72c9 inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6049fa4d1cad0acd755565c61e2725e5 inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#a6049fa4d1cad0acd755565c61e2725e5">puts</a> (const char *s)</td></tr>
-<tr class="memdesc:a6049fa4d1cad0acd755565c61e2725e5 inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#a6049fa4d1cad0acd755565c61e2725e5">More...</a><br /></td></tr>
 <tr class="separator:a6049fa4d1cad0acd755565c61e2725e5 inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ea7fe905aa122751742852c0f78b63e inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ea7fe905aa122751742852c0f78b63e"></a>
-<a class="el" href="class_sys_1_1_dbug.html">Dbug</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#a4ea7fe905aa122751742852c0f78b63e">operator&lt;&lt;</a> (const char *)</td></tr>
-<tr class="memdesc:a4ea7fe905aa122751742852c0f78b63e inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output a string. <br /></td></tr>
-<tr class="separator:a4ea7fe905aa122751742852c0f78b63e inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1ee0c502c7ea61a3332e9975a0ce230 inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1ee0c502c7ea61a3332e9975a0ce230"></a>
-<a class="el" href="class_sys_1_1_dbug.html">Dbug</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#af1ee0c502c7ea61a3332e9975a0ce230">operator&lt;&lt;</a> (char)</td></tr>
-<tr class="memdesc:af1ee0c502c7ea61a3332e9975a0ce230 inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output a char. <br /></td></tr>
-<tr class="separator:af1ee0c502c7ea61a3332e9975a0ce230 inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95bde73654b9a6966adcbd3fb76d2ee8 inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95bde73654b9a6966adcbd3fb76d2ee8"></a>
-<a class="el" href="class_sys_1_1_dbug.html">Dbug</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#a95bde73654b9a6966adcbd3fb76d2ee8">operator&lt;&lt;</a> (int)</td></tr>
-<tr class="memdesc:a95bde73654b9a6966adcbd3fb76d2ee8 inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output an integer. <br /></td></tr>
-<tr class="separator:a95bde73654b9a6966adcbd3fb76d2ee8 inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acefde838611c97a9e644ec9735769632 inherit pub_methods_class_sys_1_1_dbug"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acefde838611c97a9e644ec9735769632"></a>
-<a class="el" href="class_sys_1_1_dbug.html">Dbug</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_dbug.html#acefde838611c97a9e644ec9735769632">operator&lt;&lt;</a> (unsigned int)</td></tr>
-<tr class="memdesc:acefde838611c97a9e644ec9735769632 inherit pub_methods_class_sys_1_1_dbug"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output an unsigned int. <br /></td></tr>
-<tr class="separator:acefde838611c97a9e644ec9735769632 inherit pub_methods_class_sys_1_1_dbug"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_uart"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_uart')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_uart.html">Hal::Uart</a></td></tr>
-<tr class="memitem:af6c9dd01c97e073d4b0dd378f62d9c83 inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6c9dd01c97e073d4b0dd378f62d9c83"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#af6c9dd01c97e073d4b0dd378f62d9c83">attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structuart__attr__t.html">uart_attr_t</a> *attr)</td></tr>
-<tr class="memdesc:af6c9dd01c97e073d4b0dd378f62d9c83 inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get UART attributes in <em>attr</em>. <br /></td></tr>
-<tr class="separator:af6c9dd01c97e073d4b0dd378f62d9c83 inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace8f30f5dee7644a5c819962a2faea5e inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace8f30f5dee7644a5c819962a2faea5e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#ace8f30f5dee7644a5c819962a2faea5e">setattr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structuart__attr__t.html">uart_attr_t</a> *<a class="el" href="class_hal_1_1_uart.html#af6c9dd01c97e073d4b0dd378f62d9c83">attr</a>)</td></tr>
-<tr class="memdesc:ace8f30f5dee7644a5c819962a2faea5e inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set UART attributes to <em>attr</em>. <br /></td></tr>
-<tr class="separator:ace8f30f5dee7644a5c819962a2faea5e inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfcd314b22467f8abd5960290c1e2fbf inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#adfcd314b22467f8abd5960290c1e2fbf">getbyte</a> (char *c)</td></tr>
-<tr class="memdesc:adfcd314b22467f8abd5960290c1e2fbf inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#adfcd314b22467f8abd5960290c1e2fbf">More...</a><br /></td></tr>
 <tr class="separator:adfcd314b22467f8abd5960290c1e2fbf inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b0b9d00fc9160c4510b128c73e81e76 inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b0b9d00fc9160c4510b128c73e81e76"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#a6b0b9d00fc9160c4510b128c73e81e76">flush</a> (void)</td></tr>
-<tr class="memdesc:a6b0b9d00fc9160c4510b128c73e81e76 inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the TX/RX buffers. <br /></td></tr>
-<tr class="separator:a6b0b9d00fc9160c4510b128c73e81e76 inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a263472ed4f54752f30e3a6e0149c1f2c inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#a263472ed4f54752f30e3a6e0149c1f2c">setattr</a> (int baudrate=19200, int pin_assign=0, int parity=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_a_r_t.html#gga6bcc37e31dd40c204b4ac6f6189e8878aa80d2d8ea61454045ebe71d155e85b3d">UART_PARITY_NONE</a>, int stop=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_a_r_t.html#gga0ed680fdb405e7195d9f14032851eebba4adb27df73696c5fe5cd0960367b04ea">UART_ATTR_STOP_BITS_2</a>, int width=8)</td></tr>
-<tr class="memdesc:a263472ed4f54752f30e3a6e0149c1f2c inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attributes as specified.  <a href="#a263472ed4f54752f30e3a6e0149c1f2c">More...</a><br /></td></tr>
-<tr class="separator:a263472ed4f54752f30e3a6e0149c1f2c inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf1673928cc326e5ae4007498b566385 inherit pub_methods_class_hal_1_1_uart"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_uart.html#aaf1673928cc326e5ae4007498b566385">init</a> (int baudrate=19200, int pin_assign=0, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_a_r_t.html#ga6bcc37e31dd40c204b4ac6f6189e8878">uart_parity_t</a> parity=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_a_r_t.html#gga6bcc37e31dd40c204b4ac6f6189e8878aa80d2d8ea61454045ebe71d155e85b3d">UART_PARITY_NONE</a>, int stop=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_a_r_t.html#gga0ed680fdb405e7195d9f14032851eebba4adb27df73696c5fe5cd0960367b04ea">UART_ATTR_STOP_BITS_2</a>, int width=8)</td></tr>
-<tr class="memdesc:aaf1673928cc326e5ae4007498b566385 inherit pub_methods_class_hal_1_1_uart"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#aaf1673928cc326e5ae4007498b566385">More...</a><br /></td></tr>
 <tr class="separator:aaf1673928cc326e5ae4007498b566385 inherit pub_methods_class_hal_1_1_uart"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a817ebd5d98e31ac9ee27574e27bc4418"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device at the location <br /></td></tr>
-<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91898feb89968081a5d8c203f5647ed6"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the device at the location <br /></td></tr>
-<tr class="separator:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77439a03012cdcbeb9934e17ea530818"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="memdesc:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a line from the device <br /></td></tr>
-<tr class="separator:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3794a604e104cd9983f676a934f7663"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af3794a604e104cd9983f676a934f7663">read</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous read. <br /></td></tr>
-<tr class="separator:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacc0b6d8c2c6ff864865b637c7cf75b2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aacc0b6d8c2c6ff864865b637c7cf75b2">write</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous write. <br /></td></tr>
-<tr class="separator:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95b1bda330bd63c77dac8284032706dd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a95b1bda330bd63c77dac8284032706dd">fileno</a> (void)</td></tr>
-<tr class="memdesc:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a262402e1cbc3aedd7d5bb050a531c7ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
-<tr class="memdesc:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_class_sys_1_1_dbug"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_sys_1_1_dbug')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_sys_1_1_dbug.html">Sys::Dbug</a></td></tr>
 <tr class="inherit_header pub_types_class_hal_1_1_uart"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_uart')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_uart.html">Hal::Uart</a></td></tr>
 <tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
 </table>
@@ -159,6 +82,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>See details below. </p>
 <p>This method closes the peripheral. Once a single instance closes the peripheral, no other instances will be able to access it. </p>
 
 <p>Reimplemented from <a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">Hal::Periph</a>.</p>

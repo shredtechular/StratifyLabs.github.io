@@ -33,15 +33,12 @@ title: Stratify OS Docs
 <div class="title">Sys::Appfs Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Class for accessing Application file system (Flash/RAM)  
- <a href="class_sys_1_1_appfs.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Sys::Appfs:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_sys_1_1_appfs__inherit__graph.svg" width="120" height="288"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class provides an interface for installing programs in the Flash/RAM as well as for saving data to the flash.</p>
 <p>The following is a basic example of creating a data file in flash and then reading from it.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"><span class="keywordtype">char</span> my_user_data[16];</div><div class="line"> <span class="comment">//populate my_user_data as you please here</span></div><div class="line"><a class="code" href="class_sys_1_1_appfs.html#a64bfddd32fee00b76a8eb7cd27fbbb38">Appfs::create</a>(<span class="stringliteral">&quot;my_data&quot;</span>, my_user_data, 16); <span class="comment">//creates /app/flash/my_data as read only data</span></div></div><!-- fragment --><p>Now reading from the file.</p>
@@ -49,15 +46,9 @@ Inheritance diagram for Sys::Appfs:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#a64bfddd32fee00b76a8eb7cd27fbbb38">create</a> (const char *name, const void *buf, int nbyte, const char *<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___s_t_f_y.html#ga03c0afc4d1b734bd2edfc7e5937b716a">mount</a>=&quot;/app&quot;, link_transport_phy_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga9291cf01e8b979e54b7b85435fb3646b">h</a>=LINK_PHY_OPEN_ERROR)</td></tr>
-<tr class="memdesc:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a data file in the flash memory.  <a href="#a64bfddd32fee00b76a8eb7cd27fbbb38">More...</a><br /></td></tr>
 <tr class="separator:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea954948e0f079897875b024d34da35"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#aaea954948e0f079897875b024d34da35">offset</a> ()</td></tr>
-<tr class="memdesc:aaea954948e0f079897875b024d34da35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the offset of user data in the file.  <a href="#aaea954948e0f079897875b024d34da35">More...</a><br /></td></tr>
 <tr class="separator:aaea954948e0f079897875b024d34da35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae09565c10d4c7c6c3ec6e6bbf778d116"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae09565c10d4c7c6c3ec6e6bbf778d116"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#ae09565c10d4c7c6c3ec6e6bbf778d116">pagesize</a> ()</td></tr>
-<tr class="memdesc:ae09565c10d4c7c6c3ec6e6bbf778d116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the page size for writing data. <br /></td></tr>
-<tr class="separator:ae09565c10d4c7c6c3ec6e6bbf778d116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a64bfddd32fee00b76a8eb7cd27fbbb38"></a>
@@ -109,6 +100,8 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Create a data file in the flash memory. </p>
 <p>This method creates a file in flash memory consisting of the data specified </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The name of the data file (no path info) </td></tr>
@@ -143,6 +136,8 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns the offset of user data in the file. </p>
 <p><a class="el" href="class_sys_1_1_appfs.html" title="Class for accessing Application file system (Flash/RAM) ">Appfs</a> file contain a header that is only applicable to executable files. This gives the offset of where the user data starts with files created using <a class="el" href="class_sys_1_1_appfs.html#a64bfddd32fee00b76a8eb7cd27fbbb38" title="Create a data file in the flash memory. ">Appfs::create()</a> </p><dl class="section return"><dt>Returns</dt><dd>The offset in bytes </dd></dl>
 
 </div>

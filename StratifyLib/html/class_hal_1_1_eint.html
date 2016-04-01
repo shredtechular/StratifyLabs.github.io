@@ -28,97 +28,31 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="class_hal_1_1_eint-members.html">List of all members</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Hal::Eint Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>External Interrupt Class.  
- <a href="class_hal_1_1_eint.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Hal::Eint:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_eint__inherit__graph.svg" width="110" height="678"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class gives access to external interrupt circuitry. You can use this class to have the interrupt trigger a function or block a thread until the interrupt arrives.</p>
 <p>Here is an example:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"></div><div class="line"> <span class="comment">//This will be executed when the event is triggered</span></div><div class="line"><span class="keywordtype">int</span> event_callback(<span class="keywordtype">void</span> * args, <span class="keyword">const</span> <span class="keywordtype">void</span> * data){</div><div class="line">     <span class="keyword">volatile</span> <span class="keywordtype">int</span> * done = (<span class="keywordtype">int</span>*)args;</div><div class="line">     *done = 1;</div><div class="line">     <span class="keywordflow">return</span> 0; <span class="comment">//return 0 to clear the callback and 1 to keep it</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> eint_example(){</div><div class="line">     <span class="keyword">volatile</span> <span class="keywordtype">int</span> done;</div><div class="line">     Eint eint(0); <span class="comment">//use eint port 0 (pin 2.10 on lpc17xx devices)</span></div><div class="line"></div><div class="line">     eint.init(); <span class="comment">//open and set attributes</span></div><div class="line"></div><div class="line">     eint.setaction(0, <span class="comment">//use channel 0</span></div><div class="line">          <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___e_i_n_t.html#ggadd1257260f1ba401df43dd34fa2d28d5a91493ba0ea96049f046b9cfeebf42d81">EINT_ACTION_EVENT_FALLING</a>, <span class="comment">//trigger on a falling edge</span></div><div class="line">          event_callback, <span class="comment">//execute this function (in privileged mode when complete)</span></div><div class="line">          &amp;done <span class="comment">//pass this to event_callback as the first argumen</span></div><div class="line">          );</div><div class="line"></div><div class="line">     <span class="keywordflow">while</span>( done == 0 ){</div><div class="line">          Timer::wait_msec(1); <span class="comment">//wait for the signal to arrive</span></div><div class="line">     }</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line"> <span class="comment">//alternatively you can configure (setaction() and block by writing hwpl_action_t to the device)</span></div><div class="line"></div><div class="line"> hwpl_action_t action;</div><div class="line"> action.channel = 0;</div><div class="line"> action.event = <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___e_i_n_t.html#ggadd1257260f1ba401df43dd34fa2d28d5a91493ba0ea96049f046b9cfeebf42d81">EINT_ACTION_EVENT_FALLING</a>;</div><div class="line"> action.callback = 0; <span class="comment">//this is ignored and doesn&#39;t need to be set</span></div><div class="line"> action.context = 0; <span class="comment">//this is ignored and doesn&#39;t need to be set</span></div><div class="line"> eint.write(&amp;action, <span class="keyword">sizeof</span>(action)); <span class="comment">//this will block until a falling edge arrives</span></div></div><!-- fragment --> </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a11ebac7a509a10519812a92750f9cc09"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#a11ebac7a509a10519812a92750f9cc09">open</a> (int flags=0)</td></tr>
-<tr class="memdesc:a11ebac7a509a10519812a92750f9cc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#a11ebac7a509a10519812a92750f9cc09">More...</a><br /></td></tr>
 <tr class="separator:a11ebac7a509a10519812a92750f9cc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec6ee6f224146264ac3f50256f0f416"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abec6ee6f224146264ac3f50256f0f416"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#abec6ee6f224146264ac3f50256f0f416">attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structeint__attr__t.html">eint_attr_t</a> *attr)</td></tr>
-<tr class="memdesc:abec6ee6f224146264ac3f50256f0f416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the attributes for the external interrupt. <br /></td></tr>
-<tr class="separator:abec6ee6f224146264ac3f50256f0f416"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a32a3cb240b9fbb4edd00d3e1da68d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a32a3cb240b9fbb4edd00d3e1da68d4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#a3a32a3cb240b9fbb4edd00d3e1da68d4">setattr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structeint__attr__t.html">eint_attr_t</a> *<a class="el" href="class_hal_1_1_eint.html#abec6ee6f224146264ac3f50256f0f416">attr</a>)</td></tr>
-<tr class="memdesc:a3a32a3cb240b9fbb4edd00d3e1da68d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attributes for the external interrupt. <br /></td></tr>
-<tr class="separator:a3a32a3cb240b9fbb4edd00d3e1da68d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a608d8c1ee701cefc8fa8bc682a9a5145"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a608d8c1ee701cefc8fa8bc682a9a5145"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#a608d8c1ee701cefc8fa8bc682a9a5145">setaction</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___e_i_n_t.html#ga0cc94e61cd3d7732766b249dc30b9ba9">eint_action_t</a> &amp;action)</td></tr>
-<tr class="memdesc:a608d8c1ee701cefc8fa8bc682a9a5145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the action associated with the external interrupt. <br /></td></tr>
-<tr class="separator:a608d8c1ee701cefc8fa8bc682a9a5145"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76e02b5c48f21ad7a4f7f066591a08ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76e02b5c48f21ad7a4f7f066591a08ba"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#a76e02b5c48f21ad7a4f7f066591a08ba">setaction</a> (int channel, int event, mcu_callback_t callback, void *context)</td></tr>
-<tr class="memdesc:a76e02b5c48f21ad7a4f7f066591a08ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the action using the specified parameters. <br /></td></tr>
-<tr class="separator:a76e02b5c48f21ad7a4f7f066591a08ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0fbf219ced0b843a1e45c4c51ac66ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0fbf219ced0b843a1e45c4c51ac66ee"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#ab0fbf219ced0b843a1e45c4c51ac66ee">setattr</a> (uint8_t pin_assign=0, uint16_t mode=<a class="el" href="class_hal_1_1_pio.html#a46522e4d616ee8cf41d52dd09bdedaf0ae5840ff125008b9f97b4b0a3ae173443">Pin::INPUT</a>|<a class="el" href="class_hal_1_1_pio.html#a46522e4d616ee8cf41d52dd09bdedaf0ad61fa47d4ab6c75a80cfdcbd1e8f349d">Pin::PULLUP</a>)</td></tr>
-<tr class="memdesc:ab0fbf219ced0b843a1e45c4c51ac66ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attributes using the specified pin assignment. <br /></td></tr>
-<tr class="separator:ab0fbf219ced0b843a1e45c4c51ac66ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c70d2dd806484aaa0a6281a69527828"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c70d2dd806484aaa0a6281a69527828"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_eint.html#a5c70d2dd806484aaa0a6281a69527828">init</a> (uint8_t pin_assign=0, uint16_t mode=<a class="el" href="class_hal_1_1_pio.html#a46522e4d616ee8cf41d52dd09bdedaf0ae5840ff125008b9f97b4b0a3ae173443">Pin::INPUT</a>|<a class="el" href="class_hal_1_1_pio.html#a46522e4d616ee8cf41d52dd09bdedaf0ad61fa47d4ab6c75a80cfdcbd1e8f349d">Pin::PULLUP</a>)</td></tr>
-<tr class="memdesc:a5c70d2dd806484aaa0a6281a69527828"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open and set attributes using specified pin assignment. <br /></td></tr>
-<tr class="separator:a5c70d2dd806484aaa0a6281a69527828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af984bc7d757ba96c0348062a2cd983f3"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="memdesc:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device. <br /></td></tr>
-<tr class="separator:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a817ebd5d98e31ac9ee27574e27bc4418"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device at the location <br /></td></tr>
-<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91898feb89968081a5d8c203f5647ed6"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the device at the location <br /></td></tr>
-<tr class="separator:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77439a03012cdcbeb9934e17ea530818"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="memdesc:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a line from the device <br /></td></tr>
-<tr class="separator:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1790d22fa7a876eda53828691a01e28"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes to the character device <br /></td></tr>
-<tr class="separator:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
-<tr class="memdesc:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#a8c924f02938888935ac8952d6b96ec8b">More...</a><br /></td></tr>
 <tr class="separator:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3794a604e104cd9983f676a934f7663"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af3794a604e104cd9983f676a934f7663">read</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous read. <br /></td></tr>
-<tr class="separator:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacc0b6d8c2c6ff864865b637c7cf75b2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aacc0b6d8c2c6ff864865b637c7cf75b2">write</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous write. <br /></td></tr>
-<tr class="separator:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95b1bda330bd63c77dac8284032706dd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a95b1bda330bd63c77dac8284032706dd">fileno</a> (void)</td></tr>
-<tr class="memdesc:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a262402e1cbc3aedd7d5bb050a531c7ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
-<tr class="memdesc:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="ad4299e7efeab311e1dd6fb883a8963b3"></a>
@@ -130,6 +64,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Events used with <a class="el" href="class_hal_1_1_eint.html#a608d8c1ee701cefc8fa8bc682a9a5145" title="Set the action associated with the external interrupt. ">setaction()</a> </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ad4299e7efeab311e1dd6fb883a8963b3a6830e3d9f88f1eebe89cfc8fb7a7cebb"></a>EVENT_UNCONFIGURED&#160;</td><td class="fielddoc">
 <p>Unconfigured. </p>
@@ -175,6 +111,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>See details below. </p>
 <p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_eint.html#a11ebac7a509a10519812a92750f9cc09" title="See details below. ">open()</a> and configured with <a class="el" href="class_hal_1_1_eint.html#a3a32a3cb240b9fbb4edd00d3e1da68d4" title="Set the attributes for the external interrupt. ">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
 
 <p>Reimplemented from <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">Hal::Periph</a>.</p>

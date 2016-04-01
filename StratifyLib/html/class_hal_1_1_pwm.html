@@ -33,87 +33,22 @@ title: Stratify OS Docs
 <div class="title">Hal::Pwm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>PWM Class.  
- <a href="class_hal_1_1_pwm.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Hal::Pwm:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_pwm__inherit__graph.svg" width="110" height="651"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class implements PWM outputs.</p>
 <p>Here is an example of how to use the <a class="el" href="class_hal_1_1_pwm.html" title="PWM Class. ">Pwm</a> class</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">Pwm pwm(1); <span class="comment">//use PWM port 1</span></div><div class="line"></div><div class="line">pwm.init(1&lt;&lt;0|1&lt;&lt;1,</div><div class="line">     1000000, <span class="comment">//PWM frequency</span></div><div class="line">     1000, <span class="comment">//Top value at 1MHz the PWM period is 1ms</span></div><div class="line">     0, <span class="comment">//PWM flags (not used on lpc17xx)</span></div><div class="line">     __PWM1_PINASSIGN_PORT2_0_1_2_3_4_5); <span class="comment">//PWM pin assignment (determines how channels map to pins)</span></div><div class="line"></div><div class="line">     pwm.set(0, 500); <span class="comment">//set channel 0 to 50% duty cycle (500/1000)</span></div><div class="line">     pwm.set(1, 250); <span class="comment">//set channel 1 to 25% duty cycle</span></div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aab1401edacf4514c7c80a15da906b226"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#aab1401edacf4514c7c80a15da906b226">open</a> (int flags=0)</td></tr>
-<tr class="memdesc:aab1401edacf4514c7c80a15da906b226"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#aab1401edacf4514c7c80a15da906b226">More...</a><br /></td></tr>
 <tr class="separator:aab1401edacf4514c7c80a15da906b226"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff45770bd14c492bb0a41f812fc2e09a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff45770bd14c492bb0a41f812fc2e09a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#aff45770bd14c492bb0a41f812fc2e09a">attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structpwm__attr__t.html">pwm_attr_t</a> *attr)</td></tr>
-<tr class="memdesc:aff45770bd14c492bb0a41f812fc2e09a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get PWM attributes. <br /></td></tr>
-<tr class="separator:aff45770bd14c492bb0a41f812fc2e09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47ea0817692d2f2a680b2b4b8822cbee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47ea0817692d2f2a680b2b4b8822cbee"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#a47ea0817692d2f2a680b2b4b8822cbee">setattr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structpwm__attr__t.html">pwm_attr_t</a> *<a class="el" href="class_hal_1_1_pwm.html#aff45770bd14c492bb0a41f812fc2e09a">attr</a>)</td></tr>
-<tr class="memdesc:a47ea0817692d2f2a680b2b4b8822cbee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set PWM attributes. <br /></td></tr>
-<tr class="separator:a47ea0817692d2f2a680b2b4b8822cbee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9af89c32b35a7c1446e3aa5ca8d00824"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9af89c32b35a7c1446e3aa5ca8d00824"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#a9af89c32b35a7c1446e3aa5ca8d00824">set</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structpwm__reqattr__t.html">pwm_reqattr_t</a> *req)</td></tr>
-<tr class="memdesc:a9af89c32b35a7c1446e3aa5ca8d00824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set PWM duty cycle. <br /></td></tr>
-<tr class="separator:a9af89c32b35a7c1446e3aa5ca8d00824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2225aecf071611cfb82ac8d63eb9740f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2225aecf071611cfb82ac8d63eb9740f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#a2225aecf071611cfb82ac8d63eb9740f">set</a> (uint8_t channel, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___p_w_m.html#gaa86e40d0d6ad1ae2b4c27cdddf5e2bd6">pwm_duty_t</a> duty)</td></tr>
-<tr class="memdesc:a2225aecf071611cfb82ac8d63eb9740f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PWM duty cycle (specify individual values) <br /></td></tr>
-<tr class="separator:a2225aecf071611cfb82ac8d63eb9740f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9360d01c5ef12941dfcbd4429f34976"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9360d01c5ef12941dfcbd4429f34976"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#af9360d01c5ef12941dfcbd4429f34976">setattr</a> (uint8_t enabled_channels, uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___p_w_m.html#gaa86e40d0d6ad1ae2b4c27cdddf5e2bd6">pwm_duty_t</a> top=1000, uint16_t flags=0, uint8_t pin_assign=0)</td></tr>
-<tr class="memdesc:af9360d01c5ef12941dfcbd4429f34976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set PWM attributes (specify individual values) <br /></td></tr>
-<tr class="separator:af9360d01c5ef12941dfcbd4429f34976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f24fd549e258ec84cd69af68c188a5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f24fd549e258ec84cd69af68c188a5c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_pwm.html#a2f24fd549e258ec84cd69af68c188a5c">init</a> (uint8_t enabled_channels, uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___p_w_m.html#gaa86e40d0d6ad1ae2b4c27cdddf5e2bd6">pwm_duty_t</a> top=1000, uint16_t flags=0, uint8_t pin_assign=0)</td></tr>
-<tr class="memdesc:a2f24fd549e258ec84cd69af68c188a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open PWM and set attributes as specified. <br /></td></tr>
-<tr class="separator:a2f24fd549e258ec84cd69af68c188a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af984bc7d757ba96c0348062a2cd983f3"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="memdesc:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device. <br /></td></tr>
-<tr class="separator:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a817ebd5d98e31ac9ee27574e27bc4418"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device at the location <br /></td></tr>
-<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91898feb89968081a5d8c203f5647ed6"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the device at the location <br /></td></tr>
-<tr class="separator:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77439a03012cdcbeb9934e17ea530818"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="memdesc:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a line from the device <br /></td></tr>
-<tr class="separator:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1790d22fa7a876eda53828691a01e28"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes to the character device <br /></td></tr>
-<tr class="separator:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
-<tr class="memdesc:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#a8c924f02938888935ac8952d6b96ec8b">More...</a><br /></td></tr>
 <tr class="separator:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3794a604e104cd9983f676a934f7663"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af3794a604e104cd9983f676a934f7663">read</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous read. <br /></td></tr>
-<tr class="separator:af3794a604e104cd9983f676a934f7663 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacc0b6d8c2c6ff864865b637c7cf75b2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aacc0b6d8c2c6ff864865b637c7cf75b2">write</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous write. <br /></td></tr>
-<tr class="separator:aacc0b6d8c2c6ff864865b637c7cf75b2 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95b1bda330bd63c77dac8284032706dd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a95b1bda330bd63c77dac8284032706dd">fileno</a> (void)</td></tr>
-<tr class="memdesc:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a95b1bda330bd63c77dac8284032706dd inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a262402e1cbc3aedd7d5bb050a531c7ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
-<tr class="memdesc:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -141,6 +76,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>See details below. </p>
 <p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_pwm.html#aab1401edacf4514c7c80a15da906b226" title="See details below. ">open()</a> and configured with <a class="el" href="class_hal_1_1_pwm.html#a47ea0817692d2f2a680b2b4b8822cbee" title="Set PWM attributes. ">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
 
 <p>Reimplemented from <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">Hal::Periph</a>.</p>

@@ -51,7 +51,7 @@ $( document ).ready(function() {
 	$(".memdoc").addClass("panel-body");
 	$("span.mlabel").addClass("label label-info");
 	
-	$("table.memberdecls").addClass("table table-striped");
+	$("table.memberdecls").addClass("table table-bordered");
 	//$("[class^=memitem]").addClass("active");
 	
 	$("div.ah").addClass("btn btn-default");

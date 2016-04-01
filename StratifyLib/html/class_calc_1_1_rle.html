@@ -33,27 +33,21 @@ title: Stratify OS Docs
 <div class="title">Calc::Rle Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Run Length Encoding Class.  
- <a href="class_calc_1_1_rle.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Calc::Rle:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_calc_1_1_rle__inherit__graph.svg" width="240" height="275"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class implements Run length encoding and decoding algorithms. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a8be9c8e511f417b7f58451b7edc586"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_rle.html#a1a8be9c8e511f417b7f58451b7edc586">encode</a> (void *dest, ssize_t &amp;dest_size, const void *src, ssize_t src_size)</td></tr>
-<tr class="memdesc:a1a8be9c8e511f417b7f58451b7edc586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a chunk of data.  <a href="#a1a8be9c8e511f417b7f58451b7edc586">More...</a><br /></td></tr>
 <tr class="separator:a1a8be9c8e511f417b7f58451b7edc586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf5eeac5727a3e97aec35378e20f3932"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_rle.html#abf5eeac5727a3e97aec35378e20f3932">decode</a> (void *dest, ssize_t &amp;dest_size, const void *src, ssize_t src_size)</td></tr>
-<tr class="memdesc:abf5eeac5727a3e97aec35378e20f3932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a chunk of data.  <a href="#abf5eeac5727a3e97aec35378e20f3932">More...</a><br /></td></tr>
 <tr class="separator:abf5eeac5727a3e97aec35378e20f3932"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af11aed46c75162c405b4b7a67c19dce5"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_rle.html#af11aed46c75162c405b4b7a67c19dce5">size</a> (const void *src, int nbyte)</td></tr>
-<tr class="memdesc:af11aed46c75162c405b4b7a67c19dce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the size of the encoded data.  <a href="#af11aed46c75162c405b4b7a67c19dce5">More...</a><br /></td></tr>
 <tr class="separator:af11aed46c75162c405b4b7a67c19dce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -100,6 +94,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Decode a chunk of data. </p>
 <p>This method decodes a block of data.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -157,6 +153,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Encode a chunk of data. </p>
 <p>This method encodes a block of data.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -202,6 +200,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Calculate the size of the encoded data. </p>
 <p>This methods calculate the number of bytes that will be used by the compressed data.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

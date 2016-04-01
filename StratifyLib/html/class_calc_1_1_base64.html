@@ -33,26 +33,18 @@ title: Stratify OS Docs
 <div class="title">Calc::Base64 Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="class_calc_1_1_base64.html" title="Base64 Encode/Decode Class. ">Base64</a> Encode/Decode Class.  
- <a href="class_calc_1_1_base64.html#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class includes methods to encode and decode data using the base64 algorithm. <a class="el" href="class_calc_1_1_base64.html" title="Base64 Encode/Decode Class. ">Base64</a> is useful for representing binary data using only valid text characters. This can be useful when transmitting data over certain serial links that do not support binary transfers. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aecb1498538ab2a62f576f7abc6861f8a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_base64.html#aecb1498538ab2a62f576f7abc6861f8a">encode</a> (char *dest, const void *src, int nbyte)</td></tr>
-<tr class="memdesc:aecb1498538ab2a62f576f7abc6861f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#aecb1498538ab2a62f576f7abc6861f8a">More...</a><br /></td></tr>
 <tr class="separator:aecb1498538ab2a62f576f7abc6861f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d2d44751f8928c123c8c5f73cf5ac89"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_base64.html#a0d2d44751f8928c123c8c5f73cf5ac89">esize</a> (int nbyte)</td></tr>
-<tr class="memdesc:a0d2d44751f8928c123c8c5f73cf5ac89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate encoded size of <em>nbyte</em>.  <a href="#a0d2d44751f8928c123c8c5f73cf5ac89">More...</a><br /></td></tr>
 <tr class="separator:a0d2d44751f8928c123c8c5f73cf5ac89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5703d12b493e217519a11658b6462720"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_base64.html#a5703d12b493e217519a11658b6462720">decode</a> (void *dest, const char *src, int nbyte)</td></tr>
-<tr class="memdesc:a5703d12b493e217519a11658b6462720"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#a5703d12b493e217519a11658b6462720">More...</a><br /></td></tr>
 <tr class="separator:a5703d12b493e217519a11658b6462720"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf89361d672945e17cebd974a2f0db1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf89361d672945e17cebd974a2f0db1d"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_base64.html#abf89361d672945e17cebd974a2f0db1d">dsize</a> (int nbyte)</td></tr>
-<tr class="memdesc:abf89361d672945e17cebd974a2f0db1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate max decoded size of <em>nbyte</em>. <br /></td></tr>
+<tr class="memitem:abf89361d672945e17cebd974a2f0db1d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calc_1_1_base64.html#abf89361d672945e17cebd974a2f0db1d">dsize</a> (int nbyte)</td></tr>
 <tr class="separator:abf89361d672945e17cebd974a2f0db1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -106,6 +98,38 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
+<a class="anchor" id="abf89361d672945e17cebd974a2f0db1d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Calc::Base64::dsize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nbyte</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculate decoded size of <em>nbyte</em>. This function can be used to allocate memory for a buffer that can be used to hold decoded data</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nbyte</td><td>Number of bytes to decode </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The string length if the bytes are encoded </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="aecb1498538ab2a62f576f7abc6861f8a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +167,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This method encodes data to the base64 format. </p>
+<p>This method encodes data to the base64 format.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dest</td><td>Pointer to destination memory </td></tr>
@@ -152,6 +176,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes in the encoded string </dd></dl>
 
 </div>
 </div>
@@ -176,12 +201,14 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Calculate encoded size of <em>nbyte</em>. This function can be used to allocate memory for a buffer that can be used to hold encoded data</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nbyte</td><td>Number of bytes to encode </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The string length if the bytes are encoded </dd></dl>
 
 </div>
 </div>

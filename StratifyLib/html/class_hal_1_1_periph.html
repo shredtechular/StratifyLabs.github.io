@@ -33,15 +33,12 @@ title: Stratify OS Docs
 <div class="title">Hal::Periph Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Peripheral Class.  
- <a href="class_hal_1_1_periph.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Hal::Periph:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_periph__inherit__graph.svg" width="1342" height="1000"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_periph__inherit__graph.svg" width="1444" height="744"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This is an abstract class for a microcontroller peripheral.</p>
 <p>All peripherals have a common interface based on the following function:</p><ul>
 <li><a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391" title="See details below. ">open()</a></li>
@@ -55,47 +52,9 @@ Inheritance diagram for Hal::Periph:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aba2031de6b193c4f8786235b927fd391"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">open</a> (int flags)</td></tr>
-<tr class="memdesc:aba2031de6b193c4f8786235b927fd391"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#aba2031de6b193c4f8786235b927fd391">More...</a><br /></td></tr>
 <tr class="separator:aba2031de6b193c4f8786235b927fd391"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af984bc7d757ba96c0348062a2cd983f3"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="memdesc:af984bc7d757ba96c0348062a2cd983f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device. <br /></td></tr>
-<tr class="separator:af984bc7d757ba96c0348062a2cd983f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a817ebd5d98e31ac9ee27574e27bc4418"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a817ebd5d98e31ac9ee27574e27bc4418"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the device at the location <br /></td></tr>
-<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91898feb89968081a5d8c203f5647ed6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91898feb89968081a5d8c203f5647ed6"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:a91898feb89968081a5d8c203f5647ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the device at the location <br /></td></tr>
-<tr class="separator:a91898feb89968081a5d8c203f5647ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77439a03012cdcbeb9934e17ea530818"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77439a03012cdcbeb9934e17ea530818"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="memdesc:a77439a03012cdcbeb9934e17ea530818"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a line from the device <br /></td></tr>
-<tr class="separator:a77439a03012cdcbeb9934e17ea530818"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1790d22fa7a876eda53828691a01e28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1790d22fa7a876eda53828691a01e28"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
-<tr class="memdesc:ae1790d22fa7a876eda53828691a01e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes to the character device <br /></td></tr>
-<tr class="separator:ae1790d22fa7a876eda53828691a01e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c924f02938888935ac8952d6b96ec8b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
-<tr class="memdesc:a8c924f02938888935ac8952d6b96ec8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See details below.  <a href="#a8c924f02938888935ac8952d6b96ec8b">More...</a><br /></td></tr>
 <tr class="separator:a8c924f02938888935ac8952d6b96ec8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3794a604e104cd9983f676a934f7663"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3794a604e104cd9983f676a934f7663"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af3794a604e104cd9983f676a934f7663">read</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:af3794a604e104cd9983f676a934f7663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous read. <br /></td></tr>
-<tr class="separator:af3794a604e104cd9983f676a934f7663"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc0b6d8c2c6ff864865b637c7cf75b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacc0b6d8c2c6ff864865b637c7cf75b2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aacc0b6d8c2c6ff864865b637c7cf75b2">write</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio)</td></tr>
-<tr class="memdesc:aacc0b6d8c2c6ff864865b637c7cf75b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous write. <br /></td></tr>
-<tr class="separator:aacc0b6d8c2c6ff864865b637c7cf75b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b1bda330bd63c77dac8284032706dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95b1bda330bd63c77dac8284032706dd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a95b1bda330bd63c77dac8284032706dd">fileno</a> (void)</td></tr>
-<tr class="memdesc:a95b1bda330bd63c77dac8284032706dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a95b1bda330bd63c77dac8284032706dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a262402e1cbc3aedd7d5bb050a531c7ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
-<tr class="memdesc:a262402e1cbc3aedd7d5bb050a531c7ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor for the peripheral. <br /></td></tr>
-<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -122,6 +81,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>See details below. </p>
 <p>This method closes the peripheral. Once a single instance closes the peripheral, no other instances will be able to access it. </p>
 
 <p>Reimplemented in <a class="el" href="class_sys_1_1_dbug_uart.html#ac0e773119ffe8d23b5d9589e8254afdf">Sys::DbugUart</a>.</p>
@@ -149,9 +110,11 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>See details below. </p>
 <p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391" title="See details below. ">open()</a> and configured with setattr(). After that, other instances of the peripheral can read and write without opening again. </p>
 
-<p>Reimplemented in <a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea">Hal::Tmr</a>, <a class="el" href="class_hal_1_1_eint.html#a11ebac7a509a10519812a92750f9cc09">Hal::Eint</a>, <a class="el" href="class_hal_1_1_pio.html#a5ed1e2e7f07a90d6afccdf9c33df0a4f">Hal::Pio</a>, <a class="el" href="class_hal_1_1_uart.html#abefadef151687262a7751be3f71d40ef">Hal::Uart</a>, <a class="el" href="class_hal_1_1_core.html#a50c9b06e659bba66db154914990bd750">Hal::Core</a>, <a class="el" href="class_hal_1_1_pwm.html#aab1401edacf4514c7c80a15da906b226">Hal::Pwm</a>, <a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec">Hal::Adc</a>, <a class="el" href="class_sys_1_1_dbug_uart.html#a3070ea79d0994edffc492e072f8ed287">Sys::DbugUart</a>, <a class="el" href="class_hal_1_1_i2_c.html#aa2692e54d132f6b1ec4bad420a3ec01e">Hal::I2C</a>, <a class="el" href="class_hal_1_1_rtc.html#adff3ba6d4cb3408ff0199d112eef8567">Hal::Rtc</a>, <a class="el" href="class_hal_1_1_spi.html#a6ac76c9a3db68d156d0a117a0014144a">Hal::Spi</a>, and <a class="el" href="class_hal_1_1_usb.html#a86305311cac11b8e8239aa7c9ef15a80">Hal::Usb</a>.</p>
+<p>Reimplemented in <a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea">Hal::Tmr</a>, <a class="el" href="class_hal_1_1_eint.html#a11ebac7a509a10519812a92750f9cc09">Hal::Eint</a>, <a class="el" href="class_hal_1_1_pio.html#a5ed1e2e7f07a90d6afccdf9c33df0a4f">Hal::Pio</a>, <a class="el" href="class_hal_1_1_uart.html#abefadef151687262a7751be3f71d40ef">Hal::Uart</a>, <a class="el" href="class_hal_1_1_dac.html#abe5ef9c00b2040b8fba3b80ffa6a1e45">Hal::Dac</a>, <a class="el" href="class_hal_1_1_core.html#a50c9b06e659bba66db154914990bd750">Hal::Core</a>, <a class="el" href="class_hal_1_1_pwm.html#aab1401edacf4514c7c80a15da906b226">Hal::Pwm</a>, <a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec">Hal::Adc</a>, <a class="el" href="class_sys_1_1_dbug_uart.html#a3070ea79d0994edffc492e072f8ed287">Sys::DbugUart</a>, <a class="el" href="class_hal_1_1_i2_c.html#aa2692e54d132f6b1ec4bad420a3ec01e">Hal::I2C</a>, <a class="el" href="class_hal_1_1_rtc.html#adff3ba6d4cb3408ff0199d112eef8567">Hal::Rtc</a>, <a class="el" href="class_hal_1_1_spi.html#a6ac76c9a3db68d156d0a117a0014144a">Hal::Spi</a>, and <a class="el" href="class_hal_1_1_usb.html#a86305311cac11b8e8239aa7c9ef15a80">Hal::Usb</a>.</p>
 
 </div>
 </div>

@@ -33,9 +33,6 @@ title: Stratify OS Docs
 <div class="title">Sys::Event Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Class for sending Signal events (see <a class="el" href="class_sys_1_1_handler.html" title="Class for handling Signal events. ">Handler</a> for an example)  
-</p>
 <div class="dynheader">
 Inheritance diagram for Sys::Event:</div>
 <div class="dyncontent">
@@ -44,27 +41,12 @@ Inheritance diagram for Sys::Event:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6748d2528c82aaad145c89e208cb3d4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6748d2528c82aaad145c89e208cb3d4a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#a6748d2528c82aaad145c89e208cb3d4a">Event</a> (int signo)</td></tr>
-<tr class="memdesc:a6748d2528c82aaad145c89e208cb3d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an event based on a signal number. <br /></td></tr>
-<tr class="separator:a6748d2528c82aaad145c89e208cb3d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41ecfb24c06e3cab10195ff51fdf5e63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#a41ecfb24c06e3cab10195ff51fdf5e63">trigger</a> (pid_t pid) const </td></tr>
-<tr class="memdesc:a41ecfb24c06e3cab10195ff51fdf5e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a signal to a process.  <a href="#a41ecfb24c06e3cab10195ff51fdf5e63">More...</a><br /></td></tr>
 <tr class="separator:a41ecfb24c06e3cab10195ff51fdf5e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5183ab34348ace711f7c55a1933df43c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#a5183ab34348ace711f7c55a1933df43c">trigger</a> (pid_t pid, int value) const </td></tr>
-<tr class="memdesc:a5183ab34348ace711f7c55a1933df43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a signal to a process with a value associated with the signal.  <a href="#a5183ab34348ace711f7c55a1933df43c">More...</a><br /></td></tr>
 <tr class="separator:a5183ab34348ace711f7c55a1933df43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02385e6a7afe99b0006b9742fd7bce45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#a02385e6a7afe99b0006b9742fd7bce45">trigger</a> (pthread_t t) const </td></tr>
-<tr class="memdesc:a02385e6a7afe99b0006b9742fd7bce45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a signal to a thread within a process.  <a href="#a02385e6a7afe99b0006b9742fd7bce45">More...</a><br /></td></tr>
 <tr class="separator:a02385e6a7afe99b0006b9742fd7bce45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa28d9cf61eb1eded3d47350202b05f30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa28d9cf61eb1eded3d47350202b05f30"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#aa28d9cf61eb1eded3d47350202b05f30">trigger</a> (void) const </td></tr>
-<tr class="memdesc:aa28d9cf61eb1eded3d47350202b05f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger the event on the current thread. <br /></td></tr>
-<tr class="separator:aa28d9cf61eb1eded3d47350202b05f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7081dcad2dcb77a11dfd2a97e81e2508"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7081dcad2dcb77a11dfd2a97e81e2508"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_event.html#a7081dcad2dcb77a11dfd2a97e81e2508">set_handler</a> (const <a class="el" href="class_sys_1_1_handler.html">Handler</a> &amp;handler) const </td></tr>
-<tr class="memdesc:a7081dcad2dcb77a11dfd2a97e81e2508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the event handler. <br /></td></tr>
-<tr class="separator:a7081dcad2dcb77a11dfd2a97e81e2508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a41ecfb24c06e3cab10195ff51fdf5e63"></a>
@@ -88,6 +70,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send a signal to a process. </p>
 <p>This method sends a signal to a process</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -130,6 +114,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send a signal to a process with a value associated with the signal. </p>
 <p>This method sends a signal and associated value to a process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -163,6 +149,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send a signal to a thread within a process. </p>
 <p>This method sends a signal to a thread within a process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
