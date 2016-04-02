@@ -1,5 +1,0 @@
-<map id="Dbug" name="Dbug">
-<area shape="rect" id="node2" href="$class_dbug_null.html" title="Debug Null Class. " alt="" coords="5,249,101,375"/>
-<area shape="rect" id="node3" href="$class_dbug_stdout.html" title="Debug Stdout Class. " alt="" coords="125,249,237,375"/>
-<area shape="rect" id="node4" href="$class_dbug_uart.html" title="Debug UART Class. " alt="" coords="261,249,360,375"/>
-</map>

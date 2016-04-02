@@ -1,5 +1,0 @@
-<map id="MBFont" name="MBFont">
-<area shape="rect" id="node3" href="$class_font8.html" title="Bitmap Fonts (used with LCDs) " alt="" coords="4,591,85,718"/>
-<area shape="rect" id="node4" href="$class_m_b_font_memory.html" title="Monochrome Bitmap Font class (stored in flash memory) " alt="" coords="110,571,247,738"/>
-<area shape="rect" id="node2" href="$class_m_font.html" title="Monochrome Font. " alt="" coords="60,6,163,119"/>
-</map>

@@ -58,7 +58,7 @@ in three dimensions.
 <img class="post_image" src="{{ BASE_PATH }}/images/sili-atom-group.svg" />
 
 <div class="alert alert-info"><span class="label label-danger">Note</span>  This model
-inspired the CoActionOS logo.  The symbol inside the gear is a silicon atom.</div>
+inspired the Stratify Labs logo.  The symbol inside the gear is a silicon atom.</div>
 
 <div class="alert alert-info"><span class="label label-danger">Note</span> The 
 center atom has four valence electrons of its own and shares one from each of 

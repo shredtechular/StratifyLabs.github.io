@@ -54,6 +54,7 @@
     <filename>bootloader_8h</filename>
     <class kind="struct">bootloader_attr_t</class>
     <class kind="struct">bootloader_attr_14x_t</class>
+    <class kind="struct">bootloader_api_t</class>
     <class kind="struct">bootloader_writepage_t</class>
     <member kind="define">
       <type>#define</type>
@@ -5631,27 +5632,59 @@
     </member>
   </compound>
   <compound kind="struct">
-    <name>bootloader_attr_14x_t</name>
-    <filename>structbootloader__attr__14x__t.html</filename>
+    <name>bootloader_api_t</name>
+    <filename>structbootloader__api__t.html</filename>
     <member kind="variable">
-      <type>uint32_t</type>
-      <name>version</name>
-      <anchorfile>structbootloader__attr__14x__t.html</anchorfile>
-      <anchor>a411f5ec305a2e3872997a0d1366e632f</anchor>
+      <type>u32</type>
+      <name>code_size</name>
+      <anchorfile>structbootloader__api__t.html</anchorfile>
+      <anchor>a4f75d6476508cb5d1ed9142b70adde2a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>void(*</type>
+      <name>exec</name>
+      <anchorfile>structbootloader__api__t.html</anchorfile>
+      <anchor>ad06fc97a687dd16fa9582500b479c414</anchor>
+      <arglist>)(void *args)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>usb_dev_priv_init</name>
+      <anchorfile>structbootloader__api__t.html</anchorfile>
+      <anchor>acc7bf02cd95460222113155fe51c3db7</anchor>
+      <arglist>)(void *context)</arglist>
+    </member>
+    <member kind="variable">
+      <type>bootloader_aes_api_t</type>
+      <name>aes</name>
+      <anchorfile>structbootloader__api__t.html</anchorfile>
+      <anchor>a7486d81ce46cab0f15b2dfc328bb6f5c</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>bootloader_attr_14x_t</name>
+    <filename>structbootloader__attr__14x__t.html</filename>
+    <member kind="variable">
+      <type>u32</type>
+      <name>version</name>
+      <anchorfile>structbootloader__attr__14x__t.html</anchorfile>
+      <anchor>ac00136fda15ffa70175cf793c9be30af</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>u32</type>
       <name>serialno</name>
       <anchorfile>structbootloader__attr__14x__t.html</anchorfile>
-      <anchor>aba5616512b897241235270cd68ed61c3</anchor>
+      <anchor>aaa9a34b410186c114ab040afdbb97c1a</anchor>
       <arglist>[4]</arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>startaddr</name>
       <anchorfile>structbootloader__attr__14x__t.html</anchorfile>
-      <anchor>a0fd730ee748383ed6c2893d3ff275911</anchor>
+      <anchor>a916f6c7601af62b8392dba0febdd7265</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5659,31 +5692,31 @@
     <name>bootloader_attr_t</name>
     <filename>structbootloader__attr__t.html</filename>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>version</name>
       <anchorfile>structbootloader__attr__t.html</anchorfile>
-      <anchor>af42929d3bdb2960f90a171c591272795</anchor>
+      <anchor>a25c8de55bcefa5f98ed4a82a5ba6c6d4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>serialno</name>
       <anchorfile>structbootloader__attr__t.html</anchorfile>
-      <anchor>af530e127c74be35fd847b99ee0d9873c</anchor>
+      <anchor>ae7f50f19d4694474eb77289a5567fac0</anchor>
       <arglist>[4]</arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>startaddr</name>
       <anchorfile>structbootloader__attr__t.html</anchorfile>
-      <anchor>a0a0739d5522c2cbd0c4ec116f44c3150</anchor>
+      <anchor>aa4abf730f2dea92442c3d00cf65cb006</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>hardware_id</name>
       <anchorfile>structbootloader__attr__t.html</anchorfile>
-      <anchor>ae1d093106f4c461ccdec884662cbe776</anchor>
+      <anchor>a303177760989f7c88a6b3c6c2a584536</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5691,24 +5724,24 @@
     <name>bootloader_writepage_t</name>
     <filename>structbootloader__writepage__t.html</filename>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>addr</name>
       <anchorfile>structbootloader__writepage__t.html</anchorfile>
-      <anchor>a15df58a488c9e7fe71f67863599c31c6</anchor>
+      <anchor>a036ccb9f863985d4cfb8174a75e7f02a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>uint32_t</type>
+      <type>u32</type>
       <name>nbyte</name>
       <anchorfile>structbootloader__writepage__t.html</anchorfile>
-      <anchor>af2f150f1ab685bdbb401a7efa044de66</anchor>
+      <anchor>a0b4ff5b5654b12ac9800a480a8d6c44a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>uint8_t</type>
+      <type>u8</type>
       <name>buf</name>
       <anchorfile>structbootloader__writepage__t.html</anchorfile>
-      <anchor>a7f978a12ec96d21dc3e5482bb18d3818</anchor>
+      <anchor>a3f86275b0a7cccb440cbd2cdad8dddd6</anchor>
       <arglist>[BOOTLOADER_WRITEPAGESIZE]</arglist>
     </member>
   </compound>
@@ -7925,6 +7958,7 @@
     <filename>group___b_o_o_t_l_o_a_d_e_r___d_e_v.html</filename>
     <class kind="struct">bootloader_attr_t</class>
     <class kind="struct">bootloader_attr_14x_t</class>
+    <class kind="struct">bootloader_api_t</class>
     <class kind="struct">bootloader_writepage_t</class>
     <member kind="define">
       <type>#define</type>
@@ -13074,7 +13108,6 @@
     <subgroup>USB_DEV_HID</subgroup>
     <subgroup>USB_DEV_MSC</subgroup>
     <subgroup>USBDEFS</subgroup>
-    <subgroup>USB_DEV_RUNTIME_DFU</subgroup>
     <subgroup>USB_DEV_STD</subgroup>
   </compound>
   <compound kind="group">
@@ -13089,11 +13122,6 @@
       <anchor>ga4db272ec6c5801e3201d8319c9ab3fb3</anchor>
       <arglist>(device_name, cfg_ptr, state_ptr, mode_value, uid_value, gid_value)</arglist>
     </member>
-  </compound>
-  <compound kind="group">
-    <name>USB_DEV_RUNTIME_DFU</name>
-    <title>USB Runtime Device Firmware Upgrade</title>
-    <filename>group___u_s_b___d_e_v___r_u_n_t_i_m_e___d_f_u.html</filename>
   </compound>
   <compound kind="group">
     <name>USB_DEV_STD</name>

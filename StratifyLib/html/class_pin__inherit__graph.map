@@ -1,5 +1,0 @@
-<map id="Pin" name="Pin">
-<area shape="rect" id="node2" href="$class_pio.html" title="Pin Input/Output Class. " alt="" coords="6,465,103,725"/>
-<area shape="rect" id="node3" href="$class_periph.html" title="Peripheral Class. " alt="" coords="5,182,104,415"/>
-<area shape="rect" id="node4" href="$class_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="22,6,87,133"/>
-</map>

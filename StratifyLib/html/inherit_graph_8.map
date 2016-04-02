@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_draw_1_1_m_font.html" title="Monochrome Font. " alt="" coords="6,30,103,55"/>
-<area shape="rect" id="node2" href="$class_draw_1_1_m_b_font.html" title="Monochrome Bitmap Font class. " alt="" coords="152,30,259,55"/>
-<area shape="rect" id="node3" href="$class_draw_1_1_font8.html" title="Bitmap Fonts (used with LCDs) " alt="" coords="337,5,431,30"/>
-<area shape="rect" id="node4" href="$class_draw_1_1_m_b_font_memory.html" title="Monochrome Bitmap Font class (stored in flash memory) " alt="" coords="307,54,461,79"/>
-</map>
