@@ -1,6 +1,7 @@
 # This is the default format. 
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title/
+permalink: pretty
+
 
 exclude: ["images/convert", ".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "images/webdrawings.odg"]
 highlighter: rouge
