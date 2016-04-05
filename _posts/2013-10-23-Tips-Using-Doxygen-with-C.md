@@ -81,6 +81,6 @@ above, the following groups are needed:
    - UART
    - PWM
 
-The [Stratify documentation]({{ BASE_URL }}/StratibyLib/html/) includes many examples 
+The [Stratify documentation]({{ BASE_URL }}/StratifyLib/html/) includes many examples 
 of the techniques described herein.
 
