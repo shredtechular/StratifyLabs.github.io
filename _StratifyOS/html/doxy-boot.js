@@ -18,6 +18,9 @@ $( document ).ready(function() {
 	$(".icona .icon").addClass("label label-danger");
 	$(".icona .icon").after(" ");
 
+	$('img[src="closed.png"]').before("<i class='fa fa-chevron-right'></i> ");
+	$('img[src="closed.png"]').hide();
+
 	$("div.qindex").css("margin-bottom", "3em");
 	$("div.textblock").css("margin-bottom", "3em");
 	$("table.memberdecls").css("margin-bottom", "3em");

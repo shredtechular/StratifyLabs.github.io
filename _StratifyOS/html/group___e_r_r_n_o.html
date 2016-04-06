@@ -20,12 +20,6 @@ title: Stratify OS Docs
 <div class="title">Error Numbers<div class="ingroups"><a class="el" href="group___s_t_f_y.html">Stratify OS</a> &raquo; <a class="el" href="group___p_o_s_i_x.html">POSIX</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for Error Numbers:</div>
-<div class="dyncontent">
-<center><table><tr><td><div class="center"><iframe scrolling="no" frameborder="0" src="group___e_r_r_n_o.svg" width="232" height="35"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</td></tr></table></center>
-</div>
 <p>Many functions write the <em>errno</em> value to indicate which error has occured. The list below associates <em>errno</em> values to their descriptions. Alternatively, <em>perror()</em> can be used to show the description of the error on the stderr descriptor (normally the same descriptor as the stdout). For example: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> fd;</div><div class="line">fd = <a class="code" href="group___u_n_i___f_i_l_e___a_c_c_e_s_s.html#gac843f2e35e60c3bbf1da47d84306f29b">open</a>(<span class="stringliteral">&quot;/noexist&quot;</span>, O_RDONLY);</div><div class="line"><span class="keywordflow">if</span> ( fd &lt; 0 ){</div><div class="line">     perror(<span class="stringliteral">&quot;Could not open /noexist&quot;</span>);</div><div class="line">}</div></div><!-- fragment --><p>The above code outputs "Could not open /noexist: No such file or directory\n" on the stderr while <em>errno</em> is assigned a value of 2.</p>
 <ul>
 <li>EPERM 1: Not super-user (Not owner)</li>

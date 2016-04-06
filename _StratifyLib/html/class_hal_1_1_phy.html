@@ -28,21 +28,28 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="class_hal_1_1_phy-members.html">List of all members</a> &#124;
-<a href="#pub-types">Public Types</a>  </div>
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Hal::Phy Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for Hal::Phy:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_phy__inherit__graph.svg" width="1308" height="758"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This is the base class for physical devices. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a31c4910790fe74fe67e33c2f9d360c25"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a31c4910790fe74fe67e33c2f9d360c25">ioctl</a> (int req, void *arg)=0</td></tr>
+<tr class="separator:a31c4910790fe74fe67e33c2f9d360c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ee6ab11a504e358b39a3c65a1d10fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a56ee6ab11a504e358b39a3c65a1d10fe">ioctl</a> (int req, const void *arg)</td></tr>
+<tr class="separator:a56ee6ab11a504e358b39a3c65a1d10fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42025ff8be7cf02f3b8c7c80b7bdc916"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a42025ff8be7cf02f3b8c7c80b7bdc916">ioctl</a> (int req)</td></tr>
+<tr class="separator:a42025ff8be7cf02f3b8c7c80b7bdc916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d32b767221bc2842dbe512e20d8428"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac2d32b767221bc2842dbe512e20d8428">ioctl</a> (int req, int arg)</td></tr>
+<tr class="separator:ac2d32b767221bc2842dbe512e20d8428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a66dc234b9d1fa48f1de10b99cc9b7d06"></a>
@@ -54,8 +61,6 @@ Public Types</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>See below for details. </p>
 <p>List of options for <em>whence</em> argument of seek() </p>
 
 </div>
@@ -119,6 +124,139 @@ Public Types</h2></td></tr>
 <p>Access mode mask </p>
 </td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a31c4910790fe74fe67e33c2f9d360c25"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int Hal::Phy::ioctl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>req</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the file descriptor for the peripheral </p>
+
+<p>Implemented in <a class="el" href="class_sys_1_1_file.html#a0f1ef7f33be3dcdd02d14a4b80e2d18d">Sys::File</a>, and <a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">Hal::Periph</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a56ee6ab11a504e358b39a3c65a1d10fe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hal::Phy::ioctl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>req</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_hal_1_1_phy.html#a31c4910790fe74fe67e33c2f9d360c25">ioctl()</a> with request and const arg pointer </p>
+
+</div>
+</div>
+<a class="anchor" id="a42025ff8be7cf02f3b8c7c80b7bdc916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hal::Phy::ioctl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>req</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_hal_1_1_phy.html#a31c4910790fe74fe67e33c2f9d360c25">ioctl()</a> with just a request </p>
+
+</div>
+</div>
+<a class="anchor" id="ac2d32b767221bc2842dbe512e20d8428"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hal::Phy::ioctl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>req</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_hal_1_1_phy.html#a31c4910790fe74fe67e33c2f9d360c25">ioctl()</a> with request and integer arg </p>
 
 </div>
 </div>

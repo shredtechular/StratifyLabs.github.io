@@ -34,11 +34,6 @@ title: Stratify OS Docs
 <div class="title">Hal::Tmr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for Hal::Tmr:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_tmr__inherit__graph.svg" width="115" height="691"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class implements a hardware timer. The Timer class implements a logical timer that is based on the system clock and can be used for many timing functions.</p>
 <p>The <a class="el" href="class_hal_1_1_tmr.html" title="Tmr (hardware timer) Class. ">Tmr</a> class can be used to configure a timer to count rising edges on an input capture pin or to generate waveforms on an output compare pin. It can also configure the timer to use the internal CPU clock at various frequencies.</p>
@@ -54,13 +49,34 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac420fd0320f3c211c554fefb4a2047ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea">open</a> (int flags=0)</td></tr>
 <tr class="separator:ac420fd0320f3c211c554fefb4a2047ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fd1587e76cdd417e815383d23dea7ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#a8fd1587e76cdd417e815383d23dea7ff">setattr</a> (uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>, uint8_t clksrc=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a>, uint8_t pin_assign=0, uint8_t enabled_oc_chans=0, uint8_t enabled_ic_chans=0)</td></tr>
+<tr class="memitem:a8fd1587e76cdd417e815383d23dea7ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#a8fd1587e76cdd417e815383d23dea7ff">setattr</a> (uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>, uint8_t clksrc=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a>, uint8_t pin_assign=0, uint8_t enabled_oc_chans=0, uint8_t enabled_ic_chans=0)</td></tr>
 <tr class="separator:a8fd1587e76cdd417e815383d23dea7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19979b7aae0c81fbc2c19db42aca4bfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#a19979b7aae0c81fbc2c19db42aca4bfc">init</a> (uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, uint8_t clksrc=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a>, uint8_t pin_assign=0, uint8_t enabled_oc_chans=0, uint8_t enabled_ic_chans=0)</td></tr>
+<tr class="memitem:a19979b7aae0c81fbc2c19db42aca4bfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#a19979b7aae0c81fbc2c19db42aca4bfc">init</a> (uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, uint8_t clksrc=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a>, uint8_t pin_assign=0, uint8_t enabled_oc_chans=0, uint8_t enabled_ic_chans=0)</td></tr>
 <tr class="separator:a19979b7aae0c81fbc2c19db42aca4bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
+<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
+<tr class="separator:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
+<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
+<tr class="separator:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
+<tr class="separator:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
+<tr class="separator:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8d57cc67c0ef74fca5eb103b823712cc">write</a> (const char *s)</td></tr>
+<tr class="separator:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
 <tr class="separator:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
+<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
+<tr class="memitem:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a56ee6ab11a504e358b39a3c65a1d10fe">ioctl</a> (int req, const void *arg)</td></tr>
+<tr class="separator:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a42025ff8be7cf02f3b8c7c80b7bdc916">ioctl</a> (int req)</td></tr>
+<tr class="separator:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac2d32b767221bc2842dbe512e20d8428">ioctl</a> (int req, int arg)</td></tr>
+<tr class="separator:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="aad23d57627a26d7cddaf58c5509cdaf2"></a>
@@ -160,7 +176,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>clksrc</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a></code>, </td>
+          <td class="paramname"><em>clksrc</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -229,9 +245,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>See details below. </p>
-<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea" title="See details below. ">open()</a> and configured with <a class="el" href="class_hal_1_1_tmr.html#a7314612c42db94035134ca409d48ef31" title="Set the TMR attributes. ">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
+<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea">open()</a> and configured with <a class="el" href="class_hal_1_1_tmr.html#a7314612c42db94035134ca409d48ef31" title="Set the TMR attributes. ">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
 
 <p>Reimplemented from <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">Hal::Periph</a>.</p>
 
@@ -311,7 +325,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>clksrc</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a></code>, </td>
+          <td class="paramname"><em>clksrc</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

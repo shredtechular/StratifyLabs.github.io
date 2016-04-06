@@ -33,11 +33,6 @@ title: Stratify OS Docs
 <div class="title">Sys::Appfs Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for Sys::Appfs:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_sys_1_1_appfs__inherit__graph.svg" width="120" height="288"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class provides an interface for installing programs in the Flash/RAM as well as for saving data to the flash.</p>
 <p>The following is a basic example of creating a data file in flash and then reading from it.</p>
@@ -45,7 +40,7 @@ Inheritance diagram for Sys::Appfs:</div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"><span class="keywordtype">char</span> my_user_data[16];</div><div class="line">File f;</div><div class="line">f.open(<span class="stringliteral">&quot;/app/flash/my_data&quot;</span>, <a class="code" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bcaf8aba45016c088606e30a6f8585048c7">File::RDONLY</a>); <span class="comment">//only the file read only</span></div><div class="line">f.seek( <a class="code" href="class_sys_1_1_appfs.html#aaea954948e0f079897875b024d34da35">Appfs::offset</a>() ); <span class="comment">//seek to the start of user data</span></div><div class="line">f.read(my_user_data, 16); <span class="comment">//read 16 bytes of user data</span></div><div class="line">f.close();  <span class="comment">//free resources</span></div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#a64bfddd32fee00b76a8eb7cd27fbbb38">create</a> (const char *name, const void *buf, int nbyte, const char *<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___s_t_f_y.html#ga03c0afc4d1b734bd2edfc7e5937b716a">mount</a>=&quot;/app&quot;, link_transport_phy_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga9291cf01e8b979e54b7b85435fb3646b">h</a>=LINK_PHY_OPEN_ERROR)</td></tr>
+<tr class="memitem:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#a64bfddd32fee00b76a8eb7cd27fbbb38">create</a> (const char *name, const void *buf, int nbyte, const char *<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___s_t_f_y.html#ga03c0afc4d1b734bd2edfc7e5937b716a">mount</a>=&quot;/app&quot;, link_transport_phy_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga9291cf01e8b979e54b7b85435fb3646b">h</a>=LINK_PHY_OPEN_ERROR)</td></tr>
 <tr class="separator:a64bfddd32fee00b76a8eb7cd27fbbb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea954948e0f079897875b024d34da35"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_appfs.html#aaea954948e0f079897875b024d34da35">offset</a> ()</td></tr>
 <tr class="separator:aaea954948e0f079897875b024d34da35"><td class="memSeparator" colspan="2">&#160;</td></tr>

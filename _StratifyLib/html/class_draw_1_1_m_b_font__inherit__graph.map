@@ -1,5 +1,0 @@
-<map id="Draw::MBFont" name="Draw::MBFont">
-<area shape="rect" id="node3" href="$class_draw_1_1_font8.html" title="Bitmap Fonts (used with LCDs) " alt="" coords="5,591,99,718"/>
-<area shape="rect" id="node4" href="$class_draw_1_1_m_b_font_memory.html" title="Monochrome Bitmap Font class (stored in flash memory) " alt="" coords="123,571,277,738"/>
-<area shape="rect" id="node2" href="$class_draw_1_1_m_font.html" title="Monochrome Font. " alt="" coords="74,6,176,119"/>
-</map>

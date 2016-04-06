@@ -1,6 +1,0 @@
-<map id="Var::String" name="Var::String">
-<area shape="rect" id="node2" href="$class_var_1_1_string_name.html" title="{Var::StringName\n||+ StringName()\l}" alt="" coords="5,335,123,409"/>
-<area shape="rect" id="node3" href="$class_var_1_1_string_path.html" title="{Var::StringPath\n||+ StringPath()\l+ strip_suffix()\l+ file_name()\l+ filename()\l}" alt="" coords="147,315,257,429"/>
-<area shape="rect" id="node4" href="$class_var_1_1_string_static.html" title="{Var::StringStatic\&lt;\l arraysize \&gt;\n||+ StringStatic()\l+ StringStatic()\l+ StringStatic()\l}" alt="" coords="282,315,405,429"/>
-<area shape="rect" id="node5" href="$class_var_1_1_token.html" title="Abstract Token Class. " alt="" coords="430,262,572,482"/>
-</map>

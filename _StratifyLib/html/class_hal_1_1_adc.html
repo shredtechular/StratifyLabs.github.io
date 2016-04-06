@@ -33,29 +33,88 @@ title: Stratify OS Docs
 <div class="title">Hal::Adc Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for Hal::Adc:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_hal_1_1_adc__inherit__graph.svg" width="110" height="624"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This class implements ADC device peripherals.</p>
-<div class="fragment"><div class="line"><a class="code" href="class_hal_1_1_adc.html#a56beb2f21e348484aab32505db6e0d3b">Adc</a> adc(0);  <span class="comment">//create an instance of ADC to access port 0</span></div><div class="line"><a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a> samples[16];</div><div class="line">adc.init((1&lt;&lt;0)|(1&lt;&lt;1)); <span class="comment">//open() and setattr() enabling channels 0 and 1</span></div><div class="line">adc.read(0, samples, 16*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a>)); <span class="comment">//read 16 samples from channel 0</span></div><div class="line">adc.read(1, samples, 16*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a>)); <span class="comment">//read 16 samples from channel 1</span></div><div class="line">adc.close(); <span class="comment">//close the ADC</span></div></div><!-- fragment --> </div><table class="memberdecls">
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line">     <a class="code" href="class_hal_1_1_adc.html#a56beb2f21e348484aab32505db6e0d3b">Adc</a> adc(0);  <span class="comment">//create an instance of ADC to access port 0</span></div><div class="line">     <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a> samples[16];</div><div class="line">     adc.init((1&lt;&lt;0)|(1&lt;&lt;1)); <span class="comment">//open() and setattr() enabling channels 0 and 1</span></div><div class="line">     adc.read(0, samples, 16*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a>)); <span class="comment">//read 16 samples from channel 0</span></div><div class="line">     adc.read(1, samples, 16*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gadba18d3d5cc6cb1c33a976677f8dfb53">adc_sample_t</a>)); <span class="comment">//read 16 samples from channel 1</span></div><div class="line">     adc.close(); <span class="comment">//close the ADC</span></div><div class="line">}</div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a56beb2f21e348484aab32505db6e0d3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#a56beb2f21e348484aab32505db6e0d3b">Adc</a> (port_t port)</td></tr>
+<tr class="separator:a56beb2f21e348484aab32505db6e0d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ed752afd5c18149866a625c4fcba3ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec">open</a> (int flags=0)</td></tr>
 <tr class="separator:a6ed752afd5c18149866a625c4fcba3ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae057a3154d6d0729bf8e5723320ac551"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#ae057a3154d6d0729bf8e5723320ac551">init</a> (uint16_t enabled_channels, int <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a>, uint8_t pin_assign=0)</td></tr>
+<tr class="memitem:ad7670199bbbde22e8a52ad1de9d8347b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#ad7670199bbbde22e8a52ad1de9d8347b">attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structadc__attr__t.html">adc_attr_t</a> *attr)</td></tr>
+<tr class="separator:ad7670199bbbde22e8a52ad1de9d8347b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3032ff8185fc19a2954618e6de4f290b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#a3032ff8185fc19a2954618e6de4f290b">setattr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structadc__attr__t.html">adc_attr_t</a> *<a class="el" href="class_hal_1_1_adc.html#ad7670199bbbde22e8a52ad1de9d8347b">attr</a>)</td></tr>
+<tr class="separator:a3032ff8185fc19a2954618e6de4f290b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0b6f137e6d30f5c67c2f2d2e6a6c5b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#a7c0b6f137e6d30f5c67c2f2d2e6a6c5b">setattr</a> (uint16_t enabled_channels, int <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a>, uint8_t pin_assign=0)</td></tr>
+<tr class="separator:a7c0b6f137e6d30f5c67c2f2d2e6a6c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae057a3154d6d0729bf8e5723320ac551"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_adc.html#ae057a3154d6d0729bf8e5723320ac551">init</a> (uint16_t enabled_channels, int <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a>, uint8_t pin_assign=0)</td></tr>
 <tr class="separator:ae057a3154d6d0729bf8e5723320ac551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
+<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
+<tr class="separator:af984bc7d757ba96c0348062a2cd983f3 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
+<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
+<tr class="separator:a91898feb89968081a5d8c203f5647ed6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
+<tr class="separator:a77439a03012cdcbeb9934e17ea530818 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
+<tr class="separator:ae1790d22fa7a876eda53828691a01e28 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8d57cc67c0ef74fca5eb103b823712cc">write</a> (const char *s)</td></tr>
+<tr class="separator:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
 <tr class="separator:a8c924f02938888935ac8952d6b96ec8b inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
+<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
+<tr class="memitem:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a56ee6ab11a504e358b39a3c65a1d10fe">ioctl</a> (int req, const void *arg)</td></tr>
+<tr class="separator:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a42025ff8be7cf02f3b8c7c80b7bdc916">ioctl</a> (int req)</td></tr>
+<tr class="separator:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac2d32b767221bc2842dbe512e20d8428">ioctl</a> (int req, int arg)</td></tr>
+<tr class="separator:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a56beb2f21e348484aab32505db6e0d3b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Hal::Adc::Adc </td>
+          <td>(</td>
+          <td class="paramtype">port_t&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initialize the instance with <em>port</em> </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad7670199bbbde22e8a52ad1de9d8347b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hal::Adc::attr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structadc__attr__t.html">adc_attr_t</a> *&#160;</td>
+          <td class="paramname"><em>attr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the ADC attributes </p>
+
+</div>
+</div>
 <a class="anchor" id="ae057a3154d6d0729bf8e5723320ac551"></a>
 <div class="memitem">
 <div class="memproto">
@@ -73,7 +132,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>freq</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a></code>, </td>
+          <td class="paramname"><em>freq</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -93,8 +152,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Open ADC and set the attributes as specified. </p>
 <p>This method opens the ADC then sets the ADC attributes as specified. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -128,11 +185,26 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>See details below. </p>
-<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec" title="See details below. ">open()</a> and configured with <a class="el" href="class_hal_1_1_adc.html#a3032ff8185fc19a2954618e6de4f290b" title="Set the ADC attributes. ">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
+<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec">open()</a> and configured with <a class="el" href="class_hal_1_1_adc.html#a3032ff8185fc19a2954618e6de4f290b">setattr()</a>. After that, other instances of the peripheral can read and write without opening again. </p>
 
 <p>Reimplemented from <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">Hal::Periph</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3032ff8185fc19a2954618e6de4f290b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hal::Adc::setattr </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structadc__attr__t.html">adc_attr_t</a> *&#160;</td>
+          <td class="paramname"><em>attr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the ADC attributes </p>
 
 </div>
 </div>
@@ -153,7 +225,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>freq</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a></code>, </td>
+          <td class="paramname"><em>freq</em> = <code><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___a_d_c.html#gaee9ff036d0e34f634b48e953d19d3bc2">ADC_MAX_FREQ</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -173,8 +245,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set the ADC attributes. </p>
+<p>Set the ADC attributes </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enabled_channels</td><td>Enabled Channels </td></tr>

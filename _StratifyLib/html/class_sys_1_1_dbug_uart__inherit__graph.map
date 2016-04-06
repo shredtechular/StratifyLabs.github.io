@@ -1,6 +1,0 @@
-<map id="Sys::DbugUart" name="Sys::DbugUart">
-<area shape="rect" id="node2" href="$class_sys_1_1_dbug.html" title="Debug Class. " alt="" coords="5,465,112,658"/>
-<area shape="rect" id="node3" href="$class_hal_1_1_uart.html" title="UART Class. " alt="" coords="136,471,221,651"/>
-<area shape="rect" id="node4" href="$class_hal_1_1_periph.html" title="Peripheral Class. " alt="" coords="129,182,228,415"/>
-<area shape="rect" id="node5" href="$class_hal_1_1_phy.html" title="Base Applib Class for Physical devices. " alt="" coords="143,6,213,133"/>
-</map>
