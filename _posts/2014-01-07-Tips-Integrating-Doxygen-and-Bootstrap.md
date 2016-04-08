@@ -55,6 +55,6 @@ our custom javascript (doxy-boot.js).
 <script type="text/javascript" src="doxy-boot.js"></script>
 {% endhighlight %}
 
-The [Stratify documentation](StratifyLib/html) is built using this technique.
+The [Stratify documentation]({{ BASE_URL }}/StratifyLib/html) is built using this technique.
 
 You can grab the code from [github](https://github.com/StratifyLabs/Doxygen-Bootstrap).
