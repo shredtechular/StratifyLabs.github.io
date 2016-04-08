@@ -28,6 +28,7 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="class_hal_1_1_core-members.html">List of all members</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Hal::Core Class Reference</div>  </div>
@@ -36,7 +37,11 @@ title: Stratify OS Docs
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This is the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> class. It is used to access core MCU information such as clock speed and to adjust interrupt priorities.</p>
 <p>Here is an example of how to read the MCU serial number:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> i;</div><div class="line">Core core(0);</div><div class="line"><a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> <a class="code" href="class_hal_1_1_core.html#a1d76aceb3f567416541d6b0d0d32ce03">attr</a>;</div><div class="line">core.open();</div><div class="line">core.attr(&amp;attr);</div><div class="line">printf(<span class="stringliteral">&quot;Serial Number is:&quot;</span>);</div><div class="line"><span class="keywordflow">for</span>(i=3; i &gt;= 0; i--){</div><div class="line">     printf(<span class="stringliteral">&quot;%X&quot;</span>, attr.<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html#af814d0af22134270091735cd68e786de">serial_number</a>[i]);</div><div class="line">}</div><div class="line">printf(<span class="stringliteral">&quot;\n&quot;</span>);</div><div class="line"></div><div class="line">core.close(); <span class="comment">//core is never &quot;powered-down&quot; but this frees the file descriptor</span></div></div><!-- fragment --> </div><table class="memberdecls">
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line">     <span class="keywordtype">int</span> i;</div><div class="line">     Core core(0);</div><div class="line">     <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> <a class="code" href="class_hal_1_1_core.html#a1d76aceb3f567416541d6b0d0d32ce03">attr</a>;</div><div class="line">     core.open();</div><div class="line">     core.attr(&amp;attr);</div><div class="line">     printf(<span class="stringliteral">&quot;Serial Number is:&quot;</span>);</div><div class="line">     <span class="keywordflow">for</span>(i=3; i &gt;= 0; i--){</div><div class="line">          printf(<span class="stringliteral">&quot;%X&quot;</span>, attr.<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html#af814d0af22134270091735cd68e786de">serial_number</a>[i]);</div><div class="line">     }</div><div class="line">     printf(<span class="stringliteral">&quot;\n&quot;</span>);</div><div class="line">     core.close(); <span class="comment">//core is never &quot;powered-down&quot; but this frees the file descriptor</span></div><div class="line">}</div></div><!-- fragment --> </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a50c9b06e659bba66db154914990bd750"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a50c9b06e659bba66db154914990bd750">open</a> (int flags=0)</td></tr>
@@ -49,7 +54,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a32cb5494f85e8b18fcf5824d3cb9cc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab83f0fc560cef5a2d8874a62ff504895"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#ab83f0fc560cef5a2d8874a62ff504895">setpinfunc</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> &amp;req)</td></tr>
 <tr class="separator:ab83f0fc560cef5a2d8874a62ff504895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a228ec75f0f7d2445cd3f235c6239546b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a228ec75f0f7d2445cd3f235c6239546b">setpinfunc</a> (int port, int pin, int func, int func_port)</td></tr>
+<tr class="memitem:a228ec75f0f7d2445cd3f235c6239546b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a228ec75f0f7d2445cd3f235c6239546b">setpinfunc</a> (int port, int pin, int <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976e">func</a>, int func_port)</td></tr>
 <tr class="separator:a228ec75f0f7d2445cd3f235c6239546b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0c99e7fd5e1ef7adcfd83d8934ae09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#af0c99e7fd5e1ef7adcfd83d8934ae09f">sleep</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___c_o_r_e.html#gae362c5b04fb1b6ea07f8bdaa21bc51f7">core_sleep_t</a> level)</td></tr>
 <tr class="separator:af0c99e7fd5e1ef7adcfd83d8934ae09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -87,11 +92,125 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac2d32b767221bc2842dbe512e20d8428">ioctl</a> (int req, int arg)</td></tr>
 <tr class="separator:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
 </table>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a934bd410da78dcfab9389b2dea44976e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976e">Hal::Core::func</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> functional types </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea47d1496d7d12f2d10009438792508473"></a>CORE&#160;</td><td class="fielddoc">
+<p><a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> Functionality. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eaf7ea290a84211bd1d94db1fdb4614486"></a>ADC&#160;</td><td class="fielddoc">
+<p>Analog to Digital Converter. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea6fda9971b5757f246a418fbb69d1e4dc"></a>DAC&#160;</td><td class="fielddoc">
+<p>Digital to Analog Converter. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eae861fc89cd43d96b3a95079ac4bbef92"></a>UART&#160;</td><td class="fielddoc">
+<p>UART. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea0c62ecf9224b71d715b44b86e726c8d8"></a>SPI&#160;</td><td class="fielddoc">
+<p>SPI. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eac177d403f6e26e7dfeec20860fcf4567"></a>USB&#160;</td><td class="fielddoc">
+<p>USB. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea41fee4173db9ec8e6853b466074e0d8b"></a>CAN&#160;</td><td class="fielddoc">
+<p>CAN. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea7550278430b47245f9f2d65303fe732b"></a>ENET&#160;</td><td class="fielddoc">
+<p>ENET. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea09b5b431f1d01cc24dd683210876d8d1"></a>I2C&#160;</td><td class="fielddoc">
+<p><a class="el" href="class_hal_1_1_i2_c.html" title="I2C Peripheral Class. ">I2C</a>. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eac26832cabd794bf5effe60fb8b585644"></a>I2S&#160;</td><td class="fielddoc">
+<p>I2S. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea73b72bbf583197e74661a69bb21a3d3c"></a>MEM&#160;</td><td class="fielddoc">
+<p>External memory interface. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea148d678ab191c3ab217d5a3fb953dfea"></a>RTC&#160;</td><td class="fielddoc">
+<p>RTC. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea9ac714015d9ea02475d10d30380461d7"></a>CEC&#160;</td><td class="fielddoc">
+<p>Consumer Electronic Control (Part of HDMI) </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea12aea0726fd745cee3e87c15d20a14c2"></a>QEI&#160;</td><td class="fielddoc">
+<p>Quadrature Encoder Interface. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eaa29d2d42c651a767f95c9912799c231a"></a>PWM&#160;</td><td class="fielddoc">
+<p>PWM. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea6f1f0727c360cf87468452f632f16d7f"></a>PIO&#160;</td><td class="fielddoc">
+<p>GPIO. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea7008c0d409debcec5194db9a4bff9d59"></a>TMR&#160;</td><td class="fielddoc">
+<p>Timer (output compare and input capture) </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea9035b4fa22aa7ab1dcde221f21adcf65"></a>EINT&#160;</td><td class="fielddoc">
+<p>External interrupts. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eae61c14d0c7c707a889a17047731d5780"></a>WDT&#160;</td><td class="fielddoc">
+<p>Watch dog timer. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea24bff8beda0a830a524515a1084e6c83"></a>BOD&#160;</td><td class="fielddoc">
+<p>Brown out detection. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea1a1952097949700e397b716f986de456"></a>DMA&#160;</td><td class="fielddoc">
+<p>Direct Memory Access. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eadde11847c151085b69842183b0c06e5a"></a>JTAG&#160;</td><td class="fielddoc">
+<p>JTAG. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea071e4cc2f629d86222566082fe1f3c35"></a>RESET&#160;</td><td class="fielddoc">
+<p>Reset. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eae54735b4c08bc5c5a0fae5323d352558"></a>CLKOUT&#160;</td><td class="fielddoc">
+<p>Clockout. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eac9f938f6f049c87c745dbca6b46471fe"></a>LCD&#160;</td><td class="fielddoc">
+<p>LCD. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eaf8b3ba6f679665162eb2bd459531c1e1"></a>LCD1&#160;</td><td class="fielddoc">
+<p>LCD. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea9b8008bae1c9ceb389b5982d72a75a9c"></a>LCD2&#160;</td><td class="fielddoc">
+<p>LCD. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eaf76e6e62a36c062252c1b54a034b0845"></a>LCD3&#160;</td><td class="fielddoc">
+<p>LCD. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea619bc87d18fe7c786de254929ef1e855"></a>EMC&#160;</td><td class="fielddoc">
+<p>External Memory Controller. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea7416aba67040a12629d53f5171811965"></a>MCI&#160;</td><td class="fielddoc">
+<p>Multimedia Card Interface. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976eac9cef87593141b15fa72fe5ef7356680"></a>SSP&#160;</td><td class="fielddoc">
+<p>SSP. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea4137cbbdac88d8a56401e33983aa3329"></a>MCPWM&#160;</td><td class="fielddoc">
+<p>Motor Control PWM. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea5c3ee894f46ba8090845c12cfced514b"></a>NMI&#160;</td><td class="fielddoc">
+<p>Non-maskable Interrupt. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a934bd410da78dcfab9389b2dea44976ea1c5e2a8f93d17fef4e3f49ff990ed309"></a>TRACE&#160;</td><td class="fielddoc">
+<p>Trace data. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a1d76aceb3f567416541d6b0d0d32ce03"></a>
 <div class="memitem">
@@ -106,7 +225,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>get attributes of the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> peripheral and stores them in <em>attr</em>. </p>
+<p>Get attributes of the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> peripheral and stores them in <em>attr</em>. </p>
 
 </div>
 </div>
@@ -123,7 +242,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>invokes the device's bootloader. </p>
+<p>Invoke the device's bootloader. If no bootloader is availble, a normal reset will occur. </p>
 
 </div>
 </div>
@@ -167,7 +286,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>resets the device. </p>
+<p>Reset the device. </p>
 
 </div>
 </div>
@@ -184,7 +303,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>sets the attributes for the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> device </p>
+<p>Set the attributes for the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> device </p>
 
 </div>
 </div>
@@ -201,7 +320,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>configures the clock output pin. </p>
+<p>Configure the clock output pin. </p>
 
 </div>
 </div>
@@ -218,7 +337,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>sets the interrupt request priority according to <em>req</em>. </p>
+<p>Set the interrupt request priority according to <em>req</em>. </p>
 
 </div>
 </div>
@@ -259,7 +378,16 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>sets the interrupt request priority according to <em>req</em>. </p>
+<p>Set the interrupt priority</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">periph</td><td>The peripheral (e.g. <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976eae861fc89cd43d96b3a95079ac4bbef92" title="UART. ">Core::UART</a>) </td></tr>
+    <tr><td class="paramname">port</td><td>The peripheral port </td></tr>
+    <tr><td class="paramname">prio</td><td>The priority (remember a lower number is a higher priority) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -276,7 +404,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>executes a request to set the functionality of a pin. </p>
+<p>Execute a request to set the functionality of a pin. </p>
 
 </div>
 </div>
@@ -301,7 +429,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes pin functionality. </p>
+<p>Change pin functionality using a <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> structure </p>
 
 </div>
 </div>
@@ -348,7 +476,17 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes pin functionality. </p>
+<p>Change pin function. This can be used if the default pinassign values are not adequate for your application.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>The PIO port </td></tr>
+    <tr><td class="paramname">pin</td><td>The PIO pin number </td></tr>
+    <tr><td class="paramname">func</td><td>The function (e.g. <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976eae861fc89cd43d96b3a95079ac4bbef92" title="UART. ">Core::UART</a>) </td></tr>
+    <tr><td class="paramname">func_port</td><td>The functional port (e.g. 0 for UART0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success </dd></dl>
 
 </div>
 </div>
@@ -365,7 +503,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>causes the device to sleep at the specified sleep level. </p>
+<p>Cause the device to sleep at the specified sleep level. </p>
 
 </div>
 </div>
