@@ -48,12 +48,13 @@ cd gmp
 make
 sudo make install
 cd ../ppl
-#on mingw add: --disable-shared --enable-static --disable-debugging
+#on Windows add: --disable-shared --enable-static --disable-debugging
 ../ppl-$PPL_VERSION/configure --prefix=$TOOLSPATH --with-gmp=$TOOLSPATH
 make
 #dont use sudo on Windows
 sudo make install
 cd ../mpfr
+#on Windows add: --disable-shared --enable-static --disable-debugging
 ../mpfr-$MPFR_VERSION/configure --prefix=$TOOLSPATH --with-gmp=$TOOLSPATH
 make
 #dont use sudo on Windows

@@ -44,6 +44,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a15d1daa0edb3707b5e0a0e4a2a7a857c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af937df892f07beb3d7288704654d2ed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#af937df892f07beb3d7288704654d2ed9">resume</a> (void)</td></tr>
 <tr class="separator:af937df892f07beb3d7288704654d2ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645e0998ffe80f55b3666c536e66228e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#a645e0998ffe80f55b3666c536e66228e">is_running</a> ()</td></tr>
+<tr class="separator:a645e0998ffe80f55b3666c536e66228e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812b811c5c475c69a3a5216e45a22702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#a812b811c5c475c69a3a5216e45a22702">reset</a> (void)</td></tr>
+<tr class="separator:a812b811c5c475c69a3a5216e45a22702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa40680fe88eddeabf0d3ca214d22cef3"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#aa40680fe88eddeabf0d3ca214d22cef3">msec</a> (void)</td></tr>
 <tr class="separator:aa40680fe88eddeabf0d3ca214d22cef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21565f1e4890d795ca2af5ee5265ba5e"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#a21565f1e4890d795ca2af5ee5265ba5e">usec</a> (void)</td></tr>
@@ -61,8 +65,105 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a89d5264da473f13dd535b15f09f22455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a828756f1e91fe61f4a3fb01d7d17c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#af9a828756f1e91fe61f4a3fb01d7d17c">wait_usec</a> (u32 timeout)</td></tr>
 <tr class="separator:af9a828756f1e91fe61f4a3fb01d7d17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ab1a97cd58fc50597fd4fc3660814a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#a73ab1a97cd58fc50597fd4fc3660814a">clock_usec</a> (void)</td></tr>
+<tr class="separator:a73ab1a97cd58fc50597fd4fc3660814a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae251657d9522672bad0e5ed473c1e279"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#ae251657d9522672bad0e5ed473c1e279">clock_msec</a> (void)</td></tr>
+<tr class="separator:ae251657d9522672bad0e5ed473c1e279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef3d28158a7e228d574a94173add5e18"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_timer.html#aef3d28158a7e228d574a94173add5e18">clock_sec</a> (void)</td></tr>
+<tr class="separator:aef3d28158a7e228d574a94173add5e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae251657d9522672bad0e5ed473c1e279"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Sys::Timer::clock_msec </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The the msec's on the real-time clock </p>
+
+</div>
+</div>
+<a class="anchor" id="aef3d28158a7e228d574a94173add5e18"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Sys::Timer::clock_sec </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The the sec's on the real-time clock </p>
+
+</div>
+</div>
+<a class="anchor" id="a73ab1a97cd58fc50597fd4fc3660814a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Sys::Timer::clock_usec </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The the usec's on the real-time clock </p>
+
+</div>
+</div>
+<a class="anchor" id="a645e0998ffe80f55b3666c536e66228e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Sys::Timer::is_running </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if timer is running </p>
+
+</div>
+</div>
 <a class="anchor" id="aa40680fe88eddeabf0d3ca214d22cef3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -76,9 +177,24 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in milliseconds </p><dl class="section return"><dt>Returns</dt><dd>The number of milliseconds that have elapsed since start. </dd></dl>
 
-<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in milliseconds. </p>
-<dl class="section return"><dt>Returns</dt><dd>The number of milliseconds that have elapsed since start. </dd></dl>
+</div>
+</div>
+<a class="anchor" id="a812b811c5c475c69a3a5216e45a22702"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sys::Timer::reset </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reset the value of the timer </p>
 
 </div>
 </div>
@@ -95,9 +211,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Resume counting after <a class="el" href="class_sys_1_1_timer.html#aac65be6542ef56f10435a1990ade7f83" title="Stop the current timer. ">stop()</a>. </p>
-<p>This resumes counting after a <a class="el" href="class_sys_1_1_timer.html#aac65be6542ef56f10435a1990ade7f83" title="Stop the current timer. ">stop()</a>. </p>
+<p>This resumes counting after a <a class="el" href="class_sys_1_1_timer.html#aac65be6542ef56f10435a1990ade7f83">stop()</a>. </p>
 
 </div>
 </div>
@@ -114,9 +228,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in seconds. </p>
-<dl class="section return"><dt>Returns</dt><dd>The number of seconds that have elapsed since start. </dd></dl>
+<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in seconds </p><dl class="section return"><dt>Returns</dt><dd>The number of seconds that have elapsed since start. </dd></dl>
 
 </div>
 </div>
@@ -133,9 +245,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Start the timer. </p>
-<p>This starts the timer. It is used with value() and <a class="el" href="class_sys_1_1_timer.html#aac65be6542ef56f10435a1990ade7f83" title="Stop the current timer. ">stop()</a>. </p>
+<p>Start the timer.</p>
+<p>This starts the timer. It is used with value() and <a class="el" href="class_sys_1_1_timer.html#aac65be6542ef56f10435a1990ade7f83">stop()</a>. </p>
 
 </div>
 </div>
@@ -152,8 +263,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Stop the current timer. </p>
+<p>Stop the current timer.</p>
 <p>This stops the timer from counting. Subsequent calls to value() will return the same number. </p>
 
 </div>
@@ -171,9 +281,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in microseconds. </p>
-<dl class="section return"><dt>Returns</dt><dd>The number of microseconds that have elapsed since start. </dd></dl>
+<p><a class="el" href="class_sys_1_1_timer.html" title="Timer Class. ">Timer</a> value in microseconds </p><dl class="section return"><dt>Returns</dt><dd>The number of microseconds that have elapsed since start. </dd></dl>
 
 </div>
 </div>
@@ -198,8 +306,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Wait for a number of milliseconds. </p>
+<p>Wait for a number of milliseconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="class_sys_1_1_time.html" title="Time Class. ">Time</a> to wait in milliseconds </td></tr>
@@ -230,8 +337,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Wait for a number of seconds. </p>
+<p>Wait for a number of seconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="class_sys_1_1_time.html" title="Time Class. ">Time</a> to wait in seconds </td></tr>
@@ -262,8 +368,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Wait for a number of microseconds. </p>
+<p>Wait for a number of microseconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="class_sys_1_1_time.html" title="Time Class. ">Time</a> to wait in microseconds </td></tr>

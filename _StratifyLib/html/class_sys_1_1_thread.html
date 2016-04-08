@@ -28,7 +28,8 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="class_sys_1_1_thread-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Sys::Thread Class Reference</div>  </div>
 </div><!--header-->
@@ -40,9 +41,36 @@ title: Stratify OS Docs
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a949d34f9f699445187487c1d1d2f4f94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a949d34f9f699445187487c1d1d2f4f94">Thread</a> (int stack_size=4096, bool detached=true)</td></tr>
 <tr class="separator:a949d34f9f699445187487c1d1d2f4f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add281d4877dd091bccb42511cffed4ac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#add281d4877dd091bccb42511cffed4ac">setstacksize</a> (int <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga07a39d48e46b05223805b7a7efe606ca">size</a>)</td></tr>
+<tr class="separator:add281d4877dd091bccb42511cffed4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ccfb9a3ec66774b01818f8e12dfa997"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a8ccfb9a3ec66774b01818f8e12dfa997">stacksize</a> (void) const </td></tr>
+<tr class="separator:a8ccfb9a3ec66774b01818f8e12dfa997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8cff83a211407764b7c4a63a9c9c66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#acb8cff83a211407764b7c4a63a9c9c66">setpriority</a> (int prio, int <a class="el" href="class_sys_1_1_thread.html#ac89f795389926488002a0561c0722a0e">policy</a>=<a class="el" href="class_sys_1_1_thread.html#a617a767443c1f28ca5129855abb4d47da653f98ee572628add7b2b40b16c3cb45">ROUND_ROBIN</a>)</td></tr>
+<tr class="separator:acb8cff83a211407764b7c4a63a9c9c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307aeffc071de254bc7173785d1180e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a307aeffc071de254bc7173785d1180e6">priority</a> (void) const </td></tr>
+<tr class="separator:a307aeffc071de254bc7173785d1180e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89f795389926488002a0561c0722a0e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#ac89f795389926488002a0561c0722a0e">policy</a> (void) const </td></tr>
+<tr class="separator:ac89f795389926488002a0561c0722a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f515b336a6dc7a3ff64508712e4adcd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a1f515b336a6dc7a3ff64508712e4adcd">id</a> (void) const </td></tr>
+<tr class="separator:a1f515b336a6dc7a3ff64508712e4adcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3bcc104e9c84c7c62a707a523297d02"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#ac3bcc104e9c84c7c62a707a523297d02">create</a> (void *(*func)(void *), void *args=NULL, int prio=0, int <a class="el" href="class_sys_1_1_thread.html#ac89f795389926488002a0561c0722a0e">policy</a>=<a class="el" href="class_sys_1_1_thread.html#a617a767443c1f28ca5129855abb4d47dac83634f5c813dd4714e8501951becf81">OTHER</a>)</td></tr>
+<tr class="separator:ac3bcc104e9c84c7c62a707a523297d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e974dabe4c6baf8178d3d2e6063533"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a38e974dabe4c6baf8178d3d2e6063533">isrunning</a> (void) const </td></tr>
+<tr class="separator:a38e974dabe4c6baf8178d3d2e6063533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a930f41c8e31d4d2a17c8e96bcad33fa2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a930f41c8e31d4d2a17c8e96bcad33fa2">wait</a> (void **ret, int interval=1000)</td></tr>
+<tr class="separator:a930f41c8e31d4d2a17c8e96bcad33fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bcd70453bd2e307538e604bfdeafbd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a4bcd70453bd2e307538e604bfdeafbd5">reset</a> ()</td></tr>
+<tr class="separator:a4bcd70453bd2e307538e604bfdeafbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2be43d1572e7aad608ba2255b3746cbd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#a2be43d1572e7aad608ba2255b3746cbd">yield</a> (void)</td></tr>
+<tr class="separator:a2be43d1572e7aad608ba2255b3746cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb52c6ccd3f47a44c4e437dd7c8bb93d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_thread.html#abb52c6ccd3f47a44c4e437dd7c8bb93d">join</a> (int ident, void **value_ptr)</td></tr>
+<tr class="separator:abb52c6ccd3f47a44c4e437dd7c8bb93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
-<a class="anchor" id="aeef2b73de6d22d95524c450df13be3b6"></a>
+<a class="anchor" id="a617a767443c1f28ca5129855abb4d47d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -54,14 +82,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Scheduling policies. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="aeef2b73de6d22d95524c450df13be3b6ac83634f5c813dd4714e8501951becf81"></a>OTHER&#160;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a617a767443c1f28ca5129855abb4d47dac83634f5c813dd4714e8501951becf81"></a>OTHER&#160;</td><td class="fielddoc">
 <p>Default scheduling algorithm (SCHED_OTHER), the thread uses a round robin algorithm with a 0 priority value. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="aeef2b73de6d22d95524c450df13be3b6a653f98ee572628add7b2b40b16c3cb45"></a>ROUND_ROBIN&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a617a767443c1f28ca5129855abb4d47da653f98ee572628add7b2b40b16c3cb45"></a>ROUND_ROBIN&#160;</td><td class="fielddoc">
 <p>Spend up to the total round robin time on a task before switching, variable priority allowed </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="aeef2b73de6d22d95524c450df13be3b6aa8f9624064051242df596bb8cb968a30"></a>FIFO&#160;</td><td class="fielddoc">
-<p>Stay in the thread until the thread yields (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_n_i___s_l_e_e_p.html#ga59715f1a0a2ee4dc75e8343aca15c1dd">usleep()</a>, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_n_i___f_i_l_e___a_c_c_e_s_s.html#gaefe7609d91407014d94611912cc2b1a3">read()</a>/write(), other <a class="el" href="class_sys_1_1_thread.html#a2be43d1572e7aad608ba2255b3746cbd" title="Yield the processor to another thread. ">Thread::yield()</a>), variable priority allowed </p>
+<tr><td class="fieldname"><a class="anchor" id="a617a767443c1f28ca5129855abb4d47daa8f9624064051242df596bb8cb968a30"></a>FIFO&#160;</td><td class="fielddoc">
+<p>Stay in the thread until the thread yields (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_n_i___s_l_e_e_p.html#ga59715f1a0a2ee4dc75e8343aca15c1dd">usleep()</a>, <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___u_n_i___f_i_l_e___a_c_c_e_s_s.html#gaefe7609d91407014d94611912cc2b1a3">read()</a>/write(), other <a class="el" href="class_sys_1_1_thread.html#a2be43d1572e7aad608ba2255b3746cbd">Thread::yield()</a>), variable priority allowed </p>
 </td></tr>
 </table>
 
@@ -91,16 +119,302 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Construct a new thread object. </p>
 <p>This constructs a new thread object</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stack_size</td><td>The stack size of the new thread (default is 4096) </td></tr>
-    <tr><td class="paramname">detached</td><td>Whether to create as a detached thread. If this value is false, another thread must use join() in order for the thread to terminate correctly. </td></tr>
+    <tr><td class="paramname">detached</td><td>Whether to create as a detached thread. If this value is false, another thread must use <a class="el" href="class_sys_1_1_thread.html#abb52c6ccd3f47a44c4e437dd7c8bb93d">join()</a> in order for the thread to terminate correctly. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac3bcc104e9c84c7c62a707a523297d02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::create </td>
+          <td>(</td>
+          <td class="paramtype">void *(*)(void *)&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>args</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>policy</em> = <code><a class="el" href="class_sys_1_1_thread.html#a617a767443c1f28ca5129855abb4d47dac83634f5c813dd4714e8501951becf81">OTHER</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Start the thread </p>
+
+</div>
+</div>
+<a class="anchor" id="a1f515b336a6dc7a3ff64508712e4adcd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::id </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the ID of the thread </p>
+
+</div>
+</div>
+<a class="anchor" id="a38e974dabe4c6baf8178d3d2e6063533"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Sys::Thread::isrunning </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if the thread is running </p>
+
+</div>
+</div>
+<a class="anchor" id="abb52c6ccd3f47a44c4e437dd7c8bb93d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Sys::Thread::join </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ident</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>value_ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Join the current thread to the specified thread</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ident</td><td>the ID of the target thread </td></tr>
+    <tr><td class="paramname">value_ptr</td><td>A pointer to the return value of the target thread </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac89f795389926488002a0561c0722a0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::policy </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the thread policy </p>
+
+</div>
+</div>
+<a class="anchor" id="a307aeffc071de254bc7173785d1180e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::priority </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the thread priority </p>
+
+</div>
+</div>
+<a class="anchor" id="a4bcd70453bd2e307538e604bfdeafbd5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sys::Thread::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reset the object (thread must not be running) </p>
+
+</div>
+</div>
+<a class="anchor" id="acb8cff83a211407764b7c4a63a9c9c66"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::setpriority </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>policy</em> = <code><a class="el" href="class_sys_1_1_thread.html#a617a767443c1f28ca5129855abb4d47da653f98ee572628add7b2b40b16c3cb45">ROUND_ROBIN</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the thread priority </p>
+
+</div>
+</div>
+<a class="anchor" id="add281d4877dd091bccb42511cffed4ac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::setstacksize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the stacksize (no effect after create) </p>
+
+</div>
+</div>
+<a class="anchor" id="a8ccfb9a3ec66774b01818f8e12dfa997"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::stacksize </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the stacksize </p>
+
+</div>
+</div>
+<a class="anchor" id="a930f41c8e31d4d2a17c8e96bcad33fa2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Thread::wait </td>
+          <td>(</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>ret</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>interval</em> = <code>1000</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Wait for the thread to complete (joins thread if it is not detached) </p>
+
+</div>
+</div>
+<a class="anchor" id="a2be43d1572e7aad608ba2255b3746cbd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Sys::Thread::yield </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Yield the processor to another thread </p>
 
 </div>
 </div>
