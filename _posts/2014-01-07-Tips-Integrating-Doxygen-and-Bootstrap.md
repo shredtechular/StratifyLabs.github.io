@@ -6,10 +6,10 @@ tagline: Embedded Design
 tags : [doxygen, javascript, bootstrap]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/doxygen-and-bootstrap.png" />
 Doxygen is a great tool for documenting embedded projects.  Twitter Bootstrap is
 an elegant, HTML5 framework that works great on both desktop and mobile browsers.  Using
 jquery and javascript, the two technologies can be easily integrated.
+<img class="post_image" src="{{ BASE_PATH }}/images/doxygen-and-bootstrap.png" />
 
 ## Customizing Doxygen Output
 
