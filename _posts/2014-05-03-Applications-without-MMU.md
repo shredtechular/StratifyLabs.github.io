@@ -3,7 +3,7 @@ layout: post
 title: Applications without an MMU
 category : Embedded Design Tips
 tagline: Embedded Design
-tags : [embedded, microcontroller, arm, cortex-m3, coaction]
+tags : [embedded, microcontroller, arm, cortex-m3, cortex-m4, stratify]
 ---
 
 One of CoActionOS’s biggest software challenges is providing the ability to install applications separately from the OS--without an MMU.  Overcoming this challenge contributes to both ease-of-use and portability.  By installing just the application, you save the programmer the work of integrating and compiling the OS with the application.  The programmer can also distribute the binary file to other devices running CoActionOS.  In the MMU-free world, these features are only available on uCLinux and now CoActionOS.
