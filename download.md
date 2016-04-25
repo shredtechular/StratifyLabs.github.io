@@ -72,7 +72,9 @@ sections:
 </p>
 
 <p>
+<center>
 <a class="btn btn-lg btn-primary" href="https://docs.google.com/forms/d/11hlFVfJFB_UZ7JVLc4XFZmmdZaXTEaaQo-y3eNt4R8o/viewform" target="_blank">Download Exception</a>
+</center>
 
 </p>
 
@@ -147,7 +149,7 @@ To work with Stratify OS, you need to download three tools
 </p>
 <ol>
 <li><a href="https://eclipse.org/cdt/" target="_blank">Eclipse CDT</a></li>
-<li>The Stratify SDK (link coming soon)</li>
+<li>Stratify SDK (link coming soon)</li>
 <li>Stratify Link (link coming soon)</li>
 </ol>
 
@@ -155,7 +157,7 @@ To work with Stratify OS, you need to download three tools
 <h2>The Code</h2>
 
 <p>
-You aren't required to download any source code to build Stratify OS applications. However, if you want to check out the source code, it is on [Github](https://github.com/StratifyLabs) (if it isn't on there now, it will be soon).
+You aren't required to download any source code to build Stratify OS applications. However, if you want to check out the source code, it is on <a href="https://github.com/StratifyLabs" target="_blank">Github</a> (if it isn't on there now, it will be soon).
 </p>
 </div>
 
