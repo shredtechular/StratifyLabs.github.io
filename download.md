@@ -68,7 +68,12 @@ sections:
 </div>
 
 <p>
-*Stratify OS is distributed under the GPLv3, but you can download (coming soon) an exception to this license that allows you to distribute binary copies of Stratify OS under the license terms of your choice.
+*Stratify OS is distributed under the GPLv3, but you can download an exception (using an automated process) to this license that allows you to distribute binary copies of Stratify OS under the license terms of your choice.
+</p>
+
+<p>
+<a class="btn btn-lg btn-primary" href="https://docs.google.com/forms/d/11hlFVfJFB_UZ7JVLc4XFZmmdZaXTEaaQo-y3eNt4R8o/viewform" target="_blank">Download Exception</a>
+
 </p>
 
 </div>
