@@ -31,7 +31,7 @@ sections:
   <tr>
     <td></td>
     <td><b><a href="https://github.com/StratifyLabs/StratifyQML" target="_blank">Stratify QML</a></b></td>
-    <td><b>Stratify OS</b></td>
+    <td><b><a href="https://github.com/StratifyLabs/StratifyOS" target="_blank">Stratify OS</a></b></td>
     <td><b>Stratify CRT</b></td>
     <td><b>Newlib/Compiler RT</b></td>
     <td><b>Support</b></td>
