@@ -36,32 +36,32 @@ title: Stratify OS Docs
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This is an abstract class for a microcontroller peripheral.</p>
 <p>All peripherals have a common interface based on the following function:</p><ul>
-<li><a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">open()</a></li>
-<li><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close()</a></li>
-<li><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read()</a></li>
-<li><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write()</a></li>
+<li><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open()</a></li>
+<li><a class="el" href="class_hal_1_1_periph.html#a0712771df2484d16ef01b33fd27c4b10">close()</a></li>
+<li><a class="el" href="class_hal_1_1_periph.html#a91f045a2de2975428224243350582b70">read()</a></li>
+<li><a class="el" href="class_hal_1_1_periph.html#a15de77fba284ff6c90ff211c7ed42ead">write()</a></li>
 <li><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl()</a></li>
 </ul>
 <p>The classes that inherit <a class="el" href="class_hal_1_1_periph.html" title="Peripheral Class. ">Periph</a> implement a method for each <a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl()</a> call available on the peripheral. For example, the UART has an ioctl request called I_UART_SETATTR so the method <a class="el" href="class_hal_1_1_uart.html#ace8f30f5dee7644a5c819962a2faea5e">Uart::setattr()</a> implements the ioctl request. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aba2031de6b193c4f8786235b927fd391"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">open</a> (int flags)</td></tr>
-<tr class="separator:aba2031de6b193c4f8786235b927fd391"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af984bc7d757ba96c0348062a2cd983f3"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#af984bc7d757ba96c0348062a2cd983f3">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="separator:af984bc7d757ba96c0348062a2cd983f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817ebd5d98e31ac9ee27574e27bc4418"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a817ebd5d98e31ac9ee27574e27bc4418">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="separator:a817ebd5d98e31ac9ee27574e27bc4418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91898feb89968081a5d8c203f5647ed6"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91898feb89968081a5d8c203f5647ed6">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="separator:a91898feb89968081a5d8c203f5647ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77439a03012cdcbeb9934e17ea530818"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a77439a03012cdcbeb9934e17ea530818">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="separator:a77439a03012cdcbeb9934e17ea530818"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1790d22fa7a876eda53828691a01e28"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ae1790d22fa7a876eda53828691a01e28">write</a> (const void *buf, int nbyte)</td></tr>
-<tr class="separator:ae1790d22fa7a876eda53828691a01e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470837a3de0c1b92d8ab3814cb2fd439"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open</a> (int flags=<a class="el" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bca6007187c10a2c1fab94055824ee7c608">READWRITE</a>)</td></tr>
+<tr class="separator:a470837a3de0c1b92d8ab3814cb2fd439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f045a2de2975428224243350582b70"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91f045a2de2975428224243350582b70">read</a> (void *buf, int nbyte)</td></tr>
+<tr class="separator:a91f045a2de2975428224243350582b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec7adbbcaba690e4a243d1e26394bbc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a5ec7adbbcaba690e4a243d1e26394bbc">read</a> (int loc, void *buf, int nbyte)</td></tr>
+<tr class="separator:a5ec7adbbcaba690e4a243d1e26394bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15de77fba284ff6c90ff211c7ed42ead"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a15de77fba284ff6c90ff211c7ed42ead">write</a> (int loc, const void *buf, int nbyte)</td></tr>
+<tr class="separator:a15de77fba284ff6c90ff211c7ed42ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810c3cb4f49e1eae0a1a3f37869732ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a810c3cb4f49e1eae0a1a3f37869732ed">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
+<tr class="separator:a810c3cb4f49e1eae0a1a3f37869732ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02260d1dfb37584205a4e95881d577b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a02260d1dfb37584205a4e95881d577b1">write</a> (const void *buf, int nbyte)</td></tr>
+<tr class="separator:a02260d1dfb37584205a4e95881d577b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d57cc67c0ef74fca5eb103b823712cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8d57cc67c0ef74fca5eb103b823712cc">write</a> (const char *s)</td></tr>
 <tr class="separator:a8d57cc67c0ef74fca5eb103b823712cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c924f02938888935ac8952d6b96ec8b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8c924f02938888935ac8952d6b96ec8b">close</a> ()</td></tr>
-<tr class="separator:a8c924f02938888935ac8952d6b96ec8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0712771df2484d16ef01b33fd27c4b10"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0712771df2484d16ef01b33fd27c4b10">close</a> ()</td></tr>
+<tr class="separator:a0712771df2484d16ef01b33fd27c4b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
 <tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
@@ -77,25 +77,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8c924f02938888935ac8952d6b96ec8b"></a>
+<a class="anchor" id="a0712771df2484d16ef01b33fd27c4b10"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::close </td>
+          <td class="memname">int Hal::Periph::close </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>This method closes the peripheral. Once a single instance closes the peripheral, no other instances will be able to access it. </p>
 
@@ -138,42 +130,29 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aba2031de6b193c4f8786235b927fd391"></a>
+<a class="anchor" id="a470837a3de0c1b92d8ab3814cb2fd439"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::open </td>
+          <td class="memname">int Hal::Periph::open </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>flags</em></td><td>)</td>
+          <td class="paramname"><em>flags</em> = <code><a class="el" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bca6007187c10a2c1fab94055824ee7c608">READWRITE</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_periph.html#aba2031de6b193c4f8786235b927fd391">open()</a> and configured with setattr(). After that, other instances of the peripheral can read and write without opening again. </p>
-
-<p>Reimplemented in <a class="el" href="class_hal_1_1_core.html#a50c9b06e659bba66db154914990bd750">Hal::Core</a>, <a class="el" href="class_hal_1_1_tmr.html#ac420fd0320f3c211c554fefb4a2047ea">Hal::Tmr</a>, <a class="el" href="class_hal_1_1_eint.html#a11ebac7a509a10519812a92750f9cc09">Hal::Eint</a>, <a class="el" href="class_hal_1_1_uart.html#abefadef151687262a7751be3f71d40ef">Hal::Uart</a>, <a class="el" href="class_hal_1_1_pio.html#a5ed1e2e7f07a90d6afccdf9c33df0a4f">Hal::Pio</a>, <a class="el" href="class_hal_1_1_dac.html#abe5ef9c00b2040b8fba3b80ffa6a1e45">Hal::Dac</a>, <a class="el" href="class_hal_1_1_pwm.html#aab1401edacf4514c7c80a15da906b226">Hal::Pwm</a>, <a class="el" href="class_hal_1_1_adc.html#a6ed752afd5c18149866a625c4fcba3ec">Hal::Adc</a>, <a class="el" href="class_hal_1_1_i2_c.html#aa2692e54d132f6b1ec4bad420a3ec01e">Hal::I2C</a>, <a class="el" href="class_hal_1_1_rtc.html#adff3ba6d4cb3408ff0199d112eef8567">Hal::Rtc</a>, <a class="el" href="class_hal_1_1_spi.html#a6ac76c9a3db68d156d0a117a0014144a">Hal::Spi</a>, and <a class="el" href="class_hal_1_1_usb.html#a86305311cac11b8e8239aa7c9ef15a80">Hal::Usb</a>.</p>
+<p>This method opens the peripheral. For each instance, the peripheral only needs to be opened one time. The port is typically opened with <a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open()</a> and configured with setattr(). After that, other instances of the peripheral can read and write without opening again. </p>
 
 </div>
 </div>
-<a class="anchor" id="af984bc7d757ba96c0348062a2cd983f3"></a>
+<a class="anchor" id="a91f045a2de2975428224243350582b70"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::read </td>
+          <td class="memname">int Hal::Periph::read </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -190,25 +169,17 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>reads the device. </p>
 
 </div>
 </div>
-<a class="anchor" id="a817ebd5d98e31ac9ee27574e27bc4418"></a>
+<a class="anchor" id="a5ec7adbbcaba690e4a243d1e26394bbc"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::read </td>
+          <td class="memname">int Hal::Periph::read </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>loc</em>, </td>
@@ -231,25 +202,17 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>reads the device at the location </p>
 
 </div>
 </div>
-<a class="anchor" id="a77439a03012cdcbeb9934e17ea530818"></a>
+<a class="anchor" id="a810c3cb4f49e1eae0a1a3f37869732ed"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::readline </td>
+          <td class="memname">int Hal::Periph::readline </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -278,25 +241,17 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>reads a line from the device </p>
 
 </div>
 </div>
-<a class="anchor" id="a91898feb89968081a5d8c203f5647ed6"></a>
+<a class="anchor" id="a15de77fba284ff6c90ff211c7ed42ead"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::write </td>
+          <td class="memname">int Hal::Periph::write </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>loc</em>, </td>
@@ -319,11 +274,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>writes the device at the location</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -338,15 +288,12 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae1790d22fa7a876eda53828691a01e28"></a>
+<a class="anchor" id="a02260d1dfb37584205a4e95881d577b1"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Hal::Periph::write </td>
+          <td class="memname">int Hal::Periph::write </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
@@ -363,11 +310,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>writes data to the device </p>
 
