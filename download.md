@@ -118,7 +118,7 @@ If you use the GPLv3 license, you must either:
 <p>
 <ul>
 <li>Distribute your kernel source code under the terms of the GPLv3</li>
-<li>Download the Stratify exception to the GPLv3 which allows you to distribute binary copies of your kernel under the license of your choosing (coming soon)</li>
+<li>Download the <a href="https://docs.google.com/forms/d/11hlFVfJFB_UZ7JVLc4XFZmmdZaXTEaaQo-y3eNt4R8o/viewform" target="_blank">Stratify OS exception</a> to the GPLv3 which allows you to distribute binary copies of your kernel under the license of your choosing</li>
 </ul>
 </p>
 <p>
