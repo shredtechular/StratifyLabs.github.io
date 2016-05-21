@@ -37,8 +37,8 @@ Data Structures</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ga7380b90b4a5446ee9431e75b27943a38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v_f_i_f_o.html#ga7380b90b4a5446ee9431e75b27943a38">DEVFIFO_DEVICE</a>(device_name,  cfg_ptr,  state_ptr,  mode_value,  uid_value,  gid_value)</td></tr>
 <tr class="separator:ga7380b90b4a5446ee9431e75b27943a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7e78b3c0079120fa0f94c439fc63775f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v_f_i_f_o.html#ga7e78b3c0079120fa0f94c439fc63775f">I_DEVFIFO_GETATTR</a></td></tr>
-<tr class="separator:ga7e78b3c0079120fa0f94c439fc63775f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga800e5006bcde23a873adb87feb08c160"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v_f_i_f_o.html#ga800e5006bcde23a873adb87feb08c160">I_DEVFIFO_ATTR</a></td></tr>
+<tr class="separator:ga800e5006bcde23a873adb87feb08c160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ga7380b90b4a5446ee9431e75b27943a38"></a>
@@ -103,12 +103,12 @@ Macros</h2></td></tr>
 <p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;const device_t devices[DEVICES_TOTAL+1] = {</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;  DEVICE_PERIPH(&quot;uart0&quot;, uart, 0, 0666, USER_ROOT, GROUP_ROOT, S_IFCHR),</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  DEVFIFO_DEVICE(&quot;uart0-fifo&quot;, &amp;devices[0], 0666, USER_ROOT, GROUP_ROOT),</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;     ...</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;     DEVICE_TERMINATOR</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;}</div></div><!-- fragment --> 
 </div>
 </div>
-<a class="anchor" id="ga7e78b3c0079120fa0f94c439fc63775f"></a>
+<a class="anchor" id="ga800e5006bcde23a873adb87feb08c160"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define I_DEVFIFO_GETATTR</td>
+          <td class="memname">#define I_DEVFIFO_ATTR</td>
         </tr>
       </table>
 </div><div class="memdoc">

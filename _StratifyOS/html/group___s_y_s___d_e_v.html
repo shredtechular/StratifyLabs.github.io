@@ -66,9 +66,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ga35ecbbd6edb8e55c7d6841ba5b3f4546"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v.html#ga35ecbbd6edb8e55c7d6841ba5b3f4546">LED_DEVICE</a>(dev_name,  active_level,  pio_port0,  pio_pin0,  pio_port1,  pio_pin1,  pio_port2,  pio_pin2,  pio_port3,  pio_pin3)</td></tr>
 <tr class="memdesc:ga35ecbbd6edb8e55c7d6841ba5b3f4546"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#ga35ecbbd6edb8e55c7d6841ba5b3f4546">More...</a><br /></td></tr>
 <tr class="separator:ga35ecbbd6edb8e55c7d6841ba5b3f4546"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae5331e280386e4b946296b770c21869c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v.html#gae5331e280386e4b946296b770c21869c">I_SYS_GETATTR</a></td></tr>
-<tr class="memdesc:gae5331e280386e4b946296b770c21869c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#gae5331e280386e4b946296b770c21869c">More...</a><br /></td></tr>
-<tr class="separator:gae5331e280386e4b946296b770c21869c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga295dab31fd0969ac753ce5b3e85dd3f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v.html#ga295dab31fd0969ac753ce5b3e85dd3f5">I_SYS_ATTR</a></td></tr>
+<tr class="memdesc:ga295dab31fd0969ac753ce5b3e85dd3f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#ga295dab31fd0969ac753ce5b3e85dd3f5">More...</a><br /></td></tr>
+<tr class="separator:ga295dab31fd0969ac753ce5b3e85dd3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0cfb1333526bc4de1ca199d516b96d9a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___d_e_v.html#ga0cfb1333526bc4de1ca199d516b96d9a">I_SYS_GETTASK</a></td></tr>
 <tr class="memdesc:ga0cfb1333526bc4de1ca199d516b96d9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#ga0cfb1333526bc4de1ca199d516b96d9a">More...</a><br /></td></tr>
 <tr class="separator:ga0cfb1333526bc4de1ca199d516b96d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,17 +104,17 @@ Macros</h2></td></tr>
 <p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;#include &lt;unistd.h&gt;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;#include &lt;dev/sys.h&gt;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;...</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;led_req_t req;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;req.channel = 0;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;req.on = 1;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;ioctl(led_fd, I_LED_SET, &amp;req); //turns LED on channel 1 on</div></div><!-- fragment --> 
 </div>
 </div>
-<a class="anchor" id="gae5331e280386e4b946296b770c21869c"></a>
+<a class="anchor" id="ga295dab31fd0969ac753ce5b3e85dd3f5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define I_SYS_GETATTR</td>
+          <td class="memname">#define I_SYS_ATTR</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>This request applies the software write protect to the entire device.</p>
-<p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;#include &lt;dev/sys.h&gt;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;#include &lt;uinstd.h&gt;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;#include &lt;stdio.h&gt;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;...</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;sys_attr_t attr;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;ioctl(fildes, I_SYS_GETATTR, &amp;attr);</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;printf(&quot;Version is %s\n&quot;, attr.version);</div></div><!-- fragment --> 
+<p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;#include &lt;dev/sys.h&gt;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;#include &lt;uinstd.h&gt;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;#include &lt;stdio.h&gt;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;...</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;sys_attr_t attr;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;ioctl(fildes, I_SYS_ATTR, &amp;attr);</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;printf(&quot;Version is %s\n&quot;, attr.version);</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="gad8d831b99cd6f4396a939aaca76729b7"></a>

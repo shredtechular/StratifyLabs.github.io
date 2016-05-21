@@ -53,13 +53,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ga9282030ab69b36c283952c3b72136895"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_o_o_t_l_o_a_d_e_r___d_e_v.html#ga9282030ab69b36c283952c3b72136895">I_BOOTLOADER_ERASE</a></td></tr>
 <tr class="memdesc:ga9282030ab69b36c283952c3b72136895"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#ga9282030ab69b36c283952c3b72136895">More...</a><br /></td></tr>
 <tr class="separator:ga9282030ab69b36c283952c3b72136895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga028418a856d6fbcedcdd26f0db7d602a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_o_o_t_l_o_a_d_e_r___d_e_v.html#ga028418a856d6fbcedcdd26f0db7d602a">I_BOOTLOADER_GETATTR</a></td></tr>
-<tr class="memdesc:ga028418a856d6fbcedcdd26f0db7d602a"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#ga028418a856d6fbcedcdd26f0db7d602a">More...</a><br /></td></tr>
-<tr class="separator:ga028418a856d6fbcedcdd26f0db7d602a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga504d2040cf0c847b633a481331c94ac3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga504d2040cf0c847b633a481331c94ac3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_o_o_t_l_o_a_d_e_r___d_e_v.html#ga504d2040cf0c847b633a481331c94ac3">I_BOOTLOADER_GETATTR_14X</a></td></tr>
-<tr class="memdesc:ga504d2040cf0c847b633a481331c94ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access attr for version 1.4.x. <br /></td></tr>
-<tr class="separator:ga504d2040cf0c847b633a481331c94ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7941dcf2dfee5d59c5d85a1317d037c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_o_o_t_l_o_a_d_e_r___d_e_v.html#ga7941dcf2dfee5d59c5d85a1317d037c2">I_BOOTLOADER_ATTR</a></td></tr>
+<tr class="memdesc:ga7941dcf2dfee5d59c5d85a1317d037c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#ga7941dcf2dfee5d59c5d85a1317d037c2">More...</a><br /></td></tr>
+<tr class="separator:ga7941dcf2dfee5d59c5d85a1317d037c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad6bdf82ba5bb14fd967bb360a754ecd6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___b_o_o_t_l_o_a_d_e_r___d_e_v.html#gad6bdf82ba5bb14fd967bb360a754ecd6">I_BOOTLOADER_RESET</a></td></tr>
 <tr class="memdesc:gad6bdf82ba5bb14fd967bb360a754ecd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below for details.  <a href="#gad6bdf82ba5bb14fd967bb360a754ecd6">More...</a><br /></td></tr>
 <tr class="separator:gad6bdf82ba5bb14fd967bb360a754ecd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -81,6 +77,19 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga7941dcf2dfee5d59c5d85a1317d037c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I_BOOTLOADER_ATTR</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This request loads the bootloader attributes.</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;bootloader_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;link_ioctl(LINK_BOOTLOADER_FILDES, I_BOOTLOADER_GETATTR, &amp;attr);</div></div><!-- fragment --> 
+</div>
+</div>
 <a class="anchor" id="ga9282030ab69b36c283952c3b72136895"></a>
 <div class="memitem">
 <div class="memproto">
@@ -92,19 +101,6 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>This request sets the functionality of the specified pin. </p>
 
-</div>
-</div>
-<a class="anchor" id="ga028418a856d6fbcedcdd26f0db7d602a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define I_BOOTLOADER_GETATTR</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This request loads the bootloader attributes.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;bootloader_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;link_ioctl(LINK_BOOTLOADER_FILDES, I_BOOTLOADER_GETATTR, &amp;attr);</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="gad6bdf82ba5bb14fd967bb360a754ecd6"></a>

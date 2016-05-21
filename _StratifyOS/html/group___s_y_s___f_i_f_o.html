@@ -43,9 +43,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ga670519da9a74984f5605f50cf675385d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___f_i_f_o.html#ga670519da9a74984f5605f50cf675385d">FIFO_DEVICE</a>(device_name,  cfg_ptr,  state_ptr,  mode_value,  uid_value,  gid_value)</td></tr>
 <tr class="memdesc:ga670519da9a74984f5605f50cf675385d"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#ga670519da9a74984f5605f50cf675385d">More...</a><br /></td></tr>
 <tr class="separator:ga670519da9a74984f5605f50cf675385d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga81cb55b73d1c48300efc4f9170781de9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___f_i_f_o.html#ga81cb55b73d1c48300efc4f9170781de9">I_FIFO_GETATTR</a></td></tr>
-<tr class="memdesc:ga81cb55b73d1c48300efc4f9170781de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#ga81cb55b73d1c48300efc4f9170781de9">More...</a><br /></td></tr>
-<tr class="separator:ga81cb55b73d1c48300efc4f9170781de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga30ff48c79763bdd7c003eb41184c7d65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___f_i_f_o.html#ga30ff48c79763bdd7c003eb41184c7d65">I_FIFO_ATTR</a></td></tr>
+<tr class="memdesc:ga30ff48c79763bdd7c003eb41184c7d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">See below.  <a href="#ga30ff48c79763bdd7c003eb41184c7d65">More...</a><br /></td></tr>
+<tr class="separator:ga30ff48c79763bdd7c003eb41184c7d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0f9954de41765a8b9a5a73c66aae9daa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0f9954de41765a8b9a5a73c66aae9daa"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_y_s___f_i_f_o.html#ga0f9954de41765a8b9a5a73c66aae9daa">I_FIFO_FLUSH</a></td></tr>
 <tr class="memdesc:ga0f9954de41765a8b9a5a73c66aae9daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This request flushes all data out of the fifo (third <a class="el" href="group___u_n_i___f_i_l_e___a_c_c_e_s_s.html#ga1e7463f2ee53d9da5a2ee24121aed25d">ioctl()</a> arg is omitted). <br /></td></tr>
@@ -128,16 +128,16 @@ Macros</h2></td></tr>
 <p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;#include &lt;hwdl/fifo.h&gt;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;const fifo_cfg_t fifo_cfg0 = { .buffer = fifo_buf0, .size = FIFO_BUF_SIZE };</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;fifo_state_t fifo_state0;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;const device_t devices[DEVICES_TOTAL+1] = {</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;     ...</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;     FIFO_DEVICE(&quot;fifo0&quot;, &amp;fifo_cfg0, &amp;fifo_state0, 0666, USER_ROOT, GROUP_ROOT),</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;     ...</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;     DEVICE_TERMINATOR</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div></div><!-- fragment --> 
 </div>
 </div>
-<a class="anchor" id="ga81cb55b73d1c48300efc4f9170781de9"></a>
+<a class="anchor" id="ga30ff48c79763bdd7c003eb41184c7d65"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define I_FIFO_GETATTR</td>
+          <td class="memname">#define I_FIFO_ATTR</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This request gets the size of the FIFO in bytes. Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;fifo_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;ioctl(fifo_fd, I_FIFO_GETATTR, &amp;attr);</div></div><!-- fragment --> 
+<p>This request gets the size of the FIFO in bytes. Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;fifo_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;ioctl(fifo_fd, I_FIFO_ATTR, &amp;attr);</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="gab49deb73a64bd5aeb28e625abebd9c18"></a>

@@ -38,8 +38,8 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga3764689aafa880b400bbae34389f94bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_l_c_d.html#ga3764689aafa880b400bbae34389f94bb">I_MLCD_GETATTR</a></td></tr>
-<tr class="separator:ga3764689aafa880b400bbae34389f94bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf17f9b2386588f32d09e6bdfbb25a708"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_l_c_d.html#gaf17f9b2386588f32d09e6bdfbb25a708">I_MLCD_ATTR</a></td></tr>
+<tr class="separator:gaf17f9b2386588f32d09e6bdfbb25a708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadcb7eae821312000c0ac21557f32ad00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_l_c_d.html#gadcb7eae821312000c0ac21557f32ad00">I_MLCD_CLEAR</a></td></tr>
 <tr class="separator:gadcb7eae821312000c0ac21557f32ad00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga53769052c69cde35a0d953a4d88a4346"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_l_c_d.html#ga53769052c69cde35a0d953a4d88a4346">I_MLCD_HOLD</a></td></tr>
@@ -134,6 +134,19 @@ u16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <tr class="separator:ga267f63432703615799cec82d97ec0d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="gaf17f9b2386588f32d09e6bdfbb25a708"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I_MLCD_ATTR</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This request gets the attributes of the device.</p>
+<p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;mlcd_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;ioctl(fildes, I_MLCD_GETATTR, &amp;attr);</div></div><!-- fragment --> 
+</div>
+</div>
 <a class="anchor" id="ga8a79a884628c59386fadfb2b98c5b8d3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -158,19 +171,6 @@ u16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 </div><div class="memdoc">
 <p>This request clears the LCD. This does not affect the video memory. This is only supported on devices that include a way to clear the memory using a hardware command.</p>
 <p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;ioctl(fildes, I_MLCD_CLEAR);</div></div><!-- fragment --> 
-</div>
-</div>
-<a class="anchor" id="ga3764689aafa880b400bbae34389f94bb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define I_MLCD_GETATTR</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This request gets the attributes of the device.</p>
-<p>Example: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;mlcd_attr_t attr;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;ioctl(fildes, I_MLCD_GETATTR, &amp;attr);</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="ga53769052c69cde35a0d953a4d88a4346"></a>
