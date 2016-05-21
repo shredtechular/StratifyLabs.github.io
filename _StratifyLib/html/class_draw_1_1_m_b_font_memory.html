@@ -37,6 +37,10 @@ title: Stratify OS Docs
 <div class="textblock"></div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3dfc8558fee562635fdc7842faca3df3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_1_1_m_b_font_memory.html#a3dfc8558fee562635fdc7842faca3df3">MBFontMemory</a> ()</td></tr>
+<tr class="separator:a3dfc8558fee562635fdc7842faca3df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680f0d3769e6f382d611ec7e96f85d5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_1_1_m_b_font_memory.html#a680f0d3769e6f382d611ec7e96f85d5e">MBFontMemory</a> (const void *ptr)</td></tr>
+<tr class="separator:a680f0d3769e6f382d611ec7e96f85d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3746e25b94ddbbe6f5224a5150c8abfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_1_1_m_b_font_memory.html#a3746e25b94ddbbe6f5224a5150c8abfa">set</a> (const void *ptr)</td></tr>
 <tr class="separator:a3746e25b94ddbbe6f5224a5150c8abfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fd1dd86ca3e271049e09aba2c8c7cdf"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_1_1_m_b_font_memory.html#a1fd1dd86ca3e271049e09aba2c8c7cdf">font_memory</a> () const </td></tr>
@@ -44,6 +48,40 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6bcc4adb795b287e951ecd40f001377c"><td class="memItemLeft" align="right" valign="top">const MBitmap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_1_1_m_b_font_memory.html#a6bcc4adb795b287e951ecd40f001377c">bitmap</a> (char c, bool ascii=true) const </td></tr>
 <tr class="separator:a6bcc4adb795b287e951ecd40f001377c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a3dfc8558fee562635fdc7842faca3df3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Draw::MBFontMemory::MBFontMemory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct an object </p>
+
+</div>
+</div>
+<a class="anchor" id="a680f0d3769e6f382d611ec7e96f85d5e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Draw::MBFontMemory::MBFontMemory </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>ptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct an object pointing to the font. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a6bcc4adb795b287e951ecd40f001377c"></a>
 <div class="memitem">
@@ -76,8 +114,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Return a pointer to the character bitmap. </p>
 <p>This methods draws a character (<em>c</em>) on the font's bitmap and returns a pointer to the bitmap. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>The character to draw </td></tr>
