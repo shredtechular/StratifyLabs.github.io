@@ -94,7 +94,7 @@ We are working hard on getting the first Stratify dev board in your hands.  Sign
 
 <p>If you can't wait for genuine Stratify Boards, you can install StratifyOS on the following development boards (more to come).</p>
 <ul>
-<li><a href="https://github.com/StratifyLabs/mbedLPC1768" target="_blank">MBED LPC1768</a></li>
+<li><a href="https://github.com/StratifyLabs/mbedLPC1768#mbedlpc1768" target="_blank">MBED LPC1768</a></li>
 </ul>
 
 <h2>The Tools</h2>
