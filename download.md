@@ -84,6 +84,42 @@ sections:
 
 <div class="container">
 
+<h1>Getting Started and Download</h1>
+
+<h2>The Hardware</h2>
+
+<p>
+We are working hard on getting the first Stratify dev board in your hands.  Sign up (on the homepage) to get updates.
+</p>
+
+<p>If you can't wait for genuine Stratify Boards, you can install StratifyOS on the following development boards (more to come)</p>
+<ul>
+<li><a href="https://github.com/StratifyLabs/mbedLPC1768">MBED LPC1768</a></li>
+</ul>
+
+<h2>The Tools</h2>
+
+<p>
+To work with Stratify OS, you need to download three tools
+</p>
+<ol>
+<li><a href="https://eclipse.org/cdt/" target="_blank">Eclipse CDT</a></li>
+<li>Stratify SDK:  <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Labs-SDK-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/StratifyLabs-SDK.dmg">Mac OS X</a></li>
+<li>Stratify Link: <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link.dmg">Mac OS X</a></li>
+</ol>
+
+
+<h2>The Code</h2>
+
+<p>
+You aren't required to download any source code to build Stratify OS applications. However, if you want to check out the source code, it is on <a href="https://github.com/StratifyLabs" target="_blank">Github</a>.
+</p>
+
+</div>
+</div>
+
+<div class="container">
+
 <h1>FAQ</h1>
 
 <p>
@@ -129,36 +165,6 @@ You can also:
 </ul>
 </p>
 
-</div>
-</div>
-
-<div class="container">
-
-<h1>Getting Started and Download</h1>
-
-<h2>The Hardware</h2>
-
-<p>
-We are working hard on getting the first Stratify dev board in your hands.  Sign up (on the homepage) to get updates.
-</p>
-
-<h2>The Tools</h2>
-
-<p>
-To work with Stratify OS, you need to download three tools
-</p>
-<ol>
-<li><a href="https://eclipse.org/cdt/" target="_blank">Eclipse CDT</a></li>
-<li>Stratify SDK:  <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Labs-SDK-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/StratifyLabs-SDK.dmg">Mac OS X</a></li>
-<li>Stratify Link: <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link.dmg">Mac OS X</a></li>
-</ol>
-
-
-<h2>The Code</h2>
-
-<p>
-You aren't required to download any source code to build Stratify OS applications. However, if you want to check out the source code, it is on <a href="https://github.com/StratifyLabs" target="_blank">Github</a>.
-</p>
 </div>
 
 
