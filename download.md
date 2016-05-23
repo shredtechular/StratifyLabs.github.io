@@ -150,7 +150,7 @@ To work with Stratify OS, you need to download three tools
 <ol>
 <li><a href="https://eclipse.org/cdt/" target="_blank">Eclipse CDT</a></li>
 <li>Stratify SDK:  <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Labs-SDK-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/StratifyLabs-SDK.dmg">Mac OS X</a></li>
-<li>Stratify Link: <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/StratifyLabs-SDK.dmg">Mac OS X</a></li>
+<li>Stratify Link: <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link-Installer.exe">Windows</a>, <a href="https://dl.dropboxusercontent.com/u/33863234/StratifyLabs/Stratify-Link.dmg">Mac OS X</a></li>
 </ol>
 
 
