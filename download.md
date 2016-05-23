@@ -92,9 +92,9 @@ sections:
 We are working hard on getting the first Stratify dev board in your hands.  Sign up (on the homepage) to get updates.
 </p>
 
-<p>If you can't wait for genuine Stratify Boards, you can install StratifyOS on the following development boards (more to come)</p>
+<p>If you can't wait for genuine Stratify Boards, you can install StratifyOS on the following development boards (more to come).</p>
 <ul>
-<li><a href="https://github.com/StratifyLabs/mbedLPC1768">MBED LPC1768</a></li>
+<li><a href="https://github.com/StratifyLabs/mbedLPC1768" target="_blank">MBED LPC1768</a></li>
 </ul>
 
 <h2>The Tools</h2>
@@ -111,8 +111,10 @@ To work with Stratify OS, you need to download three tools
 
 <h2>The Code</h2>
 
+<p>You can get started by forking or downloading the <a href="https://github.com/StratifyLabs/HelloWorld" target="_blank">Hello Word</a> application from github.</p>
+
 <p>
-You aren't required to download any source code to build Stratify OS applications. However, if you want to check out the source code, it is on <a href="https://github.com/StratifyLabs" target="_blank">Github</a>.
+You aren't required to download any of the StratifyOS source code to build applications. However, if you want to check out the OS source code, it is on <a href="https://github.com/StratifyLabs" target="_blank">Github</a>.
 </p>
 
 </div>
