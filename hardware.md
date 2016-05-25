@@ -28,7 +28,7 @@ sections:
 
 <img class="post_image" src="{{ BASE_PATH }}/images/coaction-hero-production.png" />
 
-<h2>The CoAction Hero features</h2>
+<h2>Features</h2>
 
 <ul>
 <li>StratifyOS Pre-Installed and ready for you to build apps!</li>
@@ -56,7 +56,7 @@ More info:
 <hr />
 <br />
 
-<h1>mbed LPC1768</h1>
+<h1>Mbed LPC1768</h1>
 
 <p>
 StratifyOS can also run on the <a href="http://mbed.org/platforms/mbed-LPC1768/" target="_blank">mbed LPC1768</a>
