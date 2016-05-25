@@ -39,8 +39,8 @@ title: Stratify OS Docs
 <p>The <a class="el" href="class_hal_1_1_tmr.html" title="Tmr (hardware timer) Class. ">Tmr</a> class can be used to configure a timer to count rising edges on an input capture pin or to generate waveforms on an output compare pin. It can also configure the timer to use the internal CPU clock at various frequencies.</p>
 <p>For example this will start a microsecond timer (1Mhz) using an internal clock:</p>
 <div class="fragment"><div class="line">Tmr tmr(0); <span class="comment">//use /dev/tmr0</span></div><div class="line">tmr.init(); <span class="comment">//the default is 1MHz clock using the CPU see init() below</span></div><div class="line">tmr.set(0); <span class="comment">//set the value to zero</span></div><div class="line">tmr.on(); <span class="comment">//turn the timer on</span></div><div class="line">Timer::wait_msec(100);</div><div class="line">printf(<span class="stringliteral">&quot;My timer value is %d\n&quot;</span>, tmr.value()); <span class="comment">//The value will be about 100,000</span></div></div><!-- fragment --><p>Here is an example using the <a class="el" href="class_hal_1_1_tmr.html" title="Tmr (hardware timer) Class. ">Tmr</a> to count external edges on input capture 0</p>
-<div class="fragment"><div class="line">Tmr tmr(0);</div><div class="line">tmr.init(0, <span class="comment">//frequency is ignored in this case</span></div><div class="line">     <a class="code" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407a6bc26358feab21840fe2d48c3e104d6d">Tmr::INPUT0</a>|<a class="code" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407ae6bd7cfdcf1a36fef7557d597fe6a43d">Tmr::RISING</a>, <span class="comment">//use input capture channel 0 rising edges as the clock source</span></div><div class="line">     __TMR0_PINASSIGN_PORT1_26_27_28_29, <span class="comment">//This is for the LPC17xx to use P1.26 for CAP0.0 (timer0/input0)</span></div><div class="line">     0, <span class="comment">//not using output compare channels</span></div><div class="line">     0); <span class="comment">//not using input capture (other than clock source)</span></div><div class="line">tmr.on();</div><div class="line"> <span class="comment">//Tmr0 is now counting edges arriving on P1.26 (CAP0.0) for LPC17xx devices</span></div><div class="line">printf(<span class="stringliteral">&quot;Received %d edges\n&quot;</span>, tmr.value()); <span class="comment">//show the number of edges that have arrived</span></div></div><!-- fragment --><p>You can also use the output compare channels to set the top value of the timer.</p>
-<div class="fragment"><div class="line">Tmr tmr(0);</div><div class="line">tmr.init(); <span class="comment">//use default settings (1MHz CPU timer)</span></div><div class="line"></div><div class="line">tmr.setaction(0,</div><div class="line">     <a class="code" href="class_hal_1_1_tmr.html#a32f3872fe162ceab2445e021c3d63cd9a6a5910eed9b62c6a9f9891a5b78b0ff7">Tmr::RESET</a>); <span class="comment">//reset the timer to zero when the event happens</span></div><div class="line">     <span class="comment">//Now assign a value to output compare channel 0</span></div><div class="line">tmr.setoc(0, <span class="comment">//we are using output compare channel 0</span></div><div class="line">     1000000 <span class="comment">//When the count gets to 1 million (1 second at 1MHz), reset the timer</span></div><div class="line">     );</div><div class="line">tmr.on();</div></div><!-- fragment --> </div><table class="memberdecls">
+<div class="fragment"><div class="line">Tmr tmr(0);</div><div class="line">tmr.init(0, <span class="comment">//frequency is ignored in this case</span></div><div class="line">     <a class="code" href="class_hal_1_1_tmr.html#a8f93bb7361413251a1583023267411dba6bc26358feab21840fe2d48c3e104d6d">Tmr::INPUT0</a>|<a class="code" href="class_hal_1_1_tmr.html#a8f93bb7361413251a1583023267411dbae6bd7cfdcf1a36fef7557d597fe6a43d">Tmr::RISING</a>, <span class="comment">//use input capture channel 0 rising edges as the clock source</span></div><div class="line">     __TMR0_PINASSIGN_PORT1_26_27_28_29, <span class="comment">//This is for the LPC17xx to use P1.26 for CAP0.0 (timer0/input0)</span></div><div class="line">     0, <span class="comment">//not using output compare channels</span></div><div class="line">     0); <span class="comment">//not using input capture (other than clock source)</span></div><div class="line">tmr.on();</div><div class="line"> <span class="comment">//Tmr0 is now counting edges arriving on P1.26 (CAP0.0) for LPC17xx devices</span></div><div class="line">printf(<span class="stringliteral">&quot;Received %d edges\n&quot;</span>, tmr.value()); <span class="comment">//show the number of edges that have arrived</span></div></div><!-- fragment --><p>You can also use the output compare channels to set the top value of the timer.</p>
+<div class="fragment"><div class="line">Tmr tmr(0);</div><div class="line">tmr.init(); <span class="comment">//use default settings (1MHz CPU timer)</span></div><div class="line"></div><div class="line">tmr.setaction(0,</div><div class="line">     <a class="code" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407a6a5910eed9b62c6a9f9891a5b78b0ff7">Tmr::RESET</a>); <span class="comment">//reset the timer to zero when the event happens</span></div><div class="line">     <span class="comment">//Now assign a value to output compare channel 0</span></div><div class="line">tmr.setoc(0, <span class="comment">//we are using output compare channel 0</span></div><div class="line">     1000000 <span class="comment">//When the count gets to 1 million (1 second at 1MHz), reset the timer</span></div><div class="line">     );</div><div class="line">tmr.on();</div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
@@ -86,34 +86,63 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a19979b7aae0c81fbc2c19db42aca4bfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_tmr.html#a19979b7aae0c81fbc2c19db42aca4bfc">init</a> (uint32_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, uint8_t clksrc=<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___t_m_r.html#gga752e581dd80394311e122634680ece35a6928b4e5c83b959e37e3920a09123b35">TMR_CLKSRC_CPU</a>, uint8_t pin_assign=0, uint8_t enabled_oc_chans=0, uint8_t enabled_ic_chans=0)</td></tr>
 <tr class="separator:a19979b7aae0c81fbc2c19db42aca4bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open</a> (int flags=<a class="el" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bca6007187c10a2c1fab94055824ee7c608">READWRITE</a>)</td></tr>
+<tr class="memitem:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open</a> (int <a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a>=<a class="el" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bca6007187c10a2c1fab94055824ee7c608">READWRITE</a>)</td></tr>
 <tr class="separator:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91f045a2de2975428224243350582b70 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a91f045a2de2975428224243350582b70">read</a> (void *buf, int nbyte)</td></tr>
-<tr class="separator:a91f045a2de2975428224243350582b70 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ec7adbbcaba690e4a243d1e26394bbc inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a5ec7adbbcaba690e4a243d1e26394bbc">read</a> (int loc, void *buf, int nbyte)</td></tr>
-<tr class="separator:a5ec7adbbcaba690e4a243d1e26394bbc inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15de77fba284ff6c90ff211c7ed42ead inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a15de77fba284ff6c90ff211c7ed42ead">write</a> (int loc, const void *buf, int nbyte)</td></tr>
-<tr class="separator:a15de77fba284ff6c90ff211c7ed42ead inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a810c3cb4f49e1eae0a1a3f37869732ed inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a810c3cb4f49e1eae0a1a3f37869732ed">readline</a> (char *buf, int nbyte, int timeout=10, char term= '\n')</td></tr>
-<tr class="separator:a810c3cb4f49e1eae0a1a3f37869732ed inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02260d1dfb37584205a4e95881d577b1 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a02260d1dfb37584205a4e95881d577b1">write</a> (const void *buf, int nbyte)</td></tr>
-<tr class="separator:a02260d1dfb37584205a4e95881d577b1 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a8d57cc67c0ef74fca5eb103b823712cc">write</a> (const char *s)</td></tr>
-<tr class="separator:a8d57cc67c0ef74fca5eb103b823712cc inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b62ff40c5e20785af24de3aa3dfdcb1 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a7b62ff40c5e20785af24de3aa3dfdcb1">ioctl</a> (int req, void *arg) const </td></tr>
+<tr class="separator:a7b62ff40c5e20785af24de3aa3dfdcb1 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a559f68ba40dc2a5129ca9355506b6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ab9a559f68ba40dc2a5129ca9355506b6">seek</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, int whence) const </td></tr>
+<tr class="separator:ab9a559f68ba40dc2a5129ca9355506b6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d2e2e51fe1ad71ff59af18a5b502ec inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ac5d2e2e51fe1ad71ff59af18a5b502ec">read</a> (void *buf, int nbyte) const </td></tr>
+<tr class="separator:ac5d2e2e51fe1ad71ff59af18a5b502ec inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45674e142a588614138cdf2aea314870 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a45674e142a588614138cdf2aea314870">write</a> (const void *buf, int nbyte) const </td></tr>
+<tr class="separator:a45674e142a588614138cdf2aea314870 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21170fad5fb50f1362d3209204381a14 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a21170fad5fb50f1362d3209204381a14">read</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio) const </td></tr>
+<tr class="separator:a21170fad5fb50f1362d3209204381a14 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e96c063cd8e518d4ada2168436b9f9 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#aa6e96c063cd8e518d4ada2168436b9f9">write</a> (<a class="el" href="class_sys_1_1_aio.html">Sys::Aio</a> &amp;aio) const </td></tr>
+<tr class="separator:aa6e96c063cd8e518d4ada2168436b9f9 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0712771df2484d16ef01b33fd27c4b10 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0712771df2484d16ef01b33fd27c4b10">close</a> ()</td></tr>
 <tr class="separator:a0712771df2484d16ef01b33fd27c4b10 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a262402e1cbc3aedd7d5bb050a531c7ca">ioctl</a> (int req, void *arg)</td></tr>
-<tr class="separator:a262402e1cbc3aedd7d5bb050a531c7ca inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
-<tr class="memitem:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a56ee6ab11a504e358b39a3c65a1d10fe">ioctl</a> (int req, const void *arg)</td></tr>
-<tr class="separator:a56ee6ab11a504e358b39a3c65a1d10fe inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a42025ff8be7cf02f3b8c7c80b7bdc916">ioctl</a> (int req)</td></tr>
-<tr class="separator:a42025ff8be7cf02f3b8c7c80b7bdc916 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac2d32b767221bc2842dbe512e20d8428">ioctl</a> (int req, int arg)</td></tr>
-<tr class="separator:ac2d32b767221bc2842dbe512e20d8428 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a98715bcba2d13bd8b5ec3c58f68b16 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a> (void) const </td></tr>
+<tr class="separator:a6a98715bcba2d13bd8b5ec3c58f68b16 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87cf5c1d430de673d457e225b0fbb6f7 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a> () const </td></tr>
+<tr class="separator:a87cf5c1d430de673d457e225b0fbb6f7 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd23591acbb5d966a9c5b27855cd38c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#afdd23591acbb5d966a9c5b27855cd38c">fileno</a> (void) const </td></tr>
+<tr class="separator:afdd23591acbb5d966a9c5b27855cd38c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad54e78da4db8a1d71df8ecd5fd792c26 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ad54e78da4db8a1d71df8ecd5fd792c26">read</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, void *buf, int nbyte) const </td></tr>
+<tr class="separator:ad54e78da4db8a1d71df8ecd5fd792c26 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3ef7f19f2b5ec929ad72f432f56d9e inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a5f3ef7f19f2b5ec929ad72f432f56d9e">write</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, const void *buf, int nbyte) const </td></tr>
+<tr class="separator:a5f3ef7f19f2b5ec929ad72f432f56d9e inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30fbfdec99c8d215366512a822c4dce0 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a30fbfdec99c8d215366512a822c4dce0">write</a> (const char *s) const </td></tr>
+<tr class="separator:a30fbfdec99c8d215366512a822c4dce0 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b7f82b4b421c82ef3e3b7c3f6a1af4c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a2b7f82b4b421c82ef3e3b7c3f6a1af4c">readline</a> (char *buf, int nbyte, int timeout, char term) const </td></tr>
+<tr class="separator:a2b7f82b4b421c82ef3e3b7c3f6a1af4c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6174e9f31bb300968b605f6b1421c8b7 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a6174e9f31bb300968b605f6b1421c8b7">write</a> (const <a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;str) const </td></tr>
+<tr class="separator:a6174e9f31bb300968b605f6b1421c8b7 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af88bd43eb461b8ac53ca087904689c52 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#af88bd43eb461b8ac53ca087904689c52">gets</a> (char *s, int n, char term= '\n') const </td></tr>
+<tr class="separator:af88bd43eb461b8ac53ca087904689c52 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98383c457fdb0508266a751b1f530d0e inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a98383c457fdb0508266a751b1f530d0e">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> *s, char term= '\n') const </td></tr>
+<tr class="separator:a98383c457fdb0508266a751b1f530d0e inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ff0a6c370f1af06acaf91bec314c23 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a82ff0a6c370f1af06acaf91bec314c23">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;s, char term= '\n') const </td></tr>
+<tr class="separator:a82ff0a6c370f1af06acaf91bec314c23 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0c17d284bdefec3a8c3d6bab8d951c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a7a0c17d284bdefec3a8c3d6bab8d951c">ioctl</a> (int req, const void *arg) const </td></tr>
+<tr class="separator:a7a0c17d284bdefec3a8c3d6bab8d951c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055f4d4667921da396de7645e9973798 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a055f4d4667921da396de7645e9973798">ioctl</a> (int req) const </td></tr>
+<tr class="separator:a055f4d4667921da396de7645e9973798 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48dd9bfab76c068e6a9c26fe953eb9b inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ab48dd9bfab76c068e6a9c26fe953eb9b">ioctl</a> (int req, int arg) const </td></tr>
+<tr class="separator:ab48dd9bfab76c068e6a9c26fe953eb9b inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
+<tr class="memitem:ac45ab0ad116cf7f6fc03e7704809a719 inherit pub_static_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac45ab0ad116cf7f6fc03e7704809a719">name</a> (const char *path)</td></tr>
+<tr class="separator:ac45ab0ad116cf7f6fc03e7704809a719 inherit pub_static_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
+<tr class="memitem:a0855a14db45638e256d0634658e2eb06 inherit pro_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0855a14db45638e256d0634658e2eb06">open</a> (const char *<a class="el" href="class_hal_1_1_phy.html#ac45ab0ad116cf7f6fc03e7704809a719">name</a>, int <a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a>)</td></tr>
+<tr class="separator:a0855a14db45638e256d0634658e2eb06 inherit pro_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
-<a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9"></a>
+<a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -122,31 +151,31 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This lists the values for the event when using <a class="el" href="class_hal_1_1_tmr.html#a0030b0f171d3f73e3570ad2db30f3b14">setaction()</a>. The values can be Or'd (|) together such as <a class="el" href="class_hal_1_1_tmr.html#a32f3872fe162ceab2445e021c3d63cd9a6a5910eed9b62c6a9f9891a5b78b0ff7">Tmr::RESET</a>|Tmr::INTERRUPT. </p>
+<p>This lists the values for the event when using <a class="el" href="class_hal_1_1_tmr.html#a0030b0f171d3f73e3570ad2db30f3b14">setaction()</a>. The values can be Or'd (|) together such as <a class="el" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407a6a5910eed9b62c6a9f9891a5b78b0ff7">Tmr::RESET</a>|Tmr::INTERRUPT. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9a140ef26fde22fa526457bdaa79bd11be"></a>INTERRUPT&#160;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a140ef26fde22fa526457bdaa79bd11be"></a>INTERRUPT&#160;</td><td class="fielddoc">
 <p>Trigger interrupt and execute callback </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9a6a5910eed9b62c6a9f9891a5b78b0ff7"></a>RESET&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a6a5910eed9b62c6a9f9891a5b78b0ff7"></a>RESET&#160;</td><td class="fielddoc">
 <p>Reset timer value to zero </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9a653abd6e443f9fe40b21bca8d0794896"></a>STOP&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a653abd6e443f9fe40b21bca8d0794896"></a>STOP&#160;</td><td class="fielddoc">
 <p>Stop the timer </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9ac6bcec69b7a025025eb6c4693c4d7e23"></a>SETOC&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407ac6bcec69b7a025025eb6c4693c4d7e23"></a>SETOC&#160;</td><td class="fielddoc">
 <p>Set the output compare pin high </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9ada5e9fe9792e5ceb4949b0e93823df73"></a>CLROC&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407ada5e9fe9792e5ceb4949b0e93823df73"></a>CLROC&#160;</td><td class="fielddoc">
 <p>Clear the output compare pin </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a32f3872fe162ceab2445e021c3d63cd9a8084edaf9a979cceec2103d3e8ac530c"></a>TOGGLEOC&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a8084edaf9a979cceec2103d3e8ac530c"></a>TOGGLEOC&#160;</td><td class="fielddoc">
 <p>Toggle the output compare pin </p>
 </td></tr>
 </table>
 
 </div>
 </div>
-<a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407"></a>
+<a class="anchor" id="a8f93bb7361413251a1583023267411db"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -157,31 +186,31 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This is a list of the timer clock sources. Not all clock sources are available on all devices. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407aa618f926277a71de972a3ab4bb5f32ec"></a>CPU&#160;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dbaa618f926277a71de972a3ab4bb5f32ec"></a>CPU&#160;</td><td class="fielddoc">
 <p>Use the internal CPU clock </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a6bc26358feab21840fe2d48c3e104d6d"></a>INPUT0&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dba6bc26358feab21840fe2d48c3e104d6d"></a>INPUT0&#160;</td><td class="fielddoc">
 <p>Use input 0 (device specific) </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407aabf83d11ec826196b71f35b621e6bed7"></a>INPUT1&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dbaabf83d11ec826196b71f35b621e6bed7"></a>INPUT1&#160;</td><td class="fielddoc">
 <p>Use input 1 (device specific) </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a128778c65fe9bd2ccbf715c382ea70e0"></a>INPUT2&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dba128778c65fe9bd2ccbf715c382ea70e0"></a>INPUT2&#160;</td><td class="fielddoc">
 <p>Use input 2 (device specific) </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a027cd2140ad5477e9955dd021519adf9"></a>INPUT3&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dba027cd2140ad5477e9955dd021519adf9"></a>INPUT3&#160;</td><td class="fielddoc">
 <p>Use input 3 (device specific) </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407ae6bd7cfdcf1a36fef7557d597fe6a43d"></a>RISING&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dbae6bd7cfdcf1a36fef7557d597fe6a43d"></a>RISING&#160;</td><td class="fielddoc">
 <p>Modifier to clock on rising edges </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a40f2e66034a1f46c0e7be2ac99a7a36d"></a>FALLING&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dba40f2e66034a1f46c0e7be2ac99a7a36d"></a>FALLING&#160;</td><td class="fielddoc">
 <p>Modifier to clock on falling edges </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407afe98a6bd521428889c7328c0a032a543"></a>BOTH&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dbafe98a6bd521428889c7328c0a032a543"></a>BOTH&#160;</td><td class="fielddoc">
 <p>Modifier to clock on both rising and falling edges </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="abc08d16d5b33f18600307a2ad4b07407a70b7ad7b404b6fd28c9da9d984cda9fd"></a>COUNTDOWN&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><a class="anchor" id="a8f93bb7361413251a1583023267411dba70b7ad7b404b6fd28c9da9d984cda9fd"></a>COUNTDOWN&#160;</td><td class="fielddoc">
 <p>Modifier for a countdown timer </p>
 </td></tr>
 </table>
@@ -360,7 +389,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">freq</td><td>timer frequency (if using TMR_CLKSRC_CPU) </td></tr>
-    <tr><td class="paramname">clksrc</td><td>clock source for the timer (default is <a class="el" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407aa618f926277a71de972a3ab4bb5f32ec">Tmr::CPU</a>) </td></tr>
+    <tr><td class="paramname">clksrc</td><td>clock source for the timer (default is <a class="el" href="class_hal_1_1_tmr.html#a8f93bb7361413251a1583023267411dbaa618f926277a71de972a3ab4bb5f32ec">Tmr::CPU</a>) </td></tr>
     <tr><td class="paramname">pin_assign</td><td>The pin assignment if using input capture (including clock source) or output compare pins </td></tr>
     <tr><td class="paramname">enabled_oc_chans</td><td>Mask of the enabled output compare channels (only if external pins are used) </td></tr>
     <tr><td class="paramname">enabled_ic_chans</td><td>Mask of the enabled input capture channels (only if external pins are used&ndash;not including clock source) </td></tr>
@@ -485,8 +514,8 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channel</td><td>The channel to use </td></tr>
-    <tr><td class="paramname">event</td><td>The event such as <a class="el" href="class_hal_1_1_tmr.html#a32f3872fe162ceab2445e021c3d63cd9a140ef26fde22fa526457bdaa79bd11be">Tmr::INTERRUPT</a> </td></tr>
-    <tr><td class="paramname">callback</td><td>Callback executed if <a class="el" href="class_hal_1_1_tmr.html#a32f3872fe162ceab2445e021c3d63cd9a140ef26fde22fa526457bdaa79bd11be">Tmr::INTERRUPT</a> is used </td></tr>
+    <tr><td class="paramname">event</td><td>The event such as <a class="el" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407a140ef26fde22fa526457bdaa79bd11be">Tmr::INTERRUPT</a> </td></tr>
+    <tr><td class="paramname">callback</td><td>Callback executed if <a class="el" href="class_hal_1_1_tmr.html#abc08d16d5b33f18600307a2ad4b07407a140ef26fde22fa526457bdaa79bd11be">Tmr::INTERRUPT</a> is used </td></tr>
     <tr><td class="paramname">context</td><td>First argument passed to callback </td></tr>
   </table>
   </dd>
