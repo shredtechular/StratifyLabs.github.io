@@ -89,13 +89,11 @@ sections:
 <h2>The Hardware</h2>
 
 <p>
-We are working hard on getting the first Stratify dev board in your hands.  Sign up (on the homepage) to get updates.
-</p>
-
-<p>If you can't wait for genuine Stratify Boards, you can install StratifyOS on the following development boards (more to come).</p>
-<ul>
-<li><a href="https://github.com/StratifyLabs/mbedLPC1768#mbedlpc1768" target="_blank">MBED LPC1768</a></li>
-</ul>
+We are working hard on getting three new Stratify boards ready for production as well as porting Stratify to existing development
+boards. Stratity OS can currently be run on the following hardware platforms.</p>
+<center>
+<a class="btn btn-lg btn-primary" href="{{ BASE_URL }}/hardware/">CoAction Hero - Buy Now</a> <a class="btn btn-lg btn-primary" href="https://github.com/StratifyLabs/mbedLPC1768#mbedlpc1768" target="_blank">MBED LPC1768 - Install Now</a>
+</center>
 
 <h2>The Tools</h2>
 
