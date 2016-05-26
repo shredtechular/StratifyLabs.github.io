@@ -39,8 +39,8 @@ title: Stratify OS Docs
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a448f58b6114637c7167cbc74266cceeb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a448f58b6114637c7167cbc74266cceeb">getvalue</a> (int *sval)</td></tr>
-<tr class="separator:a448f58b6114637c7167cbc74266cceeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12258abe080d2b8ec17915baccc49a9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a12258abe080d2b8ec17915baccc49a9f">get_value</a> (int *sval)</td></tr>
+<tr class="separator:a12258abe080d2b8ec17915baccc49a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a818befbf3ce0ae75ec25173b582eafe4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a818befbf3ce0ae75ec25173b582eafe4">value</a> (int *sval)</td></tr>
 <tr class="separator:a818befbf3ce0ae75ec25173b582eafe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34a9cec857873f24973f081002b91672"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a34a9cec857873f24973f081002b91672">init</a> (sem_t *sem, int pshared, unsigned int <a class="el" href="class_sys_1_1_sem.html#a818befbf3ce0ae75ec25173b582eafe4">value</a>)</td></tr>
@@ -53,10 +53,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ace27dca1e4ee0d76464f56f03af2dd9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a684fbb8f1003b66eb595e432a6478c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a8a684fbb8f1003b66eb595e432a6478c">post</a> ()</td></tr>
 <tr class="separator:a8a684fbb8f1003b66eb595e432a6478c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac67622e4ebd22152fc338d3b5479472d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#ac67622e4ebd22152fc338d3b5479472d">timedwait</a> (const struct timespec *timeout)</td></tr>
-<tr class="separator:ac67622e4ebd22152fc338d3b5479472d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9936617bd7aca2b80fd65e75d957139b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a9936617bd7aca2b80fd65e75d957139b">trywait</a> ()</td></tr>
-<tr class="separator:a9936617bd7aca2b80fd65e75d957139b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b88a92c8e51681ce26cb8dce81a4011"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a5b88a92c8e51681ce26cb8dce81a4011">wait_timed</a> (const struct timespec *timeout)</td></tr>
+<tr class="separator:a5b88a92c8e51681ce26cb8dce81a4011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609d913a4e21d78f5f63796a5dcd58d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a609d913a4e21d78f5f63796a5dcd58d1">try_wait</a> ()</td></tr>
+<tr class="separator:a609d913a4e21d78f5f63796a5dcd58d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7e9a6813f2dd5e0958384d67297260c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#ae7e9a6813f2dd5e0958384d67297260c">wait</a> ()</td></tr>
 <tr class="separator:ae7e9a6813f2dd5e0958384d67297260c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -65,6 +65,30 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8024c096f0b258f43861fade087e85e0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sys_1_1_sem.html#a8024c096f0b258f43861fade087e85e0">unlink</a> (const char *name)</td></tr>
 <tr class="separator:a8024c096f0b258f43861fade087e85e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a6f3279e0aa0f50933ecb093a040a7282"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_sys_1_1_sem.html#a6f3279e0aa0f50933ecb093a040a7282">Sys::Sem::flags</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a6f3279e0aa0f50933ecb093a040a7282a553f89f375179fdd231c7a4b50da97a6"></a>CREATE&#160;</td><td class="fielddoc">
+<p>Create Semaphore flag </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a6f3279e0aa0f50933ecb093a040a7282aeb5f46d0c1696ee3534efb26b9f05a47"></a>EXCL&#160;</td><td class="fielddoc">
+<p>Create exclusive </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a6f3279e0aa0f50933ecb093a040a7282a40163c1ef749845b03db961c9ccbf816"></a>EXCLUSIVE&#160;</td><td class="fielddoc">
+<p>Create exclusive </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ace27dca1e4ee0d76464f56f03af2dd9b"></a>
 <div class="memitem">
@@ -98,12 +122,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a448f58b6114637c7167cbc74266cceeb"></a>
+<a class="anchor" id="a12258abe080d2b8ec17915baccc49a9f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Sys::Sem::getvalue </td>
+          <td class="memname">int Sys::Sem::get_value </td>
           <td>(</td>
           <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>sval</em></td><td>)</td>
@@ -230,34 +254,25 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac67622e4ebd22152fc338d3b5479472d"></a>
+<a class="anchor" id="a609d913a4e21d78f5f63796a5dcd58d1"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Sys::Sem::timedwait </td>
-          <td>(</td>
-          <td class="paramtype">const struct timespec *&#160;</td>
-          <td class="paramname"><em>timeout</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Wait for semaphore to become available with a timeout </p>
-
-</div>
-</div>
-<a class="anchor" id="a9936617bd7aca2b80fd65e75d957139b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Sys::Sem::trywait </td>
+          <td class="memname">int Sys::Sem::try_wait </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Check to see if semaphore is available </p>
 
@@ -309,7 +324,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See <a class="el" href="class_sys_1_1_sem.html#a448f58b6114637c7167cbc74266cceeb">getvalue()</a> </p>
+<p>See getvalue() </p>
 
 </div>
 </div>
@@ -326,6 +341,31 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Wait for the semaphore to become available </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b88a92c8e51681ce26cb8dce81a4011"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sys::Sem::wait_timed </td>
+          <td>(</td>
+          <td class="paramtype">const struct timespec *&#160;</td>
+          <td class="paramname"><em>timeout</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Wait for semaphore to become available with a timeout </p>
 
 </div>
 </div>

@@ -37,37 +37,37 @@ title: Stratify OS Docs
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
 <div class="textblock"><p>This is the <a class="el" href="class_hal_1_1_core.html" title="Core Class. ">Core</a> class. It is used to access core MCU information such as clock speed and to adjust interrupt priorities.</p>
 <p>Here is an example of how to read the MCU serial number:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line">     <span class="keywordtype">int</span> i;</div><div class="line">     Core core(0);</div><div class="line">     <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> <a class="code" href="class_hal_1_1_core.html#a1d76aceb3f567416541d6b0d0d32ce03">attr</a>;</div><div class="line">     core.open();</div><div class="line">     core.attr(&amp;attr);</div><div class="line">     printf(<span class="stringliteral">&quot;Serial Number is:&quot;</span>);</div><div class="line">     <span class="keywordflow">for</span>(i=3; i &gt;= 0; i--){</div><div class="line">          printf(<span class="stringliteral">&quot;%X&quot;</span>, attr.<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html#af814d0af22134270091735cd68e786de">serial_number</a>[i]);</div><div class="line">     }</div><div class="line">     printf(<span class="stringliteral">&quot;\n&quot;</span>);</div><div class="line">     core.close(); <span class="comment">//core is never &quot;powered-down&quot; but this frees the file descriptor</span></div><div class="line">}</div></div><!-- fragment --> </div><table class="memberdecls">
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/Hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line">     <span class="keywordtype">int</span> i;</div><div class="line">     Core core(0);</div><div class="line">     <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> attr;</div><div class="line">     core.open();</div><div class="line">     core.attr(&amp;attr);</div><div class="line">     printf(<span class="stringliteral">&quot;Serial Number is:&quot;</span>);</div><div class="line">     <span class="keywordflow">for</span>(i=3; i &gt;= 0; i--){</div><div class="line">          printf(<span class="stringliteral">&quot;%X&quot;</span>, attr.<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html#af814d0af22134270091735cd68e786de">serial_number</a>[i]);</div><div class="line">     }</div><div class="line">     printf(<span class="stringliteral">&quot;\n&quot;</span>);</div><div class="line">     core.close(); <span class="comment">//core is never &quot;powered-down&quot; but this frees the file descriptor</span></div><div class="line">}</div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="inherit_header pub_types_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
+<tr class="inherit_header pub_types_class_hal_1_1_dev"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_hal_1_1_dev')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_hal_1_1_dev.html">Hal::Dev</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1d76aceb3f567416541d6b0d0d32ce03"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a1d76aceb3f567416541d6b0d0d32ce03">attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *attr)</td></tr>
-<tr class="separator:a1d76aceb3f567416541d6b0d0d32ce03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73ce4838bcd996bfdbf0f42436407efd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a73ce4838bcd996bfdbf0f42436407efd">setattr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *<a class="el" href="class_hal_1_1_core.html#a1d76aceb3f567416541d6b0d0d32ce03">attr</a>)</td></tr>
-<tr class="separator:a73ce4838bcd996bfdbf0f42436407efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32cb5494f85e8b18fcf5824d3cb9cc9a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a32cb5494f85e8b18fcf5824d3cb9cc9a">setpinfunc</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> *req)</td></tr>
-<tr class="separator:a32cb5494f85e8b18fcf5824d3cb9cc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab83f0fc560cef5a2d8874a62ff504895"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#ab83f0fc560cef5a2d8874a62ff504895">setpinfunc</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> &amp;req)</td></tr>
-<tr class="separator:ab83f0fc560cef5a2d8874a62ff504895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a228ec75f0f7d2445cd3f235c6239546b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a228ec75f0f7d2445cd3f235c6239546b">setpinfunc</a> (int port, int pin, int <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976e">func</a>, int func_port)</td></tr>
-<tr class="separator:a228ec75f0f7d2445cd3f235c6239546b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062bcb776237f9fc1952379542edf1e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a062bcb776237f9fc1952379542edf1e7">get_attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *attr)</td></tr>
+<tr class="separator:a062bcb776237f9fc1952379542edf1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b17a1210f0f8571a9fa99e3ce22fd3a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a3b17a1210f0f8571a9fa99e3ce22fd3a">set_attr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *attr)</td></tr>
+<tr class="separator:a3b17a1210f0f8571a9fa99e3ce22fd3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a041f11919de78b0c401758db5a028a85"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a041f11919de78b0c401758db5a028a85">set_pin_function</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> *req)</td></tr>
+<tr class="separator:a041f11919de78b0c401758db5a028a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0ac90cc8841004878811e0e3363e58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a0b0ac90cc8841004878811e0e3363e58">set_pin_function</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> &amp;req)</td></tr>
+<tr class="separator:a0b0ac90cc8841004878811e0e3363e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3db8c69cb9cafc642130064a42895f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#ae3db8c69cb9cafc642130064a42895f3">set_pin_function</a> (int port, int pin, int <a class="el" href="class_hal_1_1_core.html#a934bd410da78dcfab9389b2dea44976e">func</a>, int func_port)</td></tr>
+<tr class="separator:ae3db8c69cb9cafc642130064a42895f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0c99e7fd5e1ef7adcfd83d8934ae09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#af0c99e7fd5e1ef7adcfd83d8934ae09f">sleep</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___c_o_r_e.html#gae362c5b04fb1b6ea07f8bdaa21bc51f7">core_sleep_t</a> level)</td></tr>
 <tr class="separator:af0c99e7fd5e1ef7adcfd83d8934ae09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a217dc256e9fbbe73ba670f442f6f8730"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a217dc256e9fbbe73ba670f442f6f8730">reset</a> (void)</td></tr>
-<tr class="separator:a217dc256e9fbbe73ba670f442f6f8730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79a0d42aca8ad15f9a0f744e07c4f751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a79a0d42aca8ad15f9a0f744e07c4f751">invokebootloader</a> (void)</td></tr>
-<tr class="separator:a79a0d42aca8ad15f9a0f744e07c4f751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ed3d36fdfbc86762789f6bdfdce0c2f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a9ed3d36fdfbc86762789f6bdfdce0c2f">setclkout</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__clkout__t.html">core_clkout_t</a> *clkout)</td></tr>
-<tr class="separator:a9ed3d36fdfbc86762789f6bdfdce0c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ccbf090d9fab67c1579e04b19665123"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#a2ccbf090d9fab67c1579e04b19665123">reset</a> ()</td></tr>
+<tr class="separator:a2ccbf090d9fab67c1579e04b19665123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad395bdf3a61177220fbafd20aabb29b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#ad395bdf3a61177220fbafd20aabb29b0">invoke_bootloader</a> ()</td></tr>
+<tr class="separator:ad395bdf3a61177220fbafd20aabb29b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb231e4ad2ec383c3f289f70b8639ee8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_core.html#acb231e4ad2ec383c3f289f70b8639ee8">set_clkout</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__clkout__t.html">core_clkout_t</a> *clkout)</td></tr>
+<tr class="separator:acb231e4ad2ec383c3f289f70b8639ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open</a> (int <a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a>=<a class="el" href="class_hal_1_1_phy.html#a8eb542d38961e7a791a308dc226ae1bca6007187c10a2c1fab94055824ee7c608">READWRITE</a>)</td></tr>
+<tr class="memitem:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a470837a3de0c1b92d8ab3814cb2fd439">open</a> (int <a class="el" href="class_hal_1_1_dev.html#aebe6e958a37636e268205ea05e709e20">flags</a>=<a class="el" href="class_hal_1_1_dev.html#afdb81cb1f49b2d17a92ce979fc31142da45ae2046bf3ab8d0c7a1e9cb05b6c170">READWRITE</a>)</td></tr>
 <tr class="separator:a470837a3de0c1b92d8ab3814cb2fd439 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b62ff40c5e20785af24de3aa3dfdcb1 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a7b62ff40c5e20785af24de3aa3dfdcb1">ioctl</a> (int req, void *arg) const </td></tr>
 <tr class="separator:a7b62ff40c5e20785af24de3aa3dfdcb1 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9a559f68ba40dc2a5129ca9355506b6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ab9a559f68ba40dc2a5129ca9355506b6">seek</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, int whence) const </td></tr>
+<tr class="memitem:ab9a559f68ba40dc2a5129ca9355506b6 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ab9a559f68ba40dc2a5129ca9355506b6">seek</a> (int <a class="el" href="class_hal_1_1_dev.html#a84f753f3653e9f38a74c87867b852b91">loc</a>, int whence) const </td></tr>
 <tr class="separator:ab9a559f68ba40dc2a5129ca9355506b6 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5d2e2e51fe1ad71ff59af18a5b502ec inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#ac5d2e2e51fe1ad71ff59af18a5b502ec">read</a> (void *buf, int nbyte) const </td></tr>
 <tr class="separator:ac5d2e2e51fe1ad71ff59af18a5b502ec inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -79,43 +79,43 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa6e96c063cd8e518d4ada2168436b9f9 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0712771df2484d16ef01b33fd27c4b10 inherit pub_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0712771df2484d16ef01b33fd27c4b10">close</a> ()</td></tr>
 <tr class="separator:a0712771df2484d16ef01b33fd27c4b10 inherit pub_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
-<tr class="memitem:a6a98715bcba2d13bd8b5ec3c58f68b16 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a> (void) const </td></tr>
-<tr class="separator:a6a98715bcba2d13bd8b5ec3c58f68b16 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87cf5c1d430de673d457e225b0fbb6f7 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a> () const </td></tr>
-<tr class="separator:a87cf5c1d430de673d457e225b0fbb6f7 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdd23591acbb5d966a9c5b27855cd38c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#afdd23591acbb5d966a9c5b27855cd38c">fileno</a> (void) const </td></tr>
-<tr class="separator:afdd23591acbb5d966a9c5b27855cd38c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad54e78da4db8a1d71df8ecd5fd792c26 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ad54e78da4db8a1d71df8ecd5fd792c26">read</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, void *buf, int nbyte) const </td></tr>
-<tr class="separator:ad54e78da4db8a1d71df8ecd5fd792c26 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f3ef7f19f2b5ec929ad72f432f56d9e inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a5f3ef7f19f2b5ec929ad72f432f56d9e">write</a> (int <a class="el" href="class_hal_1_1_phy.html#a6a98715bcba2d13bd8b5ec3c58f68b16">loc</a>, const void *buf, int nbyte) const </td></tr>
-<tr class="separator:a5f3ef7f19f2b5ec929ad72f432f56d9e inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30fbfdec99c8d215366512a822c4dce0 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a30fbfdec99c8d215366512a822c4dce0">write</a> (const char *s) const </td></tr>
-<tr class="separator:a30fbfdec99c8d215366512a822c4dce0 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b7f82b4b421c82ef3e3b7c3f6a1af4c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a2b7f82b4b421c82ef3e3b7c3f6a1af4c">readline</a> (char *buf, int nbyte, int timeout, char term) const </td></tr>
-<tr class="separator:a2b7f82b4b421c82ef3e3b7c3f6a1af4c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6174e9f31bb300968b605f6b1421c8b7 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a6174e9f31bb300968b605f6b1421c8b7">write</a> (const <a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;str) const </td></tr>
-<tr class="separator:a6174e9f31bb300968b605f6b1421c8b7 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af88bd43eb461b8ac53ca087904689c52 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#af88bd43eb461b8ac53ca087904689c52">gets</a> (char *s, int n, char term= '\n') const </td></tr>
-<tr class="separator:af88bd43eb461b8ac53ca087904689c52 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98383c457fdb0508266a751b1f530d0e inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a98383c457fdb0508266a751b1f530d0e">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> *s, char term= '\n') const </td></tr>
-<tr class="separator:a98383c457fdb0508266a751b1f530d0e inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ff0a6c370f1af06acaf91bec314c23 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a82ff0a6c370f1af06acaf91bec314c23">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;s, char term= '\n') const </td></tr>
-<tr class="separator:a82ff0a6c370f1af06acaf91bec314c23 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0c17d284bdefec3a8c3d6bab8d951c inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a7a0c17d284bdefec3a8c3d6bab8d951c">ioctl</a> (int req, const void *arg) const </td></tr>
-<tr class="separator:a7a0c17d284bdefec3a8c3d6bab8d951c inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a055f4d4667921da396de7645e9973798 inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#a055f4d4667921da396de7645e9973798">ioctl</a> (int req) const </td></tr>
-<tr class="separator:a055f4d4667921da396de7645e9973798 inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab48dd9bfab76c068e6a9c26fe953eb9b inherit pub_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ab48dd9bfab76c068e6a9c26fe953eb9b">ioctl</a> (int req, int arg) const </td></tr>
-<tr class="separator:ab48dd9bfab76c068e6a9c26fe953eb9b inherit pub_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_hal_1_1_dev"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hal_1_1_dev')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_hal_1_1_dev.html">Hal::Dev</a></td></tr>
+<tr class="memitem:a84f753f3653e9f38a74c87867b852b91 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a84f753f3653e9f38a74c87867b852b91">loc</a> () const </td></tr>
+<tr class="separator:a84f753f3653e9f38a74c87867b852b91 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebe6e958a37636e268205ea05e709e20 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#aebe6e958a37636e268205ea05e709e20">flags</a> () const </td></tr>
+<tr class="separator:aebe6e958a37636e268205ea05e709e20 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72630745ae8754da92aca4f2d14a07e inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#ac72630745ae8754da92aca4f2d14a07e">fileno</a> () const </td></tr>
+<tr class="separator:ac72630745ae8754da92aca4f2d14a07e inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b69d7870e95966b667ecc8a1909a249 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a3b69d7870e95966b667ecc8a1909a249">read</a> (int <a class="el" href="class_hal_1_1_dev.html#a84f753f3653e9f38a74c87867b852b91">loc</a>, void *buf, int nbyte) const </td></tr>
+<tr class="separator:a3b69d7870e95966b667ecc8a1909a249 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c37eced1d016fcacdc2f100546c0d3c inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a0c37eced1d016fcacdc2f100546c0d3c">write</a> (int <a class="el" href="class_hal_1_1_dev.html#a84f753f3653e9f38a74c87867b852b91">loc</a>, const void *buf, int nbyte) const </td></tr>
+<tr class="separator:a0c37eced1d016fcacdc2f100546c0d3c inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a55ee33ac053b95e68ea2544b4a238 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a56a55ee33ac053b95e68ea2544b4a238">write</a> (const char *s) const </td></tr>
+<tr class="separator:a56a55ee33ac053b95e68ea2544b4a238 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d9a2d0b7a250b08bd725634fa182b43 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a0d9a2d0b7a250b08bd725634fa182b43">readline</a> (char *buf, int nbyte, int timeout, char term) const </td></tr>
+<tr class="separator:a0d9a2d0b7a250b08bd725634fa182b43 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a964b45c99cb1eb7369cee470970ac853 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a964b45c99cb1eb7369cee470970ac853">write</a> (const <a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;str) const </td></tr>
+<tr class="separator:a964b45c99cb1eb7369cee470970ac853 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998dc9430b5885310f6429d275033e01 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a998dc9430b5885310f6429d275033e01">gets</a> (char *s, int n, char term= '\n') const </td></tr>
+<tr class="separator:a998dc9430b5885310f6429d275033e01 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c5cdd8e5e37743d5e45e2e58da55a4 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a19c5cdd8e5e37743d5e45e2e58da55a4">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> *s, char term= '\n') const </td></tr>
+<tr class="separator:a19c5cdd8e5e37743d5e45e2e58da55a4 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad09486dbb55955ab57ed1b42cdade909 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#ad09486dbb55955ab57ed1b42cdade909">gets</a> (<a class="el" href="class_var_1_1_string.html">Var::String</a> &amp;s, char term= '\n') const </td></tr>
+<tr class="separator:ad09486dbb55955ab57ed1b42cdade909 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef9c9d2fed36777e92f5585f3793318 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a6ef9c9d2fed36777e92f5585f3793318">ioctl</a> (int req, const void *arg) const </td></tr>
+<tr class="separator:a6ef9c9d2fed36777e92f5585f3793318 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e4133a17d1c878c89f61515c9d47de7 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a0e4133a17d1c878c89f61515c9d47de7">ioctl</a> (int req) const </td></tr>
+<tr class="separator:a0e4133a17d1c878c89f61515c9d47de7 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbaaf0f79696d4980d541b35b4354525 inherit pub_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#abbaaf0f79696d4980d541b35b4354525">ioctl</a> (int req, int arg) const </td></tr>
+<tr class="separator:abbaaf0f79696d4980d541b35b4354525 inherit pub_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_class_hal_1_1_phy"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_hal_1_1_phy')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_hal_1_1_phy.html">Hal::Phy</a></td></tr>
-<tr class="memitem:ac45ab0ad116cf7f6fc03e7704809a719 inherit pub_static_methods_class_hal_1_1_phy"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_phy.html#ac45ab0ad116cf7f6fc03e7704809a719">name</a> (const char *path)</td></tr>
-<tr class="separator:ac45ab0ad116cf7f6fc03e7704809a719 inherit pub_static_methods_class_hal_1_1_phy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_class_hal_1_1_dev"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_hal_1_1_dev')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_hal_1_1_dev.html">Hal::Dev</a></td></tr>
+<tr class="memitem:a50b8c05849103ef67974a976e7a902e6 inherit pub_static_methods_class_hal_1_1_dev"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_dev.html#a50b8c05849103ef67974a976e7a902e6">name</a> (const char *path)</td></tr>
+<tr class="separator:a50b8c05849103ef67974a976e7a902e6 inherit pub_static_methods_class_hal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_hal_1_1_periph"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_hal_1_1_periph')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_hal_1_1_periph.html">Hal::Periph</a></td></tr>
-<tr class="memitem:a0855a14db45638e256d0634658e2eb06 inherit pro_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0855a14db45638e256d0634658e2eb06">open</a> (const char *<a class="el" href="class_hal_1_1_phy.html#ac45ab0ad116cf7f6fc03e7704809a719">name</a>, int <a class="el" href="class_hal_1_1_phy.html#a87cf5c1d430de673d457e225b0fbb6f7">flags</a>)</td></tr>
+<tr class="memitem:a0855a14db45638e256d0634658e2eb06 inherit pro_methods_class_hal_1_1_periph"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hal_1_1_periph.html#a0855a14db45638e256d0634658e2eb06">open</a> (const char *<a class="el" href="class_hal_1_1_dev.html#a50b8c05849103ef67974a976e7a902e6">name</a>, int <a class="el" href="class_hal_1_1_dev.html#aebe6e958a37636e268205ea05e709e20">flags</a>)</td></tr>
 <tr class="separator:a0855a14db45638e256d0634658e2eb06 inherit pro_methods_class_hal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
@@ -237,12 +237,12 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1d76aceb3f567416541d6b0d0d32ce03"></a>
+<a class="anchor" id="a062bcb776237f9fc1952379542edf1e7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::attr </td>
+          <td class="memname">int Hal::Core::get_attr </td>
           <td>(</td>
           <td class="paramtype"><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *&#160;</td>
           <td class="paramname"><em>attr</em></td><td>)</td>
@@ -254,14 +254,13 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a79a0d42aca8ad15f9a0f744e07c4f751"></a>
+<a class="anchor" id="ad395bdf3a61177220fbafd20aabb29b0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Hal::Core::invokebootloader </td>
+          <td class="memname">void Hal::Core::invoke_bootloader </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -271,14 +270,13 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a217dc256e9fbbe73ba670f442f6f8730"></a>
+<a class="anchor" id="a2ccbf090d9fab67c1579e04b19665123"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Hal::Core::reset </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -288,12 +286,12 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a73ce4838bcd996bfdbf0f42436407efd"></a>
+<a class="anchor" id="a3b17a1210f0f8571a9fa99e3ce22fd3a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::setattr </td>
+          <td class="memname">int Hal::Core::set_attr </td>
           <td>(</td>
           <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__attr__t.html">core_attr_t</a> *&#160;</td>
           <td class="paramname"><em>attr</em></td><td>)</td>
@@ -305,12 +303,12 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9ed3d36fdfbc86762789f6bdfdce0c2f"></a>
+<a class="anchor" id="acb231e4ad2ec383c3f289f70b8639ee8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::setclkout </td>
+          <td class="memname">int Hal::Core::set_clkout </td>
           <td>(</td>
           <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__clkout__t.html">core_clkout_t</a> *&#160;</td>
           <td class="paramname"><em>clkout</em></td><td>)</td>
@@ -322,12 +320,12 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a32cb5494f85e8b18fcf5824d3cb9cc9a"></a>
+<a class="anchor" id="a041f11919de78b0c401758db5a028a85"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::setpinfunc </td>
+          <td class="memname">int Hal::Core::set_pin_function </td>
           <td>(</td>
           <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> *&#160;</td>
           <td class="paramname"><em>req</em></td><td>)</td>
@@ -339,7 +337,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab83f0fc560cef5a2d8874a62ff504895"></a>
+<a class="anchor" id="a0b0ac90cc8841004878811e0e3363e58"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -347,7 +345,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::setpinfunc </td>
+          <td class="memname">int Hal::Core::set_pin_function </td>
           <td>(</td>
           <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structcore__pinfunc__t.html">core_pinfunc_t</a> &amp;&#160;</td>
           <td class="paramname"><em>req</em></td><td>)</td>
@@ -364,7 +362,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a228ec75f0f7d2445cd3f235c6239546b"></a>
+<a class="anchor" id="ae3db8c69cb9cafc642130064a42895f3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -372,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Hal::Core::setpinfunc </td>
+          <td class="memname">int Hal::Core::set_pin_function </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>port</em>, </td>
