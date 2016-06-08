@@ -28,7 +28,8 @@ title: Stratify OS Docs
 <div class="header">
   <div class="summary">
 <a href="classsys_1_1_time-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">sys::Time Class Reference</div>  </div>
 </div><!--header-->
@@ -50,8 +51,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad5febcbe7e95071cef9e5d087e68be9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7f3d79598414535f6ebafcc46e2a42f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsys_1_1_time.html">Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#af7f3d79598414535f6ebafcc46e2a42f">operator-=</a> (const <a class="el" href="classsys_1_1_time.html">Time</a> &amp;a)</td></tr>
 <tr class="separator:af7f3d79598414535f6ebafcc46e2a42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8979d3a9e7081f8e9774dfeb273b59c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#a8979d3a9e7081f8e9774dfeb273b59c5">set_current</a> ()</td></tr>
-<tr class="separator:a8979d3a9e7081f8e9774dfeb273b59c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb533dbf51484a8b46a17e9d66351f16"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#adb533dbf51484a8b46a17e9d66351f16">set_time_of_day</a> ()</td></tr>
+<tr class="separator:adb533dbf51484a8b46a17e9d66351f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac435172645b2da78ee5422a259369266"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#ac435172645b2da78ee5422a259369266">get_time_of_day</a> ()</td></tr>
+<tr class="separator:ac435172645b2da78ee5422a259369266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9344edcb18433aead344bdff03f68312"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#a9344edcb18433aead344bdff03f68312">set_value</a> (u32 <a class="el" href="classsys_1_1_time.html#aab6ef5b6de2175e3df24d19a7c7c4421">hour</a>, u32 min, u32 sec)</td></tr>
 <tr class="separator:a9344edcb18433aead344bdff03f68312"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90bdf1dedeabc0c83bd9fdd0cf322d20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#a90bdf1dedeabc0c83bd9fdd0cf322d20">set_value</a> (time_t tm)</td></tr>
@@ -78,6 +81,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7e160c48cd58512f2633ac8781759697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ad8cb079dbed9dc079116ea7778c6c1"><td class="memItemLeft" align="right" valign="top">struct tm&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#a4ad8cb079dbed9dc079116ea7778c6c1">get_tm</a> () const </td></tr>
 <tr class="separator:a4ad8cb079dbed9dc079116ea7778c6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a52d2c70127add42ecf7ddd19688fdea6"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_time.html#a52d2c70127add42ecf7ddd19688fdea6">set_time_of_day</a> (const <a class="el" href="classsys_1_1_time.html">Time</a> &amp;t)</td></tr>
+<tr class="separator:a52d2c70127add42ecf7ddd19688fdea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1e6ea80c4ea924a8430ef44bd6c72846"></a>
@@ -175,6 +183,22 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Get the name of the month </p>
+
+</div>
+</div>
+<a class="anchor" id="ac435172645b2da78ee5422a259369266"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t sys::Time::get_time_of_day </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Assign the system time of day to the time stored in this object and return the current system time. </p>
 
 </div>
 </div>
@@ -358,19 +382,44 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8979d3a9e7081f8e9774dfeb273b59c5"></a>
+<a class="anchor" id="a52d2c70127add42ecf7ddd19688fdea6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int sys::Time::set_time_of_day </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsys_1_1_time.html">Time</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the system time </p>
+
+</div>
+</div>
+<a class="anchor" id="adb533dbf51484a8b46a17e9d66351f16"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void sys::Time::set_current </td>
+          <td class="memname">int sys::Time::set_time_of_day </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This method sets the time to the current time. </p>
+<p>Set the system time to the time stored in this object </p>
 
 </div>
 </div>
