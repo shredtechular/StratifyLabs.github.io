@@ -31,12 +31,11 @@ sections:
 <h2>Features</h2>
 
 <ul>
-<li>StratifyOS Pre-Installed and ready for you to build apps!</li>
+<li>Stratify OS pre-installed and ready for you to build apps!</li>
 <li>120MHz, 512KB flash, 64KB ram LPC1769 ARM Cortex M3 microcontroller</li>
 <li>USB device</li>
 <li>1MB serial flash chip for storing user files</li>
-<li>Pre-installed with CoActionOS and CoActionOS Bootloader</li>
-<li>Easiest way to get started developing CoActionOS applications</li>
+<li>Easiest way to get started developing Stratify OS applications</li>
 </ul>
 
 <p>
