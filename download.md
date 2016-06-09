@@ -90,7 +90,7 @@ sections:
 
 <p>
 We are working hard on getting three new Stratify boards ready for production as well as porting Stratify to existing development
-boards. Stratity OS can currently be run on the following hardware platforms.</p>
+boards. Stratify OS can currently be run on the following hardware platforms.</p>
 <center>
 <a class="btn btn-lg btn-primary" href="{{ BASE_URL }}/hardware/">CoAction Hero - Buy Now</a> <a class="btn btn-lg btn-primary" href="https://github.com/StratifyLabs/mbedLPC1768#mbedlpc1768" target="_blank">MBED LPC1768 - Install Now</a>
 </center>
@@ -139,7 +139,7 @@ Applications developed for Stratify OS may be distributed under any license of y
 </p>
 
 <p>
-If you use GPL code in your application, it must allow for the system library exception if you want to distribute it under the commercial Stratity License.
+If you use GPL code in your application, it must allow for the system library exception if you want to distribute it under the commercial Stratify License.
 </p>
 
 <p>
