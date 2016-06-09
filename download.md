@@ -84,7 +84,7 @@ sections:
 
 <div class="container">
 
-<h1>Getting Started and Download</h1>
+<h1>Getting Started</h1>
 
 <h2>The Hardware</h2>
 
