@@ -42,6 +42,8 @@ title: Stratify OS Docs
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad9ec6d896bacd8691b507598b332579f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_timer.html#ad9ec6d896bacd8691b507598b332579f">start</a> ()</td></tr>
 <tr class="separator:ad9ec6d896bacd8691b507598b332579f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad963646b2427c1d45167f873e1e36cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_timer.html#ad963646b2427c1d45167f873e1e36cdb">restart</a> ()</td></tr>
+<tr class="separator:ad963646b2427c1d45167f873e1e36cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d16f8f71e6e7194982ead566daccc96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_timer.html#a6d16f8f71e6e7194982ead566daccc96">resume</a> ()</td></tr>
 <tr class="separator:a6d16f8f71e6e7194982ead566daccc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e75abcb12efdf0cc1aad7b3f2a5745"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_timer.html#a52e75abcb12efdf0cc1aad7b3f2a5745">is_running</a> ()</td></tr>
@@ -91,7 +93,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in milliseconds </p><dl class="section return"><dt>Returns</dt><dd>The number of milliseconds that have elapsed since start. </dd></dl>
+<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in milliseconds </p><dl class="section return"><dt>Returns</dt><dd>The number of milliseconds that have elapsed since start. This value can be read when the timer is running to get a live value or after it has been stopped to get the time elapsed between <a class="el" href="classsys_1_1_timer.html#ad9ec6d896bacd8691b507598b332579f">start()</a> and <a class="el" href="classsys_1_1_timer.html#a0e2b359a62d721ff845374a36cc2ac0e">stop()</a> </dd></dl>
 
 </div>
 </div>
@@ -107,7 +109,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in seconds </p><dl class="section return"><dt>Returns</dt><dd>The number of seconds that have elapsed since start. </dd></dl>
+<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in seconds. This is similar to <a class="el" href="classsys_1_1_timer.html#a0a0a70bab4e815f79fb7650f9f0d09c9">calc_msec()</a> but returns the value in seconds rather than milliseconds.</p>
+<dl class="section return"><dt>Returns</dt><dd>The number of seconds that have elapsed since start. </dd></dl>
 
 </div>
 </div>
@@ -123,7 +126,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in microseconds </p><dl class="section return"><dt>Returns</dt><dd>The number of microseconds that have elapsed since start. </dd></dl>
+<p><a class="el" href="classsys_1_1_timer.html" title="Timer Class. ">Timer</a> value in microseconds. This is similar to <a class="el" href="classsys_1_1_timer.html#a0a0a70bab4e815f79fb7650f9f0d09c9">calc_msec()</a> but returns the value in microseconds rather than milliseconds.</p>
+<dl class="section return"><dt>Returns</dt><dd>The number of microseconds that have elapsed since start. </dd></dl>
 
 </div>
 </div>
@@ -147,7 +151,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The the msec's on the real-time clock </p>
+<p>The the milliseconds on the real-time clock (starts counting on reset) </p>
 
 </div>
 </div>
@@ -171,7 +175,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The the sec's on the real-time clock </p>
+<p>The the seconds on the real-time clock (starts counting on reset) </p>
 
 </div>
 </div>
@@ -195,7 +199,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The the usec's on the real-time clock </p>
+<p>The the microseconds on the real-time clock (starts counting on reset) </p>
 
 </div>
 </div>
@@ -211,7 +215,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Check if timer is running </p>
+<p>This method returns true if the timer is currently counting meaning it has been started but has not been stopped. </p>
 
 </div>
 </div>
@@ -255,6 +259,22 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad963646b2427c1d45167f873e1e36cdb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sys::Timer::restart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This method restarts the timer. If the timer is currently running, it starts over. If it is not running, it is started. </p>
+
+</div>
+</div>
 <a class="anchor" id="a6d16f8f71e6e7194982ead566daccc96"></a>
 <div class="memitem">
 <div class="memproto">
@@ -267,7 +287,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This resumes counting after a <a class="el" href="classsys_1_1_timer.html#a0e2b359a62d721ff845374a36cc2ac0e">stop()</a>. </p>
+<p>This resumes counting after a <a class="el" href="classsys_1_1_timer.html#a0e2b359a62d721ff845374a36cc2ac0e">stop()</a>. If the timer is currently running this method has no effect. If the timer has not been started, this method will start the timer. </p>
 
 </div>
 </div>
@@ -308,7 +328,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Start the timer.</p>
-<p>This starts the timer. It is used with value() and <a class="el" href="classsys_1_1_timer.html#a0e2b359a62d721ff845374a36cc2ac0e">stop()</a>. </p>
+<p>This starts the timer. It is used with value() and <a class="el" href="classsys_1_1_timer.html#a0e2b359a62d721ff845374a36cc2ac0e">stop()</a>. If the timer is currently running, this method has no effect. If the timer has been stopped, it will restart. Use <a class="el" href="classsys_1_1_timer.html#a6d16f8f71e6e7194982ead566daccc96">resume()</a> to resume running a stopped timer. </p>
 
 </div>
 </div>
@@ -325,7 +345,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Stop the current timer.</p>
-<p>This stops the timer from counting. Subsequent calls to value() will return the same number. </p>
+<p>This stops the timer from counting. Subsequent calls to value() will return the same number. Once the timer has been stopped(), a call to <a class="el" href="classsys_1_1_timer.html#a6d16f8f71e6e7194982ead566daccc96">resume()</a> will resume counting and a call to <a class="el" href="classsys_1_1_timer.html#ad9ec6d896bacd8691b507598b332579f">start()</a> or <a class="el" href="classsys_1_1_timer.html#ad963646b2427c1d45167f873e1e36cdb">restart()</a> will restart counting from zero. </p>
 
 </div>
 </div>
@@ -374,7 +394,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Wait for a number of milliseconds.</p>
+<p>This method will delay the specified number of milliseconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="classsys_1_1_time.html" title="Time Class. ">Time</a> to wait in milliseconds </td></tr>
@@ -405,7 +425,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Wait for a number of seconds.</p>
+<p>This method will delay the specified number of seconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="classsys_1_1_time.html" title="Time Class. ">Time</a> to wait in seconds </td></tr>
@@ -436,7 +456,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Wait for a number of microseconds.</p>
+<p>This method will delay the specified number of microseconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td><a class="el" href="classsys_1_1_time.html" title="Time Class. ">Time</a> to wait in microseconds </td></tr>
