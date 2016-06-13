@@ -497,7 +497,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This method is designated as an interface for classes that inherit <a class="el" href="classsgfx_1_1_bitmap.html" title="Bitmap Class. ">Bitmap</a> to copy the bitmap to a physical device (such as an LCD). The implementation in this class is simple an empty method. Here is an example:</p>
 <div class="fragment"><div class="line">LcdDev lcd; <span class="comment">//this class inherits bitmap and re-implments refresh()</span></div><div class="line"></div><div class="line">lcd.clear(); <span class="comment">//clear the bitmap in memory</span></div><div class="line">lcd.refresh(); <span class="comment">//copy the memory to the physical device (or notify the underlying driver that it is time to copy)</span></div></div><!-- fragment --> 
-<p>Reimplemented in <a class="el" href="classhal_1_1_lcd_object.html#a976c42b5b44edace1315520400f72c76">hal::LcdObject</a>.</p>
+<p>Reimplemented in <a class="el" href="classhal_1_1_lcd.html#a6d6519b1e100162a6c68a78f502ea8ad">hal::Lcd</a>.</p>
 
 </div>
 </div>

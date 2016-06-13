@@ -38,13 +38,74 @@ title: Stratify OS Docs
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c0e7c1b94d505a21ec4a44677c43842"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#a4c0e7c1b94d505a21ec4a44677c43842">load_fonts</a> (const sg_font_ref_t *fonts, int <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___h_i_o.html#ga1059a8fd88a0db39cc4b5a29a8861882">count</a>)</td></tr>
+<tr class="memitem:a4c0e7c1b94d505a21ec4a44677c43842"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#a4c0e7c1b94d505a21ec4a44677c43842">load_fonts</a> (const sg_font_ref_t *fonts, int <a class="el" href="classsgfx_1_1_font_system.html#a318a81aac8a423c4d5e8cc63996f3426">count</a>)</td></tr>
 <tr class="separator:a4c0e7c1b94d505a21ec4a44677c43842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7064d5558f7156d2f1479afff7e035e8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsgfx_1_1_font.html">Font</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#a7064d5558f7156d2f1479afff7e035e8">get_font</a> (sg_size_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga9291cf01e8b979e54b7b85435fb3646b">h</a>, bool bold=false)</td></tr>
-<tr class="separator:a7064d5558f7156d2f1479afff7e035e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f1530716a68598ec41214c24c8578f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsgfx_1_1_font.html">Font</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#ab3f1530716a68598ec41214c24c8578f">get_font</a> (sg_size_t <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga9291cf01e8b979e54b7b85435fb3646b">h</a>, bool bold)</td></tr>
+<tr class="separator:ab3f1530716a68598ec41214c24c8578f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8ad277cfc6d19c2fcf255f871c7b07"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsgfx_1_1_font.html">Font</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#a0e8ad277cfc6d19c2fcf255f871c7b07">font</a> (int num)</td></tr>
+<tr class="separator:a0e8ad277cfc6d19c2fcf255f871c7b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a318a81aac8a423c4d5e8cc63996f3426"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsgfx_1_1_font_system.html#a318a81aac8a423c4d5e8cc63996f3426">count</a> ()</td></tr>
+<tr class="separator:a318a81aac8a423c4d5e8cc63996f3426"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7064d5558f7156d2f1479afff7e035e8"></a>
+<a class="anchor" id="a318a81aac8a423c4d5e8cc63996f3426"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int sgfx::FontSystem::count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the number of system fonts available </p>
+
+</div>
+</div>
+<a class="anchor" id="a0e8ad277cfc6d19c2fcf255f871c7b07"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classsgfx_1_1_font.html">Font</a>* sgfx::FontSystem::font </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Load the specified font</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>The offset of the system font </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the font</dd></dl>
+<p>Here is an example of how to adjust the spacing of the system fonts.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> i;</div><div class="line"><span class="keywordflow">for</span>(i = 0; i &lt; <a class="code" href="classsgfx_1_1_font_system.html#a318a81aac8a423c4d5e8cc63996f3426">FontSystem::count</a>(); i++){</div><div class="line">     Font * <a class="code" href="classsgfx_1_1_font_system.html#a0e8ad277cfc6d19c2fcf255f871c7b07">font</a> = <a class="code" href="classsgfx_1_1_font_system.html#a0e8ad277cfc6d19c2fcf255f871c7b07">FontSystem::font</a>(i);</div><div class="line">     font-&gt;set_space_size(4);</div><div class="line">}</div></div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="ab3f1530716a68598ec41214c24c8578f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -61,7 +122,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bold</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>bold</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
