@@ -22,55 +22,37 @@ title: Stratify OS Docs
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceui.html">ui</a></li><li class="navelem"><a class="el" href="classui_1_1_list_dir.html">ListDir</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceui.html">ui</a></li><li class="navelem"><a class="el" href="classui_1_1_menu_list.html">MenuList</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="classui_1_1_list_dir-members.html">List of all members</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
+<a href="classui_1_1_menu_list-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ui::ListDir Class Reference</div>  </div>
+<div class="title">ui::MenuList Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Documentation</h2>
-<div class="textblock"><p>This class will create a list from directory entries in the filesystem </p>
+<div class="textblock"><p>This class implements a list with characteristics of a menu. It provides a <a class="el" href="classui_1_1_list_item_back.html" title="List Item Back Entry. ">ui::ListItemBack</a> object to be appended to the end of the list. </p>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:ab2a86e6a4b2631bcf62da82f4724e7fb"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#ab2a86e6a4b2631bcf62da82f4724e7fb">list_dir_callback_t</a>) (<a class="el" href="classui_1_1_list_dir.html">ListDir</a> *list)</td></tr>
-<tr class="separator:ab2a86e6a4b2631bcf62da82f4724e7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a809cfd23f76ca5e545b1fc774fa21d08"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a809cfd23f76ca5e545b1fc774fa21d08">at</a> (<a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">list_attr_size_t</a> i)</td></tr>
-<tr class="separator:a809cfd23f76ca5e545b1fc774fa21d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1912ce4bbe3652c7430fb0edc9f3f80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsys_1_1_dir.html">sys::Dir</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#ab1912ce4bbe3652c7430fb0edc9f3f80">dir</a> ()</td></tr>
-<tr class="separator:ab1912ce4bbe3652c7430fb0edc9f3f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1bb564dc71023db0cfb8d684548bc84"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classui_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#ae1bb564dc71023db0cfb8d684548bc84">handle_event</a> (const Event &amp;event, const <a class="el" href="classdraw_1_1_drawing_attr.html">draw::DrawingAttr</a> &amp;attr)</td></tr>
-<tr class="separator:ae1bb564dc71023db0cfb8d684548bc84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68fccf2e3ee20510752ae571ece5ac80"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a68fccf2e3ee20510752ae571ece5ac80">is_suffix_visible</a> () const </td></tr>
-<tr class="separator:a68fccf2e3ee20510752ae571ece5ac80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2822801a286e9ad7f1b6c85bbb3e3795"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classui_1_1_list_item.html">ListItem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a2822801a286e9ad7f1b6c85bbb3e3795">item</a> ()</td></tr>
-<tr class="separator:a2822801a286e9ad7f1b6c85bbb3e3795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e4ab3ce8707ba4e74548d4dfa16caad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a4e4ab3ce8707ba4e74548d4dfa16caad">ListDir</a> (const char *<a class="el" href="classui_1_1_list_dir.html#accba951928fe4873f645936de262c8dd">path</a>, const sg_icon_t *icon=0, <a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> *<a class="el" href="classui_1_1_element_linked.html#a411326796584ee0df104db6c217dde09">parent</a>=0, <a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> *<a class="el" href="classui_1_1_element_linked.html#aaa902c634947f94573a16337970c37f1">child</a>=0)</td></tr>
-<tr class="separator:a4e4ab3ce8707ba4e74548d4dfa16caad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accba951928fe4873f645936de262c8dd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvar_1_1_string.html">var::String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#accba951928fe4873f645936de262c8dd">path</a> () const </td></tr>
-<tr class="separator:accba951928fe4873f645936de262c8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ad9cd4707a9e39788fc47f4389db4d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a8ad9cd4707a9e39788fc47f4389db4d9">set_callback</a> (<a class="el" href="classui_1_1_list_dir.html#ab2a86e6a4b2631bcf62da82f4724e7fb">list_dir_callback_t</a> callback)</td></tr>
-<tr class="separator:a8ad9cd4707a9e39788fc47f4389db4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d6f636bdb53e634214a6643afa29199"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a0d6f636bdb53e634214a6643afa29199">set_path</a> (const char *<a class="el" href="classui_1_1_list_dir.html#accba951928fe4873f645936de262c8dd">path</a>)</td></tr>
-<tr class="separator:a0d6f636bdb53e634214a6643afa29199"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1f33c9247d3fe3c7a08fd0fbb33c588"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#af1f33c9247d3fe3c7a08fd0fbb33c588">set_suffix_visible</a> (bool v=true)</td></tr>
-<tr class="separator:af1f33c9247d3fe3c7a08fd0fbb33c588"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e67a5be68093a5e71ab2c8f9920c47c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">list_attr_size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list_dir.html#a8e67a5be68093a5e71ab2c8f9920c47c">size</a> () const </td></tr>
-<tr class="separator:a8e67a5be68093a5e71ab2c8f9920c47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8beb74045bac5de8c4b644e35c483c34"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classui_1_1_element_linked.html">ui::ElementLinked</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_menu_list.html#a8beb74045bac5de8c4b644e35c483c34">at</a> (<a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">ui::list_attr_size_t</a> i)</td></tr>
+<tr class="separator:a8beb74045bac5de8c4b644e35c483c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb11a75a786186298b71e9ebf6903ec2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classui_1_1_list_item_back.html">ui::ListItemBack</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_menu_list.html#abb11a75a786186298b71e9ebf6903ec2">back</a> ()</td></tr>
+<tr class="separator:abb11a75a786186298b71e9ebf6903ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909761a75727a4558304c2858e931b07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_menu_list.html#a909761a75727a4558304c2858e931b07">MenuList</a> (<a class="el" href="classui_1_1_element_linked.html">ui::ElementLinked</a> *<a class="el" href="classui_1_1_element_linked.html#a411326796584ee0df104db6c217dde09">parent</a>=0)</td></tr>
+<tr class="separator:a909761a75727a4558304c2858e931b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4843e4f517da074a430f1c013b30151e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">ui::list_attr_size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_menu_list.html#a4843e4f517da074a430f1c013b30151e">size</a> () const </td></tr>
+<tr class="separator:a4843e4f517da074a430f1c013b30151e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classui_1_1_list"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classui_1_1_list')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classui_1_1_list.html">ui::List</a></td></tr>
 <tr class="memitem:a488d3af90ea0c1da39ca35251b8e947d inherit pub_methods_classui_1_1_list"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list.html#a488d3af90ea0c1da39ca35251b8e947d">current</a> ()</td></tr>
 <tr class="separator:a488d3af90ea0c1da39ca35251b8e947d inherit pub_methods_classui_1_1_list"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16496056bb84377651e71e62c0ab9b23 inherit pub_methods_classui_1_1_list"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list.html#a16496056bb84377651e71e62c0ab9b23">draw_to_scale</a> (const <a class="el" href="classdraw_1_1_drawing_scaled_attr.html">draw::DrawingScaledAttr</a> &amp;attr)</td></tr>
 <tr class="separator:a16496056bb84377651e71e62c0ab9b23 inherit pub_methods_classui_1_1_list"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09cfe06fb1d383ab10b11f218d8c462e inherit pub_methods_classui_1_1_list"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classui_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_list.html#a09cfe06fb1d383ab10b11f218d8c462e">handle_event</a> (const Event &amp;event, const <a class="el" href="classdraw_1_1_drawing_attr.html">draw::DrawingAttr</a> &amp;attr)</td></tr>
+<tr class="separator:a09cfe06fb1d383ab10b11f218d8c462e inherit pub_methods_classui_1_1_list"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classui_1_1_element_linked"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classui_1_1_element_linked')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classui_1_1_element_linked.html">ui::ElementLinked</a></td></tr>
 <tr class="memitem:aaa902c634947f94573a16337970c37f1 inherit pub_methods_classui_1_1_element_linked"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_element_linked.html#aaa902c634947f94573a16337970c37f1">child</a> () const </td></tr>
 <tr class="separator:aaa902c634947f94573a16337970c37f1 inherit pub_methods_classui_1_1_element_linked"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,62 +118,26 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a34791bc53da791048b955c1cfbaa56b7 inherit pub_static_methods_classdraw_1_1_drawing"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdraw_1_1_drawing.html#a34791bc53da791048b955c1cfbaa56b7">set</a> (const <a class="el" href="classdraw_1_1_drawing_attr.html">DrawingAttr</a> &amp;attr, sg_bmap_data_t v=0xFF)</td></tr>
 <tr class="separator:a34791bc53da791048b955c1cfbaa56b7 inherit pub_static_methods_classdraw_1_1_drawing"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="ab2a86e6a4b2631bcf62da82f4724e7fb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* ui::ListDir::list_dir_callback_t) (<a class="el" href="classui_1_1_list_dir.html">ListDir</a> *list)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Callback for actions on a list directory </p>
-
-</div>
-</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a4e4ab3ce8707ba4e74548d4dfa16caad"></a>
+<a class="anchor" id="a909761a75727a4558304c2858e931b07"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ui::ListDir::ListDir </td>
+          <td class="memname">ui::MenuList::MenuList </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="classui_1_1_element_linked.html">ui::ElementLinked</a> *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
           <td></td>
-          <td class="paramtype">const sg_icon_t *&#160;</td>
-          <td class="paramname"><em>icon</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classui_1_1_element_linked.html">ElementLinked</a> *&#160;</td>
-          <td class="paramname"><em>child</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Contruct a new list </p>
+<p>Construct a menu list item </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a809cfd23f76ca5e545b1fc774fa21d08"></a>
+<a class="anchor" id="a8beb74045bac5de8c4b644e35c483c34"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -199,9 +145,9 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classui_1_1_element_linked.html">ElementLinked</a>&amp; ui::ListDir::at </td>
+          <td class="memname">virtual <a class="el" href="classui_1_1_element_linked.html">ui::ElementLinked</a>&amp; ui::MenuList::at </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">list_attr_size_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">ui::list_attr_size_t</a>&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
           <td></td>
         </tr>
@@ -212,19 +158,13 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Return a pointer to the element in the specfied location in the list </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>The offset within the list </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A pointer to the object </dd></dl>
+<p>Return a points to item <em>i</em> in the list </p>
 
 <p>Implements <a class="el" href="classui_1_1_list.html#affaa66d1e01f8ad81346d346cd986f05">ui::List</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab1912ce4bbe3652c7430fb0edc9f3f80"></a>
+<a class="anchor" id="abb11a75a786186298b71e9ebf6903ec2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -232,7 +172,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsys_1_1_dir.html">sys::Dir</a>&amp; ui::ListDir::dir </td>
+          <td class="memname"><a class="el" href="classui_1_1_list_item_back.html">ui::ListItemBack</a>&amp; ui::MenuList::back </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -244,11 +184,11 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Accces the <a class="el" href="classsys_1_1_dir.html" title="Dir class. ">sys::Dir</a> object used to read the directory </p>
+<p>Access the reference to the back entry </p>
 
 </div>
 </div>
-<a class="anchor" id="ae1bb564dc71023db0cfb8d684548bc84"></a>
+<a class="anchor" id="a4843e4f517da074a430f1c013b30151e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -256,21 +196,10 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classui_1_1_element.html">Element</a>* ui::ListDir::handle_event </td>
+          <td class="memname">virtual <a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">ui::list_attr_size_t</a> ui::MenuList::size </td>
           <td>(</td>
-          <td class="paramtype">const Event &amp;&#160;</td>
-          <td class="paramname"><em>event</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classdraw_1_1_drawing_attr.html">draw::DrawingAttr</a> &amp;&#160;</td>
-          <td class="paramname"><em>attr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -279,179 +208,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This method is called on the current <a class="el" href="classui_1_1_element.html" title="Element Class. ">Element</a> when an event (e.g., Element::ENTER, Element::UPDATE, Element::TOP_PRESS) happens.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td>The event to execute </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>For transitions, the new element is returned; otherwise this </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classui_1_1_list.html#a09cfe06fb1d383ab10b11f218d8c462e">ui::List</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a68fccf2e3ee20510752ae571ece5ac80"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ui::ListDir::is_suffix_visible </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns true if the filename suffixes should be visible </p>
-
-</div>
-</div>
-<a class="anchor" id="a2822801a286e9ad7f1b6c85bbb3e3795"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classui_1_1_list_item.html">ListItem</a>&amp; ui::ListDir::item </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Access the currently selected item in the list </p>
-
-</div>
-</div>
-<a class="anchor" id="accba951928fe4873f645936de262c8dd"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classvar_1_1_string.html">var::String</a>&amp; ui::ListDir::path </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Access the path </p>
-
-</div>
-</div>
-<a class="anchor" id="a8ad9cd4707a9e39788fc47f4389db4d9"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui::ListDir::set_callback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classui_1_1_list_dir.html#ab2a86e6a4b2631bcf62da82f4724e7fb">list_dir_callback_t</a>&#160;</td>
-          <td class="paramname"><em>callback</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Assign the callback for when an item in the list is selected </p>
-
-</div>
-</div>
-<a class="anchor" id="a0d6f636bdb53e634214a6643afa29199"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui::ListDir::set_path </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set the path for the directory </p>
-
-</div>
-</div>
-<a class="anchor" id="af1f33c9247d3fe3c7a08fd0fbb33c588"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui::ListDir::set_suffix_visible </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>v</em> = <code>true</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>This method changes the visibility of the file suffix in the list </p>
-
-</div>
-</div>
-<a class="anchor" id="a8e67a5be68093a5e71ab2c8f9920c47c"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceui.html#a7daea3c694b9ea69951c606f51280ef8">list_attr_size_t</a> ui::ListDir::size </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Return the total entries in the list </p>
+<p>Calculate the index of the next visible item in the specified direction </p>
 
 <p>Implements <a class="el" href="classui_1_1_list_attr.html#ac8b2dc62660885c1b179099e2d8fca81">ui::ListAttr</a>.</p>
 
