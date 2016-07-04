@@ -38,12 +38,16 @@ title: Stratify OS Docs
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a02ab8d13d8e7162454d606865db52fe6"><td class="memItemLeft" align="right" valign="top">ui::Event&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#a02ab8d13d8e7162454d606865db52fe6">event</a> ()</td></tr>
 <tr class="separator:a02ab8d13d8e7162454d606865db52fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeedd9372f001a19d92a4078aea5ea6b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#aeedd9372f001a19d92a4078aea5ea6b0">set_handler</a> (const <a class="el" href="classsys_1_1_signal_handler.html">SignalHandler</a> &amp;handler) const </td></tr>
+<tr class="separator:aeedd9372f001a19d92a4078aea5ea6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabeeae92150aa2b718cead169f4c07eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#aabeeae92150aa2b718cead169f4c07eb">SignalEvent</a> (int signo, int sigvalue=0)</td></tr>
 <tr class="separator:aabeeae92150aa2b718cead169f4c07eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4b06a949be154778e8f564816a0b09f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#ab4b06a949be154778e8f564816a0b09f">trigger</a> (pid_t pid) const </td></tr>
 <tr class="separator:ab4b06a949be154778e8f564816a0b09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa454d2db67e17d2aa40e73480d7dfab9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#aa454d2db67e17d2aa40e73480d7dfab9">trigger</a> (pthread_t t) const </td></tr>
 <tr class="separator:aa454d2db67e17d2aa40e73480d7dfab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafcba638e6d3cda026a85f39925cd51e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#aafcba638e6d3cda026a85f39925cd51e">trigger</a> () const </td></tr>
+<tr class="separator:aafcba638e6d3cda026a85f39925cd51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a438a1105795dbad3270212a633dceb40"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_signal_event.html#a438a1105795dbad3270212a633dceb40">trigger_value</a> (pid_t pid) const </td></tr>
 <tr class="separator:a438a1105795dbad3270212a633dceb40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -108,6 +112,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aeedd9372f001a19d92a4078aea5ea6b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sys::SignalEvent::set_handler </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsys_1_1_signal_handler.html">SignalHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the event handler </p>
+
+</div>
+</div>
 <a class="anchor" id="ab4b06a949be154778e8f564816a0b09f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -161,8 +182,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Send a signal to a thread within a process. </p>
 <p>This method sends a signal to a thread within a process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -171,6 +190,30 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Zero on success </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aafcba638e6d3cda026a85f39925cd51e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sys::SignalEvent::trigger </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Trigger the event on the current thread </p>
 
 </div>
 </div>
