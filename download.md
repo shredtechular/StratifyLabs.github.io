@@ -120,7 +120,7 @@ You aren't required to download any of the StratifyOS source code to build appli
 
 <div class="container">
 
-<h1>FAQ</h1>
+<h1>License FAQ</h1>
 
 <p>
 <b>Are Stratify applications considered a combined work of Stratify OS?</b>
