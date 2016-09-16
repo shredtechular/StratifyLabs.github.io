@@ -6,9 +6,9 @@ tagline: Embedded Design
 tags : [embedded, microcontroller, arm, cortex-m3, cortex-m4, stratify]
 ---
 
-One of CoActionOS’s biggest software challenges is providing the ability to install applications separately from the OS--without an MMU.  Overcoming this challenge contributes to both ease-of-use and portability.  By installing just the application, you save the programmer the work of integrating and compiling the OS with the application.  The programmer can also distribute the binary file to other devices running CoActionOS.  In the MMU-free world, these features are only available on uCLinux and now CoActionOS.
+One of Stratify OS’s biggest software challenges is providing the ability to install applications separately from the OS--without an MMU.  Overcoming this challenge contributes to both ease-of-use and portability.  By installing just the application, you save the programmer the work of integrating and compiling the OS with the application.  The programmer can also distribute the binary file to other devices running Stratify OS.  In the MMU-free world, these features are only available on uCLinux and now Stratify OS.
 
-This begs the question:  why not just use ucLinux?  The RAM requirements for uCLinux, which are in the megabyte range (versus low KB range for CoActionOS), are too high for many small systems.  uCLinux also requires a Linux computer to compile programs.
+This begs the question:  why not just use ucLinux?  The RAM requirements for uCLinux, which are in the megabyte range (versus low KB range for Stratify OS), are too high for many small systems.  uCLinux also requires a Linux computer to compile programs.
 
 ## How
 
@@ -18,7 +18,7 @@ Without an MMU, compiling and installing independent programs can be done using 
 * Compile using position independent code/executables (PIC or PIE) and have the embedded installer update the global offset table when installing the firmware
 * Compile using relocatable code and translate the memory locations of the binary program using an embedded installer
 
-CoActionOS uses the last approach.  
+Stratify OS uses the last approach.  
 
 The disadvantage of using an ELF parser is that it requires more processing on the firmware side than the other options.  This means a larger portion of precious flash memory is dedicated to installing programs.  
 
@@ -37,7 +37,7 @@ When using mlong-calls, GCC always loads the 32-bit address of a function from a
 
 For the ARMv7-M instruction set, the instruction 0xDExx is permanently undefined.  Therefore, if the program is linked to an address space starting at 0xDE000000, all instances of 0xDExxxxxx in the binary must be data rather than instructions.
 
-The code below shows an excerpt from the CoActionOS Hello World program.  
+The code below shows an excerpt from the Stratify OS Hello World program.  
 
 ~~~~~
 de00004c <main>:
@@ -63,8 +63,7 @@ uint32_t world_population_1970 = 3733996830; //0xDE90451E
 
 ## Conclusion
 
-Implementing an embedded installer that can dynamically relocate code has been well worth it.  Users can easily compile and install CoActionOS applications without worrying about compiling or installing the OS.  It also allows firmware application portability between different
-boards running CoActionOS.
+Implementing an embedded installer that can dynamically relocate code has been well worth it.  Users can easily compile and install Stratify OS applications without worrying about compiling or installing the OS.  It also allows firmware application portability between different boards running Stratify OS.
 
 
 

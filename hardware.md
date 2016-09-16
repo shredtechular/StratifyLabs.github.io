@@ -4,25 +4,119 @@ title: Hardware
 tagline: Hardware
 sections:
  intro: Hardware
- brief: Get hardware with Stratify OS pre-installed.
+ brief: Hardware with Stratify OS pre-installed for rapid development
  icon: fa fa-gears fa-5x
 ---
 
 <div style="background: #344555; color: #fff;">
-<div class="container">
-	<div class="row" style="margin-top: 50px; margin-bottom: 50px;">
-		<div class="col-md-3 text-center">
-			<h1><i class="{{ page.sections['icon'] }}"></i></h1>
-		</div>
-		<div class="col-md-9">
-			<h1><b>{{ page.sections['intro'] }}</b></h1>
-			<h3>{{ page.sections['brief'] }}</h3>
+	<div class="container">
+		<div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+			<div class="col-md-3 text-center">
+				<h1><i class="{{ page.sections['icon'] }}"></i></h1>
+			</div>
+			<div class="col-md-9">
+				<h1><b>{{ page.sections['intro'] }}</b></h1>
+				<h3>{{ page.sections['brief'] }}</h3>
+			</div>
 		</div>
 	</div>
 </div>
+
+<div style="background: #ddd;">
+	<div class="container">
+		{% include themes/twitter/signup.html %}
+	</div>
+</div>
+
+<div style="background: #fff;">
+	<div class="container">
+	<h1>Stratify <b>Hardware</b> <small>Coming soon</small></h1>
+		<div class="row text-center" style="margin-top: 20px; margin-bottom: 20px;">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-striped" style="font-size: 1.4em;">
+					  <tr>
+					    <td></td>
+					    <td><b>Stratify Alpha</b></td>
+					    <td><b>Stratify Iota</b></td>
+					    <td><b>Stratify Mu</b></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-bluetooth-b"></i> <b>Bluetooth</b></td>
+					    <td></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-arrows"></i> <b>9-axis Motion Sensor</b></td>
+					    <td></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-microphone"></i> <b>Audio</b></td>
+					    <td></td>
+					    <td></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-usb"></i> <b>USB</b></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					    <td></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-wifi"></i> <b>Wifi</b></td>
+					    <td></td>
+					    <td></td>
+					    <td><i class="fa fa-2x fa-check"></i></td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-toggle-on"></i> <b>IO</b></td>
+					    <td>35 Pins (SPI/I2C/UART)</td>
+					    <td>24 Pins (SPI/I2C/UART)</td>
+					    <td>64 Pins (SPI/I2C/UART/Ethernet)</td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-exchange"></i> <b>RAM</b></td>
+					    <td>96KB</td>
+					    <td>96KB</td>
+					    <td>256KB</td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-folder"></i> <b>Internal Flash</b></td>
+					    <td>512KB</td>
+					    <td>512KB</td>
+					    <td>1MB</td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-download"></i> <b>External Flash</b></td>
+					    <td>32MB</td>
+					    <td>32MB</td>
+					    <td>256MB</td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-flash"></i> <b>Processor</b></td>
+					    <td>120MHz ARM CM4F</td>
+					    <td>120MHz ARM CM4F</td>
+					    <td>200MHz ARM CM4F</td>
+					  </tr>
+					  <tr>
+					    <td class="text-left"><i class="fa fa-square-o"></i> <b>Form Factor</b></td>
+					    <td>Breadboard Proto</td>
+					    <td>Module 14mm x 9mm</td>
+					    <td>Module 25mm x 14mm</td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="container">
+
+<hr>
 
 <h1>CoAction Hero</h1>
 
@@ -65,6 +159,12 @@ board by following <a href="https://github.com/StratifyLabs/mbedLPC1768#mbedlpc1
 
 <img class="post_image" src="{{ BASE_PATH }}/images/mbed-xively-kit.jpg" />
 
+</div>
+
+<div style="background: #ddd;">
+	<div class="container">
+		{% include themes/twitter/signup.html %}
+	</div>
 </div>
 
 

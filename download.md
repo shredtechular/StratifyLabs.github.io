@@ -4,7 +4,7 @@ title: License and Download
 tagline: License and Download
 sections:
  intro: Downloads
- brief: If you want to start using Stratify OS, you've come to the right place.
+ brief: Open source code licensing and download options
  icon: fa fa-arrow-circle-down fa-5x
 ---
 
