@@ -46,11 +46,13 @@ sections:
 				<p><b>Stratify Labs, Inc</b></p>
 				<p>5406 W 11000 N Ste 103-440</p>
 				<p>Highland, UT 84003</p>
-				<p>801-410-0234</p>
 				<p>hello at stratifylabs.co</p>
 				<div class="alert alert-info">
 				<p>We are moving to a new location soon.  Stay tuned.</p>
 				</div>
+				<p>
+				<a class="btn btn-lg btn-success" href="https://goo.gl/forms/JDm6yKoL0SMZUWIl2" target="_blank">Request a Free Consultation</a>
+				</p>
 			</div>
 			<div class="col-md-6">
 				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.944719635798!2d-111.78969418464264!3d40.43222296262115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x874d8097b20e0f63%3A0xf5b232eb2e498e4f!2s5406+W+11000+N%2C+Highland%2C+UT+84003!5e0!3m2!1sen!2sus!4v1473997862515" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
