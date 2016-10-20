@@ -26,9 +26,10 @@ $(function () {
 </div>
 
 <div style="background: #ddd;">
-	<div class="container">
+	<div class="container" style="padding-top: 50px; padding-bottom: 50px">
+	<center>
 	<h1><i class="fa fa-wrench"></i> Let's <b>Build</b> Together</h1>
-	<p>Stratify Labs is a full service engineering, design, and product management consulting firm.</p>
+	</center>
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px; text-align: center">
 			<div class="col-md-3">
 				<div class="alert alert-danger" style="height:190px">
@@ -70,10 +71,11 @@ $(function () {
 </div>
 
 
-
 <div style="background: #fff;">
-	<div class="container">
-	<h1>Develop Faster with <b>Stratify</b> Technology</h1>
+	<div class="container" style="padding-top: 50px; padding-bottom: 50px">
+		<center>
+			<h1>Develop Faster with <b>Stratify</b> Technology</h1>
+		</center>
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div class="col-md-5">
 				<center>
