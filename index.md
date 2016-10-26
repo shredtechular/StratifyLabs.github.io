@@ -140,10 +140,3 @@ $(function () {
 		{% include themes/twitter/signup.html %}
 	</div>
 </div>
-
-
-
-
-
-
-

@@ -32,7 +32,7 @@ sections:
 
 <p>
 Stratify Labs is the company behind Stratify OS.  In addition to building open-source technology,
-we also offer development services and commerical licenses for our open-source products.  You can read more about
+we also offer development services and commercial licenses for our open-source products.  You can read more about
 how we can help you bring your next great idea to life.
 </p>
 
@@ -50,7 +50,3 @@ Stratify OS is a real-time operating system designed to rapidly decrease develop
 
 
 </div>
-
-
-
-

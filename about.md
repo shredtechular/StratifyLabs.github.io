@@ -24,16 +24,14 @@ sections:
 
 <div style="background: #fff;">
 	<div class="container">
-		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-			<div class="col-md-5">
+			<p>
 				<center>
 					<img style="height: auto;" src="{{ BASE_PATH }}/images/Stratify-Labs-Logo.svg" />
 				</center>
-			</div>
-			<div class="col-md-7">
+			</p>
+		
 				<p><b>Stratify Labs</b> is a blend of full and part-time freelance designers and engineers as well as the technology we have created to help us build smart products faster. We provide full service product development consulting services including industrial design, mechanical engineering, electrical engineering, as well as firmware and software development.</p>
-			</div>
-		</div>
+
 
 		<hr>
 
