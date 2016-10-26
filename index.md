@@ -15,7 +15,7 @@ $(function () {
 <div class="container">
 	<div class="row" style="margin-top: 50px; margin-bottom: 50px;">
 		<div class="col-md-3">
-			<img class="post_image" src="{{ BASE_PATH }}/images/Stratify-Logo-Cog.svg" />
+			<img class="post_image" src="{{ BASE_PATH }}/images/Stratify-Labs-Logo-Icon.svg" />
 		</div>
 		<div class="col-md-9">
 			<h1><b>Stratify Labs</b></h1>
