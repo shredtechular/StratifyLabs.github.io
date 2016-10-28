@@ -115,6 +115,7 @@ sections:
 </div>
 
 <div class="container">
+<a name="CoActionHero"></a>
 
 <hr>
 
@@ -142,9 +143,11 @@ More info:
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="Q534RTPRDWC8C">
+<input type="hidden" name="hosted_button_id" value="NY8QYJ9Z8ZCW2">
 <button type="submit" class="btn btn-success" name="submit">Buy Now for $39</button>
 </form>
+
+<a name="MBEDLPC1768"></a>
 
 <hr />
 <br />
