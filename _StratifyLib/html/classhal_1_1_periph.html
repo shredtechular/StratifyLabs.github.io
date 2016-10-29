@@ -43,7 +43,7 @@ title: Stratify OS Docs
 <li><a class="el" href="classhal_1_1_periph.html#a04e593170044658afed6542b13a92a02">write()</a></li>
 <li><a class="el" href="classhal_1_1_periph.html#acdc6979052e90d1480dd66649ce5f539">ioctl()</a></li>
 </ul>
-<p>The classes that inherit <a class="el" href="classhal_1_1_periph.html" title="Peripheral Class. ">Periph</a> implement a method for each <a class="el" href="classhal_1_1_periph.html#acdc6979052e90d1480dd66649ce5f539">ioctl()</a> call available on the peripheral. For example, the UART has an ioctl request called I_UART_SETATTR so the method <a class="el" href="classhal_1_1_uart.html#a7dfe0fa6e2a85fbd913e7badeae184e3">Uart::set_attr()</a> implements the ioctl request. </p>
+<p>The classes that inherit <a class="el" href="classhal_1_1_periph.html" title="Peripheral Class. ">Periph</a> implement a method for each <a class="el" href="classhal_1_1_periph.html#acdc6979052e90d1480dd66649ce5f539">ioctl()</a> call available on the peripheral. For example, the UART has an ioctl request called I_UART_SETATTR so the method <a class="el" href="classhal_1_1_uart.html#aa399a976cbd72f679fb88fa99f3b4cc8">Uart::set_attr()</a> implements the ioctl request. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -70,8 +70,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5af6e0b8dece46637daa10c022a1fc8f inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72ad863e863a0dfc3ff76d5b309278c inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#af72ad863e863a0dfc3ff76d5b309278c">gets</a> (char *s, int n, char term= '\n') const </td></tr>
 <tr class="separator:af72ad863e863a0dfc3ff76d5b309278c inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d17c84978a7cecc887439b2588f888 inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#ad8d17c84978a7cecc887439b2588f888">gets</a> (<a class="el" href="classvar_1_1_string.html">var::String</a> *s, char term= '\n') const </td></tr>
-<tr class="separator:ad8d17c84978a7cecc887439b2588f888 inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e0aae889afe1d21bd6eaadd2337d26c inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#a3e0aae889afe1d21bd6eaadd2337d26c">gets</a> (<a class="el" href="classvar_1_1_string.html">var::String</a> &amp;s, char term= '\n') const </td></tr>
 <tr class="separator:a3e0aae889afe1d21bd6eaadd2337d26c inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f9ff9cba8808739bb4991b361a6dac inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#a04f9ff9cba8808739bb4991b361a6dac">ioctl</a> (int req, const void *arg) const </td></tr>
@@ -129,6 +127,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Close the file or device </p>
 
 <p>Reimplemented from <a class="el" href="classhal_1_1_dev.html#ae9519e5711328fb31e0047ea6375171b">hal::Dev</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classsys_1_1_dbug_uart.html#a18a31787a91322da19a942dd6dcd6855">sys::DbugUart</a>.</p>
 
 </div>
 </div>

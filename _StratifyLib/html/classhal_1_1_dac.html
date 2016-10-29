@@ -39,14 +39,14 @@ title: Stratify OS Docs
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stfy/hal.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;stfy/Sys.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[]){</div><div class="line">     Dac dac(0);</div><div class="line">     <a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___d_a_c.html#gaf7a0f5287d897fc67ce9d9981c5b6236">dac_sample_t</a> samples[50];</div><div class="line">     dac.init(1&lt;&lt;0, 50000); <span class="comment">//enable channel 0 at 50KHz</span></div><div class="line"></div><div class="line"> <span class="comment">//here, write meaningful values to samples</span></div><div class="line"></div><div class="line">     dac.write(0, samples, 50*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___d_a_c.html#gaf7a0f5287d897fc67ce9d9981c5b6236">dac_sample_t</a>)); <span class="comment">//This returns when all 50 samples are written</span></div><div class="line"></div><div class="line"> <span class="comment">//if you want to do other things while the sample is written use AIO</span></div><div class="line">     Aio aio(samples, 50*<span class="keyword">sizeof</span>(<a class="codeRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___d_a_c.html#gaf7a0f5287d897fc67ce9d9981c5b6236">dac_sample_t</a>));</div><div class="line"></div><div class="line">     dac.write(aio);</div><div class="line"> <span class="comment">//Here you can do other things while the data is written</span></div><div class="line">     <span class="keywordflow">while</span>( aio.inprogress() == true ){</div><div class="line">          Timer::wait_usec(500); <span class="comment">//wait until the write is complete</span></div><div class="line">     }</div><div class="line"></div><div class="line">     dac.close(); <span class="comment">//this will power off the DAC if nothing else has it open</span></div><div class="line"></div><div class="line">     <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7aec1bb09c8afa19b72ec7da8e9d746"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#ae7aec1bb09c8afa19b72ec7da8e9d746">get_attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> *attr)</td></tr>
-<tr class="separator:ae7aec1bb09c8afa19b72ec7da8e9d746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58ac3113c94944a15c88ace32ae52f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#ac58ac3113c94944a15c88ace32ae52f2">get_attr</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> &amp;attr)</td></tr>
+<tr class="separator:ac58ac3113c94944a15c88ace32ae52f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a500ca9b7b7ced2c29cf3bf01116bcd11"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#a500ca9b7b7ced2c29cf3bf01116bcd11">init</a> (u16 enabled_channels, u32 <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, u8 pin_assign=0)</td></tr>
 <tr class="separator:a500ca9b7b7ced2c29cf3bf01116bcd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac035d80cf315b7433c082c827bfd945f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#ac035d80cf315b7433c082c827bfd945f">set</a> (<a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___d_a_c.html#gaf7a0f5287d897fc67ce9d9981c5b6236">dac_sample_t</a> <a class="el" href="classhal_1_1_dac.html#ab384c8cc17f9a1ee81ed99bf64f21833">value</a>, u32 channel=0)</td></tr>
 <tr class="separator:ac035d80cf315b7433c082c827bfd945f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86e007aed37e7b9019820370b5c0ec27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#a86e007aed37e7b9019820370b5c0ec27">set_attr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> *attr)</td></tr>
-<tr class="separator:a86e007aed37e7b9019820370b5c0ec27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bff82af1c673df8d54ff406535aeb2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#a8bff82af1c673df8d54ff406535aeb2d">set_attr</a> (const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> &amp;attr)</td></tr>
+<tr class="separator:a8bff82af1c673df8d54ff406535aeb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a319d98d6be28e43af16c172d699d5bab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#a319d98d6be28e43af16c172d699d5bab">set_attr</a> (u16 enabled_channels, u32 <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___m_l_c_d.html#ga8b9e4c2db3e8e3037740abc6006e99c1">freq</a>=1000000, u8 pin_assign=0)</td></tr>
 <tr class="separator:a319d98d6be28e43af16c172d699d5bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab384c8cc17f9a1ee81ed99bf64f21833"><td class="memItemLeft" align="right" valign="top"><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/group___d_a_c.html#gaf7a0f5287d897fc67ce9d9981c5b6236">dac_sample_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dac.html#ab384c8cc17f9a1ee81ed99bf64f21833">value</a> (u32 channel=0)</td></tr>
@@ -75,8 +75,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5af6e0b8dece46637daa10c022a1fc8f inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72ad863e863a0dfc3ff76d5b309278c inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#af72ad863e863a0dfc3ff76d5b309278c">gets</a> (char *s, int n, char term= '\n') const </td></tr>
 <tr class="separator:af72ad863e863a0dfc3ff76d5b309278c inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d17c84978a7cecc887439b2588f888 inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#ad8d17c84978a7cecc887439b2588f888">gets</a> (<a class="el" href="classvar_1_1_string.html">var::String</a> *s, char term= '\n') const </td></tr>
-<tr class="separator:ad8d17c84978a7cecc887439b2588f888 inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e0aae889afe1d21bd6eaadd2337d26c inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#a3e0aae889afe1d21bd6eaadd2337d26c">gets</a> (<a class="el" href="classvar_1_1_string.html">var::String</a> &amp;s, char term= '\n') const </td></tr>
 <tr class="separator:a3e0aae889afe1d21bd6eaadd2337d26c inherit pub_methods_classhal_1_1_dev"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f9ff9cba8808739bb4991b361a6dac inherit pub_methods_classhal_1_1_dev"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhal_1_1_dev.html#a04f9ff9cba8808739bb4991b361a6dac">ioctl</a> (int req, const void *arg) const </td></tr>
@@ -109,14 +107,14 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa9a204855ab0bcd490f9338b4f08a809 inherit pro_methods_classhal_1_1_periph"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ae7aec1bb09c8afa19b72ec7da8e9d746"></a>
+<a class="anchor" id="ac58ac3113c94944a15c88ace32ae52f2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int hal::Dac::get_attr </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> *&#160;</td>
+          <td class="paramtype"><a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> &amp;&#160;</td>
           <td class="paramname"><em>attr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -210,14 +208,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a86e007aed37e7b9019820370b5c0ec27"></a>
+<a class="anchor" id="a8bff82af1c673df8d54ff406535aeb2d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int hal::Dac::set_attr </td>
           <td>(</td>
-          <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="elRef" doxygen="/Users/tgil/git/StratifyLabs.github.io/_StratifyOS/html/StratifyOS.tag:../../StratifyOS/html/" href="../../StratifyOS/html/structdac__attr__t.html">dac_attr_t</a> &amp;&#160;</td>
           <td class="paramname"><em>attr</em></td><td>)</td>
           <td></td>
         </tr>

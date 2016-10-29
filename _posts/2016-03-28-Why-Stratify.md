@@ -1,19 +1,13 @@
 ---
-layout: default
+layout: post
 title: Why Stratify OS?
 category : FAQ
 tagline: Why not?
 tags : [stratify]
 ---
 
-<div style="background: #ddd; height: auto">
-<div class="container">
-<h1>Why Stratify OS?</h1>
-<p>
 We want to enable people to build smart products faster. There is already a huge range of professtional tools used for building smart products.  Most of them are for one of two categories: application processors or microcontrollers.  Stratify combines the best of both.
-</p>
-</div>
-</div>
+
 
 <div class="container">
 	<div class="row">
@@ -59,33 +53,31 @@ We want to enable people to build smart products faster. There is already a huge
 	</div>
 </div>
 
-<div style="background: #ddd; height: auto">
-	<div class="container">
-		<h1>Maker Use Case <small>Best features from Raspberry Pi and Arduino</small></h1>
-		<div class="row" style="margin-top: 1.5em;">
-			<div class="col-md-6">
-				<img style="width: 100%" src="{{ BASE_PATH }}/images/maker-venn-diagram.svg" />
-			</div>
-			<div class="col-md-6">
-				<h1><b>Stratify OS</b></h1>
-				<ul>
-				<li>Best for rapid development and apps on inexpensive hardware</li>
-				<li>Deploy your own app store for your smartwatch or IoT device</li>
-				<li>Doesn't support video (high end) and is overkill for simple sensors (low end)</li>
-				</ul>
-				<h2>Raspberry Pi</h2>
-				<ul>
-				<li>Best for video and scripting languages</li>
-				<li>Application processor with higher power consumption</li>
-				<li>Difficult to port and relatively expensive hardware</li>
-				</ul>
-				<h2>Arduino</h2>
-				<ul>
-				<li>Extremly easy to use for simple projects</li>
-				<li>IDE has limited features for more advanced projects</li>
-				<li>Difficult to build sophisticated applications</li>
-				</ul>
-			</div>
+<div class="container">
+	<h1>Maker Use Case <small>Best features from Raspberry Pi and Arduino</small></h1>
+	<div class="row" style="margin-top: 1.5em;">
+		<div class="col-md-6">
+			<img style="width: 100%" src="{{ BASE_PATH }}/images/maker-venn-diagram.svg" />
+		</div>
+		<div class="col-md-6">
+			<h1><b>Stratify OS</b></h1>
+			<ul>
+			<li>Best for rapid development and apps on inexpensive hardware</li>
+			<li>Deploy your own app store for your smartwatch or IoT device</li>
+			<li>Doesn't support video (high end) and is overkill for simple sensors (low end)</li>
+			</ul>
+			<h2>Raspberry Pi</h2>
+			<ul>
+			<li>Best for video and scripting languages</li>
+			<li>Application processor with higher power consumption</li>
+			<li>Difficult to port and relatively expensive hardware</li>
+			</ul>
+			<h2>Arduino</h2>
+			<ul>
+			<li>Extremly easy to use for simple projects</li>
+			<li>IDE has limited features for more advanced projects</li>
+			<li>Difficult to build sophisticated applications</li>
+			</ul>
 		</div>
 	</div>
 </div>
