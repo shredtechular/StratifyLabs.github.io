@@ -6,6 +6,7 @@ tagline: Four Tips
 tags : [product development, freelancer]
 ---
 
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/tips.jpg" />
 The entire point of hiring a freelancer is to free you up. To free your time.  Free your energy.  And, to save you from having to bring-on a full-time employee.  Isn’t that the whole idea behind outsourcing?  Well, too many times, outsourcing can feel anything but freeing.  You end up having to babysit your freelancer throughout the entire process.  Or, worse, you wish you had been babysitting the entire time because the finished product is unacceptable by your standards and now it’s too late to start over. Here are four tips to help you successfully execute a project using a freelancer.
 
 
@@ -58,6 +59,7 @@ It is also a good idea to ask your prospective freelancer to explain his entire 
 Know your expectations  
 ---------
 
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/expectations.jpg" />
 Everyone hates confusion.  You and your freelancer need to understand each other and you need to be on the same page.  The biggest problems in collaboration are typically related to expectations. 
 
 
@@ -96,7 +98,9 @@ Once, again, and this cannot be stressed enough… you need to communicate, comm
 The more you communicate with your freelancer, the more seriously they will take the job.  The opposite is also true.  
 
 
-Lastly, don’t be cheap. You get exactly what you pay for.  If you want the work done well and in a reliable manner, pay your freelancer well. Better than fair market value. Paying well will motivate them to prioritize your project.  
+Lastly, don’t be cheap. You get exactly what you pay for.  If you want the work done well and in a reliable manner, pay your freelancer well. Better than fair market value. Paying well will motivate them to prioritize your project.
+
+<small>Photos by <a href="https://www.flickr.com/photos/rachaelvoorhees/">rachaelvoorhees</a> and <a href="https://www.flickr.com/photos/planeta/">Ron Mader</a></small>
 
 
 
