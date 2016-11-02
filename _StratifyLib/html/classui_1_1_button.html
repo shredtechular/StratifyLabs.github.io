@@ -43,6 +43,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae9560ffb17a1d5ca8d671a3d1b869524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d485fe84903ab80fd3f65a213c76054"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classui_1_1_event.html">ui::Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a9d485fe84903ab80fd3f65a213c76054">event</a> ()</td></tr>
 <tr class="separator:a9d485fe84903ab80fd3f65a213c76054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c51e8137b6a378e32d739ae1462dc44"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a9c51e8137b6a378e32d739ae1462dc44">get_actuated</a> ()</td></tr>
+<tr class="separator:a9c51e8137b6a378e32d739ae1462dc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f6762d88ce382d0c3d75f6483b2b6f"><td class="memItemLeft" align="right" valign="top">virtual u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a75f6762d88ce382d0c3d75f6483b2b6f">get_duration</a> ()</td></tr>
+<tr class="separator:a75f6762d88ce382d0c3d75f6483b2b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a933b266e503ddadf2a547b8e2308c1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a1a933b266e503ddadf2a547b8e2308c1">get_held</a> (u32 msec)</td></tr>
+<tr class="separator:a1a933b266e503ddadf2a547b8e2308c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a654b37f1084a85a17fd24cb9911056e6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a654b37f1084a85a17fd24cb9911056e6">get_pressed</a> ()</td></tr>
+<tr class="separator:a654b37f1084a85a17fd24cb9911056e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb958cbdf1fa4f58ad7bb8f5e256c22"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a9fb958cbdf1fa4f58ad7bb8f5e256c22">get_released</a> ()</td></tr>
+<tr class="separator:a9fb958cbdf1fa4f58ad7bb8f5e256c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced39558f267f571ebac92026f9e810f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#aced39558f267f571ebac92026f9e810f">is_active</a> ()</td></tr>
+<tr class="separator:aced39558f267f571ebac92026f9e810f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a4ff590ff70d11f14256dec2e455c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#ac9a4ff590ff70d11f14256dec2e455c1">reset</a> ()</td></tr>
+<tr class="separator:ac9a4ff590ff70d11f14256dec2e455c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5e0e342c71bd9c79b718971c260a37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1_button.html#a0d5e0e342c71bd9c79b718971c260a37">update</a> ()</td></tr>
+<tr class="separator:a0d5e0e342c71bd9c79b718971c260a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -82,7 +98,140 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This method checks the state of the actuation and then returns an <a class="el" href="classui_1_1_event.html" title="Event Class. ">Event</a> if needed.</p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<p>It will report the following events</p>
+<ul>
+<li><a class="el" href="classui_1_1_event.html#a42a295550182c692e0b9ae2b0f5f28f9abaaffaa00ebea0ebe1357dbc89c17858">ui::Event::BUTTON_PRESSED</a></li>
+<li><a class="el" href="classui_1_1_event.html#a42a295550182c692e0b9ae2b0f5f28f9ac867c58de796b09c67061d49844f3d5a">ui::Event::BUTTON_RELEASED</a></li>
+<li><a class="el" href="classui_1_1_event.html#a42a295550182c692e0b9ae2b0f5f28f9af564a11e2a1266d34f7df8f3521043ee">ui::Event::BUTTON_ACTUATED</a></li>
+<li>ui::Event::BUTTON_HOLD </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="a9c51e8137b6a378e32d739ae1462dc44"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ui::Button::get_actuated </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the button was pressed then released This will return true only once per button press. </p>
+
+</div>
+</div>
+<a class="anchor" id="a75f6762d88ce382d0c3d75f6483b2b6f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual u32 ui::Button::get_duration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the duration of the last button press. This method will only return a non-zero value once per button press. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1a933b266e503ddadf2a547b8e2308c1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ui::Button::get_held </td>
+          <td>(</td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>msec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the button has been held for the specified duration This will only return true once per button press.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msec</td><td>The number of milliseconds the button has been held for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a654b37f1084a85a17fd24cb9911056e6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ui::Button::get_pressed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the button has been pressed. This will only return true once per button press. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9fb958cbdf1fa4f58ad7bb8f5e256c22"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ui::Button::get_released </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the button has been released. This will only return true one time for each button press. </p>
 
 </div>
 </div>
@@ -106,8 +255,56 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This method access how long the user must hold the button in the application before the <a class="el" href="classui_1_1_event.html#a42a295550182c692e0b9ae2b0f5f28f9a74e6ad81d1a5059613d02079d7239dd7">ui::Event::BUTTON_HOLD</a> is triggered when calling <a class="el" href="classui_1_1_button.html#a9d485fe84903ab80fd3f65a213c76054">event()</a></p>
+<p>This method accesses how long the user must hold the button in the application before the ui::Event::BUTTON_HOLD is triggered when calling <a class="el" href="classui_1_1_button.html#a9d485fe84903ab80fd3f65a213c76054">event()</a></p>
 <dl class="section return"><dt>Returns</dt><dd>The duration in milliseconds </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aced39558f267f571ebac92026f9e810f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ui::Button::is_active </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the button is currently in the active state. The active state is updated each time <a class="el" href="classui_1_1_button.html#a0d5e0e342c71bd9c79b718971c260a37">Button::update()</a> is called. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac9a4ff590ff70d11f14256dec2e455c1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ui::Button::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reset the state of the button </p>
 
 </div>
 </div>
@@ -133,6 +330,30 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>This method sets the duration of the hold event. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0d5e0e342c71bd9c79b718971c260a37"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ui::Button::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This will update the state of the button. This method should be called periodically. </p>
 
 </div>
 </div>

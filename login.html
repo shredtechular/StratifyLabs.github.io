@@ -1,0 +1,116 @@
+<html>
+  <title>Login</title>
+  <body>
+  email<input type="text" name="email" id="email" >
+  password<input typy="password" name="pass" id="pass">
+	<button onclick="signUpFunction()">Sign Up</button>
+	<button onclick="signInFunction()">Sign In</button>
+
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script>
+  var m_token;
+  function getToken() {
+      console.log("Get token");
+  };
+
+function signUpFunction() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("pass").value;
+    console.log(email);
+    console.log(password);
+
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDlJ3KFzNot9dtcBCkfY4Qi1jLx77Hy4l4",
+    authDomain: "stratify-e6020.firebaseapp.com",
+    databaseURL: "https://stratify-e6020.firebaseio.com",
+    storageBucket: "stratify-e6020.appspot.com",
+    messagingSenderId: "174395216788"
+  };
+
+  firebase.initializeApp(config);
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+     var user = firebase.auth().currentUser;
+     alert("Successfully added user");
+  }, function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("error code: " + errorCode);
+      console.log("error message: " + errorMessage);
+  });
+}
+
+function signInFunction() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("pass").value;
+    console.log(email);
+    console.log(password);
+
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDlJ3KFzNot9dtcBCkfY4Qi1jLx77Hy4l4",
+    authDomain: "stratify-e6020.firebaseapp.com",
+    databaseURL: "https://stratify-e6020.firebaseio.com",
+    storageBucket: "stratify-e6020.appspot.com",
+    messagingSenderId: "174395216788"
+  };
+
+  firebase.initializeApp(config);
+  firebase.auth().signOut();
+
+  if (firebase.auth().currentUser) {
+    // [START signout]
+    firebase.auth().signOut();
+    // [END signout]
+  } else {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('pass').value;
+
+    // Sign in with email and pass.
+    // [START authwithemail]
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    }).then(function(result){
+
+    		result.getToken().then(function(token){
+    		console.log("access_token: ");
+        console.log(token);
+                m_token = token;
+
+        var userId = firebase.auth().currentUser.uid;
+        var path = 'stratifylink/users/' + userId + '/';
+        console.log(path);
+
+		    firebase.database().ref(path).set({
+		    testData: "testValue_03"
+		    }).catch(function(error) {
+		      // Handle Errors here.
+		      var errorCode = error.code;
+		      var errorMessage = error.message;
+		      console.log("errror");
+		      console.log(errorMessage);
+		    });
+
+		    console.log("set data: ");
+    });
+
+
+    });;
+
+
+	}
+}
+</script>
+
+  </body>
+</html>
