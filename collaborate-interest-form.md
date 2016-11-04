@@ -26,7 +26,7 @@ sections:
 	<div class="container">
 		<h2 class="section-heading">{{ page.form_title }}</h2>
 		<div class="row">
-			<div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6">
+			<div class="col-md-12 col-lg-offset-3 col-lg-6">
         <form name="ciForm" id="ciForm" method="POST">
           <div class="row">
             <div class="col-xs-12">

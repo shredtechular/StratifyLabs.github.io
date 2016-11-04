@@ -99,6 +99,7 @@ input[type="text"].form-control.other {
   margin: 0;
   padding: 0;
   height: 75%;
+  width: 75%;
 }
 
 .btn-group.btn-group-vertical,
