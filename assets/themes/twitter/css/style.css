@@ -65,14 +65,27 @@
 
 /******************************************************************************
 /* Form Styling */
-.form-control, .btn.form-control, .form-control:focus {
+#ciForm {
+  border: 1px solid #c8c8c8;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 40px 0;
+  background-color: #fff;
+}
+
+.req {
+  color:#db4437;
+}
+
+.form-control, .btn.form-control, .form-control:focus, .form-control.focus, .form-control.active.focus, .form-control>span:focus, label {
   border: 0;
   border-radius: 0;
-  -webkit-box-shadow: 0;
+  -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
+  outline: 0;
 }
 
 input[type="text"].form-control, input[type="email"].form-control  {
@@ -81,7 +94,15 @@ input[type="text"].form-control, input[type="email"].form-control  {
   border-bottom: 1px solid #ccc;
 }
 
-.btn-group.btn-group-vertical {
+input[type="text"].form-control.other {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  height: 75%;
+}
+
+.btn-group.btn-group-vertical,
+.form-legend {
   margin-bottom: 40px;
 }
 
@@ -94,20 +115,27 @@ input[type="text"].form-control, input[type="email"].form-control  {
   font-size: 20px;
 }
 
-label input[type="radio"] ~ i.fa.fa-circle-o{
+label input[type="radio"] ~ i.fa.fa-circle-o, 
+label input[type="checkbox"] ~ i.fa.fa-square-o {
   color: #c8c8c8;
   display: inline;
 }
-label input[type="radio"] ~ i.fa.fa-dot-circle-o{
+
+label input[type="radio"] ~ i.fa.fa-dot-circle-o, 
+label input[type="checkbox"] ~ i.fa.fa-check-square,
+label input[type="checkbox"]:checked ~ i.fa.fa-square-o,
+label input[type="radio"]:checked ~ i.fa.fa-circle-o,
+div#provider-type-field, 
+div#member-skills-field {
   display: none;
 }
-label input[type="radio"]:checked ~ i.fa.fa-circle-o{
-  display: none;
-}
-label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
+
+label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o,
+label input[type="checkbox"]:checked ~ i.fa.fa-check-square {
   color: #344555;
   display: inline;
 }
+
 label:hover input[type="radio"] ~ i.fa {
   color: #344555;
 }
