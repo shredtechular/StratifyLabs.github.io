@@ -26,7 +26,7 @@ sections:
 	<div class="container" style="padding-top: 20px; padding-bottom: 20px;">
 		<p>
 			<center>
-				<a class="btn btn-lg btn-success" href="https://goo.gl/forms/VnVBA4hD4JaxN8PD3" target="_blank">Request Invitation</a>
+				<a class="btn btn-lg btn-success" href="{{ BASE_PATH }}/collaborate-interest-form/">Request Invitation</a>
 			</center>
 		</p>
 	</div>
@@ -143,12 +143,16 @@ sections:
 		The first Stratify Labs location is coming to the Sandy/Draper/Lehi, Utah area at the beginning of next year (2017). If you are a freelancer or service provider interested in meeting great people and building awesome projects together, please fill out the form in the link so we can get together sometime.
 	</p>
 
-	<p>
+<!-- 	<p>
 		<center>
 			<a class="btn btn-lg btn-success" href="https://goo.gl/forms/VnVBA4hD4JaxN8PD3" target="_blank">Interest Form</a>
 		</center>
-	</p>
-
+	</p> -->
+		<div class="row">
+			<div class="col-md-12 col-lg-offset-3 col-lg-6">
+				{% include JB/collaborate-interest-form.html %}
+			</div>
+		</div>
 
 </div>
 

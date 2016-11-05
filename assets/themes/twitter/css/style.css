@@ -77,7 +77,9 @@
   color:#db4437;
 }
 
-.form-control, .btn.form-control, .form-control:focus, .form-control.focus, .form-control.active.focus, .form-control>span:focus, label {
+.form-control, .btn.form-control, .form-control:focus, .form-control.focus, 
+.form-control.active.focus, .form-control>span:focus, label, label:focus,
+.btn.active:focus {
   border: 0;
   border-radius: 0;
   -webkit-box-shadow: none;
@@ -88,8 +90,12 @@
   outline: 0;
 }
 
+.form-control {
+  background-color: transparent;
+}
+
 input[type="text"].form-control, input[type="email"].form-control  {
-  margin-bottom: 40px;
+  /*margin-bottom: 40px;*/
   padding: 6px 0px;
   border-bottom: 1px solid #ccc;
 }
@@ -100,11 +106,6 @@ input[type="text"].form-control.other {
   padding: 0;
   height: 75%;
   width: 75%;
-}
-
-.btn-group.btn-group-vertical,
-.form-legend {
-  margin-bottom: 40px;
 }
 
 .btn.form-control {
@@ -139,4 +140,19 @@ label input[type="checkbox"]:checked ~ i.fa.fa-check-square {
 
 label:hover input[type="radio"] ~ i.fa {
   color: #344555;
+}
+
+.row.invalid-row {
+  background-color: #ffebee;
+}
+
+#ciForm .row {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.error-message {
+    color: red;
+    padding-top: 10px;
 }
