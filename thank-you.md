@@ -4,8 +4,8 @@ title: Collaborative Workspace Interest Form
 tagline: Collaborative Workspace Interest Form
 sections:
  intro: Collaborative Workspace
- brief: Interest Form
- icon: fa fa-users fa-5x
+ brief: Thank You!
+ icon: fa fa-check-square fa-5x
 ---
 
 <div style="background: #344555; color: #fff;">
@@ -25,7 +25,8 @@ sections:
 <section class="content-section">
 	<div class="container">
 		<h2 class="section-heading">{{ page.form_title }}</h2>
-    <div class="alert alert-success" role="alert"> Thank you for your interest in the Stratify Labs Collaborative Workspace</div>
+    	<div class="alert alert-success" role="alert"> Your information was submitted successfully.</div>
+    	<p>Thank you for your interest in the Stratify Labs collaborative workspace. We are excited about the opportunity of working with you and will be getting in touch shortly to talk more.</p>
 	</div>
 </section>
 
