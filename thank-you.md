@@ -25,6 +25,6 @@ sections:
 <section class="content-section">
 	<div class="container">
 		<h2 class="section-heading">{{ page.form_title }}</h2>
-    <div class="alert alert-success" role="alert"> <strong>Thank you!</strong>  We'll be in touch.</div>
+    <div class="alert alert-success" role="alert"> Thank you for your interest in the Stratify Labs Collaborative Workspace</div>
 	</div>
 </section>

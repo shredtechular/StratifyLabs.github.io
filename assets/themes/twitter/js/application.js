@@ -3,11 +3,26 @@ $(function () {
 	$('a').tooltip();
 
 	// Capture Collaborative Interest Form Submit
-  $("#ciForm").submit(function(){
+  $("#ciForm").submit(function() {
+
+    var pgHistory = '';
+
+    if ($("input[name='entry.182110896']:checked").val() == "Member") {
+      $('#entry\\.626325946').val("");
+      $('#entry\\.626325946.other_option_response').val("");
+      pgHistory = "&pageHistory=0,1"
+    } else {
+      $('#entry\\.1399066304').val("");
+      $('#entry\\.1399066304.other_option_response').val("");
+      pgHistory = "&pageHistory=0,2"
+    }
+
     $.ajax({
       type: 'POST',
-      url: "https://docs.google.com/forms/d/e/1FAIpQLSc-vwliaOCRh-Ag5aq_6E_xEgsKeNnO-58kIoYwksR4z8q4Qw/formResponse",
-      data: $('#ciForm').serialize(), 
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSf5ld1m0cUPM_x519m1q9vQYgxLj50U8h6ZTNnGbOgOWSXJbw/formResponse",
+      data: $("#ciForm").serialize().replace(/[^&]+=&/g, '').replace(/&[^&]+=$/g, '') + pgHistory + 
+        '&draftResponse=[[[,1443226713,["'+ $('#entry\\.1443226713').val() + '"]] ,[,32778454,["'+ 
+        $('#entry\\.32778454').val() + '"]] ,[,182110896,["'+ $("input[name='entry.182110896']:checked").val() + '"]] ]]',
       complete: function() {
       	window.location.href="/thank-you/";
       }
@@ -18,7 +33,7 @@ $(function () {
   });
 
 	// Display/Hide ember or Provider form fields depending on selection
-  $("input[name$='entry.1166974658']").on( "change", function() {
+  $("input[name$='entry.182110896']").on( "change", function() {
     var rdVal = $(this).val();
     if (rdVal == "Member") {
     	$("div#provider-type-field").hide();
@@ -32,7 +47,6 @@ $(function () {
 	// Make sure other is checked when text field is entered
   $(".form-control.other").on( "focus", function() {
     var grpNm = $(this).attr('name').replace(".other_option_response", "");
-    	// $('#'+grpNm+'.other-option').prop( "checked", true );
       document.getElementById(grpNm+'.other-option').checked = true
   });
 
