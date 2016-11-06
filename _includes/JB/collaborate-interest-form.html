@@ -1,0 +1,143 @@
+{% comment %}<!--
+Collaborative Workspace Form.
+
+This file can be included on any page where the collaborative workspace 
+interest form should be displayed.  Currently it is a part of the stand alone 
+form page (/collaborate-interest-form/) as well as included in the 
+collaborative workspace page (/collaborate/).
+        
+-->{% endcomment %}
+
+<form name="ciForm" id="ciForm" method="POST">
+  <div class="row">
+    <div class="col-xs-12">
+    	<div class="form-legend">
+    		<span class="req">* Required</span>
+    	</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+    	<div>
+    		<label for="emailAddress">Email Address <span class="req">*</span></label>
+    	</div>
+    	<div>
+        <input type="email" class="form-control" placeholder="Your email" id="emailAddress" name="emailAddress" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+    	<div>
+    		<label for="entry.1443226713">Name <span class="req">*</span></label>
+    	</div>
+    	<div>
+        <input type="text" class="form-control" placeholder="Your answer" id="entry.1443226713" name="entry.1443226713" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+    	<div>
+    		<label for="entry.32778454">Organization</label>
+    	</div>
+    	<div>
+        <input type="text" class="form-control" placeholder="Your answer" id="entry.32778454" name="entry.32778454">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div>
+    		<label for="entry.182110896">Member or Provider <span class="req">*</span></label>
+    	</div>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn active form-control">
+          <input type="radio" name='entry.182110896' value="Member" required><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span>  Member</span>
+        </label>
+        <label class="btn form-control">
+          <input type="radio" name='entry.182110896' value="Provider"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i><span> Provider</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="member-skills-field">
+    <div class="col-xs-12">
+      <div>
+    		<label for="entry.1399066304">Member Skills</label>
+    	</div>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Industrial and Product Design"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Industrial and Product Design</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Mechanical Engineering"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Mechanical Engineering</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Electrical Engineering"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Electrical Engineering</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Firmware Engineering"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Firmware Engineering</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Desktop Software Developer"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Desktop Software Developer</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Mobile Software Developer"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Mobile Software Developer</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Web Developer"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Web Developer</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Graphic Design"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Graphic Design</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' value="Marketing"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Marketing</span>
+        </label>
+        <label class="btn form-control">
+          <input type="checkbox" name='entry.1399066304' id="entry.1399066304.other-option" value="__other_option__"><i class="fa fa-square-o fa-big"></i><i class="fa fa-check-square fa-big"></i> <span> Other <input type="text" class="form-control other" id="entry.1399066304.other_option_response" name="entry.1399066304.other_option_response"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="provider-type-field">
+    <div class="col-xs-12">
+      <div>
+    		<label for="entry.626325946">Provider Type</label>
+    	</div>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Accounting"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Accounting</span>
+        </label>
+        <label class="btn form-control">
+          <input type="radio" name="entry.626325946" value="Legal Contracts"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i><span> Legal Contracts</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Intellectual Property"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Intellectual Property</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Venture Funding"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Venture Funding</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Business Consultant"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Business Consultant</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Marketing"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Marketing</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" value="Design and Engineering Firm"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Design and Engineering Firm</span>
+        </label>
+        <label class="btn active form-control">
+          <input type="radio" name="entry.626325946" id="entry.626325946.other-option" value="__other_option__"><i class="fa fa-circle-o fa-big"></i><i class="fa fa-dot-circle-o fa-big"></i> <span> Other <input type="text" class="form-control other" id="entry.626325946.other_option_response" name="entry.626325946.other_option_response"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+    	<div class="form-group">	
+				<button type="submit" class="btn btn-lg btn-success submitbtn">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
