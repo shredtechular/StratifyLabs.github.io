@@ -28,3 +28,5 @@ sections:
     <div class="alert alert-success" role="alert"> Thank you for your interest in the Stratify Labs Collaborative Workspace</div>
 	</div>
 </section>
+
+{% include JB/analytics-providers/google-adwords.html %}
