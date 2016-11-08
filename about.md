@@ -49,7 +49,7 @@ sections:
 				<p>We are moving to a new location soon.  Stay tuned.</p>
 				</div>
 				<p>
-				<a class="btn btn-lg btn-success" href="https://goo.gl/forms/JDm6yKoL0SMZUWIl2" target="_blank">Request a Free Consultation</a>
+				<a class="btn btn-lg btn-success" href="{{ BASE_PATH }}/contact-us">Request a Free Consultation</a>
 				</p>
 			</div>
 			<div class="col-md-6">

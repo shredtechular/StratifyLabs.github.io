@@ -32,7 +32,7 @@ $(function () {
     return false;
   });
 
-  // Capture Collaborative Interest Form Submit
+  // Contact Us Form Submit
   $("#cuForm").submit(function() {
 
     var pgHistory = '';
