@@ -32,6 +32,26 @@ $(function () {
     return false;
   });
 
+  // Capture Collaborative Interest Form Submit
+  $("#cuForm").submit(function() {
+
+    var pgHistory = '';
+
+    pgHistory = "&pageHistory=0"
+
+    $.ajax({
+      type: 'POST',
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSc4sHW3OhJDocWVc3pEnzO_llQBZAd_KC9UpbEywY_1HUIFGw/formResponse",
+      data: $("#cuForm").serialize().replace(/[^&]+=&/g, '').replace(/&[^&]+=$/g, '') + pgHistory,
+      complete: function() {
+        window.location.href="/thank-you-contact/";
+      }
+    });
+
+    // prevent submitting form again
+    return false;
+  });
+
 	// Display/Hide ember or Provider form fields depending on selection
   $("input[name$='entry.182110896']").on( "change", function() {
     var rdVal = $(this).val();
@@ -79,6 +99,7 @@ function replaceValidationUI( form ) {
       var invalidFields = form.querySelectorAll( ":invalid" ),
           errorMessages = form.querySelectorAll( ".error-message" ),
           radioError = false;
+          radioErrorArr = [];
           parent;
 
         // Remove any existing messages
@@ -86,7 +107,15 @@ function replaceValidationUI( form ) {
         $('.invalid-row').removeClass('invalid-row');
 
         for ( var i = 0; i < invalidFields.length; i++ ) {
+          radioError = false;
           if (invalidFields[ i ].type == "radio") {
+            for (var j = 0; j < radioErrorArr.length; j++) {
+              if (radioErrorArr[j] == invalidFields[i].name) {
+                radioError = true;
+                break;
+              }
+            }
+            radioErrorArr.push(invalidFields[i].name);
             if (!radioError) {
               parent = invalidFields[ i ].parentNode.parentNode;
               parent.insertAdjacentHTML( "beforeend", "<div class='error-message'>" + 
@@ -94,6 +123,27 @@ function replaceValidationUI( form ) {
                   "</div>" );
               $(invalidFields[ i ].parentNode.parentNode.parentNode.parentNode).addClass("invalid-row");  
               radioError = true;
+            }
+          } else if (invalidFields[ i ].type == "checkbox") {
+            var cbx_group = $("input:checkbox[name='" + invalidFields[i].name + "']");
+            if (!cbx_group.is(":checked")) {
+              cbx_group.attr('required', 'required');
+              for (var j = 0; j < radioErrorArr.length; j++) {
+                if (radioErrorArr[j] == invalidFields[i].name) {
+                  radioError = true;
+                  break;
+                }
+              }
+              radioErrorArr.push(invalidFields[i].name);
+              if (!radioError) {
+                parent = invalidFields[ i ].parentNode.parentNode;
+                parent.insertAdjacentHTML( "beforeend", "<div class='error-message'>" + 
+                    invalidFields[ i ].validationMessage +
+                    "</div>" );
+                $(invalidFields[ i ].parentNode.parentNode.parentNode.parentNode).addClass("invalid-row");
+              }
+            } else {
+              cbx_group.removeAttr('required');
             }
           } else {
             parent = invalidFields[ i ].parentNode;
