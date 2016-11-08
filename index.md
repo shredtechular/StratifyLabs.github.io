@@ -63,7 +63,7 @@ $(function () {
 		<p>
 			<center>
 				<a class="btn btn-lg btn-info" href="{{ BASE_PATH }}/services">Learn More</a>
-				<a class="btn btn-lg btn-info" href="https://goo.gl/forms/JDm6yKoL0SMZUWIl2" target="_blank">Contact Us</a>
+				<a class="btn btn-lg btn-info" href="{{ BASE_PATH }}/contact-us">Contact Us</a>
 			</center>
 		</p>
 		<p></p>

@@ -22,7 +22,7 @@ sections:
 </div>
 </div>
 
-<section class="content-section" style="background-color: rgb(232, 234, 246);">
+<section class="content-section">
 	<div class="container">
 		<h2 class="section-heading">{{ page.form_title }}</h2>
 		<div class="row">
