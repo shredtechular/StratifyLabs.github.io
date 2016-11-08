@@ -74,32 +74,6 @@ $(function () {
       document.getElementById(grpNm+'.other-option').checked = true
   });
 
-  // Make sure no more than 2 checkboxes checked
-  // $("input:checkbox[name='entry.423030335']").on( "change", function() {
-  //   var cbx_group = $("input:checkbox[name='entry.423030335']"),
-  //     chkErrMsg = "",
-  //     parent = this.parentNode.parentNode,
-  //     parentRow = this.parentNode.parentNode.parentNode.parentNode;
-
-  //   //remove any existing error messages
-  //   $(parent).find('div.error-message').remove()
-  //   $(parentRow).removeClass('invalid-row')
-
-  //   //Is more than 1 checkbox or none checked?
-  //   if ($('.max2:checked').size() > 2) {
-  //     chkErrMsg = "You can choose a maximum of two options";
-  //   } else if ($('.max2:checked').size() === 0) {
-  //     chkErrMsg = "Please check this box if you want to proceed.";
-  //   }
-
-  //   if (chkErrMsg !== "") {
-  //     parent.insertAdjacentHTML( "beforeend", "<div class='error-message'>" + 
-  //         chkErrMsg +
-  //         "</div>" );
-  //     $(parentRow).addClass("invalid-row");      
-  //   }
-  // });
-
   // Replace the validation UI for all forms
   var forms = document.querySelectorAll( "form" );
   for ( var i = 0; i < forms.length; i++ ) {
