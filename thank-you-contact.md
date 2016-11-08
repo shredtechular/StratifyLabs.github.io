@@ -1,12 +1,11 @@
 ---
 layout: homepage
-<<<<<<< HEAD
 title: Contact Form Thank You
 tagline: Contact Form Thank You
 sections:
  intro: New Client
  brief: Contact Form
- icon: fa fa-envelope-square fa-5x
+ icon: fa fa-check-square fa-5x
 ---
 
 <div style="background: #344555; color: #fff;">
@@ -26,17 +25,9 @@ sections:
 <section class="content-section">
 	<div class="container">
 		<h2 class="section-heading">{{ page.form_title }}</h2>
-<<<<<<< HEAD
-    <div class="alert alert-success" role="alert"> Thank you for contacting Stratify Labs. You should hear back from us in the next 24 hours.</div>
-	</div>
-</section>
-
-{% include JB/analytics-providers/google-adwords.html %}
-=======
     	<div class="alert alert-success" role="alert"> Your information was submitted successfully.</div>
     	<p>Thank you for contacting Stratify Labs. You should hear back from us in the next 24 hours.</p>
 	</div>
 </section>
 
 {% include JB/analytics-providers/google-adwords.html %}
->>>>>>> feature-form-migration2
