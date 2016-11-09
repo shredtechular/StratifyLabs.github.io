@@ -101,9 +101,6 @@ function maxCheckboxes() {
   }
 
   if (chkErrMsg !== "") {
-    // parent.insertAdjacentHTML( "beforeend", "<div class='error-message'>" + 
-    //     chkErrMsg +
-    //     "</div>" );
     parent.append("<div class='error-message'>" + chkErrMsg + "</div>");
     $(parentRow).addClass("invalid-row");
     return true;
@@ -186,9 +183,10 @@ function replaceValidationUI( form ) {
         }
 
         // Make sure no more than 2 checkboxes checked
-        // if (maxCheckboxes()) {
-        //   invalidFields.push("entry.423030335");
-        // }
+        if (maxCheckboxes()) {
+          invalidFields.push("entry.423030335");
+          return false;
+        }
 
         // If there are errors, give focus to the first invalid field
         if ( invalidFields.length > 0 ) {
