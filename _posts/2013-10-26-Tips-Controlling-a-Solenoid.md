@@ -5,7 +5,7 @@ category: Embedded Design Tips
 tagline: Embedded Design
 tags : [embedded, control, gpio]
 ---
-<img class="post_image" src="{{ BASE_PATH }}/images/solenoid-ckt.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/solenoid-ckt.svg" />
 Many products use solenoids to open and close valves. A microcontroller 
 can control solenoids programmatically using a GPIO pin and a simple circuit. 
 
@@ -43,7 +43,7 @@ V<sub>L</sub>=L \* di / dt
  line (shown below) to ensure the solenoid stays off during microcontroller 
  initialization.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/solenoid-pulldown-ckt.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/solenoid-pulldown-ckt.svg" />
 
 
 ## Conclusion

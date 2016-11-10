@@ -72,7 +72,7 @@ If the feedback resistor is 9KOhms and the input resistor is 1KOhms, the gain wi
 
 Another useful application of the op-amp is a sine-wave to square-wave converter which can be input to a timer clock input to measure frequency. For example, if you have a sine wave in your embedded application and want to measure the frequency, you can pass the wave through an op-amp and use a timer on the microcontroller to count rising edges. Converting the rising edges to frequency can be done in one of two ways. The fast way is to count the number of MCU clock cycles between rising edges; this method works well if the MCU clock speed is much higher have the input frequency. The slow way is to count the number of rising edges in a given period of time. Either method uses the circuit below to convert the sine wave to a square wave that can act as the timer input.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/freq-counter-circuit.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/freq-counter-circuit.svg" />
 
 The first stage of the circuit adjusts the sine wave to be centered around Vcc/2. Rf and Ri can be adjusted so that the output swing of the first amplifier is between 0V and Vcc. The second op-amp acts as a voltage comparator. If the input (on the inverting terminal) is greater than Vcc/2 (the non-inverting terminal), the output is zero volts. If the inverting input is less than Vcc/2, the output is Vcc assuming the op-amp is of the rail-to-rail variety.
 
