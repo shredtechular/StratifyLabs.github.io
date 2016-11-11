@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 960 560" style="enable-background:new 0 0 960 560;" xml:space="preserve">
+	 viewBox="0 0 535 371.7" style="enable-background:new 0 0 535 371.7;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FCF8E3;stroke:#DDDDDD;stroke-miterlimit:10;}
 	.st1{fill:none;stroke:#DDDDDD;stroke-miterlimit:10;}
@@ -688,135 +688,133 @@
 </font>
 
 	<g id="Layer_2">
-	<path class="st0" d="M213.5,95v369.1c1.4-0.1,2.9,0.4,4,1.4c1,0.9,1.5,2.2,1.4,3.5h529.5V95H213.5z"/>
-	<path class="st1" d="M246.1,97.1C246,220,246,344,246.1,467.5"/>
-	<path class="st1" d="M284.8,97.1C285,220,285,344,284.6,467.5"/>
-	<path class="st1" d="M323,97.1c0,122.9,0,246.9,0,370.4"/>
-	<path class="st1" d="M361.7,97.1C362,220,362,344,361.5,467.5"/>
-	<path class="st1" d="M400,97.1c0,122.9,0,246.9,0,370.4"/>
-	<path class="st1" d="M438.3,97.1C438,220,438,344,438.4,467.5"/>
-	<path class="st1" d="M476.9,97.1c0.1,122.9,0.1,246.9,0,370.4"/>
-	<path class="st1" d="M515.2,97.1C515,220,515,344,515.3,467.5"/>
-	<path class="st1" d="M553.9,97.1C554,220,554,344,553.8,467.5"/>
-	<path class="st1" d="M592.2,97.1C592,220,592,344,592.2,467.5"/>
-	<path class="st1" d="M630.8,97.1C631,220,631,344,630.7,467.5"/>
-	<path class="st1" d="M669.1,97.1C669,220,669,344,669.2,467.5"/>
-	<path class="st1" d="M707.8,97.1C708,220,708,344,707.6,467.5"/>
-	<line class="st1" x1="213.5" y1="95.8" x2="748.5" y2="95.8"/>
-	<line class="st1" x1="213.5" y1="133" x2="748.5" y2="133"/>
-	<line class="st1" x1="213.5" y1="170.2" x2="748.5" y2="170.2"/>
-	<line class="st1" x1="213.5" y1="207.3" x2="748.5" y2="207.3"/>
-	<line class="st1" x1="213.5" y1="244.5" x2="748.5" y2="244.5"/>
-	<line class="st1" x1="213.5" y1="281.7" x2="748.5" y2="281.7"/>
-	<line class="st1" x1="213.5" y1="318.8" x2="748.5" y2="318.8"/>
-	<line class="st1" x1="213.5" y1="356" x2="748.5" y2="356"/>
-	<line class="st1" x1="213.5" y1="393.2" x2="748.5" y2="393.2"/>
-	<line class="st1" x1="213.5" y1="430.3" x2="748.5" y2="430.3"/>
-	<path class="st1" d="M220.5,467.5c176.5,0.5,351.5,0.5,528,0"/>
+	<path class="st0" d="M0-0.8v369.1c1.4-0.1,2.9,0.4,4,1.4c1,0.9,1.5,2.2,1.4,3.5H535v-374H0z"/>
+	<path class="st1" d="M32.6,1.3c-0.1,122.9-0.1,246.9,0.1,370.4"/>
+	<path class="st1" d="M71.3,1.3c0.2,122.9,0.2,246.9-0.2,370.4"/>
+	<path class="st1" d="M109.5,1.3c0,122.9,0,246.9,0,370.4"/>
+	<path class="st1" d="M148.2,1.3c0.3,122.9,0.3,246.9-0.2,370.4"/>
+	<path class="st1" d="M186.5,1.3c0,122.9,0,246.9,0,370.4"/>
+	<path class="st1" d="M224.8,1.3c-0.3,122.9-0.3,246.9,0.2,370.4"/>
+	<path class="st1" d="M263.4,1.3c0.1,122.9,0.1,246.9,0,370.4"/>
+	<path class="st1" d="M301.7,1.3c-0.2,122.9-0.2,246.9,0.1,370.4"/>
+	<path class="st1" d="M340.4,1.3c0.1,122.9,0.1,246.9-0.1,370.4"/>
+	<path class="st1" d="M378.7,1.3c-0.2,122.9-0.2,246.9,0.1,370.4"/>
+	<path class="st1" d="M417.3,1.3c0.2,122.9,0.2,246.9-0.1,370.4"/>
+	<path class="st1" d="M455.6,1.3c-0.1,122.9-0.1,246.9,0.1,370.4"/>
+	<path class="st1" d="M494.3,1.3c0.2,122.9,0.2,246.9-0.1,370.4"/>
+	<line class="st1" x1="0" y1="0" x2="535" y2="0"/>
+	<line class="st1" x1="0" y1="37.2" x2="535" y2="37.2"/>
+	<line class="st1" x1="0" y1="74.3" x2="535" y2="74.3"/>
+	<line class="st1" x1="0" y1="111.5" x2="535" y2="111.5"/>
+	<line class="st1" x1="0" y1="148.7" x2="535" y2="148.7"/>
+	<line class="st1" x1="0" y1="185.8" x2="535" y2="185.8"/>
+	<line class="st1" x1="0" y1="223" x2="535" y2="223"/>
+	<line class="st1" x1="0" y1="260.2" x2="535" y2="260.2"/>
+	<line class="st1" x1="0" y1="297.3" x2="535" y2="297.3"/>
+	<line class="st1" x1="0" y1="334.5" x2="535" y2="334.5"/>
+	<path class="st1" d="M7,371.7c176.5,0.5,351.5,0.5,528,0"/>
 </g>
 <g id="Layer_4">
-	<polyline class="st2" points="701.5,248.7 690.2,261 708.7,248.7 	"/>
-	<line class="st3" x1="253.5" y1="293" x2="253.5" y2="281"/>
-	<line class="st3" x1="253.5" y1="349" x2="253.5" y2="323"/>
-	<line class="st4" x1="253.5" y1="392" x2="253.5" y2="399"/>
-	<line class="st3" x1="253.5" y1="381" x2="253.5" y2="392"/>
-	<line class="st4" x1="424" y1="238.5" x2="432" y2="238.5"/>
-	<line class="st5" x1="391" y1="238.5" x2="424" y2="238.5"/>
-	<line class="st5" x1="315" y1="238.5" x2="366" y2="238.5"/>
-	<line class="st5" x1="245" y1="238.5" x2="308" y2="238.5"/>
-	<line class="st5" x1="230" y1="238.5" x2="237" y2="238.5"/>
-	<polyline class="st3" points="467,173.5 527.5,173.5 527.5,251 	"/>
-	<polyline class="st3" points="402.5,239 402.5,173.5 431,173.5 	"/>
-	<line class="st4" x1="582" y1="251.5" x2="590" y2="251.5"/>
-	<line class="st3" x1="499" y1="251.5" x2="582" y2="251.5"/>
-	<line class="st4" x1="489" y1="251.5" x2="499" y2="251.5"/>
-	<polyline class="st3" points="424,264.5 401.5,264.5 401.5,332 	"/>
-	<line class="st4" x1="432" y1="264.5" x2="424" y2="264.5"/>
-	<line class="st4" x1="582" y1="276.5" x2="590" y2="276.5"/>
-	<polyline class="st3" points="253,332.5 526.5,332.5 526.5,276.5 582,276.5 	"/>
-	<line class="st3" x1="693" y1="264.5" x2="736" y2="264.5"/>
-	<line class="st3" x1="657" y1="264.5" x2="684" y2="264.5"/>
-	<line class="st4" x1="648" y1="264.5" x2="657" y2="264.5"/>
-	<ellipse class="st6" cx="402.5" cy="239" rx="4.3" ry="4"/>
-	<ellipse class="st6" cx="253.5" cy="332" rx="4.3" ry="4"/>
-	<ellipse class="st4" cx="241.5" cy="239" rx="4.3" ry="4"/>
-	<ellipse class="st6" cx="527.5" cy="251" rx="4.3" ry="4"/>
-	<ellipse class="st4" cx="688.5" cy="264" rx="4.3" ry="4"/>
-	<ellipse class="st6" cx="401.5" cy="332" rx="4.3" ry="4"/>
-	<polyline class="st4" points="431,173.5 436,173.5 438.3,177.2 442.5,166.8 447.5,177.2 451.3,166.8 455.5,177.2 459.7,166.8 
-		462.5,173.5 468,173.5 	"/>
-	<polyline class="st4" points="397,238.5 392,238.5 390.4,235 386.3,245.1 382,235 377.6,245.1 373.3,235 369.4,245.9 366,238.5 
-		361,238.5 	"/>
-	<polygon class="st4" points="430.5,223 430.5,281 490.3,252 	"/>
-	<polygon class="st4" points="589.5,236 589.5,294 649.3,265 	"/>
-	<polygon class="st4" points="245,398.5 263,398.5 254,408.3 	"/>
-	<polyline class="st4" points="253.5,383 253.5,379 259,376.9 248.5,372.8 259,367.9 248.5,363.9 259,359.3 248.3,354.9 
-		253.5,352.8 253.5,346 	"/>
-	<polyline class="st4" points="253.5,326 253.5,322 259,319.9 248.5,315.8 259,310.9 248.5,306.9 259,302.3 248.3,297.9 
-		253.5,295.8 253.5,289 	"/>
-	<line class="st4" x1="308.5" y1="227" x2="308.5" y2="252"/>
-	<line class="st4" x1="313.5" y1="227" x2="313.5" y2="252"/>
+	<polyline class="st2" points="488,152.9 476.7,165.2 495.2,152.9 	"/>
+	<line class="st3" x1="40" y1="197.2" x2="40" y2="185.2"/>
+	<line class="st3" x1="40" y1="253.2" x2="40" y2="227.2"/>
+	<line class="st4" x1="40" y1="296.2" x2="40" y2="303.2"/>
+	<line class="st3" x1="40" y1="285.2" x2="40" y2="296.2"/>
+	<line class="st4" x1="210.5" y1="142.7" x2="218.5" y2="142.7"/>
+	<line class="st5" x1="177.5" y1="142.7" x2="210.5" y2="142.7"/>
+	<line class="st5" x1="101.5" y1="142.7" x2="152.5" y2="142.7"/>
+	<line class="st5" x1="31.5" y1="142.7" x2="94.5" y2="142.7"/>
+	<line class="st5" x1="16.5" y1="142.7" x2="23.5" y2="142.7"/>
+	<polyline class="st3" points="253.5,77.7 314,77.7 314,155.2 	"/>
+	<polyline class="st3" points="189,143.2 189,77.7 217.5,77.7 	"/>
+	<line class="st4" x1="368.5" y1="155.7" x2="376.5" y2="155.7"/>
+	<line class="st3" x1="285.5" y1="155.7" x2="368.5" y2="155.7"/>
+	<line class="st4" x1="275.5" y1="155.7" x2="285.5" y2="155.7"/>
+	<polyline class="st3" points="210.5,168.7 188,168.7 188,236.2 	"/>
+	<line class="st4" x1="218.5" y1="168.7" x2="210.5" y2="168.7"/>
+	<line class="st4" x1="368.5" y1="180.7" x2="376.5" y2="180.7"/>
+	<polyline class="st3" points="39.5,236.7 313,236.7 313,180.7 368.5,180.7 	"/>
+	<line class="st3" x1="479.5" y1="168.7" x2="522.5" y2="168.7"/>
+	<line class="st3" x1="443.5" y1="168.7" x2="470.5" y2="168.7"/>
+	<line class="st4" x1="434.5" y1="168.7" x2="443.5" y2="168.7"/>
+	<ellipse class="st6" cx="189" cy="143.2" rx="4.3" ry="4"/>
+	<ellipse class="st6" cx="40" cy="236.2" rx="4.3" ry="4"/>
+	<ellipse class="st4" cx="28" cy="143.2" rx="4.3" ry="4"/>
+	<ellipse class="st6" cx="314" cy="155.2" rx="4.3" ry="4"/>
+	<ellipse class="st4" cx="475" cy="168.2" rx="4.3" ry="4"/>
+	<ellipse class="st6" cx="188" cy="236.2" rx="4.3" ry="4"/>
+	<polyline class="st4" points="217.5,77.7 222.5,77.7 224.8,81.3 229,71 234,81.3 237.8,71 242,81.3 246.2,71 249,77.7 254.5,77.7 	
+		"/>
+	<polyline class="st4" points="183.5,142.7 178.5,142.7 176.9,139.1 172.8,149.3 168.5,139.1 164.1,149.3 159.8,139.1 155.9,150 
+		152.5,142.7 147.5,142.7 	"/>
+	<polygon class="st4" points="217,127.2 217,185.2 276.8,156.2 	"/>
+	<polygon class="st4" points="376,140.2 376,198.2 435.8,169.2 	"/>
+	<polygon class="st4" points="31.5,302.7 49.5,302.7 40.5,312.4 	"/>
+	<polyline class="st4" points="40,287.2 40,283.2 45.5,281 35,276.9 45.5,272 35,268 45.5,263.4 34.8,259 40,256.9 40,250.2 	"/>
+	<polyline class="st4" points="40,230.2 40,226.2 45.5,224 35,219.9 45.5,215 35,211 45.5,206.4 34.8,202 40,199.9 40,193.2 	"/>
+	<line class="st4" x1="95" y1="131.2" x2="95" y2="156.2"/>
+	<line class="st4" x1="100" y1="131.2" x2="100" y2="156.2"/>
 	<g>
-		<text transform="matrix(1 0 0 1 303.7711 263.4517)" class="st2 st7 st8">Ci</text>
+		<text transform="matrix(1 0 0 1 90.2711 167.6171)" class="st2 st7 st8">Ci</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 372.4378 259.6183)" class="st2 st7 st8">Ri</text>
+		<text transform="matrix(1 0 0 1 158.9378 163.7838)" class="st2 st7 st8">Ri</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 442.1045 190.4517)" class="st2 st7 st8">Rf</text>
+		<text transform="matrix(1 0 0 1 228.6045 94.6171)" class="st2 st7 st8">Rf</text>
 	</g>
 	<g>
-		<text transform="matrix(2.1008 0 0 1 433.9251 241.9517)" class="st2 st7 st8">-</text>
+		<text transform="matrix(2.1008 0 0 1 220.4251 146.1171)" class="st2 st7 st8">-</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 434.6665 266.6184)" class="st2 st7 st8">+</text>
+		<text transform="matrix(1 0 0 1 221.1665 170.7838)" class="st2 st7 st8">+</text>
 	</g>
 	<g>
-		<text transform="matrix(2.1008 0 0 1 594.2958 255.0376)" class="st2 st7 st8">-</text>
+		<text transform="matrix(2.1008 0 0 1 380.7958 159.203)" class="st2 st7 st8">-</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 595.0372 279.7043)" class="st2 st7 st8">+</text>
+		<text transform="matrix(1 0 0 1 381.5373 183.8698)" class="st2 st7 st8">+</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 263.4373 308.6971)"><tspan x="0" y="0" class="st2 st7 st9">R1</tspan><tspan x="0" y="10.2" class="st2 st7 st9">50</tspan></text>
+		<text transform="matrix(1 0 0 1 49.9374 212.8626)"><tspan x="0" y="0" class="st2 st7 st9">R1</tspan><tspan x="0" y="10.2" class="st2 st7 st9">50</tspan></text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 263.4372 364.4999)"><tspan x="0" y="0" class="st2 st7 st9">R2</tspan><tspan x="0" y="10.2" class="st2 st7 st9">50</tspan></text>
+		<text transform="matrix(1 0 0 1 49.9372 268.6653)"><tspan x="0" y="0" class="st2 st7 st9">R2</tspan><tspan x="0" y="10.2" class="st2 st7 st9">50</tspan></text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 276.0417 374.5)" class="st2 st7 st9">kΩ</text>
+		<text transform="matrix(1 0 0 1 62.5417 278.6655)" class="st2 st7 st9">kΩ</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 276.0418 319.25)" class="st2 st7 st9">kΩ</text>
+		<text transform="matrix(1 0 0 1 62.5418 223.4155)" class="st2 st7 st9">kΩ</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 447.1664 198.0769)" class="st2 st7 st9">kΩ</text>
+		<text transform="matrix(1 0 0 1 233.6664 102.2424)" class="st2 st7 st9">kΩ</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 699.6663 240.8749)" class="st2 st7 st10">Vo</text>
+		<text transform="matrix(1 0 0 1 486.1663 145.0404)" class="st2 st7 st10">Vo</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 439.7917 198.0769)" class="st2 st7 st9">5</text>
+		<text transform="matrix(1 0 0 1 226.2917 102.2424)" class="st2 st7 st9">5</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 376.1252 266.6182)" class="st2 st7 st9">kΩ</text>
+		<text transform="matrix(1 0 0 1 162.6252 170.7836)" class="st2 st7 st9">kΩ</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 368.7505 266.6182)" class="st2 st7 st9">5</text>
+		<text transform="matrix(1 0 0 1 155.2505 170.7836)" class="st2 st7 st9">5</text>
 	</g>
-	<path class="st11" d="M717.3,248.7H700c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h17.3c3.1,0,5.7,2.5,5.7,5.7V243
-		C723,246.1,720.5,248.7,717.3,248.7z"/>
-	<polyline class="st2" points="254.5,224.7 243.2,237 261.7,224.7 	"/>
+	<path class="st11" d="M503.8,152.9h-17.3c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h17.3c3.1,0,5.7,2.5,5.7,5.7v12.6
+		C509.5,150.3,507,152.9,503.8,152.9z"/>
+	<polyline class="st2" points="41,128.9 29.7,141.2 48.2,128.9 	"/>
 	<g>
-		<text transform="matrix(1 0 0 1 254.1664 216.7083)" class="st2 st7 st10">Vi</text>
+		<text transform="matrix(1 0 0 1 40.6664 120.8737)" class="st2 st7 st10">Vi</text>
 	</g>
-	<path class="st11" d="M270.3,224.7H253c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h17.3c3.1,0,5.7,2.5,5.7,5.7V219
-		C276,222.1,273.5,224.7,270.3,224.7z"/>
-	<polyline class="st2" points="264.5,274.7 253.2,287 271.7,274.7 	"/>
+	<path class="st11" d="M56.8,128.9H39.5c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h17.3c3.1,0,5.7,2.5,5.7,5.7v12.6
+		C62.5,126.3,60,128.9,56.8,128.9z"/>
+	<polyline class="st2" points="51,178.9 39.7,191.2 58.2,178.9 	"/>
 	<g>
-		<text transform="matrix(1 0 0 1 260.4996 265.8749)" class="st2 st7 st10">Vcc</text>
+		<text transform="matrix(1 0 0 1 46.9996 170.0403)" class="st2 st7 st10">Vcc</text>
 	</g>
-	<path class="st11" d="M284.8,274.7H263c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h21.8c3.1,0,5.7,2.5,5.7,5.7V269
-		C290.5,272.1,288,274.7,284.8,274.7z"/>
+	<path class="st11" d="M71.3,178.9H49.5c-3.1,0-5.7-2.5-5.7-5.7v-12.6c0-3.1,2.5-5.7,5.7-5.7h21.8c3.1,0,5.7,2.5,5.7,5.7v12.6
+		C77,176.3,74.5,178.9,71.3,178.9z"/>
 </g>
 </svg>

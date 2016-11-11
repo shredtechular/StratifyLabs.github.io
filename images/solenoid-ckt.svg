@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 960 560" style="enable-background:new 0 0 960 560;" xml:space="preserve">
+	 viewBox="0 0 535 510" style="enable-background:new 0 0 535 510;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FCF8E3;stroke:#DDDDDD;stroke-miterlimit:10;}
 	.st1{fill:none;stroke:#DDDDDD;stroke-miterlimit:10;}
@@ -687,71 +687,71 @@
 </font>
 
 	<g id="Layer_2">
-	<rect x="213.5" y="30.3" class="st0" width="535" height="510"/>
-	<line class="st1" x1="246.1" y1="30.3" x2="246.1" y2="540.3"/>
-	<line class="st1" x1="284.6" y1="30.3" x2="284.6" y2="540.3"/>
-	<line class="st1" x1="323.1" y1="30.3" x2="323.1" y2="540.3"/>
-	<line class="st1" x1="361.5" y1="30.3" x2="361.5" y2="540.3"/>
-	<line class="st1" x1="400" y1="30.3" x2="400" y2="540.3"/>
-	<line class="st1" x1="438.4" y1="30.3" x2="438.4" y2="540.3"/>
-	<line class="st1" x1="476.9" y1="30.3" x2="476.9" y2="540.3"/>
-	<line class="st1" x1="515.3" y1="30.3" x2="515.3" y2="540.3"/>
-	<line class="st1" x1="553.8" y1="30.3" x2="553.8" y2="540.3"/>
-	<line class="st1" x1="592.2" y1="30.3" x2="592.2" y2="540.3"/>
-	<line class="st1" x1="630.7" y1="30.3" x2="630.7" y2="540.3"/>
-	<line class="st1" x1="669.2" y1="30.3" x2="669.2" y2="540.3"/>
-	<line class="st1" x1="707.6" y1="30.3" x2="707.6" y2="540.3"/>
-	<line class="st1" x1="213.5" y1="58.7" x2="748.5" y2="58.7"/>
-	<line class="st1" x1="213.5" y1="95.8" x2="748.5" y2="95.8"/>
-	<line class="st1" x1="213.5" y1="133" x2="748.5" y2="133"/>
-	<line class="st1" x1="213.5" y1="170.2" x2="748.5" y2="170.2"/>
-	<line class="st1" x1="213.5" y1="207.3" x2="748.5" y2="207.3"/>
-	<line class="st1" x1="213.5" y1="244.5" x2="748.5" y2="244.5"/>
-	<line class="st1" x1="213.5" y1="281.7" x2="748.5" y2="281.7"/>
-	<line class="st1" x1="213.5" y1="318.8" x2="748.5" y2="318.8"/>
-	<line class="st1" x1="213.5" y1="356" x2="748.5" y2="356"/>
-	<line class="st1" x1="213.5" y1="393.2" x2="748.5" y2="393.2"/>
-	<line class="st1" x1="213.5" y1="430.3" x2="748.5" y2="430.3"/>
-	<line class="st1" x1="213.5" y1="467.5" x2="748.5" y2="467.5"/>
-	<line class="st1" x1="213.5" y1="504.7" x2="748.5" y2="504.7"/>
+	<rect class="st0" width="535" height="510"/>
+	<line class="st1" x1="32.6" y1="0" x2="32.6" y2="510"/>
+	<line class="st1" x1="71.1" y1="0" x2="71.1" y2="510"/>
+	<line class="st1" x1="109.6" y1="0" x2="109.6" y2="510"/>
+	<line class="st1" x1="148" y1="0" x2="148" y2="510"/>
+	<line class="st1" x1="186.5" y1="0" x2="186.5" y2="510"/>
+	<line class="st1" x1="224.9" y1="0" x2="224.9" y2="510"/>
+	<line class="st1" x1="263.4" y1="0" x2="263.4" y2="510"/>
+	<line class="st1" x1="301.8" y1="0" x2="301.8" y2="510"/>
+	<line class="st1" x1="340.3" y1="0" x2="340.3" y2="510"/>
+	<line class="st1" x1="378.7" y1="0" x2="378.7" y2="510"/>
+	<line class="st1" x1="417.2" y1="0" x2="417.2" y2="510"/>
+	<line class="st1" x1="455.7" y1="0" x2="455.7" y2="510"/>
+	<line class="st1" x1="494.1" y1="0" x2="494.1" y2="510"/>
+	<line class="st1" x1="0" y1="28.3" x2="535" y2="28.3"/>
+	<line class="st1" x1="0" y1="65.5" x2="535" y2="65.5"/>
+	<line class="st1" x1="0" y1="102.7" x2="535" y2="102.7"/>
+	<line class="st1" x1="0" y1="139.8" x2="535" y2="139.8"/>
+	<line class="st1" x1="0" y1="177" x2="535" y2="177"/>
+	<line class="st1" x1="0" y1="214.2" x2="535" y2="214.2"/>
+	<line class="st1" x1="0" y1="251.3" x2="535" y2="251.3"/>
+	<line class="st1" x1="0" y1="288.5" x2="535" y2="288.5"/>
+	<line class="st1" x1="0" y1="325.7" x2="535" y2="325.7"/>
+	<line class="st1" x1="0" y1="362.8" x2="535" y2="362.8"/>
+	<line class="st1" x1="0" y1="400" x2="535" y2="400"/>
+	<line class="st1" x1="0" y1="437.2" x2="535" y2="437.2"/>
+	<line class="st1" x1="0" y1="474.3" x2="535" y2="474.3"/>
 </g>
 <g id="Layer_1">
-	<line class="st2" x1="519.3" y1="348.6" x2="519.3" y2="466"/>
-	<line class="st2" x1="519.3" y1="214.7" x2="519.3" y2="312.9"/>
-	<line class="st2" x1="519.3" y1="156.5" x2="519.3" y2="92.7"/>
-	<polyline class="st3" points="509.1,104 519.5,90.5 530.6,104 	"/>
-	<polyline class="st3" points="519.3,134 463.6,134 463.6,229.5 519.9,229.5 	"/>
-	<path class="st4" d="M519.3,169.9c-7.6,0-13.7-3.4-13.7-7.5s7.3-7.5,14.9-7.5"/>
-	<path class="st4" d="M519.3,184.9c-7.6,0-13.7-3.4-13.7-7.5s6.1-7.5,13.7-7.5"/>
-	<path class="st4" d="M519.3,200.5c-7.6,0-13.7-3.4-13.7-7.5s6.1-7.5,13.7-7.5"/>
-	<path class="st4" d="M520.6,215.5c-7.6,0-14.9-3.4-14.9-7.5s6.1-7.5,13.7-7.5"/>
-	<line class="st5" x1="453.6" y1="168.3" x2="475" y2="168.3"/>
-	<polygon class="st6" points="463.6,169.9 453.6,189.7 475,189.7 	"/>
-	<ellipse class="st7" cx="519.3" cy="134" rx="4.3" ry="4.3"/>
-	<ellipse class="st7" cx="519.3" cy="229.5" rx="4.3" ry="4.3"/>
-	<polyline class="st4" points="519.3,298.9 519.3,311.5 491.8,311.5 491.8,349.9 519.1,349.9 519.1,363.9 	"/>
-	<line class="st2" x1="491.8" y1="330.7" x2="367.6" y2="330.7"/>
-	<polygon class="st6" points="344.6,348.6 344.6,348.6 245.1,348.6 245.1,312.9 343.6,312.9 343.6,312.9 367.6,330.7 	"/>
+	<line class="st2" x1="305.8" y1="318.3" x2="305.8" y2="435.7"/>
+	<line class="st2" x1="305.8" y1="184.3" x2="305.8" y2="282.6"/>
+	<line class="st2" x1="305.8" y1="126.2" x2="305.8" y2="62.4"/>
+	<polyline class="st3" points="295.6,73.7 306,60.2 317.1,73.7 	"/>
+	<polyline class="st3" points="305.8,103.7 250.1,103.7 250.1,199.2 306.4,199.2 	"/>
+	<path class="st4" d="M305.8,139.6c-7.6,0-13.7-3.4-13.7-7.5c0-4.1,7.3-7.5,14.9-7.5"/>
+	<path class="st4" d="M305.8,154.6c-7.6,0-13.7-3.4-13.7-7.5s6.1-7.5,13.7-7.5"/>
+	<path class="st4" d="M305.8,170.2c-7.6,0-13.7-3.4-13.7-7.5s6.1-7.5,13.7-7.5"/>
+	<path class="st4" d="M307.1,185.2c-7.6,0-14.9-3.4-14.9-7.5s6.1-7.5,13.7-7.5"/>
+	<line class="st5" x1="240.1" y1="138" x2="261.5" y2="138"/>
+	<polygon class="st6" points="250.1,139.6 240.1,159.3 261.5,159.3 	"/>
+	<ellipse class="st7" cx="305.8" cy="103.7" rx="4.3" ry="4.3"/>
+	<ellipse class="st7" cx="305.8" cy="199.2" rx="4.3" ry="4.3"/>
+	<polyline class="st4" points="305.8,268.5 305.8,281.2 278.3,281.2 278.3,319.5 305.6,319.5 305.6,333.5 	"/>
+	<line class="st2" x1="278.3" y1="300.4" x2="154.1" y2="300.4"/>
+	<polygon class="st6" points="131.1,318.3 131.1,318.3 31.6,318.3 31.6,282.6 130.1,282.6 130.1,282.6 154.1,300.4 	"/>
 	<g>
-		<text transform="matrix(1 0 0 1 274.5621 337.8209)" class="st8 st9 st10">GPIO</text>
+		<text transform="matrix(1 0 0 1 61.0621 307.4865)" class="st8 st9 st10">GPIO</text>
 	</g>
-	<line class="st2" x1="499.6" y1="466" x2="541" y2="466"/>
-	<line class="st2" x1="507.3" y1="474.7" x2="531.3" y2="474.7"/>
-	<line class="st2" x1="511" y1="482.4" x2="527.7" y2="482.4"/>
-	<line class="st2" x1="516" y1="490.3" x2="522.7" y2="490.3"/>
-	<text transform="matrix(1 0 0 1 539.6458 325.7827)"><tspan x="0" y="0" class="st8 st9 st10">MOSFET</tspan><tspan x="0" y="23.9" class="st8 st9 st10">(NMOS)</tspan></text>
-	<text transform="matrix(1 0 0 1 369.9791 187.0018)" class="st8 st9 st10">DIODE</text>
+	<line class="st2" x1="286.1" y1="435.7" x2="327.5" y2="435.7"/>
+	<line class="st2" x1="293.8" y1="444.3" x2="317.8" y2="444.3"/>
+	<line class="st2" x1="297.5" y1="452" x2="314.2" y2="452"/>
+	<line class="st2" x1="302.5" y1="459.9" x2="309.2" y2="459.9"/>
+	<text transform="matrix(1 0 0 1 326.1458 295.4484)"><tspan x="0" y="0" class="st8 st9 st10">MOSFET</tspan><tspan x="0" y="23.9" class="st8 st9 st10">(NMOS)</tspan></text>
+	<text transform="matrix(1 0 0 1 156.4791 156.6674)" class="st8 st9 st10">DIODE</text>
 	<g>
-		<text transform="matrix(1 0 0 1 539.6455 184.9155)" class="st8 st9 st10">SOLENOID</text>
+		<text transform="matrix(1 0 0 1 326.1455 154.5811)" class="st8 st9 st10">SOLENOID</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 429.6456 57.5995)"><tspan x="0" y="0" class="st8 st9 st10"> </tspan><tspan x="0" y="23.9" class="st8 st9 st10">POWER SUPPLY</tspan></text>
+		<text transform="matrix(1 0 0 1 216.1456 27.2651)"><tspan x="0" y="0" class="st8 st9 st10"> </tspan><tspan x="0" y="23.9" class="st8 st9 st10">POWER SUPPLY</tspan></text>
 	</g>
-	<line class="st4" x1="477" y1="330.5" x2="492" y2="330.5"/>
-	<line class="st6" x1="463.5" y1="159" x2="463.5" y2="170"/>
-	<line class="st6" x1="463.5" y1="190" x2="463.5" y2="199"/>
-	<path class="st6" d="M519.3,146.7"/>
-	<line class="st4" x1="519.5" y1="147" x2="519.3" y2="156.5"/>
-	<line class="st4" x1="519.3" y1="214.1" x2="519.5" y2="223"/>
+	<line class="st4" x1="263.5" y1="300.2" x2="278.5" y2="300.2"/>
+	<line class="st6" x1="250" y1="128.7" x2="250" y2="139.7"/>
+	<line class="st6" x1="250" y1="159.7" x2="250" y2="168.7"/>
+	<path class="st6" d="M305.8,116.3"/>
+	<line class="st4" x1="306" y1="116.7" x2="305.8" y2="126.2"/>
+	<line class="st4" x1="305.8" y1="183.8" x2="306" y2="192.7"/>
 </g>
 </svg>
