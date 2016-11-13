@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, gpio, circuit, microcontroller, popular]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/pullup.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/pullup.svg" />
 An embedded microcontroller utilizes input/output (IO) signals to 
 communicate with the outside world.  The simplest form of IO is 
 commonly referred to as general purpose input/output (GPIO) where 
@@ -60,7 +60,7 @@ weak internal pull-up resistor--most modern microcontroller designs
 have built-in pull-up and/or pull-down resistors on each GPIO pin--and 
 a strong external pull-down resistor.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/internalpullup2.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/internalpullup2.svg" />
 
 In order for the strong pull-down resistor to work properly, it must be correctly sized.  
 During normal operation, the voltage at the GPIO pin must be below the input low 
