@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, c, doxygen, programming]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/cdoxygen-arch.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/cdoxygen-arch.svg" />
 Doxygen is a free source code documentation tool.  It automatically 
 decomposes a software design when using an object-oriented programming 
 language such as C++ or Java.  When using C, however, there is no natural 

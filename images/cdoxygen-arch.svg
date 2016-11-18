@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 837 761.1" style="enable-background:new 0 0 837 761.1;" xml:space="preserve">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 821.6 426" style="enable-background:new 0 0 821.6 426;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#D9EDF7;stroke:#FFFFFF;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#44546A;stroke-width:5;stroke-miterlimit:10;}
-	.st2{fill:#31708F;}
+	.st0{fill:#FCF8E3;}
+	.st1{fill:#DFF0D8;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st2{fill:#44546A;}
 	.st3{font-family:'Arial-Black';}
-	.st4{font-size:17px;}
-	.st5{font-size:15px;}
+	.st4{font-size:19.956px;}
+	.st5{fill:#3C763D;}
+	.st6{font-size:30px;}
+	.st7{fill:#CCCBCC;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st8{fill:#9FCAE1;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st9{fill:#2E6387;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st10{fill:#9FCAE1;}
+	.st11{fill:#2E6387;}
+	.st12{fill:#FFFFFF;}
+	.st13{font-size:37.4232px;}
+	.st14{fill:#31708F;}
+	.st15{font-size:20px;}
+	.st16{font-size:14px;}
+	.st17{font-size:12px;}
 </style>
 <font horiz-adv-x="2048">
 <!-- Arial is a trademark of The Monotype Corporation. -->
@@ -681,53 +693,48 @@
 <glyph unicode="&#x20BE;" horiz-adv-x="1636" d="M1025,815l-146,0l0,402C861,1219 843,1220 826,1220C819,1220 812,1220 805,1220C798,1219 792,1219 785,1218l0,-403l-146,0l0,357C615,1158 593,1140 574,1119C555,1098 538,1072 525,1043C511,1014 500,980 493,943C486,906 482,864 482,817C482,747 489,686 502,634C515,581 532,536 553,498C574,460 599,429 626,404C653,379 680,359 709,344l749,0l0,-344l-1377,0l0,344l164,0C222,375 200,408 180,444C160,479 143,518 128,559C113,600 101,643 93,689C84,734 80,783 80,834C80,912 93,986 120,1057C147,1127 184,1190 233,1247C282,1303 341,1351 410,1390C479,1429 555,1457 639,1474l0,166l146,0l0,-150C790,1491 794,1491 799,1491C803,1491 808,1491 813,1491C824,1491 835,1491 846,1491C857,1490 868,1490 879,1489l0,151l146,0l0,-170C1100,1455 1170,1430 1235,1396C1299,1362 1355,1318 1402,1265C1449,1211 1487,1147 1514,1072C1541,997 1555,912 1556,815l-364,0C1192,864 1188,908 1180,947C1171,986 1160,1020 1145,1049C1130,1078 1113,1103 1093,1124C1072,1145 1050,1162 1025,1175z"/>
 </font>
 
-	<rect x="306.4" y="31.1" class="st0" width="145" height="48.8"/>
-<rect x="10.4" y="137.9" class="st0" width="145" height="48.8"/>
-<rect x="116.4" y="274.7" class="st0" width="145" height="48.8"/>
-<rect x="670.8" y="274.7" class="st0" width="145" height="48.8"/>
-<rect x="670.8" y="398.9" class="st0" width="145" height="48.8"/>
-<rect x="216.2" y="374.5" class="st0" width="145" height="48.8"/>
-<rect x="216.2" y="450.4" class="st0" width="145" height="48.8"/>
-<rect x="216.2" y="526.3" class="st0" width="145" height="48.8"/>
-<rect x="116.4" y="695.2" class="st0" width="145" height="48.8"/>
-<rect x="569.8" y="137.9" class="st0" width="145" height="48.8"/>
-<polyline class="st1" points="378.9,79.9 378.9,113.4 81.9,113.4 81.9,137.9 "/>
-<polyline class="st1" points="364.4,113.4 641.9,113.4 641.9,137.9 "/>
-<polyline class="st1" points="82.9,186.9 82.9,720.4 116.4,720.4 "/>
-<line class="st1" x1="82.4" y1="299.4" x2="116.4" y2="299.4"/>
-<polyline class="st1" points="188.9,323.9 188.9,551.4 216.4,551.4 "/>
-<line class="st1" x1="216.4" y1="474.4" x2="188.4" y2="474.4"/>
-<line class="st1" x1="216.4" y1="399.4" x2="188.4" y2="399.4"/>
-<polyline class="st1" points="641.9,186.9 641.9,423.4 670.4,423.4 "/>
-<line class="st1" x1="642.4" y1="299.4" x2="670.4" y2="299.4"/>
-<g>
-	<text transform="matrix(1 0 0 1 317.2565 61.3269)" class="st2 st3 st4">Configuration</text>
+	<g id="Layer_3">
+	<rect x="10.3" y="9.4" class="st0" width="549.5" height="404"/>
+	<rect x="40.6" y="44" class="st1" width="499.4" height="78"/>
+	<rect x="610" y="67.4" class="st1" width="200.1" height="31.2"/>
+	<g>
+		<text transform="matrix(1 0 0 1 241.6674 34.043)" class="st2 st3 st4">SYSTEM</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 144.1681 92.71)" class="st5 st3 st6">Command Manager</text>
+	</g>
+	<rect x="211.3" y="150.5" class="st7" width="146" height="102.4"/>
+	<rect x="610" y="98.7" class="st7" width="100" height="17.1"/>
+	<rect x="610" y="115.7" class="st8" width="100" height="17.1"/>
+	<rect x="710" y="98.7" class="st9" width="100" height="34.1"/>
+	<rect x="211.3" y="284.5" class="st10" width="146" height="102.4"/>
+	<rect x="394" y="150.5" class="st11" width="146" height="236.4"/>
+	<rect x="40.6" y="284.5" class="st10" width="146" height="102.4"/>
+	<g>
+		<text transform="matrix(1 0 0 1 236.6667 213.376)" class="st2 st3 st6">Motor</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 434.5023 277.2765)" class="st12 st3 st13">PID</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 245.3333 344.7094)" class="st14 st3 st6">PWM</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 66.6664 349.376)" class="st14 st3 st6">UART</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 647.3333 88.3767)" class="st5 st3 st15">Application</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 724.8805 120.8299)" class="st12 st3 st16">Software</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 642.1666 110.71)" class="st2 st3 st17">Device</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 629.6666 127.3767)" class="st14 st3 st17">Peripheral</text>
+	</g>
 </g>
-<g>
-	<text transform="matrix(1 0 0 1 32.3089 157.5602)"><tspan x="0" y="0" class="st2 st3 st5">Comm. ACM</tspan><tspan x="-12.9" y="18" class="st2 st3 st5">Class Interface</tspan></text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 139.3008 303.8933)" class="st2 st3 st5">CDC Header</text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 267.7134 406.0765)" class="st2 st3 st5">ACM</text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 262.7071 481.0765)" class="st2 st3 st5">Union</text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 275.1282 547.576)"><tspan x="0" y="0" class="st2 st3 st5">Call</tspan><tspan x="-37.1" y="18" class="st2 st3 st5">Management</tspan></text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 134.2237 714.56)"><tspan x="0" y="0" class="st2 st3 st5">Interrumpt In</tspan><tspan x="17.9" y="18" class="st2 st3 st5">Endpoint</tspan></text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 592.3878 157.5602)"><tspan x="0" y="0" class="st2 st3 st5">Comm. Data</tspan><tspan x="-12.5" y="18" class="st2 st3 st5">Class Interface</tspan></text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 714.5825 293.8932)"><tspan x="0" y="0" class="st2 st3 st5">Bulk In</tspan><tspan x="-7.5" y="18" class="st2 st3 st5">Endpoint</tspan></text>
-</g>
-<g>
-	<text transform="matrix(1 0 0 1 709.1703 418.5597)"><tspan x="0" y="0" class="st2 st3 st5">Bulk out</tspan><tspan x="-2.1" y="18" class="st2 st3 st5">Endpoint</tspan></text>
+<g id="Layer_2">
 </g>
 </svg>
