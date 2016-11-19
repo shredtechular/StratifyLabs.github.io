@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, circuit, sensor, filter, adc, programming]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/currentsense.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/currentsense.svg" />
 This is a simple, low-cost way to measure the current output at the power 
 source of an embedded system using a microcontroller's ADC input.
 
