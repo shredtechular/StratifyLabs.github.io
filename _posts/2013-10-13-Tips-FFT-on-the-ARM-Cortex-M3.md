@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, cortex-m3, fft, filter, popular]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/DIT-FFT-butterfly.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/DIT-FFT-butterfly.svg" />
 The ARM Cortex-M3 combined with a Fast Fourier Transform (FFT) implementation 
 is a powerful, embedded digital signal processing (DSP) solution.  The ARM 
 Cortex-M3 is a mid-range microcontroller architecture with clock speeds 
@@ -38,7 +38,7 @@ frequency domain rather than the discrete time domain.  The following graph
 shows a signal in the time domain (top) as well as the frequency domain (middle 
 and bottom).
 
-<img class="post_image" src="{{ BASE_PATH }}/images/time-freq.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/time-freq.svg" />
 
 The above graphs use the following equation for the time-domain representation:
 

@@ -5,7 +5,7 @@ category : Embedded Design Tips
 tagline: Embedded Design
 tags : [embedded, control, pwm, pid, motor, programming, circuit, popular]
 ---
-<img class="post_image" src="{{ BASE_PATH }}/images/h-bridge.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/h-bridge.svg" />
 Bi-directional motor control can be done using an H-bridge circuit 
 with pulse-width modulation (PWM) from a microcontroller to vary 
 the speed. Several design challenges include preventing shoot-through, implementing 
@@ -22,7 +22,7 @@ Each side of the H-bridge has two transistors with the gates tied together resul
 
 PWM is a simple way to vary the voltage applied to the motor. Most microcontrollers have dedicated PWM hardware, but an output compare timer can also generate a PWM signal.  PWM works by rapidly turning the motor on and off. For example, if the motor supply is 12V, the motor can be driven at 6V by applying a 50% duty cycle where half the time 12V is applied, and half the time 0V is applied as shown by the green signal in the plot below.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/pwm-plot.jpg" />
+<img class="post_image" src="{{ BASE_PATH }}/images/pwm-plot.svg" />
 
 While using PWM is simple, it introduces a problem called shoot-through which occurs when current flows directly from the power supply to ground when the transistors are being switched.  For example, when the PWMA input signal switches from high to low, Q1 turns on and Q3 turns off.  For a brief period of time, both Q1 and Q3 are partially on allowing current to flow from the supply to ground.  This causes efficiency to plummet and introduces heating problems in the transistors.  To overcome this problem additional circuitry must be added to ensure Q3 turns completely off before Q1 starts to turn on.
 
@@ -44,7 +44,7 @@ in nearby circuitry.  The snubber circuit safely dissipates the energy in
 passive elements.  A simple, effective snubber circuit consists of a resistor 
 and capacitor in series across the terminals of the motor as shown below.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/motorsnubber.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/motorsnubber.svg" />
 
 ### PID Control
 
@@ -54,7 +54,7 @@ A PID loop--verbosely known as proportional, integral, differential loop--is a p
 
 ### PID loop
 
-<img class="post_image" src="{{ BASE_PATH }}/images/pid_en.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/pid_en.svg" />
 
 Image from Wikipedia
 
@@ -131,7 +131,7 @@ The parts include:
 
 The following drawing shows the specific connections. The user input (to set the speed) consists of a potentiometer wiper connected to P0.2 (ADC Channel 7). The rotary encoder is connected to P1.26 which also serves as a clock input for timer zero. Finally, 2.3 and 2.4 are PWM outputs connected to the input of the Si9986 H-bridge driver. For more details, please see the "CoAction Hero Microcomputer":http://www.coactionos.com/getting-started/33-getting-started-123/89-buy-the-hardware-details.html page where the schematic and datasheet are available.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/motordemo-drawing.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/motordemo-drawing.svg" />
 
 ### Source Code
 
@@ -386,7 +386,7 @@ print("output.png", "-dpng");
  
 The following shows the motor speed, duty cycle (per one thousand), and the actual speed.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/motordemoplot.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/motordemoplot.svg" />
 
 To get the above performance, the PID constants required tweaking. The approach was to set the I and D values to zero and monitor the performance by changing the P value. Once a stable P value was found, the I value was adjusted to find a good trade-off between accuracy and stability. Finally, the D constant--the least significant in this application--was set.
 
