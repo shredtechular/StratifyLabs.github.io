@@ -42,7 +42,7 @@ $(document).ready( function(){
 			{{ content }}
 		</div>
 		<div class="col-md-4">
-			<h2><i class="fa fa-filter"></i> Filter
+<!-- 			<h2><i class="fa fa-filter"></i> Filter
 			<button id="all" class="btn btn-default pull-right"><i class="fa fa-refresh"></i></button>
 			</h2>
 			<ul class="list-inline">
@@ -51,7 +51,8 @@ $(document).ready( function(){
 			</ul>
 			<div class="list-inline">
 				{% include themes/twitter/nav-buttons %}
-			</div>
+			</div> -->
+			{% include JB/blog-sidebar.html %}
 		</div>
 	</div>
 	<div class="infinite-spinner"></div>
