@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, adc, lookup-table, c, programming]
 ---
 
-<img class="post_image" src="{{ BASE_PATH }}/images/thermistor-circuit.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/thermistor-circuit.svg" />
 Thermistors are simple to integrate in embedded designs but their temperature 
 response can be challenging to interpret.  A lookup table is a convenient way 
 to convert a thermistor's ADC reading to temperature.
@@ -17,7 +17,7 @@ Vishay/Dale Inc. This thermistor has the resistive characteristics shown
 in the table below.  At cold temperatures, the resistance is very large 
 but decreases non-linearly as temperature increases.
 
-<img class="post_image_tall" src="{{ BASE_PATH }}/images/resistance-temperature.png" />
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/resistance-temperature.svg" />
 
 The complete datasheet for the part referenced is available [here](http://www.vishay.com/docs/29078/ntcle413.pdf).  The 
 voltage at the ADC input is calculated using a voltage divider:
@@ -44,7 +44,7 @@ table and can be designed to easily copy and paste as a data table in a C
 file.  The image below shows a screen shot of an example.  The highlighted 
 portion can be directly copied and pasted into the code.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/lookup-table-shot.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/lookup-table-shot.svg" />
 
 (The source file for the above image can be downloaded from 
 this [link](https://dl.dropbox.com/u/33863234/CoActionOS/lookup-table-sheet.xlsx).)

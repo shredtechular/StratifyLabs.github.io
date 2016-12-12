@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, filter, iir, programming, popular]
 ---
 
-<img class="post_image_tall" src="{{ BASE_PATH }}/images/316px-Fourier_Series.png" />
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/316px-Fourier_Series.svg" />
 The exponential moving average (EMA) is a type of infinite impulse response (IIR) filter 
 that can be used in many embedded DSP applications.  It requires only a small amount 
 of RAM and computing power.
@@ -16,7 +16,7 @@ of RAM and computing power.
 Filters come in both analog and digital forms and exist to remove specific frequencies 
 from a signal.  A common analog filter is the low pass RC filter shown below.
 
-<img class="post_image_tall" src="{{ BASE_PATH }}/images/lpf-1st-order.png" />
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/lpf-1st-order.svg" />
 
 Analog filters are characterized by their frequency response; that is how much the 
 frequencies are attenuated (magnitude response) and shifted (phase response).  The 
@@ -28,7 +28,7 @@ function in the S-domain.  For the above circuit, the transfer function is given
 For R equals one kilo-ohm and C equals one microfarad, the magnitude response is 
 shown below.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/lpf-mag.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/lpf-mag.svg" />
 
 
 Note that the x-axis is logarithmic (every tick mark is 10 times greater than the last one).  The y-axis is in decibels (which is a logarithmic function of the output).  The "cutoff frequency" for this filter is 1000 rad/s or 160 Hz.  This is the point where less than half the power at a given frequency is transferred from the input to the output of the filter.
@@ -80,7 +80,7 @@ function is used.
 
 The magnitude response is shown below for alpha equal 0.5.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/dig-mag.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/dig-mag.svg" />
 
 The y-axis is, again, shown in decibels.  The x-axis is logarithmic from 0.001 to 
 pi.  The real-world frequency maps to the x-axis with zero being the DC voltage 
@@ -94,7 +94,7 @@ easy to adjust the cutoff frequency.  Decreasing the value of alpha will lower
 the cutoff frequency of the filter as illustrated by comparing the above 
 alpha = 0.5 plot to the below plot where alpha = 0.1.
 
-<img class="post_image" src="{{ BASE_PATH }}/images/dig-mag2.png" />
+<img class="post_image" src="{{ BASE_PATH }}/images/dig-mag2.svg" />
 
 Second, the EMA is easy to code and requires only a small amount of computing power 
 and memory.  The code implementation of the filter uses the difference equation.  There 

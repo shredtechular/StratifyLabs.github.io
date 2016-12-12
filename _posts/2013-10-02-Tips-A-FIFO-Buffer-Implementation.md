@@ -6,7 +6,7 @@ tagline: Embedded Design
 tags : [embedded, fifo, uart, serial, microcontroller, programming, popular]
 ---
 
-<img class="post_image_tall" src="{{ BASE_PATH }}/images/fifo.png" />
+<img class="post_image_tall" src="{{ BASE_PATH }}/images/fifo.svg" />
 A FIFO buffer is a useful way of storing data that arrives to a microcontroller peripheral 
 asynchronously but cannot be read immediately.  One example is storing bytes incoming on a 
 UART. Buffering the bytes eases the real-time requirements for the embedded firmware.
