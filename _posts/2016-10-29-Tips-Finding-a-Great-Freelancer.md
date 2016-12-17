@@ -100,7 +100,7 @@ The more you communicate with your freelancer, the more seriously they will take
 
 Lastly, don’t be cheap. You get exactly what you pay for.  If you want the work done well and in a reliable manner, pay your freelancer well. Better than fair market value. Paying well will motivate them to prioritize your project.
 
-<small>Photos by <a href="https://www.flickr.com/photos/rachaelvoorhees/">rachaelvoorhees</a> and <a href="https://www.flickr.com/photos/planeta/">Ron Mader</a></small>
+<small>Photos by <a target="_blank" href="https://www.flickr.com/photos/rachaelvoorhees/">rachaelvoorhees</a> and <a target="_blank" href="https://www.flickr.com/photos/planeta/">Ron Mader</a></small>
 
 
 
