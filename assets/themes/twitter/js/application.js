@@ -235,7 +235,7 @@ $(function() {
           }
         }
         if (postURLs.length <= postsToLoad)
-          disableFetching();     
+          disableFetching();
       } else if (monthID) {
         var name = window.location.pathname.replace('/tips', '');
         for (var hh=0; hh < postURLs.length; hh++) {
@@ -245,7 +245,7 @@ $(function() {
           }
         }
         if (postURLs.length <= postsToLoad)
-          disableFetching();     
+          disableFetching();
       }
 
     }
