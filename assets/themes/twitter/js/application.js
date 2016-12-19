@@ -206,6 +206,7 @@ $(function() {
       postsToLoad = $(".container article").size(),
       loadNewPostsThreshold = 100,
       catID = $("#catID").attr("data-catID");
+      tagID = $("#tagID").attr("data-tagID");
 
   // Load the JSON file containing all URLs
   $.getJSON('/all-posts.json', function(data) {
@@ -218,14 +219,35 @@ $(function() {
       // Filter array of posts by category if on category page
       if (catID) {
         for (var ii=0; ii < postURLs.length; ii++) {
-          if (postURLs[ii].categories.indexOf(catID) == -1 ) {
+          if (postURLs[ii].category.indexOf(catID) == -1 ) {
             postURLs.splice(ii,1);
             ii--;
           }
         }
         if (postURLs.length <= postsToLoad)
           disableFetching();
+      } else if (tagID) {
+        for (var jj=0; jj < postURLs.length; jj++) {
+          arr = postURLs[jj].tags.split(',');
+          if (arr.indexOf(tagID) == -1 ) {
+            postURLs.splice(jj,1);
+            jj--;
+          }
+        }
+        if (postURLs.length <= postsToLoad)
+          disableFetching();     
+      } else if (monthID) {
+        var name = window.location.pathname.replace('/tips', '');
+        for (var hh=0; hh < postURLs.length; hh++) {
+          if (postURLs[hh].url.indexOf(name) == -1 ) {
+            postURLs.splice(hh,1);
+            hh--;
+          }
+        }
+        if (postURLs.length <= postsToLoad)
+          disableFetching();     
       }
+
     }
   });
 
