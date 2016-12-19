@@ -65,7 +65,7 @@
 
 /******************************************************************************
 /* Form Styling */
-#ciForm {
+#ciForm, #cuForm {
   border: 1px solid #c8c8c8;
   border-radius: 5px;
   padding: 20px;
@@ -145,15 +145,46 @@ label:hover input[type="radio"] ~ i.fa {
   background-color: #ffebee;
 }
 
-#ciForm .row {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+#ciForm .row, #cuForm .row {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .error-message {
-    color: red;
-    padding-top: 10px;
+  color: red;
+  padding-top: 10px;
+}
+
+.form-subheader {
+  margin-left: -35px;
+}
+
+.form-subheader-container {
+  background-color: #344555;
+  padding: 10px 0px 10px 20px;
+  color: #fff;
+  float: left;
+}
+
+.form-subheader-triangle {
+  float:left;
+}
+
+.form-subheader-triangle svg {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+.form-subheader-triangle svg polygon {
+  fill: #344555;
+  stroke: #344555;
+  stroke-width: 1;
+}
+
+.form-question-desc {
+  font-size: 12px;
 }
 
 input#mce-EMAIL {
