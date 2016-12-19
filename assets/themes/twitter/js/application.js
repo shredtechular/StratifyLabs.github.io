@@ -207,6 +207,7 @@ $(function() {
       loadNewPostsThreshold = 100,
       catID = $("#catID").attr("data-catID");
       tagID = $("#tagID").attr("data-tagID");
+      monthID = $("#monthID").attr("data-monthID");
 
   // Load the JSON file containing all URLs
   $.getJSON('/all-posts.json', function(data) {

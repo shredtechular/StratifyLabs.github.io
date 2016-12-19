@@ -56,7 +56,7 @@ $(document).ready( function(){
 	{% assign posts = site.posts %}
 	<!-- | where: "archive-year","2013"  -->
 	 <!-- | where:"year","2013"  -->
-		<div id="monthID" data-tagID="{{ page.url }}" class="hidden"></div>
+		<div id="monthID" data-monthID="{{ page.url }}" class="hidden"></div>
 {% else %}
 	{% assign limit = 5 %}
 	{% assign archive = page.title %}
